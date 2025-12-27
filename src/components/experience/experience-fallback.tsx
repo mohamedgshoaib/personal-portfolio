@@ -17,7 +17,7 @@ export function ExperienceFallback({ items }: ExperienceFallbackProps) {
               alt={`${item.company} logo`}
               width={32}
               height={32}
-              className="object-contain shrink-0"
+              className="object-contain shrink-0 opacity-75"
             />
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-0.5">
