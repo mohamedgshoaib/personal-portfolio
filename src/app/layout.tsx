@@ -23,7 +23,7 @@ import { ScrollRestoration } from "@/components/scroll-restoration";
 import { StructuredData } from "@/components/structured-data/structured-data";
 import { portfolioData } from "@/lib/portfolio-data";
 
-const siteUrl = "https://mohamedgshoaib.vercel.app";
+const siteUrl = "https://www.mohamedgshoaib.me";
 const { personal } = portfolioData;
 
 export const metadata: Metadata = {
@@ -102,8 +102,9 @@ export default function RootLayout({
         </MotionConfig>
         {/* Umami Analytics */}
         <Script
-          src="https://cloud.umami.is/script.js"
+          src="/metrics/lib.js"
           data-website-id="a34c9d7b-045a-4a81-94ba-7903026c23cd"
+          data-host-url="/metrics"
           strategy="lazyOnload"
         />
       </body>
