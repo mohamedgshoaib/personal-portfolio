@@ -17,9 +17,9 @@ const Experience = dynamic(() =>
     default: mod.Experience,
   }))
 );
-const Certifications = dynamic(() =>
-  import("@/components/certifications/certifications").then((mod) => ({
-    default: mod.Certifications,
+const Education = dynamic(() =>
+  import("@/components/education/education").then((mod) => ({
+    default: mod.Education,
   }))
 );
 
@@ -60,7 +60,7 @@ export default function Home() {
                 <Experience />
               </SectionWrapper>
               <SectionWrapper delay={0.1}>
-                <Certifications />
+                <Education />
               </SectionWrapper>
 
               <SectionWrapper delay={0.1}>

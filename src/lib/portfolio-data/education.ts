@@ -38,14 +38,13 @@ export const education: readonly EducationItem[] = [
   // ========================================
   {
     id: "edu-1",
-    name: "Bachelor's Degree in Computer Science",
+    name: "B.Sc. in Computer Science",
     issuer: "Misr University for Science and Technology",
     date: "Oct 2017 – Jun 2021",
-    description:
-      "Bachelor's degree in Computer Science from Misr University for Science and Technology.",
+    description: "Bachelor of Computer Science (GPA 3.11).",
     learnings: [
-      "Computer Science fundamentals, Operating Systems, and Computer Networks",
-      "Software Engineering and system design",
+      "Strong foundation in core CS topics and problem solving.",
+      "Exposure to Software Engineering concepts and system-level thinking.",
     ],
     certificateUrl:
       "https://drive.google.com/file/d/18-7fbodbrCyFqutgqZncntsCsTH68HnV/view",

@@ -14,7 +14,7 @@
  * - Projects: Edit `projects.ts`
  * - Tech stack: Edit `tech-stack.ts`
  * - Experience: Edit `experience.ts`
- * - Education: Edit `certifications.ts`
+ * - Education: Edit `education.ts`
  *
  * Each file contains detailed instructions on how to edit and add data.
  */
@@ -23,7 +23,7 @@ import { personal } from "./personal";
 import { projects } from "./projects";
 import { techStack } from "./tech-stack";
 import { experience } from "./experience";
-import { education } from "./certifications";
+import { education } from "./education";
 
 export const portfolioData = {
   personal,
@@ -38,4 +38,4 @@ export { personal, projects, techStack, experience, education };
 
 // Re-export types
 export type { ExperienceItem, ExperienceType } from "./experience";
-export type { EducationItem } from "./certifications";
+export type { EducationItem } from "./education";
