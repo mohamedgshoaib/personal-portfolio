@@ -31,10 +31,10 @@ export function Footer() {
     <footer className="w-full bg-background pb-4">
       <div className="container mx-auto px-4">
         <div className="relative mx-auto max-w-3xl border border-border bg-card py-4">
-          <span className="pointer-events-none absolute z-20 bottom-0 left-0 -translate-x-[calc(50%+0.5px)] translate-y-[calc(50%-0.5px)] text-[10px] font-mono font-semibold leading-none text-accent-orange">
+          <span className="pointer-events-none absolute z-20 bottom-0 left-0 -translate-x-1/2 translate-y-[calc(50%-0.3px)] text-sm font-mono font-semibold leading-none text-accent-orange">
             +
           </span>
-          <span className="pointer-events-none absolute z-20 bottom-0 right-0 translate-x-[calc(50%+0.5px)] translate-y-[calc(50%-0.5px)] text-[10px] font-mono font-semibold leading-none text-accent-orange">
+          <span className="pointer-events-none absolute z-20 bottom-0 right-0 translate-x-1/2 translate-y-[calc(50%-0.3px)] text-sm font-mono font-semibold leading-none text-accent-orange">
             +
           </span>
           <div className="flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
