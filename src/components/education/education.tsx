@@ -2,6 +2,7 @@
 
 import { useEffect, useState, startTransition } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Accordion,
   AccordionItem,
@@ -46,12 +47,21 @@ export function Education() {
                     showArrow={false}
                     className="group flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-3 text-left font-medium transition-colors hover:bg-muted hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background [&[data-panel-open]>svg]:rotate-45 [&[data-panel-open]>svg]:scale-110"
                   >
-                    <div className="flex-1">
-                      <h4 className="text-base font-semibold">{item.name}</h4>
-                      <div className="flex flex-col md:flex-row md:items-center md:gap-2 gap-1 text-sm text-muted-foreground">
-                        <span>{item.issuer}</span>
-                        <span className="hidden md:inline">•</span>
-                        <span>{item.date}</span>
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src={item.logo}
+                        alt={`${item.issuer} logo`}
+                        width={32}
+                        height={32}
+                        className="object-contain shrink-0"
+                      />
+                      <div className="flex-1">
+                        <h4 className="text-base font-semibold">{item.name}</h4>
+                        <div className="flex flex-col md:flex-row md:items-center md:gap-2 gap-1 text-sm text-muted-foreground">
+                          <span>{item.issuer}</span>
+                          <span className="hidden md:inline">•</span>
+                          <span>{item.date}</span>
+                        </div>
                       </div>
                     </div>
                     <PlusIcon className="h-3 w-3 shrink-0 transition-transform duration-200" />
@@ -98,12 +108,21 @@ export function Education() {
                 key={item.id}
                 className="relative border border-border bg-card"
               >
-                <div className="px-4 py-3">
-                  <h4 className="text-base font-semibold">{item.name}</h4>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>{item.issuer}</span>
-                    <span>•</span>
-                    <span>{item.date}</span>
+                <div className="px-4 py-3 flex items-center gap-3">
+                  <Image
+                    src={item.logo}
+                    alt={`${item.issuer} logo`}
+                    width={32}
+                    height={32}
+                    className="object-contain shrink-0"
+                  />
+                  <div className="flex-1">
+                    <h4 className="text-base font-semibold">{item.name}</h4>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span>{item.issuer}</span>
+                      <span>•</span>
+                      <span>{item.date}</span>
+                    </div>
                   </div>
                 </div>
               </div>

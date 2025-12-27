@@ -13,6 +13,7 @@
  * - company: Company name
  * - period: Employment period (e.g., "2024 - Present")
  * - type: Either "work" or "internship"
+ * - logo: Path to institution logo image
  * - responsibilities: Array of responsibility strings
  * - learnings: Array of learning strings
  * - certificateUrl: URL to view certificate (optional)
@@ -31,6 +32,7 @@ export interface ExperienceItem {
   company: string;
   period: string;
   type: ExperienceType;
+  logo: string;
   responsibilities: readonly string[];
   learnings: readonly string[];
   certificateUrl?: string | null;
@@ -46,6 +48,7 @@ export const experience: readonly ExperienceItem[] = [
     company: "Information Technology Institute (ITI)",
     period: "Feb 2025 - Jul 2025",
     type: "internship",
+    logo: "/assets/institutions/iti.png",
     responsibilities: [
       "Built full-stack MERN applications and connected React UIs to REST APIs.",
       "Worked in a team setting and shipped responsive features under training deadlines.",
@@ -67,6 +70,7 @@ export const experience: readonly ExperienceItem[] = [
     company: "TELUS International",
     period: "Sep 2019 - May 2024",
     type: "work",
+    logo: "/assets/institutions/telus.png",
     responsibilities: [
       "Reviewed search results using detailed guidelines and wrote clear evaluation notes.",
       "Maintained consistent quality and attention to detail while working remotely.",
