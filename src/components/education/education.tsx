@@ -3,6 +3,8 @@
 import { useEffect, useState, startTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Icon } from "@/components/ui/icon";
+import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
 import {
   Accordion,
   AccordionItem,
@@ -53,7 +55,7 @@ export function Education() {
                         alt={`${item.issuer} logo`}
                         width={32}
                         height={32}
-                        className="object-contain shrink-0"
+                        className="object-contain shrink-0 opacity-75"
                       />
                       <div className="flex-1">
                         <h4 className="text-base font-semibold">{item.name}</h4>
@@ -88,9 +90,10 @@ export function Education() {
                           href={item.certificateUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-primary hover:underline"
+                          className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
                         >
-                          View Certificate →
+                          View Certificate
+                          <Icon icon={ArrowRight02Icon} size={14} />
                         </Link>
                       ) : (
                         <p>No certificate link available.</p>
@@ -114,7 +117,7 @@ export function Education() {
                     alt={`${item.issuer} logo`}
                     width={32}
                     height={32}
-                    className="object-contain shrink-0"
+                    className="object-contain shrink-0 opacity-75"
                   />
                   <div className="flex-1">
                     <h4 className="text-base font-semibold">{item.name}</h4>
