@@ -5,6 +5,8 @@ import {
 } from "@/components/animate-ui/components/base/accordion";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { Icon } from "@/components/ui/icon";
+import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
 import type { ExperienceItem } from "@/lib/portfolio-data";
 
 interface ExperienceAccordionItemProps {
@@ -31,7 +33,7 @@ export function ExperienceAccordionItem({
               alt={`${item.company} logo`}
               width={32}
               height={32}
-              className="object-contain shrink-0"
+              className="object-contain shrink-0 opacity-75"
             />
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-0.5">
@@ -79,9 +81,10 @@ export function ExperienceAccordionItem({
                 href={item.certificateUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-primary hover:underline"
+                className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
               >
-                View Certificate →
+                View Certificate
+                <Icon icon={ArrowRight02Icon} size={14} />
               </a>
             </div>
           ) : null}
