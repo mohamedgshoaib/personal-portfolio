@@ -85,6 +85,7 @@ export function ProjectCarouselCard({
             className="cursor-pointer text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring mb-4 w-fit inline-flex items-center gap-1"
           >
             Read More
+            <span className="sr-only"> about {project.name}</span>
             <Icon icon={ArrowRight02Icon} size={14} />
           </button>
 
@@ -95,7 +96,7 @@ export function ProjectCarouselCard({
               href={project.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="cursor-pointer text-sm font-bold text-accent-orange transition-colors hover:text-accent-orange/80 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="cursor-pointer text-sm font-semibold text-accent-orange transition-colors hover:text-accent-orange/80 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               Visit Website
               <span className="sr-only"> - {project.name}</span>
@@ -105,9 +106,10 @@ export function ProjectCarouselCard({
                 href={project.repositoryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cursor-pointer text-sm font-bold text-muted-foreground transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="cursor-pointer text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 Repository
+                <span className="sr-only"> for {project.name}</span>
               </Link>
             )}
           </div>

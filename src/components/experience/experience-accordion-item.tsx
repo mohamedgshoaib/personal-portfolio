@@ -81,9 +81,13 @@ export function ExperienceAccordionItem({
                 href={item.certificateUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+                className="inline-flex items-center gap-1 text-sm text-primary font-semibold hover:underline"
               >
                 View Certificate
+                <span className="sr-only">
+                  {" "}
+                  for {item.title} at {item.company}
+                </span>
                 <Icon icon={ArrowRight02Icon} size={14} />
               </a>
             </div>

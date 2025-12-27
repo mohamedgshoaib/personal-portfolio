@@ -90,9 +90,13 @@ export function Education() {
                           href={item.certificateUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+                          className="inline-flex items-center gap-1 text-sm text-primary font-semibold hover:underline"
                         >
                           View Certificate
+                          <span className="sr-only">
+                            {" "}
+                            for {item.name} from {item.issuer}
+                          </span>
                           <Icon icon={ArrowRight02Icon} size={14} />
                         </Link>
                       ) : (

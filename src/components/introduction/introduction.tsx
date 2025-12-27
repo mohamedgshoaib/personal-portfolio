@@ -34,13 +34,13 @@ export function Introduction() {
               </p>
             </div>
 
-            <p className="text-lg leading-relaxed text-foreground/90">
+            <p className="text-lg leading-relaxed text-foreground">
               Co-founder @{" "}
               <Link
                 href="https://www.devloop.software/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline"
+                className="text-primary font-semibold hover:underline"
               >
                 Devloop
               </Link>
@@ -56,6 +56,7 @@ export function Introduction() {
               className="hidden text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:inline-block"
             >
               View My CV
+              <span className="sr-only"> (opens in a new tab)</span>
             </Link>
           </div>
 
@@ -137,6 +138,7 @@ export function Introduction() {
               className="text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
             >
               View My CV
+              <span className="sr-only"> (opens in a new tab)</span>
             </Link>
           </div>
         </div>

@@ -37,7 +37,7 @@ export const mdxComponents: MDXComponents = {
 
   // Paragraphs and text
   p: ({ children, ...props }) => (
-    <p className="mb-4 leading-7 text-foreground/90" {...props}>
+    <p className="mb-4 leading-7 text-foreground" {...props}>
       {children}
     </p>
   ),
