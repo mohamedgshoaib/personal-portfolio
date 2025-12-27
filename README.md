@@ -55,7 +55,7 @@ Geist Mono for body, Geist Sans for headings. Projects show in a carousel. Exper
 
 ## Project Structure
 
-```
+```bash
 src/
   app/                    # Pages and layouts
     blog/                 # Blog post listing & dynamic routes
