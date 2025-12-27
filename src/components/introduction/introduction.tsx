@@ -35,7 +35,17 @@ export function Introduction() {
             </div>
 
             <p className="text-lg leading-relaxed text-foreground/90">
-              {personal.bio}
+              Co-founder @{" "}
+              <Link
+                href="https://www.devloop.software/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                Devloop
+              </Link>
+              . I build React/Next.js sites with RTL support, accessibility, and
+              performance optimization.
             </p>
 
             {/* View CV - shown on desktop */}
