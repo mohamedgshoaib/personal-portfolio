@@ -16,7 +16,7 @@
 export const personal = {
   name: "Mohamed Gamal",
   jobTitle: "Frontend Developer",
-  bio: "Cairo-based. Co-founder @ Devloop. Ships React/Next.js sites with RTL support, accessibility, and performance optimization.",
+  bio: "Co-founder @ Devloop. I build React/Next.js sites with RTL support, accessibility, and performance optimization.",
   avatar: "/assets/avatars/portfolio-pfp.jpg",
   socialLinks: {
     linkedin: "https://www.linkedin.com/in/mohamed-g-shoaib/",
