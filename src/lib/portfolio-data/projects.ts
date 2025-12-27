@@ -165,6 +165,40 @@ export const projects = {
       ],
     },
     // ========================================
+    // Nexcn
+    // ========================================
+    {
+      id: "nexcn",
+      type: "personal",
+      name: "Nexcn",
+      description:
+        "Interactive CLI and Next.js 16 starter preconfigured with TypeScript, Tailwind CSS v4, Base UI, EN/AR i18n (RTL), and testing out of the box.",
+      fullDescription:
+        "Nexcn is a Next.js 16 starter built for shipping without spending time on boilerplate configuration. It includes next-intl for English/Arabic i18n with RTL support, Vitest + Playwright for testing, and a code-quality setup with ESLint, Prettier, and Husky.",
+      image: "/assets/projects/nexcn/nexcn.png",
+      websiteUrl: "https://nexcn.vercel.app/en",
+      repositoryUrl: "https://github.com/mohamed-g-shoaib/nexcn",
+      architecture:
+        "Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS v4, with Base UI and shadcn/ui for components, next-intl for i18n (EN/AR + RTL), Vitest for unit tests, Playwright for E2E, and ESLint/Prettier/Husky for code quality.",
+      problem:
+        "Starting a new Next.js project usually means repeating the same setup work (TypeScript, styling, i18n, testing, linting, and SEO basics).",
+      solution:
+        "Built an interactive CLI and starter template that generates a production-ready baseline with i18n and testing configured, so the focus stays on product work instead of boilerplate.",
+      techStack: [
+        "Next.js 16",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "shadcn/ui",
+        "Base UI",
+        "next-intl",
+        "Vitest",
+        "Playwright",
+        "ESLint",
+        "Prettier",
+        "Husky",
+      ],
+    },
+    // ========================================
     // Marky
     // ========================================
     {

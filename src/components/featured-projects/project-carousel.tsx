@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState, startTransition } from "react";
+import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import { Button } from "@base-ui/react/button";
 import { ProjectDetailsDialog } from "./project-details-dialog";
@@ -30,12 +31,10 @@ interface ProjectCarouselProps {
 export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
-    loop: false,
+    loop: true,
     skipSnaps: false,
     dragFree: false,
   });
-  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
-  const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -50,8 +49,6 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
-    setPrevBtnDisabled(!emblaApi.canScrollPrev());
-    setNextBtnDisabled(!emblaApi.canScrollNext());
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
@@ -86,33 +83,39 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
             ))}
           </div>
         </div>
-      </ProjectCarouselContainer>
 
-      <div className="mt-6 flex flex-col items-center gap-2">
-        <div className="flex items-center justify-center gap-2">
-          <Button
-            onClick={scrollPrev}
-            disabled={prevBtnDisabled}
-            className="flex h-11 min-w-[88px] cursor-pointer items-center justify-center gap-1.5 border border-border bg-background px-3 py-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-not-allowed md:min-w-[100px] md:gap-2 md:px-4 md:text-sm"
-            aria-label="Previous project"
+        <div className="mt-6 flex flex-col items-center gap-4">
+          <div className="flex items-center justify-center gap-3">
+            <Button
+              onClick={scrollPrev}
+              className="flex h-11 min-w-22 cursor-pointer items-center justify-center gap-1.5 border border-border bg-background px-3 py-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-w-25 md:gap-2 md:px-4 md:text-sm"
+              aria-label="Previous project"
+            >
+              <ChevronLeftIcon className="h-4 w-4 md:h-5 md:w-5" />
+              <span>{selectedIndex === 0 ? "Last" : "Back"}</span>
+            </Button>
+            <span className="text-xs text-muted-foreground md:text-sm min-w-16 text-center">
+              {selectedIndex + 1} of {projects.length}
+            </span>
+            <Button
+              onClick={scrollNext}
+              className="flex h-11 min-w-22 cursor-pointer items-center justify-center gap-1.5 border border-border bg-background px-3 py-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-w-25 md:gap-2 md:px-4 md:text-sm"
+              aria-label="Next project"
+            >
+              <span>
+                {selectedIndex === projects.length - 1 ? "First" : "Next"}
+              </span>
+              <ChevronRightIcon className="h-4 w-4 md:h-5 md:w-5" />
+            </Button>
+          </div>
+          <Link
+            href="/projects"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground hover:underline"
           >
-            <ChevronLeftIcon className="h-4 w-4 md:h-5 md:w-5" />
-            <span>Back</span>
-          </Button>
-          <Button
-            onClick={scrollNext}
-            disabled={nextBtnDisabled}
-            className="flex h-11 min-w-[88px] cursor-pointer items-center justify-center gap-1.5 border border-border bg-background px-3 py-2 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-not-allowed md:min-w-[100px] md:gap-2 md:px-4 md:text-sm"
-            aria-label="Next project"
-          >
-            <span>Next</span>
-            <ChevronRightIcon className="h-4 w-4 md:h-5 md:w-5" />
-          </Button>
+            View All Projects
+          </Link>
         </div>
-        <span className="text-xs text-muted-foreground md:text-sm">
-          ({selectedIndex + 1} of {projects.length})
-        </span>
-      </div>
+      </ProjectCarouselContainer>
 
       <ProjectDetailsDialog
         open={dialogOpen}
