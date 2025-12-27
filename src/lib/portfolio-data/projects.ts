@@ -34,58 +34,68 @@ export const projects = {
     // Devloop
     // ========================================
     {
-      id: "devloop-agency",
+      id: "devloop-homepage",
       type: "client",
-      name: "Devloop Agency",
+      name: "Devloop Homepage",
       description:
-        "Agency site with SEO, reusable components, and responsive design.",
+        "Agency website for Devloop with RTL-ready i18n, performance optimizations, and a Resend-powered contact form.",
       fullDescription:
-        "Built the Devloop agency website with reusable components, responsive layout, and SEO-friendly pages for ongoing content updates. Features project showcases, testimonials, and bilingual support.",
+        "The official Devloop website built with localized routing for English and Arabic, including full RTL support and server-side translations for SEO. It ships with theme switching, animation components that respect reduced-motion, and lazy-loaded/dynamically imported heavy UI to keep the initial load lean.",
       image: "/assets/projects/devloop/devloop.jpg",
-      websiteUrl: "https://devloop.software",
+      websiteUrl: "https://www.devloop.software",
       repositoryUrl: null,
       architecture:
-        "Next.js App Router with Tailwind CSS for styling, TypeScript for type safety, and Framer Motion for smooth animations. Optimized for RTL/SEO and performance.",
+        "Next.js 16 App Router (Turbopack) + React 19 + Tailwind CSS 4, with next-intl for i18n (en/ar), next-themes for theming, Framer Motion for animations, and Resend for contact email delivery.",
       problem:
-        "Needed a professional showcase site to highlight services, case studies, and attract global clients.",
+        "Devloop needed a fast, bilingual (English/Arabic) public site with strong SEO, clear sections, and a working contact flow.",
       solution:
-        "Created a fast, accessible agency site with dynamic project grids, contact forms, and content management for easy updates.",
+        "Built a localized Next.js website with RTL support, theme switching, performance-focused loading strategies for animations, and a Resend-backed contact form.",
       techStack: [
-        "Next.js 15",
-        "React 19",
+        "Next.js 16",
         "TypeScript",
-        "Tailwind CSS",
+        "Tailwind CSS 4",
+        "shadcn/ui",
+        "Base UI",
         "Framer Motion",
+        "next-intl",
+        "React Hook Form",
+        "Zod",
+        "Resend",
       ],
     },
     // ========================================
     // Mo's Experiences
     // ========================================
     {
-      id: "mo-experiences",
+      id: "mos-experiences",
       type: "client",
       name: "Mo's Experiences",
       description:
-        "Egyptian travel platform connecting tourists with authentic desert adventures and Nile experiences.",
+        "Tourism website with en/fr routing, real-time search, favorites, and an admin dashboard with analytics + Web Vitals insights.",
       fullDescription:
-        "A booking platform for Mo's Experiences, an Egyptian tour agency specializing in desert safaris and Nile cruises. Handles custom trip inquiries with real-time notifications, showcases destination packages, and streamlines communication between travelers and guides.",
+        "A production-ready travel site that includes destinations, packages, VIP tours, and multiple booking/contact flows with email + WhatsApp integration. It also includes an admin dashboard for CRUD content management and an analytics area tracking engagement and Core Web Vitals (LCP/FID/CLS), plus SEO features like OpenGraph, JSON-LD, sitemap, robots, and hreflang.",
       image: "/assets/projects/mos-experiences/mosexperiences.jpg",
       websiteUrl: "https://www.mosexperiences.com/",
       repositoryUrl: null,
       architecture:
-        "Server-rendered with Next.js 15 App Router. Uses Supabase for inquiry management and TanStack Query for optimized data fetching. Implements Radix UI components for accessible interactions and Recharts for pricing visualization.",
+        "Next.js 15.5.5 App Router + TypeScript + Tailwind CSS 4 + shadcn/ui, with Supabase (PostgreSQL + Auth), TanStack Query for server-state, Resend for email, next-themes for theming, and a custom analytics tracking layer.",
       problem:
-        "The tour agency managed bookings through scattered WhatsApp conversations and spreadsheets. No centralized system to track inquiries, showcase packages with pricing, or follow up with potential clients.",
+        "A tourism business needed a multi-language website with searchable content, structured packages, and a managed workflow for inquiries and bookings.",
       solution:
-        "Built a platform that centralizes all trip inquiries in a dashboard, displays packages with dynamic pricing, and sends real-time notifications for new bookings. Travelers browse destinations and submit custom requests that route directly to the agency's inbox.",
+        "Delivered a full-featured site with en/fr routing, content browsing + search, favorites, multiple inquiry forms, and an admin dashboard for managing content and monitoring analytics/Web Vitals/SEO signals.",
       techStack: [
         "Next.js 15",
-        "React 19",
         "TypeScript",
-        "Tailwind CSS",
-        "Supabase",
-        "TanStack Query",
+        "Tailwind CSS 4",
+        "shadcn/ui",
         "Radix UI",
+        "next-intl",
+        "React Hook Form",
+        "Zod",
+        "PostgreSQL",
+        "Supabase Auth",
+        "TanStack Query",
+        "Resend",
       ],
     },
 
@@ -97,56 +107,61 @@ export const projects = {
       type: "client",
       name: "Dana Doors",
       description:
-        "Bilingual showroom for premium doors and windows with optimized image delivery.",
+        "Bilingual (EN/AR) product catalog with full RTL support, Cloudinary-powered image galleries, detailed product specs, and SEO setup (sitemap + structured data).",
       fullDescription:
-        "An online catalog for Dana Doors, a doors and windows manufacturer. Features bilingual Arabic/English support, product galleries with zoom, quote request forms, and SEO optimization for local search visibility.",
+        "A modern website for showcasing aluminum doors, windows, handrails, kitchens, and related products with full English/Arabic localization. Includes a Cloudinary-powered gallery, dark/light themes, and SEO features such as sitemap, structured data, and meta tags.",
       image: "/assets/projects/dana-doors/dana-doors.jpg",
       websiteUrl: "https://www.danadoors.net/",
       repositoryUrl: null,
       architecture:
-        "Bilingual Next.js 16 application with internationalization support. Uses Cloudinary for optimized image delivery and Upstash Redis for rate limiting on contact forms. Implements Framer Motion for smooth transitions.",
+        "Next.js 16 App Router + TypeScript + Tailwind CSS, using Radix UI + shadcn/ui for components, Cloudinary for images/CDN, and Upstash Redis for analytics (visit counter).",
       problem:
-        "The manufacturer had no online presence. Customers couldn't browse products, see pricing ranges, or request quotes without calling. SEO was non-existent for local searches.",
+        "The business needed a bilingual (RTL-ready) catalog that makes products easy to browse with high-quality imagery and search-friendly pages.",
       solution:
-        "Created a fast-loading showroom with product categories, high-quality images optimized via Cloudinary, and quote request forms that go straight to sales. Added bilingual SEO to rank for both Arabic and English searches in Egypt.",
+        "Shipped a responsive EN/AR website with RTL localization, Cloudinary-powered galleries, dark/light themes, and SEO setup including sitemap and structured data.",
       techStack: [
         "Next.js 16",
-        "React 19",
         "TypeScript",
-        "Tailwind CSS",
+        "Tailwind CSS 4",
+        "shadcn/ui",
+        "Radix UI",
+        "next-intl",
+        "React Hook Form",
+        "Zod",
         "Cloudinary",
         "Upstash Redis",
-        "Framer Motion",
+        "Resend",
       ],
     },
     // ========================================
     // Rootly
     // ========================================
     {
-      id: "rootly",
+      id: "rootly-notes",
       type: "personal",
       name: "Rootly Notes",
       description:
-        "Study tracker with progress charts, streak tracking, and multi-tenant authentication.",
+        "Learning tracker with dual storage (Supabase or LocalStorage), analytics charts, quiz review mode, and exports (JSON/CSV).",
       fullDescription:
-        "A learning platform for students to track study sessions, visualize progress with charts, and maintain study streaks. Features secure authentication, offline-capable notes, and real-time progress sync across devices.",
+        "Rootly Notes helps track learning progress through courses, Q&A notes (with code snippets), daily study logging (time + mood), and visual analytics across the last 90 days. It supports cloud sync via Supabase or offline-first usage via LocalStorage, and includes a review/quiz mode with session summaries and improvement stats.",
       image: "/assets/projects/rootly-notes/rootly-notes.jpg",
       websiteUrl: "https://rootly-notes-app.vercel.app/",
       repositoryUrl: "https://github.com/mohamed-g-shoaib/rootly-notes-app",
       architecture:
-        "Full-stack application with Supabase Auth for multi-tenant user management. Uses Recharts for progress visualization and React Hook Form with Zod for validated data entry. Implements real-time subscriptions for live updates.",
+        "Next.js 15 App Router + React 19 + TypeScript + Tailwind CSS v4, using Supabase (PostgreSQL + Auth + RLS) for secure per-user data, Recharts for dashboards, and Radix UI/shadcn/ui for accessible components.",
       problem:
-        "Students had no way to track their study habits, see progress over time, or stay motivated with streak tracking. Existing tools were either too complex or lacked visual feedback.",
+        "Learners needed a structured way to store notes, track progress over time, and review what they studied without losing data (online or offline).",
       solution:
-        "Built an intuitive study tracker where students log sessions, see understanding metrics in charts, and track daily streaks. Progress syncs in real-time across devices, and notes are accessible offline for studying anywhere.",
+        "Built a notes + learning tracker with offline and cloud modes, progress dashboards, quiz-based review, and exports to JSON/CSV.",
       techStack: [
         "Next.js 15",
-        "React 19",
         "TypeScript",
-        "Tailwind CSS",
-        "Supabase",
+        "Tailwind CSS 4",
+        "shadcn/ui",
+        "Radix UI",
+        "PostgreSQL",
+        "Supabase Auth",
         "Recharts",
-        "React Hook Form",
       ],
     },
     // ========================================
@@ -155,27 +170,29 @@ export const projects = {
     {
       id: "marky",
       type: "personal",
-      name: "Marky Editor",
+      name: "Marky",
       description:
-        "AI-powered mindmap editor that transforms markdown into interactive visual diagrams.",
+        "Mindmap editor with AI-assisted generation, rich editing, markmap visual preview, import/export, and autosave.",
       fullDescription:
-        "A markdown-based mindmap editor with live preview and AI assistance. Users write in markdown, see it rendered as an interactive mindmap in real-time, and can export or share their visual diagrams.",
+        "A responsive mindmap creation and editing app built around a rich editor and real-time visual rendering using markmap. Supports importing Markdown/HTML, exporting standalone HTML, local autosave, a learning center, keyboard shortcuts, and accessibility-focused interactions (including keyboard navigation).",
       image: "/assets/projects/marky-editor/marky-editor.jpg",
       websiteUrl: "https://marky-editor.vercel.app/",
       repositoryUrl: "https://github.com/mohamed-g-shoaib/marky-editor",
       architecture:
-        "Next.js 15 application with Markmap library for mindmap rendering. Uses split-panel layout for simultaneous markdown editing and visual preview. Implements error boundaries for graceful handling of invalid markdown.",
+        "Next.js 15 + TypeScript + Tailwind CSS + shadcn/ui, using markmap for visualization and Lexical for editing, with an optional configurable AI endpoint and error boundaries for resilience.",
       problem:
-        "Creating mindmaps required dedicated tools with steep learning curves. Developers wanted to use markdown (which they already know) but needed the visual clarity of mindmaps for presentations.",
+        "Users needed a fast way to turn text/Markdown into clean visual mindmaps without relying on heavy desktop tools.",
       solution:
-        "Created an editor where users write markdown on the left and see a live mindmap on the right. Supports collapsing nodes, zooming, and exporting. The markdown-first approach means content is portable and version-controllable.",
+        "Built an editor + live mindmap preview workflow with autosave, import/export, and optional AI-assisted generation to quickly structure ideas.",
       techStack: [
         "Next.js 15",
-        "React 19",
         "TypeScript",
-        "Tailwind CSS",
-        "Markmap",
-        "React Resizable Panels",
+        "Tailwind CSS 4",
+        "shadcn/ui",
+        "Radix UI",
+        "markmap.js",
+        "Lexical",
+        "GPT-OSS",
       ],
     },
   ],
