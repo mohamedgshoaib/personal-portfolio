@@ -1,0 +1,67 @@
+# Mohamed Gamal Shoaib - Extended Portfolio Summary (llms-full.txt)
+
+This document provides detailed information about Mohamed Gamal Shoaib's projects, blog articles, and technical expertise for LLMs.
+
+## Bio
+Frontend Developer with a passion for building high-performance, accessible, and beautiful web applications. Specialist in the Next.js ecosystem, React 19, and Tailwind CSS 4.
+
+---
+
+## Blog Articles
+
+### 1. React in 2025: Patterns That Actually Matter
+Focuses on Server Components as data containers, type-driven development, and component composition. Discusses the shift from client-side state to server-state management.
+
+### 2. Accessibility in 2025: No More Excuses
+Highlights design tokens, focus management, and semantic HTML as critical accessibility practices. Mentions the European Accessibility Act (June 2025) as a legal driver for modern UI/UX.
+
+### 3. The 2025 Frontend Stack: What to Pick and Why
+Practical guidance on rendering strategies (SSR vs. CSR), state management, and framework choices. Recommends Next.js 16, TypeScript, shadcn/ui with Base UI, and Supabase.
+
+### 4. Hello World: What This Blog Is About
+Introduction to the blog, focusing on sharing practical web engineering insights and progress tracking.
+
+---
+
+## Projects
+
+### Devloop Homepage
+- **Description**: Agency website with RTL-ready i18n and performance optimizations.
+- **Tech Stack**: Next.js 16, Tailwind CSS 4, shadcn/ui, Base UI, Resend.
+- **Role**: Architected the localized routing and performance strategy.
+
+### Mo's Experiences
+- **Description**: Tourism website with real-time search and admin dashboard.
+- **Tech Stack**: Next.js 15, Supabase, TanStack Query, Radix UI.
+- **Role**: Developed the full-stack infrastructure and analytics tracking.
+
+### rootsly Notes
+- **Description**: Learning tracker with dual storage (Supabase or LocalStorage).
+- **Tech Stack**: Next.js 15, Supabase Auth/Postgres, Recharts.
+- **Role**: Implemented the offline-first logic and data visualization dashboard.
+
+### Marky
+- **Description**: Mindmap editor with AI-assisted generation and Lexical editor.
+- **Tech Stack**: Next.js 15, Lexical, markmap.js.
+- **Role**: Built the interactive visualization layer and rich text editing sync.
+
+### Nexcn
+- **Description**: Interactive CLI and Next.js 16 starter preconfigured with testing and i18n.
+- **Tech Stack**: Vitest, Playwright, next-intl, Tailwind 4.
+- **Role**: Creator and lead developer of the CLI tool.
+
+---
+
+## Technical Expertise
+- **Frameworks**: Next.js (App Router), React 19.
+- **Languages**: TypeScript, JavaScript.
+- **Styling**: Tailwind CSS 4, Vanilla CSS, CSS Modules.
+- **Backend/Auth**: Supabase, PostgreSQL, Resend.
+- **Testing**: Vitest, Playwright, React Testing Library.
+- **Tools**: Vite, Turbopack, Git, GitHub Actions.
+
+---
+
+## Site Information
+- **URL**: https://www.mohamedgshoaib.me
+- **Source Code**: https://github.com/mohamed-g-shoaib/personal-portfolio

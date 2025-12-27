@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = "https://mohamedgshoaib.vercel.app";
+  const siteUrl = "https://www.mohamedgshoaib.me";
 
   return {
     rules: [
@@ -14,4 +14,3 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: `${siteUrl}/sitemap.xml`,
   };
 }
-

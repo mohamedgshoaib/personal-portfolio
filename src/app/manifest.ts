@@ -3,7 +3,7 @@ import { portfolioData } from "@/lib/portfolio-data";
 
 export default function manifest(): MetadataRoute.Manifest {
   const { personal } = portfolioData;
-  const siteUrl = "https://mohamedgshoaib.vercel.app";
+  const siteUrl = "https://www.mohamedgshoaib.me";
 
   return {
     name: `${personal.name} - Portfolio`,
@@ -34,4 +34,3 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
   };
 }
-

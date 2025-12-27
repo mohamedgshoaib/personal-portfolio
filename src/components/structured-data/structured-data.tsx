@@ -1,7 +1,7 @@
 import { portfolioData } from "@/lib/portfolio-data";
 
-const siteUrl = "https://mohamedgshoaib.vercel.app";
-const { personal, projects, experience, techStack } = portfolioData;
+const siteUrl = "https://www.mohamedgshoaib.me";
+const { personal, projects, techStack } = portfolioData;
 
 export function StructuredData() {
   // Person schema
@@ -62,7 +62,7 @@ export function StructuredData() {
         "@type": "CreativeWork",
         name: project.name,
         description: project.description,
-        url: project.websiteUrl,
+        url: `${siteUrl}/projects/${project.id}`,
         image: `${siteUrl}${project.image}`,
       },
     })),
