@@ -53,7 +53,7 @@ export function Introduction() {
               href={personal.cv}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:inline-block"
+              className="hidden w-fit text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:inline-block"
             >
               View My CV
               <span className="sr-only"> (opens in a new tab)</span>
@@ -135,7 +135,7 @@ export function Introduction() {
               href={personal.cv}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
+              className="w-fit text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
             >
               View My CV
               <span className="sr-only"> (opens in a new tab)</span>
