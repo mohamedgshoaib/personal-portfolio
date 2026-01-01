@@ -17,11 +17,6 @@ const Experience = dynamic(() =>
     default: mod.Experience,
   }))
 );
-const Education = dynamic(() =>
-  import("@/components/education/education").then((mod) => ({
-    default: mod.Education,
-  }))
-);
 
 const GitHubActivity = dynamic(() =>
   import("@/components/github-activity/github-activity").then((mod) => ({
@@ -58,9 +53,6 @@ export default function Home() {
               </SectionWrapper>
               <SectionWrapper delay={0.1}>
                 <Experience />
-              </SectionWrapper>
-              <SectionWrapper delay={0.1}>
-                <Education />
               </SectionWrapper>
 
               <SectionWrapper delay={0.1}>
