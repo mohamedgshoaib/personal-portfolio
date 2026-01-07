@@ -3,6 +3,7 @@ import { getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 import { MDXRemote } from "@/components/mdx/mdx-remote";
 import { Navbar } from "@/components/navbar/navbar";
 import { Footer } from "@/components/footer/footer";
+import { CopyActions } from "@/components/blog/copy-actions";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -97,7 +98,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   {post.description}
                 </p>
               )}
-
               {post.tags && post.tags.length > 0 && (
                 <div className="flex flex-wrap justify-center gap-2 mt-4">
                   {post.tags.map((tag) => (
@@ -110,6 +110,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   ))}
                 </div>
               )}
+
+              <div className="mt-6 flex justify-center">
+                <CopyActions rawMarkdown={post.rawContent} />
+              </div>
             </header>
 
             <hr className="my-8 border-border" />

@@ -13,6 +13,7 @@ export interface BlogPost {
   tags?: string[];
   readingTime: string;
   content: string;
+  rawContent: string;
 }
 
 export interface BlogPostMeta {
@@ -67,7 +68,9 @@ export function getPostBySlug(slug: string): BlogPost | null {
   }
 
   const fileContents = fs.readFileSync(filePath, "utf8");
-  const { data, content } = matter(fileContents);
+  // Normalize line endings to LF for consistent clipboard behavior
+  const normalizedContents = fileContents.replace(/\r\n/g, "\n");
+  const { data, content } = matter(normalizedContents);
 
   return {
     slug,
@@ -77,6 +80,14 @@ export function getPostBySlug(slug: string): BlogPost | null {
     tags: data.tags || [],
     readingTime: readingTime(content).text,
     content,
+    rawContent: `---
+title: "${data.title}"
+date: "${data.date}"
+description: "${data.description}"
+tags: ${JSON.stringify(data.tags)}
+---
+
+${content.trim()}`,
   };
 }
 
