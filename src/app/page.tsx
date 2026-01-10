@@ -49,10 +49,10 @@ export default function Home() {
                 <FeaturedProjects />
               </SectionWrapper>
               <SectionWrapper delay={0.1}>
-                <TechStack />
+                <Experience />
               </SectionWrapper>
               <SectionWrapper delay={0.1}>
-                <Experience />
+                <TechStack />
               </SectionWrapper>
 
               <SectionWrapper delay={0.1}>
