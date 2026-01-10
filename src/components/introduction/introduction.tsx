@@ -37,10 +37,10 @@ export function Introduction() {
               <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
                 {personal.name}
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl font-semibold text-muted-foreground">
                 {personal.jobTitle}
               </p>
-              <div className="flex items-center justify-center gap-1.5 text-sm text-muted-foreground md:justify-start">
+              <div className="flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground md:justify-start">
                 <Icon icon={Location06Icon} size={14} strokeWidth={2} />
                 Cairo, Egypt
               </div>
@@ -62,7 +62,7 @@ export function Introduction() {
                 href={personal.cv}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="font-semibold underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 My CV
                 <span className="sr-only"> (opens in a new tab)</span>
@@ -77,7 +77,7 @@ export function Introduction() {
                 href={personal.socialLinks.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="font-semibold underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 My GitHub
                 <span className="sr-only"> (opens in a new tab)</span>
@@ -92,7 +92,7 @@ export function Introduction() {
                 href={personal.socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="font-semibold underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 LinkedIn
                 <span className="sr-only"> (opens in a new tab)</span>
@@ -102,7 +102,7 @@ export function Introduction() {
                 href={personal.socialLinks.x}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="font-semibold underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 X<span className="sr-only"> (opens in a new tab)</span>
               </Link>
