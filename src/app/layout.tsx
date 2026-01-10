@@ -1,22 +1,9 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import localFont from "next/font/local";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { MotionConfig } from "motion/react";
 import "./globals.css";
-
-const sora = localFont({
-  src: "./fonts/Sora-VariableFont_wght.ttf",
-  variable: "--font-sora",
-  display: "swap",
-  weight: "100 800",
-});
-
-const jetbrainsMono = localFont({
-  src: "./fonts/JetBrainsMono-VariableFont_wght.ttf",
-  variable: "--font-jetbrains-mono",
-  display: "optional", // lazy load - won't block render
-  weight: "100 800",
-});
 
 import { Toaster } from "@/components/toaster/toaster";
 import { ScrollRestoration } from "@/components/scroll-restoration";
@@ -90,8 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${sora.variable} ${jetbrainsMono.variable} antialiased`}
-        style={sora.style}
+        className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
         suppressHydrationWarning
       >
         <StructuredData />
