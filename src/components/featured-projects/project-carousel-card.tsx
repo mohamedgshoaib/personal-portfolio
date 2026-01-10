@@ -77,7 +77,7 @@ export function ProjectCarouselCard({
             {project.type === "personal" ? "Personal" : "Client Work"}
           </Badge>
           <h3 className="mb-2 text-lg font-semibold">{project.name}</h3>
-          <p className="mb-2 min-h-10 text-sm text-muted-foreground">
+          <p className="mb-2 min-h-10 text-sm font-medium text-muted-foreground">
             {project.description}
           </p>
           <button

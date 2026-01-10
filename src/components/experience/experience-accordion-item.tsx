@@ -54,11 +54,13 @@ export function ExperienceAccordionItem({
           </div>
           <PlusIcon className="h-3 w-3 shrink-0 transition-transform duration-200" />
         </AccordionTrigger>
-        <AccordionPanel className="px-4 pt-4 pb-4 space-y-4 text-sm text-muted-foreground">
+        <AccordionPanel className="px-4 pt-4 pb-4 space-y-4 text-sm font-medium text-muted-foreground">
           {item.responsibilities?.length ? (
             <div className="space-y-2">
-              <p className="font-medium text-foreground">My Responsibilities</p>
-              <ul className="list-disc space-y-1 pl-5">
+              <p className="font-semibold text-foreground">
+                My Responsibilities
+              </p>
+              <ul className="list-disc space-y-1 pl-5 font-medium">
                 {item.responsibilities.map((responsibility) => (
                   <li key={responsibility}>{responsibility}</li>
                 ))}
@@ -67,8 +69,8 @@ export function ExperienceAccordionItem({
           ) : null}
           {item.learnings?.length ? (
             <div className="space-y-2">
-              <p className="font-medium text-foreground">What I Learned</p>
-              <ul className="list-disc space-y-1 pl-5">
+              <p className="font-semibold text-foreground">What I Learned</p>
+              <ul className="list-disc space-y-1 pl-5 font-medium">
                 {item.learnings.map((learning) => (
                   <li key={learning}>{learning}</li>
                 ))}

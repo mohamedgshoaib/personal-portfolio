@@ -53,7 +53,7 @@ export function Introduction() {
           </p>
 
           {/* CTAs + Social links */}
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
             {/* View CV */}
             <div className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
               <Icon icon={DocumentAttachmentIcon} size={16} strokeWidth={2} />

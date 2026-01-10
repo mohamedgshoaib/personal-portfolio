@@ -63,7 +63,7 @@ function ContributionGraph({
 
   return (
     <div>
-      <p className="mb-4 text-center text-sm text-muted-foreground">
+      <p className="mb-4 text-center text-sm font-medium text-muted-foreground">
         {totalContributions.toLocaleString()} contributions in the past year
       </p>
       <div className="relative border-y border-border bg-card">
@@ -89,7 +89,7 @@ function ContributionGraph({
                     />
                   }
                 />
-                <TooltipPanel className="border border-border bg-popover px-2.5 py-1 text-xs text-popover-foreground shadow-md **:data-[slot='tooltip-arrow']:bg-popover **:data-[slot='tooltip-arrow']:fill-popover">
+                <TooltipPanel className="border border-border bg-popover px-2.5 py-1 text-xs font-medium text-popover-foreground shadow-md **:data-[slot='tooltip-arrow']:bg-popover **:data-[slot='tooltip-arrow']:fill-popover">
                   {contributionLabel}
                 </TooltipPanel>
               </Tooltip>

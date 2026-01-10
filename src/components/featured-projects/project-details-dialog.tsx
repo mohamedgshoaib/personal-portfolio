@@ -67,7 +67,7 @@ export function ProjectDetailsDialog({
           {project.fullDescription && (
             <div>
               <h3 className="mb-2 text-lg font-semibold">Description</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm font-medium leading-relaxed text-muted-foreground">
                 {project.fullDescription}
               </p>
             </div>
@@ -76,7 +76,7 @@ export function ProjectDetailsDialog({
           {project.problem && (
             <div>
               <h3 className="mb-2 text-lg font-semibold">Problem</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm font-medium leading-relaxed text-muted-foreground">
                 {project.problem}
               </p>
             </div>
@@ -85,7 +85,7 @@ export function ProjectDetailsDialog({
           {project.solution && (
             <div>
               <h3 className="mb-2 text-lg font-semibold">Solution</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm font-medium leading-relaxed text-muted-foreground">
                 {project.solution}
               </p>
             </div>
