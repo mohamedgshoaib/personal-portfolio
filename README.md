@@ -12,7 +12,7 @@ My personal portfolio as a frontend developer. Built for simplicity, fast loads,
 
 ## Architecture
 
-Uses Next.js App Router with mostly server components. Client components only where needed (theme toggle, accordions). Components stay small and focused, each section in its own folder.
+Uses Next.js App Router with mostly server components. Client components only where needed (accordions). Components stay small and focused, each section in its own folder.
 
 ## Tech Stack
 
@@ -49,9 +49,9 @@ The site is built with a "machine-first" discovery strategy:
 
 Swiss-inspired minimal design. Consistent `max-w-3xl` width. No rounded corners. Vertical borders connect sections into a boxy layout.
 
-Corner accents use small orange plus signs on border intersections. Orange is the accent color, used sparingly for links and interactive elements.
+Orange is the accent color, used sparingly for links and interactive elements.
 
-Geist Mono for body, Geist Sans for headings. Projects show in a carousel. Experience and education expand via accordions. Animations are subtle and respect motion preferences.
+Inter variable font for all text and code. Badges use dashed borders for visual distinction. Projects show in a carousel. Experience and education expand via accordions. Animations are subtle and respect motion preferences.
 
 ## Project Structure
 
