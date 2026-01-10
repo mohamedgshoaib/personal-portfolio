@@ -33,14 +33,29 @@ export function ExperienceAccordionItem({
               alt={`${item.company} logo`}
               width={32}
               height={32}
-              className="object-contain shrink-0 opacity-75"
+              className="object-contain shrink-0 opacity-75 hidden md:block"
             />
             <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1 md:hidden">
+                <Image
+                  src={item.logo}
+                  alt={`${item.company} logo`}
+                  width={20}
+                  height={20}
+                  className="object-contain shrink-0 opacity-75"
+                />
+                <Badge
+                  variant="outline"
+                  className="h-auto text-[10px] px-1.5 py-0"
+                >
+                  {item.type === "internship" ? "Internship" : "Work"}
+                </Badge>
+              </div>
               <div className="flex items-center gap-2 mb-0.5">
                 <h4 className="text-base font-semibold">{item.title}</h4>
                 <Badge
                   variant="outline"
-                  className="h-auto text-[10px] px-1.5 py-0"
+                  className="h-auto text-[10px] px-1.5 py-0 hidden md:inline-flex"
                 >
                   {item.type === "internship" ? "Internship" : "Work"}
                 </Badge>
