@@ -44,7 +44,7 @@ export const experience: readonly ExperienceItem[] = [
   // ========================================
   {
     id: "intern-1",
-    title: "Full-Stack Web Development (MERN)",
+    title: "Full-Stack MERN Developer",
     company: "Information Technology Institute (ITI)",
     period: "Feb 2025 - Jul 2025",
     type: "internship",
