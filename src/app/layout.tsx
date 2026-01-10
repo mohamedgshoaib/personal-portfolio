@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import localFont from "next/font/local";
 import { MotionConfig } from "motion/react";
 import "./globals.css";
+
+const inter = localFont({
+  src: "./fonts/Inter-VariableFont_opsz,wght.ttf",
+  variable: "--font-inter",
+  display: "swap",
+  weight: "100 900",
+});
 
 import { Toaster } from "@/components/toaster/toaster";
 import { ScrollRestoration } from "@/components/scroll-restoration";
@@ -77,7 +83,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
+        className={`${inter.variable} antialiased`}
+        style={inter.style}
         suppressHydrationWarning
       >
         <StructuredData />
