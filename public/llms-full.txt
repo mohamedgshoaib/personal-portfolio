@@ -40,15 +40,10 @@ Introduction to the blog, focusing on sharing practical web engineering insights
 - **Tech Stack**: Next.js 15, Supabase Auth/Postgres, Recharts.
 - **Role**: Implemented the offline-first logic and data visualization dashboard.
 
-### Marky
-- **Description**: Mindmap editor with AI-assisted generation and Lexical editor.
-- **Tech Stack**: Next.js 15, Lexical, markmap.js.
-- **Role**: Built the interactive visualization layer and rich text editing sync.
-
-### Nexcn
-- **Description**: Interactive CLI and Next.js 16 starter preconfigured with testing and i18n.
-- **Tech Stack**: Vitest, Playwright, next-intl, Tailwind 4.
-- **Role**: Creator and lead developer of the CLI tool.
+### Mind Cave Bookmark Manager
+- **Description**: High-performance bookmark manager with Chrome extension, real-time sync across devices, and intelligent organization with custom categories.
+- **Tech Stack**: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Supabase PostgreSQL, Shadcn/ui, Framer Motion, Sharp, React Query, Chrome Extension (MV3).
+- **Role**: Built the full-stack system from dashboard to Chrome extension, optimized performance from 5.49s to 1.1s.
 
 ---
 

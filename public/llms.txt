@@ -15,8 +15,7 @@ A portfolio website for Mohamed Gamal Shoaib, a Frontend Developer focused on Re
 ## Key Projects
 - Devloop: Agency website with RTL-ready i18n and performance optimizations.
 - Rootsly Notes: Learning tracker with Supabase and analytics.
-- Marky: AI-assisted mindmap editor with real-time visualization.
-- Nexcn: Interactive CLI and Next.js 16 starter template.
+- Mind Cave: High-performance bookmark manager with Chrome extension and real-time sync.
 
 ## Contact
 - GitHub: [mohamed-g-shoaib](https://github.com/mohamed-g-shoaib)
