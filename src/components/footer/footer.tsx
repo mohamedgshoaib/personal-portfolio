@@ -31,12 +31,6 @@ export function Footer() {
     <footer className="w-full bg-background pb-4">
       <div className="container mx-auto px-4">
         <div className="relative mx-auto max-w-3xl border border-border bg-card py-4">
-          <span className="pointer-events-none absolute z-20 bottom-0 left-0 flex h-4 w-4 -translate-x-1/2 translate-y-1/2 items-center justify-center text-sm font-mono font-semibold text-accent-orange">
-            +
-          </span>
-          <span className="pointer-events-none absolute z-20 bottom-0 right-0 flex h-4 w-4 translate-x-1/2 translate-y-1/2 items-center justify-center text-sm font-mono font-semibold text-accent-orange">
-            +
-          </span>
           <div className="flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
             <div className="flex w-full flex-col items-center md:w-auto md:flex-row md:items-center gap-3">
               <Link
