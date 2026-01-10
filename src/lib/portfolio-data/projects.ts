@@ -36,9 +36,9 @@ export const projects = {
     {
       id: "devloop-homepage",
       type: "client",
-      name: "Devloop Homepage",
+      name: "Devloop Software Agency",
       description:
-        "Agency website for Devloop with RTL-ready i18n, performance optimizations, and a Resend-powered contact form.",
+        "Developed a modular component library, RTL/LTR support, SEO-optimized pages, and integrated Resend for emails, and react-email for professional email template.",
       fullDescription:
         "The official Devloop website built with localized routing for English and Arabic, including full RTL support and server-side translations for SEO. It ships with theme switching, animation components that respect reduced-motion, and lazy-loaded/dynamically imported heavy UI to keep the initial load lean.",
       image: "/assets/projects/devloop/devloop.jpg",
@@ -69,9 +69,9 @@ export const projects = {
     {
       id: "mos-experiences",
       type: "client",
-      name: "Mo's Experiences",
+      name: "Mo's Experiences for Tourism",
       description:
-        "Tourism website with en/fr routing, real-time search, favorites, and an admin dashboard with analytics + Web Vitals insights.",
+        "Optimized caching for server data, improving load times 40%, enhanced security with XSS and CSRF prevention, and added bilingual support.",
       fullDescription:
         "A production-ready travel site that includes destinations, packages, VIP tours, and multiple booking/contact flows with email + WhatsApp integration. It also includes an admin dashboard for CRUD content management and an analytics area tracking engagement and Core Web Vitals (LCP/FID/CLS), plus SEO features like OpenGraph, JSON-LD, sitemap, robots, and hreflang.",
       image: "/assets/projects/mos-experiences/mosexperiences.jpg",
@@ -105,9 +105,9 @@ export const projects = {
     {
       id: "dana-doors",
       type: "client",
-      name: "Dana Doors",
+      name: "Dana Doors Showroom",
       description:
-        "Bilingual (EN/AR) product catalog with full RTL support, Cloudinary-powered image galleries, detailed product specs, and SEO setup (sitemap + structured data).",
+        "Implemented bilingual inquiry flows and responsive showroom UI to drive sales leads, RTL/LTR support, and Indexed on Google Search Console.",
       fullDescription:
         "A modern website for showcasing aluminum doors, windows, handrails, kitchens, and related products with full English/Arabic localization. Includes a Cloudinary-powered gallery, dark/light themes, and SEO features such as sitemap, structured data, and meta tags.",
       image: "/assets/projects/dana-doors/dana-doors.jpg",
@@ -131,6 +131,42 @@ export const projects = {
         "Cloudinary",
         "Upstash Redis",
         "Resend",
+      ],
+    },
+    // ========================================
+    // Mind Cave
+    // ========================================
+    {
+      id: "mind-cave",
+      type: "personal",
+      name: "Mind Cave Bookmark Manager",
+      description:
+        "High-performance bookmark manager with Chrome extension, real-time sync across devices, and intelligent organization with custom categories.",
+      fullDescription:
+        "Mind Cave is a full-stack bookmark management system that solves the problem of scattered, unorganized bookmarks across browsers. It features a lightning-fast dashboard with real-time multi-tab synchronization, intelligent category management with custom icons and colors, advanced filtering, bulk operations, and one-click bookmark imports from Chrome/Firefox/Safari. The dashboard was comprehensively optimized through systematic performance improvements: lazy loading, image optimization with Sharp/WebP conversion, Intersection Observer-based true lazy loading, and pre-generated thumbnail caching. Built with Next.js 16, React 19, and Supabase PostgreSQL, it delivers a seamless bookmark collection and discovery experience.",
+      image: "/assets/projects/mind-cave/mind-cave.jpg",
+      websiteUrl: "https://mindcave.vercel.app",
+      repositoryUrl: "https://github.com/mohamed-g-shoaib/mindcave",
+      architecture:
+        "Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS 4 + Supabase PostgreSQL. Frontend: Shadcn/ui components, Framer Motion animations, Hugeicons, React Query for server state. Backend: Next.js API routes, Sharp for server-side image processing, real-time subscriptions. Chrome Extension: Manifest v3 with content scripts and background workers. Performance: Intersection Observer lazy loading, content-visibility CSS, 365-day cache, WebP image conversion.",
+      problem:
+        "Users collect thousands of bookmarks across browsers but struggle to organize, rediscover, and access them efficiently. Browser bookmarks are scattered, search is poor, and there's no way to add context or categorize at scale.",
+      solution:
+        "Built a centralized bookmark hub with intelligent organization (categories with icons/colors), real-time Chrome extension syncing, advanced filtering, bulk operations, bookmark import from browsers, and metadata auto-fetch. Optimized the dashboard from 5.49s to 1.1s through 4 strategic performance phases, ensuring fast load times even with hundreds of bookmarks.",
+      techStack: [
+        "Next.js 16",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "Supabase PostgreSQL",
+        "Shadcn/ui",
+        "Framer Motion",
+        "Hugeicons",
+        "Sharp",
+        "React Query",
+        "Chrome Extension (MV3)",
+        "Intersection Observer",
+        "Sonner (Toast)",
       ],
     },
     // ========================================
@@ -162,71 +198,6 @@ export const projects = {
         "PostgreSQL",
         "Supabase Auth",
         "Recharts",
-      ],
-    },
-    // ========================================
-    // Nexcn
-    // ========================================
-    {
-      id: "nexcn",
-      type: "personal",
-      name: "Nexcn",
-      description:
-        "Interactive CLI and Next.js 16 starter preconfigured with TypeScript, Tailwind CSS v4, Base UI, EN/AR i18n (RTL), and testing out of the box.",
-      fullDescription:
-        "Nexcn is a Next.js 16 starter built for shipping without spending time on boilerplate configuration. It includes next-intl for English/Arabic i18n with RTL support, Vitest + Playwright for testing, and a code-quality setup with ESLint, Prettier, and Husky.",
-      image: "/assets/projects/nexcn/nexcn.png",
-      websiteUrl: "https://nexcn.vercel.app/en",
-      repositoryUrl: "https://github.com/mohamed-g-shoaib/nexcn",
-      architecture:
-        "Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS v4, with Base UI and shadcn/ui for components, next-intl for i18n (EN/AR + RTL), Vitest for unit tests, Playwright for E2E, and ESLint/Prettier/Husky for code quality.",
-      problem:
-        "Starting a new Next.js project usually means repeating the same setup work (TypeScript, styling, i18n, testing, linting, and SEO basics).",
-      solution:
-        "Built an interactive CLI and starter template that generates a production-ready baseline with i18n and testing configured, so the focus stays on product work instead of boilerplate.",
-      techStack: [
-        "Next.js 16",
-        "TypeScript",
-        "Tailwind CSS 4",
-        "shadcn/ui",
-        "Base UI",
-        "next-intl",
-        "Vitest",
-        "Playwright",
-        "ESLint",
-        "Prettier",
-        "Husky",
-      ],
-    },
-    // ========================================
-    // Marky
-    // ========================================
-    {
-      id: "marky",
-      type: "personal",
-      name: "Marky",
-      description:
-        "Mindmap editor with AI-assisted generation, rich editing, markmap visual preview, import/export, and autosave.",
-      fullDescription:
-        "A responsive mindmap creation and editing app built around a rich editor and real-time visual rendering using markmap. Supports importing Markdown/HTML, exporting standalone HTML, local autosave, a learning center, keyboard shortcuts, and accessibility-focused interactions (including keyboard navigation).",
-      image: "/assets/projects/marky-editor/marky-editor.jpg",
-      websiteUrl: "https://marky-editor.vercel.app/",
-      repositoryUrl: "https://github.com/mohamed-g-shoaib/marky-editor",
-      architecture:
-        "Next.js 15 + TypeScript + Tailwind CSS + shadcn/ui, using markmap for visualization and Lexical for editing, with an optional configurable AI endpoint and error boundaries for resilience.",
-      problem:
-        "Users needed a fast way to turn text/Markdown into clean visual mindmaps without relying on heavy desktop tools.",
-      solution:
-        "Built an editor + live mindmap preview workflow with autosave, import/export, and optional AI-assisted generation to quickly structure ideas.",
-      techStack: [
-        "Next.js 15",
-        "TypeScript",
-        "Tailwind CSS 4",
-        "shadcn/ui",
-        "Radix UI",
-        "markmap.js",
-        "Lexical",
-        "GPT-OSS",
       ],
     },
   ],
