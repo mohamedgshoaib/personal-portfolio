@@ -6,17 +6,10 @@ import { Avatar } from "./avatar";
 import { Icon } from "@/components/ui/icon";
 import {
   Location06Icon,
-  Linkedin02Icon,
   GithubIcon,
-  NewTwitterIcon,
   DocumentAttachmentIcon,
   Message01Icon,
 } from "@hugeicons/core-free-icons";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipPanel,
-} from "@/components/animate-ui/components/base/tooltip";
 
 export function Introduction() {
   const { personal } = portfolioData;
