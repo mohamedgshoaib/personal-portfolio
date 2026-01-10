@@ -9,6 +9,7 @@ import {
   Linkedin02Icon,
   GithubIcon,
   NewTwitterIcon,
+  DocumentAttachmentIcon,
 } from "@hugeicons/core-free-icons";
 import {
   Tooltip,
@@ -50,6 +51,29 @@ export function Footer() {
             </div>
 
             <div className="flex items-center gap-4">
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <Link
+                      href={personal.cv}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-8 w-8 items-center justify-center transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      aria-label="CV"
+                    >
+                      <Icon
+                        icon={DocumentAttachmentIcon}
+                        size={16}
+                        strokeWidth={2}
+                      />
+                    </Link>
+                  }
+                />
+                <TooltipPanel className="border border-border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md **:data-[slot='tooltip-arrow']:bg-popover **:data-[slot='tooltip-arrow']:fill-popover">
+                  CV
+                </TooltipPanel>
+              </Tooltip>
+
               <Tooltip>
                 <TooltipTrigger
                   render={
