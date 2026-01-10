@@ -6,7 +6,7 @@ import { portfolioData } from "@/lib/portfolio-data";
 import Mg8BitLogo from "@/components/logo/mg-8bit-logo";
 import { Icon } from "@/components/ui/icon";
 import {
-  Linkedin02Icon,
+  Linkedin01Icon,
   GithubIcon,
   NewTwitterIcon,
   DocumentAttachmentIcon,
@@ -84,7 +84,7 @@ export function Footer() {
                       className="flex h-8 w-8 items-center justify-center transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       aria-label="LinkedIn"
                     >
-                      <Icon icon={Linkedin02Icon} size={16} strokeWidth={2} />
+                      <Icon icon={Linkedin01Icon} size={16} strokeWidth={2} />
                     </Link>
                   }
                 />
