@@ -12,7 +12,7 @@ export function Avatar({ src, alt }: AvatarProps) {
   const [imageLoading, setImageLoading] = useState(true);
 
   return (
-    <div className="relative h-36 w-36 flex-shrink-0 border border-border">
+    <div className="relative h-full w-full flex-shrink-0 border border-border">
       <div className="relative h-full w-full overflow-hidden">
         {imageLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-muted">
