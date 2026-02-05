@@ -1,118 +1,133 @@
-# Personal Portfolio
+# [mohamedgshoaib.me](https://mohamedgshoaib.me) &middot; [![GitHub License](https://img.shields.io/github/license/mohamed-g-shoaib/personal-portfolio?label=License)](https://github.com/mohamed-g-shoaib/personal-portfolio/blob/main/LICENSE) ![GitHub Repo Views](https://gitviews.com/repo/mohamed-g-shoaib/personal-portfolio.svg?style=flat&label-color=%23555&color=%23f59e0b)
 
-Next.js portfolio site with a clean, minimal design and technical blog.
+A minimal, pixel-perfect dev portfolio, and blog to showcase my work as a Design Engineer.
+
+→ Check out the live site: [mohamedgshoaib.me](https://mohamedgshoaib.me)
+
+[![screenshot-dark](https://assets.chanhdai.com/images/screenshot-desktop-dark.webp?v=5#gh-dark-mode-only)](https://chanhdai.com#gh-dark-mode-only)
+[![screenshot-light](https://assets.chanhdai.com/images/screenshot-desktop-light.webp?v=5#gh-light-mode-only)](https://chanhdai.com#gh-light-mode-only)
 
 ## Overview
 
-My personal portfolio as a frontend developer. Built for simplicity, fast loads, and easy updates. Now featuring a dedicated projects gallery with detailed case studies and a technical blog.
+### Stack
 
-- **Home**: Hero section, tech stack, and featured projects carousel.
-- **Projects**: Detailed gallery of client and personal work.
-- **Blog**: Technical articles focusing on modern frontend engineering.
+- Next.js 16
+- Tailwind CSS v4
+- shadcn/ui
 
-## Architecture
+### Featured
 
-Uses Next.js App Router with mostly server components. Client components only where needed (accordions). Components stay small and focused, each section in its own folder.
+- Clean & modern design
+- Light/Dark themes
+- vCard integration
+- SEO optimized ([JSON-LD schema](https://json-ld.org), sitemap, robots)
+- AI-ready with [/llms.txt](https://llmstxt.org)
+- Spam-protected email
+- Installable as PWA
+- Analytics with [PostHog](https://posthog.com)
+- Consent management via [c15t](https://c15t.com)
 
-## Tech Stack
+### Blog
 
-**Next.js 16** - Routing, server rendering, image optimization via App Router.
+- Supports MDX & Markdown
+- Raw `.mdx` endpoints for AI readability
+- Syntax highlighting for clear code presentation
+- Dynamic OG images for rich link previews
+- RSS feed for easy content distribution
 
-**React 19** - Server Components by default. Less JS shipped to the browser.
+### Analytics
 
-**TypeScript** - Catches errors early. Makes updating data files safer.
+User behavior tracking with [PostHog](https://posthog.com) to understand how visitors interact with the site:
 
-**Tailwind CSS 4** - Modern utility-first styling with a built-in design system.
+- **Copy events** - Track code & command copies
+- **Engagement** - Monitor name pronunciation plays, command menu usage
+- **Search behavior** - Analyze search queries (debounced)
+- **User actions** - Navigation, theme changes, content interactions
+- **Screen views** - Automatic page view tracking
 
-**Base UI** - Unstyled primitives with accessibility handled. I control the styling.
+Built with privacy in mind:
 
-**Animate UI** - Adds Motion-based animations to Base UI. Respects reduced motion.
-
-**Hugeicons** - Icon library for UI elements.
-
-**simple-icons** - SVG icons for the tech stack display.
-
-**Embla Carousel** - Powers the project carousel. Lightweight with smooth navigation.
-
-**Umami** - Privacy-friendly analytics with a stealth proxy rewrite to bypass adblockers.
-
-## SEO & AI Optimization
-
-The site is built with a "machine-first" discovery strategy:
-
-- **Structured Data**: JSON-LD Person, WebSite, and ItemList schemas for rich snippets.
-- **Dynamic Sitemap**: Automatically indexed blog posts and project pages.
-- **AI-Ready**: `llms.txt` and `llms-full.txt` at the root for LLM context and discovery.
-- **Performance**: Optimized images, minimal JS, and 100/100 Lighthouse scores.
-
-## Design
-
-Swiss-inspired minimal design. Consistent `max-w-3xl` width. No rounded corners. Vertical borders connect sections into a boxy layout.
-
-Orange is the accent color, used sparingly for links and interactive elements.
-
-Inter variable font for all text and code. Badges use dashed borders for visual distinction. Projects show in a carousel. Experience and education expand via accordions. Animations are subtle and respect motion preferences.
-
-## Project Structure
-
-```bash
-src/
-  app/                    # Pages and layouts
-    blog/                 # Blog post listing & dynamic routes
-    projects/             # Projects gallery & dynamic routes
-  components/             # By feature
-    animate-ui/           # Animated Base UI wrappers
-    education/            # Education accordion
-    experience/           # Experience accordion
-    featured-projects/    # Project carousel and cards
-    footer/               # Footer with social links
-    github-activity/      # GitHub contribution graph
-    introduction/         # Hero section
-    navbar/               # Navigation
-    tech-stack/           # Skills grid
-    mdx/                  # Blog rendering components
-    structured-data/      # JSON-LD injection
-    ui/                   # Shared primitives
-  content/
-    blog/                 # MDX articles
-  lib/
-    portfolio-data/       # Content files
-      index.ts            # Aggregates exports
-      personal.ts         # Name, bio, socials
-      projects.ts         # Featured projects
-      tech-stack.ts       # Skills with icons
-      experience.ts       # Work history
-      education.ts        # Degrees
-  hooks/                  # Custom hooks
-```
-
-## Portfolio Data
-
-Content split into files under `src/lib/portfolio-data/`:
-
-- **personal.ts** - Name, title, bio, avatar, social links
-- **projects.ts** - Projects with descriptions, tags, links
-- **tech-stack.ts** - Tech with SVG icons
-- **experience.ts** - Jobs and internships
-- **education.ts** - Degrees with institution logos
-
-Each file has comments explaining the fields. Import from `@/lib/portfolio-data`.
-
-## Why Base UI
-
-Chose Base UI over Radix UI because:
-
-- Truly unstyled. No defaults to override.
-- Works with Animate UI for animations.
-- Covers all components I need.
-
-Radix is good but has more built-in styling. I wanted full control.
+- Consent management via [c15t](https://c15t.com)
+- Cookieless mode until consent
+- Production-only tracking
+- Type-safe event schema with Zod
 
 ## Development
 
+This guide provides instructions on how to set up and run the project locally.
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (Latest LTS version recommended)
+- [pnpm](https://pnpm.io/)
+- [Git](https://git-scm.com/)
+
+### Setup
+
+1. Clone the repository
+
 ```bash
-pnpm install    # Install deps
-pnpm dev        # Dev server
-pnpm build      # Production build
-pnpm start      # Production server
+git clone https://github.com/mohamed-g-shoaib/personal-portfolio.git
+cd personal-portfolio
 ```
+
+2. Install dependencies
+
+```bash
+pnpm i
+```
+
+3. Configure environment variables
+
+Create a `.env.local` file based on `.env.example`:
+
+```bash
+cp .env.example .env.local
+```
+
+Then, update the necessary environment variables inside `.env.local`.
+
+4. Run the development server
+
+```bash
+pnpm dev
+```
+
+The application should now be available at http://localhost:1408
+
+### Building for Production
+
+```bash
+pnpm build
+```
+
+After building, start the application with:
+
+```bash
+NODE_ENV=production pnpm start
+```
+
+## License
+
+Licensed under the [MIT license](./LICENSE).
+
+You're free to use my code! Just make sure to <ins>remove all my personal information</ins> before publishing your website. It's awesome to see my code being useful to someone!
+
+## Acknowledgments
+
+- [React](https://react.dev)
+- [Next.js](https://nextjs.org)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Radix UI](https://www.radix-ui.com)
+- [Base UI](https://base-ui.com)
+- [Motion](https://motion.dev)
+- [shadcn/ui](https://ui.shadcn.com)
+- [Aceternity UI](https://ui.aceternity.com)
+- [Kibo UI](https://www.kibo-ui.com)
+- [Lucide](https://lucide.dev)
+- [Fumadocs](https://fumadocs.dev)
+- [PostHog](https://posthog.com)
+- [c15t](https://c15t.com)
+- And many other open-source libraries used in `package.json`
