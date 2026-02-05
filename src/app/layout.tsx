@@ -1,105 +1,147 @@
-import type { Metadata } from "next";
+import "@/styles/globals.css";
+
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import localFont from "next/font/local";
-import { MotionConfig } from "motion/react";
-import "./globals.css";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import type { WebSite, WithContext } from "schema-dts";
 
-const inter = localFont({
-  src: "./fonts/Inter-VariableFont_opsz,wght.ttf",
-  variable: "--font-inter",
-  display: "swap",
-  weight: "100 900",
-});
+import { ConsentManager } from "@/components/consent-manager";
+import { DuckFollower } from "@/components/duck-follower";
+import { Providers } from "@/components/providers";
+import { META_THEME_COLORS, SITE_INFO } from "@/config/site";
+import { USER } from "@/features/portfolio/data/user";
+import { fontMono, fontSans } from "@/lib/fonts";
 
-import { Toaster } from "@/components/toaster/toaster";
-import { ScrollRestoration } from "@/components/scroll-restoration";
-import { StructuredData } from "@/components/structured-data/structured-data";
-import { portfolioData } from "@/lib/portfolio-data";
+function getWebSiteJsonLd(): WithContext<WebSite> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_INFO.name,
+    url: SITE_INFO.url,
+    alternateName: [USER.username],
+  };
+}
 
-const siteUrl = "https://www.mohamedgshoaib.me";
-const { personal } = portfolioData;
+// Thanks @shadcn-ui, @tailwindcss
+const darkModeScript = String.raw`
+  try {
+    if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
+    }
+  } catch (_) {}
+
+  try {
+    if (/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+      document.documentElement.classList.add('os-macos')
+    }
+  } catch (_) {}
+`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: `${personal.name} - ${personal.jobTitle}`,
-    template: `%s | ${personal.name}`,
+  metadataBase: new URL(SITE_INFO.url),
+  alternates: {
+    canonical: "/",
   },
-  description: personal.bio,
-  keywords: [
-    "frontend developer",
-    "React developer",
-    "Next.js developer",
-    "web developer",
-    "portfolio",
-    personal.name,
-    personal.jobTitle,
+  title: {
+    template: `%s – ${SITE_INFO.name}`,
+    default: `${USER.displayName} – ${USER.jobTitle}`,
+  },
+  description: SITE_INFO.description,
+  keywords: SITE_INFO.keywords,
+  authors: [
+    {
+      name: "Mohamed Gamal",
+      url: SITE_INFO.url,
+    },
   ],
-  authors: [{ name: personal.name }],
-  creator: personal.name,
+  creator: "Mohamed Gamal",
   openGraph: {
-    type: "website",
+    siteName: SITE_INFO.name,
+    url: "/",
+    type: "profile",
     locale: "en_US",
-    url: siteUrl,
-    siteName: `${personal.name} - Portfolio`,
-    title: `${personal.name} - ${personal.jobTitle}`,
-    description: personal.bio,
-    // Next.js automatically adds opengraph-image tags when using file-based convention
-    // No need to specify images here - they're generated from opengraph-image.tsx
+    firstName: USER.firstName,
+    lastName: USER.lastName,
+    username: USER.username,
+    gender: USER.gender,
+    images: [
+      {
+        url: SITE_INFO.ogImage,
+        width: 1200,
+        height: 630,
+        alt: SITE_INFO.name,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${personal.name} - ${personal.jobTitle}`,
-    description: personal.bio,
-    creator: personal.socialLinks.x.replace("https://x.com/", "@"),
-    // Next.js automatically uses opengraph-image for Twitter if twitter-image is not present
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    creator: "@mo0hamed_gamal", // Twitter username
+    images: [SITE_INFO.ogImage],
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/web-app-manifest-192x192.png",
+    icon: [
+      {
+        url: "/assets/favicon.ico",
+        sizes: "any",
+      },
+      {
+        url: "/assets/favicon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: {
+      url: "/assets/apple-touch-icon.png",
+      type: "image/png",
+      sizes: "180x180",
+    },
   },
-  // Next.js automatically handles manifest.ts file-based convention
-  alternates: {
-    canonical: siteUrl,
-  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: META_THEME_COLORS.light,
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} antialiased`}
-        style={inter.style}
-        suppressHydrationWarning
-      >
-        <StructuredData />
-        <MotionConfig reducedMotion="user">
-          <ScrollRestoration />
-          {children}
-          <Toaster />
-        </MotionConfig>
-        {/* Umami Analytics */}
-        <Script
-          src="/metrics/lib.js"
-          data-website-id="a34c9d7b-045a-4a81-94ba-7903026c23cd"
-          data-host-url="/metrics"
-          strategy="lazyOnload"
+    <html
+      lang="en"
+      className={`${fontSans.variable} ${fontMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{ __html: darkModeScript }}
         />
+        {/*
+          Thanks @tailwindcss. We inject the script via the `<Script/>` tag again,
+          since we found the regular `<script>` tag to not execute when rendering a not-found page.
+         */}
+        <Script src={`data:text/javascript;base64,${btoa(darkModeScript)}`} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getWebSiteJsonLd()).replace(/</g, "\\u003c"),
+          }}
+        />
+      </head>
+
+      <body>
+        <Providers>
+          <NuqsAdapter>
+            <ConsentManager>
+              {children}
+              <DuckFollower />
+            </ConsentManager>
+          </NuqsAdapter>
+        </Providers>
       </body>
     </html>
   );

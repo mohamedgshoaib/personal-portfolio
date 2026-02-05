@@ -1,16 +1,14 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+
+import { SITE_INFO } from "@/config/site";
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = "https://www.mohamedgshoaib.me";
-
   return {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/api/"],
       },
     ],
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: `${SITE_INFO.url}/sitemap.xml`,
   };
 }
