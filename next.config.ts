@@ -1,51 +1,83 @@
 import type { NextConfig } from "next";
-import createMDX from "@next/mdx";
+import path from "path";
 
 const nextConfig: NextConfig = {
-  // Configure pageExtensions to include MDX files
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  images: {
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
-    qualities: [75, 95],
-  },
-  compress: true,
-  poweredByHeader: false,
   reactStrictMode: true,
-  compiler: {
-    removeConsole:
-      process.env.NODE_ENV === "production"
-        ? {
-            exclude: ["error", "warn"],
-          }
-        : false,
+  transpilePackages: ["next-mdx-remote"],
+  allowedDevOrigins: ["chanhdai-macbook.local"],
+  turbopack: {
+    root: path.join(__dirname, "."),
   },
-  experimental: {
-    optimizePackageImports: ["motion", "lucide-react", "simple-icons"],
+  devIndicators: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "assets.chanhdai.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+      },
+    ],
+    qualities: [75, 100],
+  },
+  async redirects() {
+    return [
+      {
+        source:
+          "/:section(blog|components)/writing-effect-inspired-by-apple:extension(.mdx)?",
+        destination: "/:section/apple-hello-effect:extension",
+        permanent: true,
+      },
+    ];
   },
   async rewrites() {
     return [
       {
-        source: "/metrics/lib.js",
-        destination: "https://cloud.umami.is/script.js",
+        source: "/blog/:slug.mdx",
+        destination: "/blog.mdx/:slug",
       },
       {
-        source: "/metrics/api/send",
-        destination: "https://cloud.umami.is/api/send",
+        source: "/components/:slug.mdx",
+        destination: "/blog.mdx/:slug",
+      },
+      {
+        source: "/rss",
+        destination: "/blog/rss",
+      },
+      {
+        source: "/registry/rss",
+        destination: "/components/rss",
       },
     ];
   },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/(.*)",
+  //       headers: [
+  //         {
+  //           // Prevents MIME type sniffing, reducing the risk of malicious file uploads
+  //           key: "X-Content-Type-Options",
+  //           value: "nosniff",
+  //         },
+  //         {
+  //           // Protects against clickjacking attacks by preventing your site from being embedded in iframes.
+  //           key: "X-Frame-Options",
+  //           value: "DENY",
+  //         },
+  //         {
+  //           // Controls how much referrer information is included with requests, balancing security and functionality.
+  //           key: "Referrer-Policy",
+  //           value: "strict-origin-when-cross-origin",
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
 };
 
-const withMDX = createMDX({
-  // Add markdown plugins here if needed
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-  },
-});
-
-// Merge MDX config with Next.js config
-export default withMDX(nextConfig);
+export default nextConfig;
