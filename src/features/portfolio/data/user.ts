@@ -28,7 +28,7 @@ export const USER = {
   about: `
 - I’m Mohamed, a frontend developer focused on building fast, SEO-driven web applications with full RTL support.
 
-- I care deeply about structure, long-term maintainability, clean architecture, predictable state, and performance that holds up under real traffic. I’ve worked extensively with modern frameworks to deliver interfaces that feel simple to users but are carefully engineered under the hood.
+- I care about long-term maintainability, clean architecture, and performance that holds up under real traffic. I’ve worked extensively with modern frameworks to deliver interfaces that feel simple to users and carefully engineered under the hood.
 
 - I adapt quickly to project needs, prefer modern tooling, and actively look for problems that force me to learn something new.
 `,
