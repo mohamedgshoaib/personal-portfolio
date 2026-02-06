@@ -11,6 +11,7 @@ import {
   TooltipTrigger,
 } from "@/components/base/ui/tooltip";
 import { Markdown } from "@/components/markdown";
+import { BackButton } from "@/components/ui/back-button";
 import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 import { Tag } from "@/components/ui/tag";
@@ -97,12 +98,15 @@ function getPageJsonLd(project: Project): WithContext<PageSchema> {
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{
     slug: string;
   }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const slug = (await params).slug;
+  const { slug } = await params;
+  const { from } = await searchParams;
   const project = getProjectBySlug(slug);
 
   if (!project) {
@@ -111,6 +115,9 @@ export default async function Page({
 
   const allProjects = getAllProjects();
   const { previous, next } = findNeighbourProject(allProjects, slug);
+
+  const backHref = from === "home" ? "/" : "/projects";
+  const backLabel = from === "home" ? "Home" : "Projects";
 
   return (
     <>
@@ -130,16 +137,7 @@ export default async function Page({
       />
 
       <div className="flex items-center justify-between p-2 pl-4">
-        <Button
-          className="h-7 gap-2 rounded-lg px-0 font-mono text-muted-foreground"
-          variant="link"
-          asChild
-        >
-          <Link href="/projects">
-            <ArrowLeftIcon />
-            Projects
-          </Link>
-        </Button>
+        <BackButton fallbackHref={backHref} label={backLabel} />
 
         <div className="flex items-center gap-2">
           <ProjectShareMenu
@@ -214,14 +212,15 @@ export default async function Page({
 
         {project.screenshot && (
           <div className="pb-4">
-            <div className="relative select-none [&_img]:aspect-1200/630 [&_img]:rounded-xl">
+            <div className="relative overflow-hidden rounded-xl border border-edge select-none">
               <Image
                 src={project.screenshot}
                 alt={project.title}
-                width={1200}
-                height={630}
+                width={1800}
+                height={1350}
                 quality={100}
                 priority
+                className="aspect-4/3 w-full object-cover object-top"
                 unoptimized
               />
 
