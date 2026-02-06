@@ -5,11 +5,9 @@ export const PROJECTS: Project[] = [
     id: "Devloop",
     slug: "devloop",
     title: "Devloop",
-    period: {
-      start: "10.2025",
-    },
     link: "https://www.devloop.software/",
     github: "https://github.com/devloop-software",
+    post: "https://www.devloop.software/blog/launch",
     screenshot: "/assets/projects/devloop/screenshot.png",
     skills: [
       "TypeScript",
@@ -43,9 +41,6 @@ Architecture:
     id: "mosexperiences",
     slug: "mos-experiences",
     title: "Mo's Experiences",
-    period: {
-      start: "08.2025",
-    },
     link: "https://www.mosexperiences.com/en",
     screenshot: "/assets/projects/mos-experiences/screenshot.png",
     skills: [
@@ -77,9 +72,6 @@ Architecture:
     id: "danadoors",
     slug: "dana-doors",
     title: "Dana Doors",
-    period: {
-      start: "09.2025",
-    },
     link: "https://www.danadoors.net/en",
     screenshot: "/assets/projects/dana-doors/screenshot.png",
     skills: [
@@ -111,9 +103,6 @@ Architecture:
     id: "rootlynotes",
     slug: "rootly-notes",
     title: "Rootly Notes",
-    period: {
-      start: "06.2025",
-    },
     link: "https://rootly-notes-app.vercel.app/",
     screenshot: "/assets/projects/rootly-notes/screenshot.png",
     skills: [

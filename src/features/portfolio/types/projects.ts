@@ -4,20 +4,12 @@ export type Project = {
   /** URL-friendly slug for project detail pages. */
   slug: string;
   title: string;
-  /**
-   * Project period for display and sorting.
-   * Use "MM.YYYY" format. Omit `end` for ongoing projects.
-   */
-  period: {
-    /** Start date (e.g., "05.2025"). */
-    start: string;
-    /** End date; leave undefined for "Present". */
-    end?: string;
-  };
   /** Public URL (site, repository, demo, or video). */
   link: string;
   /** GitHub repository URL (optional). */
   github?: string;
+  /** Link to a blog post or article (optional). */
+  post?: string;
   /** Tags/technologies for chips or filtering. */
   skills: string[];
   /** Optional rich description; Markdown and line breaks supported. */
