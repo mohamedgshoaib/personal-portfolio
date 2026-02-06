@@ -67,6 +67,8 @@
     collapsible-up var(--tw-duration, 200ms) ease-out,
     fade-out var(--tw-duration, 200ms) ease-out;
 
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+
   @keyframes fade-in {
     from {
       opacity: 0;
