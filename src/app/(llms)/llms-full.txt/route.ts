@@ -52,7 +52,6 @@ ${PROJECTS.map((item) => {
 }).join("\n\n")}
 `;
 
-
 async function getBlogContent() {
   const text = await Promise.all(
     allPosts.map(
