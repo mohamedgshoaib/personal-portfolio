@@ -1,9 +1,4 @@
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  GithubIcon,
-  LinkIcon,
-} from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,8 +15,9 @@ import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 import { Tag } from "@/components/ui/tag";
 import { ProseMono } from "@/components/ui/typography";
-import { SITE_INFO, UTM_PARAMS } from "@/config/site";
+import { SITE_INFO } from "@/config/site";
 import { ProjectKeyboardShortcuts } from "@/features/portfolio/components/projects/project-keyboard-shortcuts";
+import { ProjectLinks } from "@/features/portfolio/components/projects/project-links";
 import { ProjectShareMenu } from "@/features/portfolio/components/projects/project-share-menu";
 import {
   findNeighbourProject,
@@ -31,7 +27,6 @@ import {
 import { USER } from "@/features/portfolio/data/user";
 import type { Project } from "@/features/portfolio/types/projects";
 import { cn } from "@/lib/utils";
-import { addQueryParams } from "@/utils/url";
 
 export async function generateStaticParams() {
   const projects = getAllProjects();
@@ -212,13 +207,13 @@ export default async function Page({
         />
       </div>
 
-      <div className="px-4">
+      <div className="px-4 sm:px-6">
         <h1 className="screen-line-after mb-4 text-3xl font-semibold">
           {project.title}
         </h1>
 
         {project.screenshot && (
-          <div className="screen-line-after pb-4">
+          <div className="pb-4">
             <div className="relative select-none [&_img]:aspect-1200/630 [&_img]:rounded-xl">
               <Image
                 src={project.screenshot}
@@ -235,43 +230,19 @@ export default async function Page({
           </div>
         )}
 
-        <div className="flex flex-wrap gap-2 pb-4">
-          {project.link && (
-            <Button className="gap-2" variant="default" size="sm" asChild>
-              <a
-                href={addQueryParams(project.link, UTM_PARAMS)}
-                target="_blank"
-                rel="noopener"
-              >
-                <LinkIcon className="size-4" />
-                Visit Website
-              </a>
-            </Button>
-          )}
-
-          {project.github && (
-            <Button className="gap-2" variant="secondary" size="sm" asChild>
-              <a
-                href={addQueryParams(project.github, UTM_PARAMS)}
-                target="_blank"
-                rel="noopener"
-              >
-                <GithubIcon className="size-4" />
-                View Source
-              </a>
-            </Button>
-          )}
-        </div>
+        <ProjectLinks project={project} className="-mx-4 mb-4 sm:-mx-6" />
 
         {project.description && (
-          <ProseMono className="screen-line-after pb-4">
+          <ProseMono className="screen-line-after py-4">
             <Markdown>{project.description}</Markdown>
           </ProseMono>
         )}
 
         {project.skills.length > 0 && (
-          <div className="screen-line-after pb-4">
-            <h2 className="mb-3 text-lg font-semibold">Tech Stack</h2>
+          <div className="pb-4">
+            <h2 className="screen-line-after mb-3 text-3xl font-semibold">
+              Tech Stack
+            </h2>
             <ul className="flex flex-wrap gap-1.5">
               {project.skills.map((skill, index) => (
                 <li key={index} className="flex">
@@ -281,17 +252,6 @@ export default async function Page({
             </ul>
           </div>
         )}
-
-        <div className="flex flex-col gap-2 pb-4">
-          <dl className="text-sm">
-            <dt className="font-semibold text-muted-foreground">Period</dt>
-            <dd className="mt-1">
-              {project.period.start}
-              {project.period.end && ` — ${project.period.end}`}
-              {!project.period.end && " — Present"}
-            </dd>
-          </dl>
-        </div>
       </div>
 
       <div className="screen-line-before h-4 w-full" />
