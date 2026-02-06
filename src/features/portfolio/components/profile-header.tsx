@@ -109,7 +109,7 @@ export function ProfileHeader() {
               )}
             </div>
 
-            <h2 className="-mt-1 text-lg font-medium text-primary/90">
+            <h2 className="mt-0.5 text-lg font-medium text-primary/90">
               {USER.jobTitle}
             </h2>
           </div>
