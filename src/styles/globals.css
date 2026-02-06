@@ -110,13 +110,6 @@
   @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-edge;
 }
 
-@layer base {
-  .wordmark text::selection {
-    background: var(--accent);
-    fill: var(--foreground);
-  }
-}
-
 @utility step {
   counter-increment: step;
   &::before {

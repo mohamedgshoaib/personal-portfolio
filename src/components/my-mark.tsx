@@ -5,48 +5,16 @@ export function MyMark(props: SVGProps<SVGSVGElement>) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 233.367"
+      fill="currentColor"
       {...props}
     >
-      <text
-        xmlSpace="preserve"
-        x={0.606}
-        y={325.601}
-        style={{
-          fontSize: "232.156px",
-          fontFamily: "QuinqueFive",
-          textAlign: "start",
-          letterSpacing: 0,
-          writingMode: "horizontal-tb",
-          direction: "ltr",
-          textAnchor: "start",
-          fill: "currentColor",
-          stroke: "none",
-          strokeWidth: 1.211,
-          strokeDasharray: "none",
-        }}
-        transform="translate(0 -139.316)"
-      >
-        <tspan
-          x={0.606}
-          y={325.601}
-          style={{
-            fontSize: "232.156px",
-            letterSpacing: 0,
-            fill: "currentColor",
-            stroke: "none",
-            strokeWidth: 1.211,
-            strokeDasharray: "none",
-          }}
-        >
-          {"MG"}
-        </tspan>
-      </text>
+      <path d="m0.60565 0.60565v232.16h46.25v-139.54h46.363v-46.477h-46.363v-46.136h-46.25zm92.613 92.613v92.613h46.25v-92.613h-46.25zm46.25 0h47.043v139.54h46.25v-232.16h-46.25v46.136h-47.043v46.477zm186.25-92.613v46.363h185.68v-46.363h-185.68zm0 46.363h-46.476v139.32h46.476v-139.32zm0 139.32v46.477h185.68v-139.32h-139.32v46.363h92.84v46.476h-139.2z" />
     </svg>
   );
 }
 
 export function getMarkSVG(color: string) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 233.367"><text xml:space="preserve" x="0.606" y="325.601" style="font-size:232.156px;font-family:QuinqueFive;text-align:start;letter-spacing:0;writing-mode:horizontal-tb;direction:ltr;text-anchor:start;fill:${color};stroke:none;stroke-width:1.211;stroke-dasharray:none" transform="translate(0 -139.316)"><tspan x="0.606" y="325.601" style="font-size:232.156px;letter-spacing:0;fill:${color};stroke:none;stroke-width:1.211;stroke-dasharray:none">MG</tspan></text></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 233.367" fill="${color}"><path d="m0.60565 0.60565v232.16h46.25v-139.54h46.363v-46.477h-46.363v-46.136h-46.25zm92.613 92.613v92.613h46.25v-92.613h-46.25zm46.25 0h47.043v139.54h46.25v-232.16h-46.25v46.136h-47.043v46.477zm186.25-92.613v46.363h185.68v-46.363h-185.68zm0 46.363h-46.476v139.32h46.476v-139.32zm0 139.32v46.477h185.68v-139.32h-139.32v46.363h92.84v46.476h-139.2z" /></svg>`;
 }
 
 export default MyMark;
