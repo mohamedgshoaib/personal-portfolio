@@ -15,10 +15,7 @@ export function ProfileCover() {
         )}
       >
         <Magnet magnetStrength={6}>
-          <MyMark
-            id="js-cover-mark"
-            className="h-14 w-28 sm:h-16 sm:w-32"
-          />
+          <MyMark id="js-cover-mark" className="h-14 w-28 sm:h-16 sm:w-32" />
         </Magnet>
       </div>
     </BrandContextMenu>
