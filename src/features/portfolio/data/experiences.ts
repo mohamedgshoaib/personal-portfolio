@@ -8,7 +8,7 @@ export const EXPERIENCES: Experience[] = [
     companyWebsite: "https://www.devloop.software/",
     positions: [
       {
-        id: "0C741FC7-A4C2-4B1D-857B-F3058CE8D9CE",
+        id: "devloop-frontend-developer",
         title: "Frontend Developer",
         employmentPeriod: {
           start: "10.2025",
@@ -46,8 +46,8 @@ What I'm Learning:
     companyWebsite: "https://iti.gov.eg/home",
     positions: [
       {
-        id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        title: "Search Engine Optimizer & Evaluator",
+        id: "iti-full-stack-mern",
+        title: "Full Stack MERN Web Developer Trainee",
         employmentPeriod: {
           start: "02.2025",
           end: "07.2025",
@@ -73,6 +73,7 @@ What I Learned:
           "Angular",
           "Figma",
         ],
+        isExpanded: false,
       },
     ],
     isCurrentEmployer: false,
@@ -84,7 +85,7 @@ What I Learned:
     companyWebsite: "https://www.telusinternational.ai/",
     positions: [
       {
-        id: "30d3a9fb-021d-452a-9d27-83655369b4b9",
+        id: "telus-search-engine",
         title: "Search Engine Optimizer & Evaluator",
         employmentPeriod: {
           start: "09.2019",
@@ -102,6 +103,7 @@ What I Learned:
 - Improved written communication through structured, guideline-based reporting.
 `,
         skills: ["QA", "SEO", "Research", "Content Writing"],
+        isExpanded: false,
       },
     ],
     isCurrentEmployer: false,
