@@ -31,22 +31,19 @@ export default function Page() {
         <Overview />
         <Separator />
 
-        <SocialLinks />
-        <Separator />
-
         <About />
         <Separator />
 
-        <GitHubContributions />
-        <Separator />
-
-        <TechStack />
+        <SocialLinks />
         <Separator />
 
         <Experiences />
         <Separator />
 
         <Projects />
+        <Separator />
+
+        <TechStack />
         <Separator />
 
         <Bookmarks />
