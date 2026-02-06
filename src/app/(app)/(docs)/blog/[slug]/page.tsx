@@ -119,11 +119,7 @@ export default async function Page({
 
   return (
     <>
-      <PostKeyboardShortcuts
-        basePath="/blog"
-        previous={previous}
-        next={next}
-      />
+      <PostKeyboardShortcuts basePath="/blog" previous={previous} next={next} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -148,7 +144,10 @@ export default async function Page({
             markdownUrl={`/blog/${post.slug}.mdx`}
           />
 
-          <PostShareMenu title={post.metadata.title} url={`/blog/${post.slug}`} />
+          <PostShareMenu
+            title={post.metadata.title}
+            url={`/blog/${post.slug}`}
+          />
 
           {previous && (
             <Tooltip>
@@ -228,4 +227,3 @@ export default async function Page({
     </>
   );
 }
-
