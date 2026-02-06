@@ -221,10 +221,7 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
     });
   }, [setIsDuckFollowerVisible]);
 
-  const blogLinks = useMemo(
-    () => posts.map(postToCommandLinkItem),
-    [posts]
-  );
+  const blogLinks = useMemo(() => posts.map(postToCommandLinkItem), [posts]);
 
   return (
     <>
@@ -313,7 +310,6 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
               <TypeIcon />
               Copy Logotype as SVG
             </CommandItem>
-
           </CommandGroup>
 
           <CommandGroup heading="Theme">
