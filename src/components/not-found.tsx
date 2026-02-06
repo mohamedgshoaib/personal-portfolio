@@ -1,41 +1,46 @@
-import { ArrowRightIcon } from "lucide-react";
+"use client";
+
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+import { MyMark } from "./my-mark";
+
 export function NotFound({ className }: { className?: string }) {
+  const router = useRouter();
+
   return (
     <div
       className={cn(
-        "flex h-[calc(100svh-5.5rem)] flex-col items-center justify-center",
+        "flex h-[calc(100svh-5.5rem)] flex-col items-center justify-center px-4 text-center",
         className
       )}
     >
-      <svg
-        className="h-28 w-full text-border"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 514 258"
-        fill="none"
-      >
-        <path
-          d="M65 193v64h128v-64H65Zm0 0H1V65h64m0 128V65m384 0H321v128h128m0-128V1H257v256h192v-64m0-128v128m0-128h64v128h-64M65 65h128V1H65v64Z"
-          stroke="currentColor"
-          strokeWidth="1"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
+      <MyMark className="h-20 w-full text-border md:h-28" />
 
-      <h1 className="my-6 text-8xl font-medium tracking-tighter tabular-nums">
+      <h1 className="my-6 text-6xl font-medium tracking-tighter tabular-nums md:text-8xl">
         404
       </h1>
+      <p className="mb-8 max-w-125 text-muted-foreground">
+        Sorry, we couldn&apos;t find the page you&apos;re looking for. It might
+        have been removed, renamed, or doesn&apos;t exist.
+      </p>
 
-      <Button variant="default" asChild>
-        <Link href="/">
-          Go to Home
-          <ArrowRightIcon />
-        </Link>
-      </Button>
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <Button variant="outline" onClick={() => router.back()}>
+          <ArrowLeftIcon className="mr-2 h-4 w-4" />
+          Go Back
+        </Button>
+        <Button variant="default" asChild>
+          <Link href="/">
+            Go to Home
+            <ArrowRightIcon className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 }
