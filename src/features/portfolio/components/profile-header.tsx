@@ -10,7 +10,6 @@ import { UTM_PARAMS } from "@/config/site";
 import { USER } from "@/features/portfolio/data/user";
 import { addQueryParams } from "@/utils/url";
 
-
 export function ProfileHeader() {
   return (
     <div className="screen-line-after flex border-x border-edge">
@@ -59,49 +58,60 @@ export function ProfileHeader() {
         </div>
 
         <div className="border-t border-edge">
-          <div className="flex items-center gap-2 pl-4">
-            <h1 className="-translate-y-px text-3xl font-semibold">
-              {USER.displayName}
-            </h1>
+          <div className="flex flex-col pl-4">
+            <div className="flex items-center gap-2">
+              <h1 className="-translate-y-px text-3xl font-semibold">
+                {USER.displayName}
+              </h1>
 
-            {USER.affiliateBadge && (
-              <Tooltip>
-                <TooltipTrigger
-                  render={
-                    <a
-                      className="relative flex after:absolute after:inset-0 after:ring after:ring-black/10 after:ring-inset dark:after:ring-white/15"
-                      href={addQueryParams(USER.affiliateBadge.url, UTM_PARAMS)}
-                      target="_blank"
-                      rel="noopener"
+              {USER.affiliateBadge && (
+                <Tooltip>
+                  <TooltipTrigger
+                    render={
+                      <a
+                        className="relative flex after:absolute after:inset-0 after:ring after:ring-black/10 after:ring-inset dark:after:ring-white/15"
+                        href={addQueryParams(
+                          USER.affiliateBadge.url,
+                          UTM_PARAMS
+                        )}
+                        target="_blank"
+                        rel="noopener"
+                      />
+                    }
+                  >
+                    <Image
+                      src={USER.affiliateBadge.logo}
+                      alt={USER.affiliateBadge.name}
+                      width={20}
+                      height={20}
+                      quality={100}
+                      unoptimized
                     />
-                  }
-                >
-                  <Image
-                    src={USER.affiliateBadge.logo}
-                    alt={USER.affiliateBadge.name}
-                    width={20}
-                    height={20}
-                    quality={100}
-                    unoptimized
-                  />
-                </TooltipTrigger>
+                  </TooltipTrigger>
 
-                <TooltipContent>
-                  <p>
-                    Co-Founder @{" "}
-                    <a
-                      className="font-medium underline-offset-4 hover:underline"
-                      href={addQueryParams(USER.affiliateBadge.url, UTM_PARAMS)}
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      {USER.affiliateBadge.name}
-                    </a>
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            )}
+                  <TooltipContent>
+                    <p>
+                      Co-Founder @{" "}
+                      <a
+                        className="font-medium underline-offset-4 hover:underline"
+                        href={addQueryParams(
+                          USER.affiliateBadge.url,
+                          UTM_PARAMS
+                        )}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        {USER.affiliateBadge.name}
+                      </a>
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+            </div>
 
+            <h2 className="-mt-1 text-lg font-medium text-primary/90">
+              {USER.jobTitle}
+            </h2>
           </div>
 
           <div className="h-12.5 border-t border-edge py-1 pl-4 sm:h-9">

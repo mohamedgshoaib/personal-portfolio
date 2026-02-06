@@ -12,7 +12,6 @@ import {
   IntroItemIcon,
   IntroItemLink,
 } from "./intro-item";
-import { JobItem } from "./job-item";
 import { PhoneItem } from "./phone-item";
 
 export function Overview() {
@@ -20,24 +19,15 @@ export function Overview() {
     <Panel>
       <h2 className="sr-only">Overview</h2>
 
-      <PanelContent className="space-y-2.5">
-        {USER.jobs.map((job, index) => {
-          return (
-            <JobItem
-              key={index}
-              title={job.title}
-              company={job.company}
-              website={job.website}
-            />
-          );
-        })}
-
+      <PanelContent className="space-y-4">
         <div
           className={cn(
             "relative grid gap-x-4 gap-y-2.5 sm:grid-cols-2",
             "before:absolute before:-top-4 before:-right-8 before:w-[calc(50%+var(--spacing)*14)] before:border-t before:border-dashed before:border-edge/80 max-sm:before:content-none"
           )}
         >
+          <EmailItem email={USER.email} />
+
           <IntroItem>
             <IntroItemIcon>
               <MapPinIcon />
@@ -52,12 +42,9 @@ export function Overview() {
             </IntroItemContent>
           </IntroItem>
 
-          <CurrentLocalTimeItem timeZone={USER.timeZone} />
-
           <PhoneItem phoneNumber={USER.phoneNumber} />
 
-          <EmailItem email={USER.email} />
-
+          <CurrentLocalTimeItem timeZone={USER.timeZone} />
         </div>
       </PanelContent>
 
@@ -65,4 +52,3 @@ export function Overview() {
     </Panel>
   );
 }
-

@@ -10,8 +10,8 @@ export const USER = {
   bio: "Learn, Struggle, Master.",
   flipSentences: [
     "Learn, Struggle, Master.",
-    "Frontend Developer",
-    "Open Source Contributor",
+    "Progress, Not Perfection.",
+    "Open Source Contributor.",
   ],
   address: "Cairo, Egypt",
   phoneNumber: "KzIwMTE0MDQ5MzMyOA==", // E.164 format, base64 encoded (https://t.io.vn/base64-string-converter)
@@ -26,7 +26,11 @@ export const USER = {
     },
   ],
   about: `
-- Building secure, SEO-optimized web applications with React and Next.js. I specialize in delivering high-performance interfaces with full RTL support and clean architecture, bringing a full-stack mindset to frontend engineering.
+- I’m Mohamed, a frontend developer focused on building fast, SEO-driven web applications with full RTL support.
+
+- I care deeply about structure, long-term maintainability, clean architecture, predictable state, and performance that holds up under real traffic. I’ve worked extensively with modern frameworks to deliver interfaces that feel simple to users but are carefully engineered under the hood.
+
+- I adapt quickly to project needs, prefer modern tooling, and actively look for problems that force me to learn something new.
 `,
   avatar: "/assets/avatars/portfolio-pfp.jpg",
   ogImage:
