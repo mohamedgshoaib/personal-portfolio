@@ -27,4 +27,10 @@ export const BOOKMARKS: Bookmark[] = [
     author: "Guillermo Rauch",
     bookmarkedAt: "2025-12-16",
   },
+  {
+    title: "Building Bulletproof React Components",
+    url: "https://shud.in/thoughts/build-bulletproof-react-components",
+    author: "Shu Ding",
+    bookmarkedAt: "2026-02-06",
+  },
 ];
