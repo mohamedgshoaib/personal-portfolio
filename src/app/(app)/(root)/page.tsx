@@ -46,6 +46,9 @@ export default function Page() {
         <TechStack />
         <Separator />
 
+        <GitHubContributions />
+        <Separator />
+
         <Bookmarks />
         <Separator />
       </div>
