@@ -1,10 +1,10 @@
 "use client";
 
 import { AppProgressProvider } from "@bprogress/next";
-import { PostHogProvider } from "posthog-js/react";
-import posthog from "posthog-js";
 import { Provider as JotaiProvider } from "jotai";
 import { ThemeProvider } from "next-themes";
+import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
 
 import { TooltipProvider } from "./base/ui/tooltip";
 import { Toaster } from "./ui/sonner";

@@ -40,9 +40,9 @@ import { useSound } from "@/hooks/use-sound";
 import { trackEvent } from "@/lib/events";
 import { copyText } from "@/utils/copy";
 
-import { MyMark, getMarkSVG } from "./my-mark";
-import { getWordmarkSVG } from "./my-wordmark";
 import { Icons } from "./icons";
+import { getMarkSVG,MyMark } from "./my-mark";
+import { getWordmarkSVG } from "./my-wordmark";
 import { Button } from "./ui/button";
 import { Kbd, KbdGroup } from "./ui/kbd";
 import { Separator } from "./ui/separator";
