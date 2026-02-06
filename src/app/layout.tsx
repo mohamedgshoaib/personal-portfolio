@@ -127,6 +127,7 @@ export default function RootLayout({
         <Script src={`data:text/javascript;base64,${btoa(darkModeScript)}`} />
         <script
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(getWebSiteJsonLd()).replace(/</g, "\\u003c"),
           }}
