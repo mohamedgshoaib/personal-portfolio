@@ -66,7 +66,7 @@ export function CollapsibleList<T>({
               </span>
 
               <ChevronDownIcon
-                className="group-data-[state=open]/collapsible-trigger:rotate-180"
+                className="transition-transform duration-300 ease-premium group-hover/collapsible-trigger:translate-y-0.5 group-data-[state=open]/collapsible-trigger:rotate-180 group-data-[state=open]/collapsible-trigger:group-hover/collapsible-trigger:-translate-y-0.5"
                 aria-hidden
               />
             </Button>
