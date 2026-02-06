@@ -41,7 +41,7 @@ import { trackEvent } from "@/lib/events";
 import { copyText } from "@/utils/copy";
 
 import { Icons } from "./icons";
-import { getMarkSVG,MyMark } from "./my-mark";
+import { getMarkSVG, MyMark } from "./my-mark";
 import { getWordmarkSVG } from "./my-wordmark";
 import { Button } from "./ui/button";
 import { Kbd, KbdGroup } from "./ui/kbd";
@@ -290,7 +290,11 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
             <CommandItem
               onSelect={() => {
                 handleCopyText(
-                  getMarkSVG(resolvedTheme === "light" ? "#000" : "#fff"),
+                  getMarkSVG(
+                    resolvedTheme === "light"
+                      ? "oklch(0.28 0.02 49.25)"
+                      : "oklch(0.95 0.01 49.25)"
+                  ),
                   "Copied Mark as SVG"
                 );
               }}
@@ -302,7 +306,11 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
             <CommandItem
               onSelect={() => {
                 handleCopyText(
-                  getWordmarkSVG(resolvedTheme === "light" ? "#000" : "#fff"),
+                  getWordmarkSVG(
+                    resolvedTheme === "light"
+                      ? "oklch(0.28 0.02 49.25)"
+                      : "oklch(0.95 0.01 49.25)"
+                  ),
                   "Copied Logotype as SVG"
                 );
               }}
@@ -480,8 +488,8 @@ function CommandMenuFooter() {
     <>
       <div className="flex h-10" />
 
-      <div className="absolute inset-x-0 bottom-0 flex h-10 items-center justify-between gap-2 border-t bg-zinc-100/30 px-4 text-xs font-medium dark:bg-zinc-800/30">
-        <MyMark className="size-6 text-muted-foreground" aria-hidden />
+      <div className="absolute inset-x-0 bottom-0 flex h-10 items-center justify-between gap-2 border-t bg-muted/30 px-4 text-xs font-medium">
+        <MyMark className="size-6 text-brand/50" aria-hidden />
 
         <div className="flex shrink-0 items-center gap-2">
           <span>{ENTER_ACTION_LABELS[selectedCommandKind]}</span>

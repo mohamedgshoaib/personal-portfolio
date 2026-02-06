@@ -48,6 +48,7 @@
   --color-code-foreground: var(--code-foreground);
   --color-code-number: var(--code-number);
   --color-code-highlight: var(--code-highlight);
+  --color-brand: var(--brand);
   --color-selection: var(--selection);
   --color-selection-foreground: var(--selection-foreground);
 
@@ -157,6 +158,7 @@
   --scrollbar: oklch(0.7 0.03 49.25);
 
   --link: oklch(0.4 0.12 250);
+  --brand: oklch(0.28 0.02 49.25);
 
   --code: oklch(0.94 0.005 49.25);
   --code-foreground: oklch(0.2 0.01 49.25);
@@ -203,6 +205,8 @@
   --scrollbar: oklch(0.55 0.03 49.25);
 
   --link: oklch(0.623 0.15 250);
+
+  --brand: oklch(0.95 0.01 49.25);
 
   --code: oklch(0.211 0.005 56.04);
   --code-foreground: oklch(0.985 0 0);
