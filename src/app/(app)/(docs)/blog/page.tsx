@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import { PostList } from "@/features/blog/components/post-list";
 import { getAllPosts } from "@/features/blog/data/posts";
 
@@ -22,7 +23,10 @@ export default function Page() {
         </p>
       </div>
 
-      <PostList posts={allPosts} />
+      <PostList
+        posts={allPosts}
+        className="screen-line-before screen-line-after pt-4"
+      />
 
       <div className="h-4" />
     </div>

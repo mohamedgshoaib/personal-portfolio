@@ -86,11 +86,7 @@ function getPrompt(url: string) {
   return `Read ${url}, I want to ask questions about it.`;
 }
 
-export function ViewOptions({
-  markdownUrl,
-}: {
-  markdownUrl: string;
-}) {
+export function ViewOptions({ markdownUrl }: { markdownUrl: string }) {
   const items = useMemo(() => {
     const fullMarkdownUrl =
       typeof window !== "undefined"
