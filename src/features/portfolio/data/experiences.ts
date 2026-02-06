@@ -18,12 +18,10 @@ export const EXPERIENCES: Experience[] = [
         description: `
 Responsibilities:
 - Implement modern web applications using Next.js and TypeScript.
-- Collaborate with Backend & AI Engineer to create AI Integrations for web applications.
 
 What I'm Learning:
-- How to build scalable and maintainable web applications.
-- How to work effectively in a team environmen and use tools like Linear and GitHub Actions.
-- How to plan, research, and execute projects from start to finish.
+- How to plan, research, and build scalable and maintainable web applications.
+- How to use tools like Linear and GitHub Actions in a professional environment.
 `,
         skills: [
           "TypeScript",
