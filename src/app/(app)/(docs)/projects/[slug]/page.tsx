@@ -205,7 +205,7 @@ export default async function Page({
         />
       </div>
 
-      <div className="px-4 sm:px-6">
+      <div className="px-4">
         <h1 className="screen-line-after mb-4 text-3xl font-semibold">
           {project.title}
         </h1>
@@ -223,13 +223,11 @@ export default async function Page({
                 className="aspect-4/3 w-full object-cover object-top"
                 unoptimized
               />
-
-              <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-black/10 ring-inset dark:ring-white/10" />
             </div>
           </div>
         )}
 
-        <ProjectLinks project={project} className="-mx-4 mb-4 sm:-mx-6" />
+        <ProjectLinks project={project} className="-mx-4 mb-4" />
 
         {project.description && (
           <ProseMono className="screen-line-after py-4">
