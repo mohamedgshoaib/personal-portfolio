@@ -27,7 +27,8 @@ export const MAIN_NAV: NavItem[] = [
 
 export const GITHUB_USERNAME = "mohamed-g-shoaib";
 export const SOURCE_CODE_GITHUB_REPO = "mohamed-g-shoaib/personal-portfolio";
-export const SOURCE_CODE_GITHUB_URL = "https://github.com/mohamed-g-shoaib/personal-portfolio";
+export const SOURCE_CODE_GITHUB_URL =
+  "https://github.com/mohamed-g-shoaib/personal-portfolio";
 
 export const UTM_PARAMS = {
   utm_source: "https://www.mohamedgshoaib.me/",
