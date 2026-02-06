@@ -45,7 +45,7 @@ export function ProjectLinks({ project, className }: ProjectLinksProps) {
           href={addQueryParams(link.href!, UTM_PARAMS)}
           target="_blank"
           rel="noopener"
-          className="flex flex-1 items-center justify-center gap-2.5 py-4 text-sm font-medium transition-all select-none hover:bg-accent hover:text-foreground active:bg-accent-muted"
+          className="flex flex-1 items-center justify-center gap-2.5 py-4 text-sm font-medium transition-all duration-300 ease-premium select-none hover:bg-accent hover:text-foreground active:scale-[0.98] active:bg-accent-muted"
         >
           <link.icon className="size-4.5" />
           {link.label}

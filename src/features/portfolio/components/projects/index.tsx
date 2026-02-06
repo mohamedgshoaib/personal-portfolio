@@ -21,13 +21,13 @@ export function Projects() {
         </PanelTitle>
       </PanelHeader>
 
-      <ProjectList projects={displayedProjects} />
+      <ProjectList projects={displayedProjects} isHome={true} />
 
       <div className="screen-line-before flex justify-center py-2">
         <Button className="px-3" variant="default" asChild>
-          <Link href="/projects">
+          <Link href="/projects" className="group">
             All Projects
-            <ArrowRightIcon />
+            <ArrowRightIcon className="transition-transform duration-300 ease-premium group-hover:translate-x-1" />
           </Link>
         </Button>
       </div>

@@ -6,9 +6,11 @@ import { ProjectGridItem } from "./project-grid-item";
 export function ProjectList({
   projects,
   className,
+  isHome,
 }: {
   projects: Project[];
   className?: string;
+  isHome?: boolean;
 }) {
   const wrapperClasses = className ?? "py-4";
 
@@ -25,6 +27,7 @@ export function ProjectList({
             key={project.slug}
             project={project}
             shouldPreloadImage={index <= 4}
+            isHome={isHome}
           />
         ))}
 
