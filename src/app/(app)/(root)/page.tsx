@@ -48,7 +48,6 @@ export default function Page() {
 
         <Bookmarks />
         <Separator />
-
       </div>
     </>
   );
