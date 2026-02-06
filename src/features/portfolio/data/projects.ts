@@ -8,7 +8,8 @@ export const PROJECTS: Project[] = [
     link: "https://www.devloop.software/",
     github: "https://github.com/devloop-software",
     post: "https://www.devloop.software/blog/launch",
-    screenshot: "/assets/projects/devloop/devloop.jpg",
+    screenshot: "/assets/projects/devloop/devloop.webp",
+    background: "/assets/projects/devloop/devloop-bg.webp",
     skills: [
       "TypeScript",
       "Next.js",
@@ -42,7 +43,8 @@ Architecture:
     slug: "mos-experiences",
     title: "Mo's Experiences",
     link: "https://www.mosexperiences.com/en",
-    screenshot: "/assets/projects/mos-experiences/mosexperiences.jpg",
+    screenshot: "/assets/projects/mos-experiences/mosexperiences.webp",
+    background: "/assets/projects/mos-experiences/mos-bg.webp",
     skills: [
       "TypeScript",
       "Next.js",
@@ -73,7 +75,8 @@ Architecture:
     slug: "dana-doors",
     title: "Dana Doors",
     link: "https://www.danadoors.net/en",
-    screenshot: "/assets/projects/dana-doors/dana-doors.jpg",
+    screenshot: "/assets/projects/dana-doors/dana-doors.webp",
+    background: "/assets/projects/dana-doors/danadoors-bg.webp",
     skills: [
       "TypeScript",
       "Next.js",
@@ -104,7 +107,8 @@ Architecture:
     slug: "rootly-notes",
     title: "Rootly Notes",
     link: "https://rootly-notes-app.vercel.app/",
-    screenshot: "/assets/projects/rootly-notes/rootly-notes.jpg",
+    screenshot: "/assets/projects/rootly-notes/rootly-notes.webp",
+    background: "/assets/projects/rootly-notes/rootly-bg.webp",
     skills: [
       "TypeScript",
       "Next.js",
