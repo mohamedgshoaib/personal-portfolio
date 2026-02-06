@@ -3,11 +3,14 @@ import type { Project } from "../types/projects";
 export const PROJECTS: Project[] = [
   {
     id: "Devloop",
+    slug: "devloop",
     title: "Devloop",
     period: {
       start: "10.2025",
     },
     link: "https://www.devloop.software/",
+    github: "https://github.com/devloop-software",
+    screenshot: "/assets/projects/devloop/screenshot.png",
     skills: [
       "TypeScript",
       "Next.js",
@@ -38,11 +41,13 @@ Architecture:
   },
   {
     id: "mosexperiences",
+    slug: "mos-experiences",
     title: "Mo's Experiences",
     period: {
       start: "08.2025",
     },
     link: "https://www.mosexperiences.com/en",
+    screenshot: "/assets/projects/mos-experiences/screenshot.png",
     skills: [
       "TypeScript",
       "Next.js",
@@ -70,11 +75,13 @@ Architecture:
   },
   {
     id: "danadoors",
+    slug: "dana-doors",
     title: "Dana Doors",
     period: {
       start: "09.2025",
     },
     link: "https://www.danadoors.net/en",
+    screenshot: "/assets/projects/dana-doors/screenshot.png",
     skills: [
       "TypeScript",
       "Next.js",
@@ -86,7 +93,7 @@ Architecture:
       "React Hook Form",
       "Cloudinary",
     ],
-        description: `
+    description: `
 A modern website for showcasing aluminum doors, windows, handrails, kitchens, and related products with full English/Arabic localization. Includes a Cloudinary-powered gallery, dark/light themes, and SEO features such as sitemap, structured data, and meta tags.
 
 Problem:
@@ -102,11 +109,13 @@ Architecture:
   },
   {
     id: "rootlynotes",
+    slug: "rootly-notes",
     title: "Rootly Notes",
     period: {
       start: "06.2025",
     },
     link: "https://rootly-notes-app.vercel.app/",
+    screenshot: "/assets/projects/rootly-notes/screenshot.png",
     skills: [
       "TypeScript",
       "Next.js",
@@ -115,7 +124,7 @@ Architecture:
       "React Hook Form",
       "Recharts",
     ],
-        description: `
+    description: `
 Rootly Notes helps track learning progress through courses, Q&A notes (with code snippets), daily study logging (time + mood), and visual analytics across the last 90 days. It supports cloud sync via Supabase or offline-first usage via LocalStorage, and includes a review/quiz mode with session summaries and improvement stats.
 
 Problem:

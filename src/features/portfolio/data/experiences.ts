@@ -4,8 +4,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: "devloop",
     companyName: "Devloop",
-    companyLogo:
-      "/assets/logos/devloop-pfp.webp",
+    companyLogo: "/assets/logos/devloop-pfp.webp",
     companyWebsite: "https://www.devloop.software/",
     positions: [
       {
@@ -102,12 +101,7 @@ What I Learned:
 - Built a strong QA mindset and habit of double-checking work before submitting.
 - Improved written communication through structured, guideline-based reporting.
 `,
-        skills: [
-          "QA",
-          "SEO",
-          "Research",
-          "Content Writing",
-        ],
+        skills: ["QA", "SEO", "Research", "Content Writing"],
       },
     ],
     isCurrentEmployer: false,
