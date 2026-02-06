@@ -7,11 +7,9 @@ import {
   BoxIcon,
   BriefcaseBusinessIcon,
   CornerDownLeftIcon,
-  DownloadIcon,
   FileTextIcon,
   LayersIcon,
   MoonStarIcon,
-  MousePointer2Icon,
   RssIcon,
   SunMediumIcon,
   TextIcon,
@@ -35,7 +33,6 @@ import {
 } from "@/components/ui/command";
 import type { Post } from "@/features/blog/types/post";
 import { SOCIAL_LINKS } from "@/features/portfolio/data/social-links";
-import { useDuckFollowerVisibility } from "@/hooks/use-duck-follower-visibility";
 import { useSound } from "@/hooks/use-sound";
 import { trackEvent } from "@/lib/events";
 import { copyText } from "@/utils/copy";
@@ -96,11 +93,6 @@ const PORTFOLIO_LINKS: CommandLinkItem[] = [
     href: "/#bookmarks",
     icon: BookmarkIcon,
   },
-  {
-    title: "Download vCard",
-    href: "/vcard",
-    icon: DownloadIcon,
-  },
 ];
 
 const SOCIAL_LINK_ITEMS: CommandLinkItem[] = SOCIAL_LINKS.map((item) => ({
@@ -127,8 +119,6 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
   const [open, setOpen] = useState(false);
 
   const playClick = useSound("/audio/ui-sounds/click.wav");
-
-  const [, setIsDuckFollowerVisible] = useDuckFollowerVisibility();
 
   useHotkeys("mod+k, slash", (e) => {
     e.preventDefault();
@@ -208,18 +198,6 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
     },
     [playClick, setTheme]
   );
-
-  const handleToggleDuckFollower = useCallback(() => {
-    setOpen(false);
-    setIsDuckFollowerVisible((isVisible) => !isVisible);
-
-    trackEvent({
-      name: "command_menu_action",
-      properties: {
-        action: "toggle_duck_follower",
-      },
-    });
-  }, [setIsDuckFollowerVisible]);
 
   const blogLinks = useMemo(() => posts.map(postToCommandLinkItem), [posts]);
 
@@ -344,13 +322,6 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
             </CommandItem>
           </CommandGroup>
 
-          <CommandGroup heading="Interactive Features">
-            <CommandItem onSelect={handleToggleDuckFollower}>
-              <MousePointer2Icon />
-              Toggle Duck Follower
-            </CommandItem>
-          </CommandGroup>
-
           <CommandLinkGroup
             heading="Other"
             links={OTHER_LINK_ITEMS}
@@ -445,8 +416,6 @@ type CommandMetaMap = Map<
 
 function buildCommandMetaMap() {
   const commandMetaMap: CommandMetaMap = new Map();
-
-  commandMetaMap.set("Download vCard", { commandKind: "command" });
 
   commandMetaMap.set("Light", { commandKind: "command" });
   commandMetaMap.set("Dark", { commandKind: "command" });
