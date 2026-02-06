@@ -41,7 +41,7 @@ function MyMarkMotion() {
   return (
     <MyMark
       data-visible={visible}
-      className="translate-y-2 opacity-0 transition-[opacity,translate] duration-300 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100"
+      className="translate-y-2 text-brand opacity-0 transition-[opacity,translate] duration-300 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100"
     />
   );
 }
@@ -49,5 +49,5 @@ function MyMarkMotion() {
 export function SiteHeaderMark() {
   const pathname = usePathname();
   const isHome = ["/", "/index"].includes(pathname);
-  return isHome ? <MyMarkMotion /> : <MyMark />;
+  return isHome ? <MyMarkMotion /> : <MyMark className="text-brand" />;
 }

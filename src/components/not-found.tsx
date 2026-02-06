@@ -19,7 +19,7 @@ export function NotFound({ className }: { className?: string }) {
         className
       )}
     >
-      <MyMark className="h-20 w-full text-border md:h-28" />
+      <MyMark className="h-20 w-full text-brand/20 md:h-28" />
 
       <h1 className="my-6 text-6xl font-medium tracking-tighter tabular-nums md:text-8xl">
         404

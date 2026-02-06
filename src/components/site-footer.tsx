@@ -10,7 +10,7 @@ export function SiteFooter() {
     <footer className="max-w-screen overflow-x-hidden px-2">
       <div className="screen-line-before mx-auto border-x border-edge pt-4 md:max-w-3xl">
         <div className="mb-4 flex justify-center px-4 selection:bg-accent selection:text-foreground">
-          <MyWordmark className="wordmark h-8 w-auto text-foreground/80 dark:text-foreground/70" />
+          <MyWordmark className="wordmark h-8 w-auto text-brand" />
         </div>
 
         <p className="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground">

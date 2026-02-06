@@ -23,7 +23,7 @@ export default function Error({
 
   return (
     <div className="flex h-screen flex-col items-center justify-center px-4 text-center">
-      <MyMark className="h-20 w-full text-border md:h-28" />
+      <MyMark className="h-20 w-full text-brand md:h-28" />
       <h2 className="my-6 text-2xl font-medium tracking-tighter md:text-3xl">
         Something went wrong!
       </h2>
