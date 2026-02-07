@@ -4,7 +4,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: "devloop",
     companyName: "Devloop",
-    companyLogo: "/assets/logos/devloop-pfp.webp",
+    companyLogo: "/assets/logos/devloop.webp",
     companyWebsite: "https://www.devloop.software/",
     positions: [
       {

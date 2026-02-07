@@ -37,7 +37,7 @@ export const USER = {
   affiliateBadge: {
     name: "Devloop",
     url: "https://www.devloop.software/",
-    logo: "/assets/logos/devloop-pfp.webp",
+    logo: "/assets/logos/devloop.webp",
   },
   timeZone: "Africa/Cairo",
   keywords: [
