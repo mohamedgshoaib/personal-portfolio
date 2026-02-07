@@ -1,11 +1,12 @@
-# [mohamedgshoaib.me](https://mohamedgshoaib.me) &middot; [![GitHub License](https://img.shields.io/github/license/mohamed-g-shoaib/personal-portfolio?label=License)](https://github.com/mohamed-g-shoaib/personal-portfolio/blob/main/LICENSE) ![GitHub Repo Views](https://gitviews.com/repo/mohamed-g-shoaib/personal-portfolio.svg?style=flat&label-color=%23555&color=%23f59e0b)
+# [Personal Portfolio](https://mohamedgshoaib.me)
 
-A minimal, pixel-perfect dev portfolio, and blog to showcase my work as a Design Engineer.
+A minimal, pixel-perfect dev portfolio and blog to showcase my work as a Frontend Developer.
 
-→ Check out the live site: [mohamedgshoaib.me](https://mohamedgshoaib.me)
+→ Check out the live portfolio: [mohamedgshoaib.me](https://mohamedgshoaib.me)
 
-[![screenshot-dark](https://assets.chanhdai.com/images/screenshot-desktop-dark.webp?v=5#gh-dark-mode-only)](https://chanhdai.com#gh-dark-mode-only)
-[![screenshot-light](https://assets.chanhdai.com/images/screenshot-desktop-light.webp?v=5#gh-light-mode-only)](https://chanhdai.com#gh-light-mode-only)
+[![Personal Portfolio](./public/assets/og-image.png)](https://mohamedgshoaib.me)
+
+→ Credit to [Chanh Dai](https://chanhdai.com) for the amazing template.
 
 ## Overview
 
@@ -17,34 +18,36 @@ A minimal, pixel-perfect dev portfolio, and blog to showcase my work as a Design
 
 ### Featured
 
-- Clean & modern design
-- Light/Dark themes
-- SEO optimized ([JSON-LD schema](https://json-ld.org), sitemap, robots)
+- Clean and modern design
+- Light and dark themes
+- SEO optimized with JSON-LD schema, sitemap, and robots.txt
 - AI-ready with [/llms.txt](https://llmstxt.org)
 - Spam-protected email
 - Installable as PWA
 - Analytics with [PostHog](https://posthog.com)
 - Consent management via [c15t](https://c15t.com)
+- Integrated contact form
+- Visual project grid
 
 ### Blog
 
-- Supports MDX & Markdown
+- Supports MDX and Markdown
 - Raw `.mdx` endpoints for AI readability
-- Syntax highlighting for clear code presentation
+- Syntax highlighting for code presentation
 - Dynamic OG images for rich link previews
-- RSS feed for easy content distribution
+- RSS feed for content distribution
 
 ### Analytics
 
-User behavior tracking with [PostHog](https://posthog.com) to understand how visitors interact with the site:
+User behavior tracking with [PostHog](https://posthog.com) to understand visitor interaction:
 
-- **Copy events** - Track code & command copies
-- **Engagement** - Monitor name pronunciation plays, command menu usage
-- **Search behavior** - Analyze search queries (debounced)
-- **User actions** - Navigation, theme changes, content interactions
-- **Screen views** - Automatic page view tracking
+- **Copy events**: Track code and command copies
+- **Engagement**: Monitor name pronunciation plays and command menu usage
+- **Search behavior**: Analyze search queries
+- **User actions**: Navigation, theme changes, and content interactions
+- **Screen views**: Automatic page view tracking
 
-Built with privacy in mind:
+Built with privacy:
 
 - Consent management via [c15t](https://c15t.com)
 - Cookieless mode until consent
@@ -94,7 +97,7 @@ Then, update the necessary environment variables inside `.env.local`.
 pnpm dev
 ```
 
-The application should now be available at http://localhost:1408
+The application is available at http://localhost:1408
 
 ### Building for Production
 
@@ -112,7 +115,7 @@ NODE_ENV=production pnpm start
 
 Licensed under the [MIT license](./LICENSE).
 
-You're free to use my code! Just make sure to <ins>remove all my personal information</ins> before publishing your website. It's awesome to see my code being useful to someone!
+You are free to use this code. Please remove all personal information before publishing your website.
 
 ## Acknowledgments
 
