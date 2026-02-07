@@ -33,8 +33,7 @@ export const USER = {
 - I adapt quickly to project needs, prefer modern tooling, and actively look for problems that force me to learn something new.
 `,
   avatar: "/assets/avatars/portfolio-pfp.jpg",
-  ogImage:
-    "https://assets.chanhdai.com/images/screenshot-og-image-dark.png?v=5",
+  ogImage: "/assets/og-image.png",
   affiliateBadge: {
     name: "Devloop",
     url: "https://www.devloop.software/",
