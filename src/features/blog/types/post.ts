@@ -16,6 +16,10 @@ export type PostMetadata = {
    */
   icon?: string;
   /**
+   * List of tags associated with the post.
+   */
+  tags?: string[];
+  /**
    * Flag to show a "New" badge/highlight in the UI.
    */
   new?: boolean;

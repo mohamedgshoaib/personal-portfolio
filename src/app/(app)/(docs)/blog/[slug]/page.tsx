@@ -1,6 +1,7 @@
 import { getTableOfContents } from "fumadocs-core/content/toc";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { BlogPosting as PageSchema, WithContext } from "schema-dts";
@@ -217,6 +218,22 @@ export default async function Page({
         <p className="text-muted-foreground">{post.metadata.description}</p>
 
         <InlineTOC items={toc} />
+
+        {post.metadata.image && (
+          <div className="not-prose my-8">
+            <div className="relative overflow-hidden rounded-xl border border-edge select-none">
+              <Image
+                src={post.metadata.image}
+                alt={post.metadata.title}
+                width={1200}
+                height={630}
+                quality={100}
+                priority
+                className="aspect-video w-full object-cover object-center"
+              />
+            </div>
+          </div>
+        )}
 
         <div>
           <MDX code={post.content} />
