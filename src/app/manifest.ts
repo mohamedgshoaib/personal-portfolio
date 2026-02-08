@@ -9,25 +9,25 @@ export default function manifest(): MetadataRoute.Manifest {
     description: SITE_INFO.description,
     icons: [
       {
-        src: "https://i.ibb.co/mVvqjQzb/icon-vector.jpg",
+        src: "https://i.ibb.co/7dkp6f7Y/icon-vector.jpg",
         type: "image/jpg",
         sizes: "any",
         purpose: "any",
       },
       {
-        src: "https://i.ibb.co/ymRRHZsm/icon-192x192.png",
+        src: "https://i.ibb.co/NgM9QtSX/icon-192x192.png",
         type: "image/png",
         sizes: "192x192",
         purpose: "any",
       },
       {
-        src: "https://i.ibb.co/9m5yGbsc/icon-512x512.png",
+        src: "https://i.ibb.co/gZVmrMrC/icon-512x512.png",
         type: "image/png",
         sizes: "512x512",
         purpose: "any",
       },
       {
-        src: "https://i.ibb.co/CgxPPND/maskable-icon.png",
+        src: "https://i.ibb.co/RqjPDsc/maskable-icon.png",
         type: "image/png",
         sizes: "512x512",
         purpose: "maskable",
@@ -39,25 +39,25 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     screenshots: [
       {
-        src: "https://i.ibb.co/QyPSMyp/screenshot-mobile-dark.png",
+        src: "https://i.ibb.co/yFKgbgsk/screenshot-mobile-dark.png",
         type: "image/png",
         sizes: "440x956",
         form_factor: "narrow",
       },
       {
-        src: "https://i.ibb.co/5xhrzNsZ/screenshot-mobile-light.png",
+        src: "https://i.ibb.co/XkMpmgB2/screenshot-mobile-light.png",
         type: "image/png",
         sizes: "440x956",
         form_factor: "narrow",
       },
       {
-        src: "https://i.ibb.co/M5PJ2CbW/screenshot-desktop-dark.png",
+        src: "https://i.ibb.co/nsW9tXM2/screenshot-desktop-dark.png",
         type: "image/png",
         sizes: "1920x1080",
         form_factor: "wide",
       },
       {
-        src: "https://i.ibb.co/DfzN4GvN/screenshot-desktop-light.png",
+        src: "https://i.ibb.co/2YpjRjy6/screenshot-desktop-light.png",
         type: "image/png",
         sizes: "1920x1080",
         form_factor: "wide",
