@@ -159,8 +159,8 @@
   --info: oklch(0.67 0.17 244.98);
   --success: oklch(0.723 0.219 149.579);
   --destructive: oklch(0.577 0.245 27.325);
-  --selection: oklch(0.78 0.06 49.25);
-  --selection-foreground: var(--foreground);
+  --selection: var(--scrollbar);
+  --selection-foreground: oklch(0.985 0.001 96);
   --scrollbar: oklch(0.45 0.05 49.25);
 
   --link: oklch(0.4 0.12 250);
@@ -212,7 +212,7 @@
 
   --success: oklch(0.723 0.219 149.579);
   --destructive: oklch(0.704 0.191 22.216);
-  --selection: oklch(0.32 0.1 49.25);
+  --selection: var(--scrollbar);
   --selection-foreground: var(--foreground);
   --scrollbar: oklch(0.55 0.05 49.25);
 
