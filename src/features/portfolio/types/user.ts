@@ -33,12 +33,6 @@ export type User = {
   avatar: string;
   /** Open Graph image URL for social sharing */
   ogImage: string;
-  /** Affiliate badge displayed to the right of displayName */
-  affiliateBadge?: {
-    name: string;
-    url: string;
-    logo: string;
-  };
   /** SEO keywords list for metadata */
   keywords: string[];
   /** Time zone in IANA format (e.g., "Asia/Ho_Chi_Minh") */

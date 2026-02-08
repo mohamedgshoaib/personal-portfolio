@@ -34,11 +34,6 @@ export const USER = {
 `,
   avatar: "/assets/avatars/portfolio-pfp.jpg",
   ogImage: "/assets/og-image.png",
-  affiliateBadge: {
-    name: "Devloop",
-    url: "https://www.devloop.software/",
-    logo: "/assets/logos/devloop.webp",
-  },
   timeZone: "Africa/Cairo",
   keywords: [
     "mohamedgshoaib",
