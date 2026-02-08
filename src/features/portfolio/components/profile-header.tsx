@@ -1,14 +1,5 @@
-import Image from "next/image";
-
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/base/ui/tooltip";
 import { FlipSentences } from "@/components/flip-sentences";
-import { UTM_PARAMS } from "@/config/site";
 import { USER } from "@/features/portfolio/data/user";
-import { addQueryParams } from "@/utils/url";
 
 export function ProfileHeader() {
   return (
@@ -48,11 +39,11 @@ export function ProfileHeader() {
       </div>
 
       <div className="flex flex-1 flex-col">
-        <div className="flex grow items-end pb-1 pl-4">
-          <div className="line-clamp-1 font-mono text-xs text-zinc-300 select-none max-sm:hidden dark:text-zinc-800">
+        <div className="flex grow items-end pb-0.5 pl-4 sm:pb-1">
+          <div className="line-clamp-1 font-mono text-[10px] text-muted-foreground/50 select-none sm:text-xs">
             {"text-3xl "}
-            <span className="inline dark:hidden">text-zinc-950</span>
-            <span className="hidden dark:inline">text-zinc-50</span>
+            <span className="inline dark:hidden">text-stone-950</span>
+            <span className="hidden dark:inline">text-stone-50</span>
             {" font-medium"}
           </div>
         </div>
@@ -60,53 +51,9 @@ export function ProfileHeader() {
         <div className="border-t border-edge">
           <div className="flex flex-col pl-4">
             <div className="flex items-center gap-2">
-              <h1 className="-translate-y-px text-3xl font-semibold">
+              <h1 className="-translate-y-px text-2xl font-semibold sm:text-3xl">
                 {USER.displayName}
               </h1>
-
-              {USER.affiliateBadge && (
-                <Tooltip>
-                  <TooltipTrigger
-                    render={
-                      <a
-                        className="relative flex after:absolute after:inset-0 after:ring after:ring-black/10 after:ring-inset dark:after:ring-white/15"
-                        href={addQueryParams(
-                          USER.affiliateBadge.url,
-                          UTM_PARAMS
-                        )}
-                        target="_blank"
-                        rel="noopener"
-                      />
-                    }
-                  >
-                    <Image
-                      src={USER.affiliateBadge.logo}
-                      alt={USER.affiliateBadge.name}
-                      width={20}
-                      height={20}
-                      quality={100}
-                      unoptimized
-                    />
-                  </TooltipTrigger>
-
-                  <TooltipContent>
-                    <p>
-                      Co-Founder @{" "}
-                      <a
-                        className="font-medium underline-offset-4 hover:underline"
-                        href={addQueryParams(
-                          USER.affiliateBadge.url,
-                          UTM_PARAMS
-                        )}
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        {USER.affiliateBadge.name}
-                      </a>
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              )}
             </div>
 
             <h2 className="mt-0.5 text-lg font-medium text-primary/90">
@@ -114,9 +61,9 @@ export function ProfileHeader() {
             </h2>
           </div>
 
-          <div className="h-12.5 border-t border-edge py-1 pl-4 sm:h-9">
+          <div className="flex h-9 items-center border-t border-edge py-0.5 pl-4 sm:h-9">
             <FlipSentences
-              className="font-mono text-sm text-balance text-muted-foreground"
+              className="font-mono text-xs text-balance text-muted-foreground sm:text-sm"
               variants={{
                 initial: { y: -10, opacity: 0 },
                 animate: { y: -1, opacity: 1 },
