@@ -116,7 +116,7 @@ See `.env.example` for required variables:
 
 ### Analytics Events
 
-The project uses PostHog for analytics tracking. Events are defined in `src/lib/events.ts` with Zod schema validation. PostHog is initialized for production with consent management via the `@c15t/nextjs` package.
+The project uses PostHog for analytics tracking. Events are defined in `src/lib/events.ts` with Zod schema validation.
 
 ### Site Configuration
 

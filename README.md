@@ -25,7 +25,6 @@ A minimal, pixel-perfect dev portfolio and blog to showcase my work as a Fronten
 - Spam-protected email
 - Installable as PWA
 - Analytics with [PostHog](https://posthog.com)
-- Consent management via [c15t](https://c15t.com)
 - Integrated contact form
 - Visual project grid
 
@@ -49,8 +48,6 @@ User behavior tracking with [PostHog](https://posthog.com) to understand visitor
 
 Built with privacy:
 
-- Consent management via [c15t](https://c15t.com)
-- Cookieless mode until consent
 - Production-only tracking
 - Type-safe event schema with Zod
 
@@ -131,5 +128,4 @@ You are free to use this code. Please remove all personal information before pub
 - [Lucide](https://lucide.dev)
 - [Fumadocs](https://fumadocs.dev)
 - [PostHog](https://posthog.com)
-- [c15t](https://c15t.com)
 - And many other open-source libraries used in `package.json`
