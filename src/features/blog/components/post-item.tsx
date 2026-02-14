@@ -30,7 +30,7 @@ export function PostItem({
             height={630}
             quality={100}
             priority={shouldPreloadImage}
-            unoptimized
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
           />
 
           <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-black/10 ring-inset dark:ring-white/10" />

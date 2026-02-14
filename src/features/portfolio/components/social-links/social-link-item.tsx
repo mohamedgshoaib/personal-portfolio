@@ -26,7 +26,6 @@ export function SocialLinkItem({ icon, title, description, href }: SocialLink) {
           width={48}
           height={48}
           quality={100}
-          unoptimized
         />
         <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-black/10 corner-squircle ring-inset dark:ring-white/15 supports-corner-shape:rounded-[50%]" />
       </div>

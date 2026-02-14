@@ -44,7 +44,6 @@ export function ProjectGridItem({
                   alt=""
                   fill
                   className="object-cover"
-                  unoptimized
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-black/40" />
               </div>
@@ -61,7 +60,7 @@ export function ProjectGridItem({
                   quality={100}
                   priority={shouldPreloadImage}
                   className="h-full w-full object-cover object-top"
-                  unoptimized
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
                 />
               </div>
             </div>

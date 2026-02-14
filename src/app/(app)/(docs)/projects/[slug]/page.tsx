@@ -221,7 +221,7 @@ export default async function Page({
                 quality={100}
                 priority
                 className="aspect-4/3 w-full object-cover object-top"
-                unoptimized
+                sizes="(max-width: 1024px) 100vw, 1200px"
               />
             </div>
           </div>
