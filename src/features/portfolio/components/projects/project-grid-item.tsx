@@ -4,6 +4,8 @@ import Link from "next/link";
 
 import { UTM_PARAMS } from "@/config/site";
 import type { Project } from "@/features/portfolio/types/projects";
+import { ProjectStatus } from "@/features/portfolio/components/projects/project-status";
+import { ProjectType } from "@/features/portfolio/components/projects/project-type";
 import { cn } from "@/lib/utils";
 import { addQueryParams } from "@/utils/url";
 
@@ -35,10 +37,13 @@ export function ProjectGridItem({
         />
 
         {project.screenshot && (
-          <div className="relative aspect-4/3 overflow-hidden rounded-xl border border-edge bg-muted/30 select-none dark:bg-muted/10">
+          <div className="relative aspect-4/3 overflow-hidden rounded-xl border border-edge bg-muted/30 select-none dark:bg-muted/10 group">
+            {/* Project Type Badge */}
+            {project.type && <ProjectType type={project.type} />}
+            
             {/* Background Layer (Candy / Asset) */}
             {project.background && (
-              <div className="absolute inset-0 opacity-15 grayscale transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:grayscale-0">
+              <div className="absolute inset-0 opacity-60 grayscale transition-all duration-500 ease-premium group-hover:opacity-100 group-hover:grayscale-0">
                 <Image
                   src={project.background}
                   alt=""
@@ -68,14 +73,19 @@ export function ProjectGridItem({
         )}
 
         <div className="flex flex-col gap-2 p-2 pb-0">
-          <Link
-            href={detailUrl}
-            className="w-fit rounded outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-          >
-            <h3 className="text-lg leading-snug font-medium text-balance underline-offset-4">
-              {project.title}
-            </h3>
-          </Link>
+          <div className="flex items-center justify-between gap-2">
+            <Link
+              href={detailUrl}
+              className="w-fit rounded outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              <h3 className="text-lg leading-snug font-medium text-balance underline-offset-4">
+                {project.title}
+              </h3>
+            </Link>
+            
+            {/* Project Status */}
+            {project.status && <ProjectStatus status={project.status} />}
+          </div>
 
           {project.description && (
             <p className="line-clamp-2 text-sm text-muted-foreground">

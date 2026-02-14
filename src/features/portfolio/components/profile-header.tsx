@@ -5,7 +5,7 @@ import { USER } from "@/features/portfolio/data/user";
 
 export function ProfileHeader() {
   return (
-    <div className="screen-line-after flex border-x border-edge">
+    <div className="screen-line-before screen-line-after flex border-x border-edge">
       <div className="absolute top-[-3.5px] left-[-4.5px] size-2 rounded-xs border bg-popover" />
       <div className="absolute top-[-3.5px] right-[-4.5px] size-2 rounded-xs border bg-popover" />
 
