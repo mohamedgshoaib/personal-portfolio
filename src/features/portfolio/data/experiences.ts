@@ -13,7 +13,7 @@ export const EXPERIENCES: Experience[] = [
         employmentPeriod: {
           start: "10.2025",
         },
-        employmentType: "Part-time",
+        employmentType: "Self-employed",
         icon: "code",
         description: `
 Responsibilities:
@@ -23,15 +23,7 @@ What I'm Learning:
 - How to plan, research, and build scalable and maintainable web applications.
 - How to use tools like Linear and GitHub Actions in a professional environment.
 `,
-        skills: [
-          "TypeScript",
-          "Next.js",
-          "Tailwind CSS",
-          "shadcn/ui",
-          "Supabase",
-          "Upstash Redis",
-          "GitHub Actions",
-        ],
+        skills: ["TypeScript", "Next.js", "Upstash Redis", "GitHub Actions"],
         isExpanded: true,
       },
     ],
@@ -67,9 +59,6 @@ What I Learned:
           "React",
           "Node.js",
           "Software Engineering",
-          "React.js & Next.js",
-          "Angular",
-          "Figma",
         ],
         isExpanded: false,
       },
