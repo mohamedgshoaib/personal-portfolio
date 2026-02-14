@@ -1,16 +1,22 @@
 export type ProjectScreenshot =
+  | "/assets/projects/reway/reway.webp"
   | "/assets/projects/devloop/devloop.webp"
   | "/assets/projects/mos-experiences/mosexperiences.webp"
   | "/assets/projects/dana-doors/dana-doors.webp"
-  | "/assets/projects/rootly-notes/rootly-notes.webp";
+  | "/assets/projects/rootly-notes/rootly-notes.webp"
+  | "/assets/projects/nexcn/nexcn.webp"
+  | "/assets/projects/marky-editor/marky.webp";
 
 export type ProjectBackground = "/assets/projects/backgrounds/candy.jpg";
 
 export type ProjectLogo =
+  | "https://reway-app.vercel.app/favicon.ico"
   | "https://www.devloop.software/favicon.ico"
   | "https://www.mosexperiences.com/favicon.ico"
   | "https://www.danadoors.net/dana-doors-logo.svg"
-  | "https://rootly-notes-app.vercel.app/favicon.ico";
+  | "https://rootly-notes-app.vercel.app/favicon.ico"
+  | "https://nexcn.vercel.app/favicon.ico"
+  | "https://marky-editor.vercel.app/marky-logo.png";
 
 export type ProjectStatus = "live" | "building" | "soon";
 
@@ -23,7 +29,7 @@ export type Project = {
   slug: string;
   title: string;
   /** Public URL (site, repository, demo, or video). */
-  link: string;
+  link?: string;
   /** GitHub repository URL (optional). */
   github?: string;
   /** Link to a blog post or article (optional). */

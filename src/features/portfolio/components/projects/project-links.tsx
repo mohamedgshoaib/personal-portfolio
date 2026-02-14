@@ -28,9 +28,7 @@ export function ProjectLinks({ project, className }: ProjectLinksProps) {
       href: project.post,
       icon: NewspaperIcon,
     },
-  ].filter((link) => !!link.href);
-
-  if (links.length === 0) return null;
+  ];
 
   return (
     <div
@@ -39,18 +37,40 @@ export function ProjectLinks({ project, className }: ProjectLinksProps) {
         className
       )}
     >
-      {links.map((link) => (
-        <a
-          key={link.label}
-          href={addQueryParams(link.href!, UTM_PARAMS)}
-          target="_blank"
-          rel="noopener"
-          className="flex flex-1 items-center justify-center gap-2.5 py-4 text-sm font-medium transition-all duration-300 ease-premium select-none hover:bg-accent hover:text-foreground active:scale-[0.98] active:bg-accent-muted"
-        >
-          <link.icon className="size-4.5" />
-          {link.label}
-        </a>
-      ))}
+      {links.map((link) => {
+        const isDisabled = !link.href;
+
+        const content = (
+          <>
+            <link.icon className="size-4.5" />
+            {link.label}
+          </>
+        );
+
+        if (isDisabled) {
+          return (
+            <div
+              key={link.label}
+              aria-disabled="true"
+              className="flex flex-1 items-center justify-center gap-2.5 py-4 text-sm font-medium select-none text-muted-foreground/70 cursor-not-allowed"
+            >
+              {content}
+            </div>
+          );
+        }
+
+        return (
+          <a
+            key={link.label}
+            href={addQueryParams(link.href!, UTM_PARAMS)}
+            target="_blank"
+            rel="noopener"
+            className="flex flex-1 items-center justify-center gap-2.5 py-4 text-sm font-medium transition-all duration-300 ease-premium select-none hover:bg-accent hover:text-foreground active:scale-[0.98] active:bg-accent-muted"
+          >
+            {content}
+          </a>
+        );
+      })}
     </div>
   );
 }

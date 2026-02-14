@@ -105,15 +105,17 @@ export function ProjectGridItem({
             <ArrowRightIcon className="size-4 text-current transition-transform duration-300 ease-premium group-hover/link:translate-x-1" />
           </Link>
 
-          <a
-            href={addQueryParams(project.link, UTM_PARAMS)}
-            target="_blank"
-            rel="noopener"
-            className="group/link inline-flex items-center gap-2 rounded text-sm font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-          >
-            Visit Website
-            <ArrowUpRightIcon className="size-4 text-current transition-transform duration-300 ease-premium group-hover/link:rotate-45" />
-          </a>
+          {project.link && (
+            <a
+              href={addQueryParams(project.link, UTM_PARAMS)}
+              target="_blank"
+              rel="noopener"
+              className="group/link inline-flex items-center gap-2 rounded text-sm font-medium text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              Visit Website
+              <ArrowUpRightIcon className="size-4 text-current transition-transform duration-300 ease-premium group-hover/link:rotate-45" />
+            </a>
+          )}
         </div>
       </div>
     </div>

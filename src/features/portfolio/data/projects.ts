@@ -2,12 +2,48 @@ import type { Project } from "../types/projects";
 
 export const PROJECTS: Project[] = [
   {
+    id: "Reway",
+    slug: "reway",
+    title: "Reway",
+    link: "",
+    github: "",
+    post: "",
+    screenshot: "/assets/projects/reway/reway.webp",
+    background: "/assets/projects/reway/reway-bg.webp",
+    skills: [
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Supabase",
+      "Framer Motion",
+      "Driver.js",
+      "Dnd-kit",
+    ],
+    description: `
+The official Reway bookmarking workspace built with intelligent link extraction, real-time sync, and a Chrome extension for instant capture. It ships with keyboard-first navigation, flexible view modes, reduced-motion support, and optimistic updates to keep the UI fast and responsive.
+
+Problem:
+- Users needed a unified way to capture, organize, and search bookmarks across devices without browser silos, with smart metadata enrichment and fast keyboard workflows.
+
+Solution:
+- Built a centralized bookmarking platform with smart paste-to-bookmark extraction, grouped organization, real-time Supabase sync, and a Chrome MV3 extension for instant page capture and bulk actions.
+
+Architecture:
+- Next.js 16 App Router (Turbopack) + React 19 + Tailwind CSS + shadcn/ui, with Supabase (PostgreSQL + Auth + Realtime), Chrome MV3 extension, and optimistic UI patterns for responsive interactions..
+`,
+    logo: "https://reway-app.vercel.app/favicon.ico",
+    isExpanded: true,
+    status: "soon",
+    type: "Agency",
+  },
+  {
     id: "Devloop",
     slug: "devloop",
     title: "Devloop",
     link: "https://www.devloop.software/",
-    github: "https://github.com/devloop-software",
-    post: "https://www.devloop.software/blog/launch",
+    github: "",
+    post: "https://www.linkedin.com/posts/mohamed-g-shoaib_%D8%A8%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86-%D9%85%D8%B9-%D8%B5%D8%AF%D9%8A%D9%82%D9%8A-husseini-sobhy-%D9%82%D8%B1%D8%B1%D9%86%D8%A7-%D9%86%D8%A8%D8%AF%D8%A3-activity-7417690607848112128-DvnR?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFBpshwBEQfaP7_ezFl885oMg_0UXZ0vsZM",
     screenshot: "/assets/projects/devloop/devloop.webp",
     background: "/assets/projects/devloop/devloop-bg.webp",
     skills: [
@@ -45,6 +81,8 @@ Architecture:
     slug: "mos-experiences",
     title: "Mo's Experiences",
     link: "https://www.mosexperiences.com/en",
+    github: "",
+    post: "https://www.linkedin.com/posts/mohamed-g-shoaib_%D9%81%D8%AE%D9%88%D8%B1-%D8%A7%D9%86%D9%8A-%D8%A7%D8%B4%D8%A7%D8%B1%D9%83-%D9%85%D8%B9%D8%A7%D9%83%D9%85-%D8%A3%D9%88%D9%84-%D9%85%D9%88%D9%82%D8%B9-%D9%85%D8%AA%D9%83%D8%A7%D9%85%D9%84-%D8%A3%D8%B9%D9%85%D9%84%D9%87-activity-7397716704656760832-1UrE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBpshwBEQfaP7_ezFl885oMg_0UXZ0vsZM",
     screenshot: "/assets/projects/mos-experiences/mosexperiences.webp",
     background: "/assets/projects/mos-experiences/mos-bg.webp",
     skills: [
@@ -79,6 +117,8 @@ Architecture:
     slug: "dana-doors",
     title: "Dana Doors",
     link: "https://www.danadoors.net/en",
+    github: "",
+    post: "https://www.linkedin.com/posts/mohamed-g-shoaib_%D8%A7%D9%84%D8%AD%D9%85%D8%AF-%D9%84%D9%84%D9%87-%D8%B3%D9%84%D9%85%D8%AA-%D8%AA%D8%A7%D9%86%D9%8A-%D9%85%D8%B4%D8%B1%D9%88%D8%B9-freelance-%D9%85%D9%88%D9%82%D8%B9-activity-7400236974671933440-Dczu?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBpshwBEQfaP7_ezFl885oMg_0UXZ0vsZM",
     screenshot: "/assets/projects/dana-doors/dana-doors.webp",
     background: "/assets/projects/dana-doors/danadoors-bg.webp",
     skills: [
@@ -113,6 +153,8 @@ Architecture:
     slug: "rootly-notes",
     title: "Rootly Notes",
     link: "https://rootly-notes-app.vercel.app/",
+    github: "https://github.com/mohamed-g-shoaib/rootly-notes-app",
+    post: "https://www.linkedin.com/posts/mohamed-g-shoaib_%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85-%D8%B9%D9%84%D9%8A%D9%83%D9%85-%D8%AD%D8%A7%D8%A8%D8%A8-%D8%A7%D8%B4%D8%A7%D8%B1%D9%83-%D9%85%D8%B9%D8%A7%D9%83%D9%85-%D8%A8%D8%B1%D9%88%D8%AC%D9%83%D8%AA-activity-7363964829461549057-ezWC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBpshwBEQfaP7_ezFl885oMg_0UXZ0vsZM",
     screenshot: "/assets/projects/rootly-notes/rootly-notes.webp",
     background: "/assets/projects/rootly-notes/rootly-bg.webp",
     skills: [
@@ -136,6 +178,78 @@ Architecture:
 - Next.js 15 App Router + React 19 + TypeScript + Tailwind CSS v4, using Supabase (PostgreSQL + Auth + RLS) for secure per-user data, Recharts for dashboards, and Radix UI/shadcn/ui for accessible components.
 `,
     logo: "https://rootly-notes-app.vercel.app/favicon.ico",
+    status: "live",
+    type: "Open Source",
+  },
+  {
+    id: "nexcn",
+    slug: "nexcn-starter",
+    title: "Nexcn Starter",
+    link: "https://nexcn.vercel.app/en",
+    github: "https://github.com/mohamed-g-shoaib/nexcn",
+    post: "https://www.linkedin.com/posts/mohamed-g-shoaib_nextjs-react-typescript-activity-7405713947305226240-p5Bk?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBpshwBEQfaP7_ezFl885oMg_0UXZ0vsZM",
+    screenshot: "/assets/projects/nexcn/nexcn.webp",
+    background: "/assets/projects/nexcn/nexcn-bg.webp",
+    skills: [
+      "TypeScript",
+      "Next.js 16",
+      "Tailwind CSS",
+      "Base UI",
+      "next-intl",
+      "Vitest",
+      "Playwright",
+      "ESLint",
+      "Prettier",
+      "Husky",
+    ],
+    description: `
+A production-ready Next.js 16 starter that ships with modern tooling and best practices out of the box: TypeScript, Tailwind CSS v4, Base UI, shadcn/ui, internationalization, SEO, and a full testing setup. Nexcn can be used as a foundation for SaaS apps, dashboards, marketing sites, or multi-language products.
+
+Problem:
+- Spinning up a real-world Next.js project often requires repetitive boilerplate: configuring TypeScript, Tailwind v4, component libraries, i18n, testing, linting, formatting, and deployment.
+- Developers lose time wiring up the same stack instead of focusing on product features.
+
+Solution:
+- Nexcn provides a batteries-included starter with a clean project structure, opinionated tooling, and sensible defaults.
+- It includes DX-friendly scripts for development, testing, linting, formatting, and type-checking, plus documented guides for getting started, styling, i18n, testing, SEO, and RTL support.
+
+Architecture:
+- Next.js 16 App Router + React 19 + TypeScript in strict mode, with Tailwind CSS v4, Base UI, shadcn/ui, next-intl for i18n with RTL support, Vitest and Playwright for testing, ESLint/Prettier/Husky for code quality, and SEO-friendly metadata/sitemap/Vercel deployment.
+`,
+    logo: "https://nexcn.vercel.app/favicon.ico",
+    status: "live",
+    type: "Open Source",
+  },
+  {
+    id: "marky",
+    slug: "marky-editor",
+    title: "Marky",
+    link: "https://marky-editor.vercel.app/",
+    github: "https://github.com/mohamed-g-shoaib/marky-editor",
+    post: "https://www.linkedin.com/posts/mohamed-g-shoaib_%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85-%D8%B9%D9%84%D9%8A%D9%83%D9%85-%D9%84%D9%88-%D8%B9%D9%86%D8%AF%D9%83-%D9%86%D9%88%D8%AA%D8%A7%D8%AA-%D9%83%D8%AA%D9%8A%D8%B1-activity-7374204942602911744-tSHR?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBpshwBEQfaP7_ezFl885oMg_0UXZ0vsZM",
+    screenshot: "/assets/projects/marky-editor/marky.webp",
+    background: "/assets/projects/marky-editor/marky-bg.webp",
+    skills: [
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Lexical",
+      "markmap",
+    ],
+    description: `
+An AI-powered mindmap creator that transforms ideas into beautiful visual mindmaps with real-time editing, rich markdown support, and intelligent content generation. Features include file import/export, auto-save, dark/light themes, and a responsive design with accessibility support.
+
+Problem:
+- Users needed an intuitive way to create, edit, and visualize mindmaps without complex software, with support for collaboration and multiple export formats.
+
+Solution:
+- Delivered a modern web application with AI-powered content generation, real-time preview, comprehensive file support, and a beautiful UI that works seamlessly across all devices.
+
+Architecture:
+- Next.js 15 App Router + TypeScript + Tailwind CSS + shadcn/ui, with Lexical for rich text editing, markmap.js for visualization, custom AI service integration, and local storage for persistent data management.
+`,
+    logo: "https://marky-editor.vercel.app/marky-logo.png",
     status: "live",
     type: "Open Source",
   },
