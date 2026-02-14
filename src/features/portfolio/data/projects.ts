@@ -37,6 +37,8 @@ Architecture:
 `,
     logo: "https://www.devloop.software/favicon.ico",
     isExpanded: true,
+    status: "live",
+    type: "Agency",
   },
   {
     id: "mosexperiences",
@@ -69,6 +71,8 @@ Architecture:
 - Next.js 15.5.5 App Router + TypeScript + Tailwind CSS 4 + shadcn/ui, with Supabase (PostgreSQL + Auth), TanStack Query for server-state, Resend for email, next-themes for theming, and a custom analytics tracking layer.
 `,
     logo: "https://www.mosexperiences.com/favicon.ico",
+    status: "live",
+    type: "Client Work",
   },
   {
     id: "danadoors",
@@ -101,6 +105,8 @@ Architecture:
 - Next.js 16 App Router + TypeScript + Tailwind CSS, using Radix UI + shadcn/ui for components, Cloudinary for images/CDN, and Upstash Redis for analytics (visit counter).
 `,
     logo: "https://www.danadoors.net/dana-doors-logo.svg",
+    status: "live",
+    type: "Client Work",
   },
   {
     id: "rootlynotes",
@@ -130,5 +136,7 @@ Architecture:
 - Next.js 15 App Router + React 19 + TypeScript + Tailwind CSS v4, using Supabase (PostgreSQL + Auth + RLS) for secure per-user data, Recharts for dashboards, and Radix UI/shadcn/ui for accessible components.
 `,
     logo: "https://rootly-notes-app.vercel.app/favicon.ico",
+    status: "live",
+    type: "Open Source",
   },
 ];

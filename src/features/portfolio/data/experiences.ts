@@ -8,7 +8,7 @@ export const EXPERIENCES: Experience[] = [
     companyWebsite: "https://www.devloop.software/",
     positions: [
       {
-        id: "devloop-frontend-developer",
+        id: "devloop-frontend-developer-self-employed",
         title: "Frontend Developer",
         employmentPeriod: {
           start: "10.2025",

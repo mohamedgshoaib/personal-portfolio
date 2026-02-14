@@ -12,6 +12,10 @@ export type ProjectLogo =
   | "https://www.danadoors.net/dana-doors-logo.svg"
   | "https://rootly-notes-app.vercel.app/favicon.ico";
 
+export type ProjectStatus = "live" | "building" | "soon";
+
+export type ProjectType = "Client Work" | "Open Source" | "Agency";
+
 export type Project = {
   /** Stable unique identifier (used as list key/anchor). */
   id: string;
@@ -36,4 +40,8 @@ export type Project = {
   logo?: ProjectLogo | string;
   /** Whether the project card is expanded by default in the UI. */
   isExpanded?: boolean;
+  /** Project status indicator. */
+  status?: ProjectStatus;
+  /** Project type classification. */
+  type?: ProjectType;
 };
