@@ -20,6 +20,8 @@ import { SITE_INFO } from "@/config/site";
 import { ProjectKeyboardShortcuts } from "@/features/portfolio/components/projects/project-keyboard-shortcuts";
 import { ProjectLinks } from "@/features/portfolio/components/projects/project-links";
 import { ProjectShareMenu } from "@/features/portfolio/components/projects/project-share-menu";
+import { ProjectStatus } from "@/features/portfolio/components/projects/project-status";
+import { ProjectType } from "@/features/portfolio/components/projects/project-type";
 import {
   findNeighbourProject,
   getAllProjects,
@@ -211,7 +213,7 @@ export default async function Page({
         </h1>
 
         {project.screenshot && (
-          <div className="pb-4">
+          <div className="pb-2">
             <div className="relative overflow-hidden rounded-xl border border-edge select-none">
               <Image
                 src={project.screenshot}
@@ -224,6 +226,21 @@ export default async function Page({
                 sizes="(max-width: 1024px) 100vw, 1200px"
               />
             </div>
+
+            {(project.type || project.status) && (
+              <div className="mt-2 px-1 flex items-center justify-between text-xs">
+                {project.type ? (
+                  <ProjectType
+                    type={project.type}
+                    className="static left-auto top-auto z-auto translate-x-0 scale-100 text-xs text-muted-foreground drop-shadow-none transition-none"
+                  />
+                ) : (
+                  <span />
+                )}
+
+                {project.status && <ProjectStatus status={project.status} />}
+              </div>
+            )}
           </div>
         )}
 
