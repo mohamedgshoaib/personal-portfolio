@@ -1,0 +1,137 @@
+---
+title: "PostHog Analytics That Survive Ad Blockers With First-Party Proxying"
+description: "How to proxy PostHog Cloud through your own domain in Next.js using rewrites to reduce blocked requests and improve performance."
+image: "/assets/blog/PostHog First-Party Proxying With Next.js.webp"
+createdAt: "2026-02-15"
+updatedAt: "2026-02-15"
+tags: ["analytics", "privacy", "next.js", "web-performance"]
+---
+
+If you rely on analytics in 2026, you have probably noticed a frustrating gap between what you ship and what your dashboard reports.
+
+A big chunk of visitors never send events at all. It happens when the browser, an extension, or DNS level filters block requests to known tracking domains.
+
+PostHog is a great product, but default PostHog Cloud endpoints are easy for blockers to spot. The fix is simple and practical.
+
+## The Problem: Third-Party Domains Get Blocked
+
+Most hosted analytics setups follow the same pattern:
+
+1. Load assets from a third-party domain
+2. Send events to a third-party ingestion endpoint
+3. Hope those requests are allowed
+
+With PostHog Cloud, those calls often go to domains like `us.i.posthog.com` and `us-assets.i.posthog.com`. Many blocklists include them, which leads to `net::ERR_BLOCKED_BY_CLIENT` in the console and missing data.
+
+## The Solution: First-Party Proxying
+
+Instead of letting the browser talk to PostHog directly, proxy PostHog through your own domain. From the browser perspective, everything becomes same-origin requests like `/ph/decide` and `/ph/e`.
+
+The mechanism in Next.js is **rewrites**.
+
+### Step 1: Configure Server-Side Rewrites
+
+In `next.config.ts`:
+
+```typescript
+async rewrites() {
+  return [
+    {
+      source: "/ph/array/:path*",
+      destination: "https://us-assets.i.posthog.com/array/:path*",
+    },
+    {
+      source: "/ph/:path*",
+      destination: "https://us.i.posthog.com/:path*",
+    },
+  ];
+}
+```
+
+What this does:
+
+- Browser requests `/ph/array/...`, Next.js fetches those assets from PostHog's CDN server-side
+- Events and feature flag requests sent to `/ph/...` get forwarded to the PostHog ingestion API
+- The browser no longer requests `posthog.com` domains directly
+
+### Step 2: Point the PostHog Client at Your Proxy
+
+If you initialize PostHog with `posthog-js`, set `api_host` to your proxied path.
+
+In `src/instrumentation-client.ts`:
+
+```ts
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  api_host: "/ph",
+  ui_host: process.env.NEXT_PUBLIC_POSTHOG_UI_HOST,
+  defaults: "2026-02-15",
+});
+```
+
+Key details:
+
+- `api_host: "/ph"` makes the SDK call your own domain
+- Your `rewrites()` send those calls to PostHog Cloud
+- This also avoids extra DNS and TLS work for the browser
+
+### Step 3: Deploy and Test
+
+1. Open your site with an ad blocker enabled
+2. Open DevTools, Network tab
+3. You should see:
+   - requests to `/ph/decide` and `/ph/e` (or similar)
+   - requests to `/ph/array/...` for config and assets
+   - no direct requests to `us.i.posthog.com` or `us-assets.i.posthog.com`
+
+If PostHog still gets blocked, it will usually show as blocked requests to your `/ph/...` routes. Some filters block by behavior and not only by domain.
+
+## Why This Works (And Why It's Reasonable)
+
+Most blockers start with domain-based rules. Same-origin requests to your own domain are harder to block safely because doing so can break unrelated functionality.
+
+This does not change what you collect. It changes where requests go from the browser's perspective.
+
+If you care about privacy, keep your tracking scope tight:
+
+- track only what you need
+- avoid sensitive properties
+- use session replay only when it is truly necessary
+
+## The Performance Bonus
+
+Proxying is not only about blocked requests. It can also improve load behavior.
+
+A third-party script path usually means:
+
+1. another DNS lookup
+2. another connection
+3. another TLS handshake
+
+With a first-party path, the browser can reuse the existing connection and start downloading sooner.
+
+## Other Frameworks?
+
+This technique works anywhere you can configure reverse proxy rules:
+
+- **Vercel**: `vercel.json` rewrites
+- **Netlify**: `_redirects` or `netlify.toml`
+- **Cloudflare Workers**: intercept and proxy requests
+- **Nginx/Apache**: reverse proxy configuration
+
+The core idea stays the same. Keep analytics traffic on your domain.
+
+## The Reality
+
+You cannot guarantee tracking for every visitor. Some people actively choose to block analytics, and that choice should be respected.
+
+What you can do is reduce accidental blocking, remove noisy console errors, and get a clearer picture of your traffic without switching to invasive techniques.
+
+## Try It Yourself
+
+If you are using Next.js and PostHog Cloud:
+
+1. Add the `/ph` rewrites to `next.config.ts`
+2. Set `api_host: "/ph"` in your `posthog.init(...)`
+3. Deploy and verify requests go to `/ph/...` in the Network tab
+
+Once it is live, your PostHog data will be more complete for visitors who are not explicitly blocking analytics.
