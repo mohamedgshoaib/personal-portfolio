@@ -7,9 +7,9 @@ import { SocialLinkItem } from "./social-link-item";
 export function SocialLinks() {
   return (
     <Panel id="socials">
-      <PanelHeader>
-        <PanelTitle>Socials</PanelTitle>
-      </PanelHeader>
+      {/* <PanelHeader>
+        <PanelTitle>Connect</PanelTitle>
+      </PanelHeader> */}
 
       <div className="relative">
         <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
