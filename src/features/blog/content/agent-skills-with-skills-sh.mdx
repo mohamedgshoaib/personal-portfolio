@@ -1,0 +1,99 @@
+---
+title: "Agent Skills With skills.sh: Give Your Coding Agent Real Procedures"
+description: "How Vercel's skills.sh ecosystem helps AI agents follow proven workflows, and how to discover and install skills with one command."
+image: "/assets/blog/Agent Skills With Vercel skills.webp"
+createdAt: "2026-02-15"
+updatedAt: "2026-02-15"
+tags: ["ai", "tooling", "developer-experience", "productivity"]
+---
+
+If you use AI coding agents daily, you have probably felt this gap.
+
+Your agent can write code, but it does not always follow the same reliable procedure you would. It might skip a check, miss a step, or take a path that looks reasonable and still wastes time.
+
+Skills are a practical way to close that gap.
+
+## What Are Skills?
+
+Skills are reusable capabilities for AI agents. They package procedural knowledge that helps an agent complete a task with a consistent playbook.
+
+You can think of a skill as a small, focused set of instructions your agent can pull in when it needs to do a specific job.
+
+A good skill can include:
+
+1. code generation patterns
+2. domain or framework expertise
+3. tool integrations
+4. checklists and workflows
+
+## Getting Started: Install the Skills CLI
+
+You can install skills with the `skills` CLI.
+
+Run this:
+
+```bash
+npx skills add vercel-labs/agent-skills
+```
+
+That command downloads the skill and configures it for your agent.
+
+Skills work with popular AI coding agents including Claude Code, Cursor, Windsurf, and others. Compatibility depends on the specific skill, so it is worth checking the skill README.
+
+## How Skills Are Ranked
+
+The skills leaderboard on `skills.sh` is ranked using anonymous telemetry from the CLI.
+
+When people install skills, aggregated installation counts help surface the most useful ones.
+
+What is collected:
+
+- the skill name
+- the skill files
+- a timestamp
+
+What is not collected:
+
+- personal information
+- device identifiers
+- usage patterns inside your editor
+
+If you want to opt out, set this environment variable:
+
+```bash
+DISABLE_TELEMETRY=1
+```
+
+## Browse Skills
+
+If you are not sure what to install, start on the skills homepage and browse the leaderboard. It is the fastest way to discover what other teams are using.
+
+## Security and Trust
+
+Skills are hosted in GitHub repositories, so the same rules apply as any dependency.
+
+Vercel runs routine audits to assess skills for malicious content, but they do not guarantee the quality or security of every skill listed on the site.
+
+If you find an issue, you can report it at `security.vercel.com`.
+
+For day to day use, the best practice is simple:
+
+- read the repository
+- scan the skill files
+- install only what you understand
+
+## The Reality
+
+Skills do not make an agent smarter by magic. They make it more consistent.
+
+If you have a workflow you repeat every week, it is a perfect candidate for a skill. The goal is to remove variance in execution so you spend time on decisions instead of process.
+
+## Try It Yourself
+
+If you want to add skills today:
+
+1. Visit `skills.sh` and find a skill you would actually use
+2. Install it with `npx skills add <owner>/<skill-name>`
+3. Ask your agent to use it on a real task and compare the result to your normal flow
+
+When the procedure is explicit, the output gets better.
