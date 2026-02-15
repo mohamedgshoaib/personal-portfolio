@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import { DesktopNav } from "@/components/desktop-nav";
+import { MobilePrimaryNavLink } from "@/components/mobile-primary-nav-link";
 import { MAIN_NAV } from "@/config/site";
 import { getAllPosts } from "@/features/blog/data/posts";
 import { cn } from "@/lib/utils";
@@ -20,6 +21,8 @@ const MobileNav = dynamic(() =>
 
 export function SiteHeader() {
   const posts = getAllPosts();
+  const mobilePrimaryItem = MAIN_NAV.find((item) => item.href === "/projects");
+  const mobileMenuItems = MAIN_NAV.filter((item) => item.href !== "/projects");
 
   return (
     <SiteHeaderWrapper
@@ -49,9 +52,15 @@ export function SiteHeader() {
         <DesktopNav items={MAIN_NAV} />
 
         <div className="flex items-center *:first:mr-2">
+          {mobilePrimaryItem && (
+            <MobilePrimaryNavLink
+              href={mobilePrimaryItem.href}
+              title={mobilePrimaryItem.title}
+            />
+          )}
           <span className="mx-2 flex h-4 w-px bg-border" />
           <ThemeToggle />
-          <MobileNav items={MAIN_NAV} />
+          <MobileNav items={mobileMenuItems} />
         </div>
       </div>
     </SiteHeaderWrapper>

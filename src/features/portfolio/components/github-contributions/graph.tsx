@@ -39,6 +39,7 @@ export function GitHubContributionGraph({
       <ContributionGraphCalendar
         className="no-scrollbar"
         title="GitHub Contributions"
+        scrollToEnd
       >
         {({ activity, dayIndex, weekIndex }) => (
           <Tooltip>
