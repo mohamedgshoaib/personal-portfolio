@@ -24,7 +24,10 @@ What I'm Learning:
 - How to use tools like Linear and GitHub Actions in a professional environment.
 `,
         skills: ["TypeScript", "Next.js", "Upstash Redis", "GitHub Actions"],
-        isExpanded: true,
+        isExpanded: {
+          desktop: true,
+          mobile: false,
+        },
       },
     ],
     isCurrentEmployer: true,
@@ -60,7 +63,10 @@ What I Learned:
           "Node.js",
           "Software Engineering",
         ],
-        isExpanded: false,
+        isExpanded: {
+          desktop: false,
+          mobile: false,
+        },
       },
     ],
     isCurrentEmployer: false,
@@ -90,7 +96,10 @@ What I Learned:
 - Improved written communication through structured, guideline-based reporting.
 `,
         skills: ["QA", "SEO", "Research", "Content Writing"],
-        isExpanded: false,
+        isExpanded: {
+          desktop: false,
+          mobile: false,
+        },
       },
     ],
     isCurrentEmployer: false,

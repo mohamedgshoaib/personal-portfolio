@@ -23,9 +23,22 @@ export function ExperiencePositionItem({
 }) {
   const { start, end } = position.employmentPeriod;
   const isOngoing = !end;
+  const isExpandedValue = position.isExpanded;
+  const defaultOpenOnDesktop =
+    typeof isExpandedValue === "object"
+      ? Boolean(isExpandedValue.desktop)
+      : Boolean(isExpandedValue);
+  const defaultOpenOnMobile =
+    typeof isExpandedValue === "object"
+      ? Boolean(isExpandedValue.mobile)
+      : false;
 
   return (
-    <CollapsibleWithContext defaultOpen={position.isExpanded} asChild>
+    <CollapsibleWithContext
+      defaultOpen={defaultOpenOnMobile}
+      defaultOpenOnDesktop={defaultOpenOnDesktop}
+      asChild
+    >
       <div className="relative last:before:absolute last:before:h-full last:before:w-4 last:before:bg-background">
         <CollapsibleTrigger
           className={cn(

@@ -3,6 +3,8 @@
 import { Collapsible as CollapsiblePrimitive } from "radix-ui";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
+import { useMediaQuery } from "@/hooks/use-media-query";
+
 import type { ChevronsDownUpIconHandle } from "../animated-icons/chevrons-down-up-icon";
 import { ChevronsDownUpIcon } from "../animated-icons/chevrons-down-up-icon";
 
@@ -54,9 +56,19 @@ const useCollapsible = () => {
 
 function CollapsibleWithContext({
   defaultOpen,
+  defaultOpenOnDesktop,
   ...props
-}: React.ComponentProps<typeof Collapsible>) {
+}: React.ComponentProps<typeof Collapsible> & {
+  defaultOpenOnDesktop?: boolean;
+}) {
+  const isDesktop = useMediaQuery("(min-width: 40rem)");
   const [open, setOpen] = useState(defaultOpen ?? false);
+
+  useEffect(() => {
+    if (typeof defaultOpenOnDesktop === "boolean") {
+      setOpen(isDesktop ? defaultOpenOnDesktop : (defaultOpen ?? false));
+    }
+  }, [defaultOpen, defaultOpenOnDesktop, isDesktop]);
 
   return (
     <CollapsibleContext.Provider value={{ open }}>

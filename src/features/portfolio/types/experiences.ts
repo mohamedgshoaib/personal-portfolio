@@ -21,8 +21,17 @@ export type ExperiencePosition = {
   /** UI icon to represent the role type. */
   icon?: ExperiencePositionIcon;
   skills?: string[];
-  /** Whether the position is expanded by default in the UI. */
-  isExpanded?: boolean;
+  /**
+   * Whether the position is expanded by default in the UI.
+   * - boolean: applies to desktop, mobile defaults to collapsed
+   * - object: configure mobile/desktop defaults explicitly
+   */
+  isExpanded?:
+    | boolean
+    | {
+        mobile?: boolean;
+        desktop?: boolean;
+      };
 };
 
 export type Experience = {
