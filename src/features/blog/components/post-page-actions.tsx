@@ -59,7 +59,7 @@ export function LLMCopyButton({ markdownUrl }: { markdownUrl: string }) {
 
   return (
     <button
-      className="flex h-7 items-center gap-1.5 rounded-l-full pr-2 pl-2.5 text-sm font-medium disabled:pointer-events-none disabled:opacity-50"
+      className="flex h-7 cursor-pointer items-center gap-1.5 rounded-l-full pr-2 pl-2.5 text-sm font-medium disabled:pointer-events-none disabled:opacity-50"
       onClick={handleCopy}
     >
       <AnimatePresence mode="popLayout" initial={false}>
@@ -131,7 +131,7 @@ export function ViewOptions({ markdownUrl }: { markdownUrl: string }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex size-7 items-center justify-center gap-2 rounded-r-full text-sm">
+        <button className="flex size-7 cursor-pointer items-center justify-center gap-2 rounded-r-full text-sm">
           <ChevronDownIcon className="mt-0.5 size-4" />
           <span className="sr-only">View Options</span>
         </button>
