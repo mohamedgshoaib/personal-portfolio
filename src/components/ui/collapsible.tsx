@@ -4,6 +4,7 @@ import { Collapsible as CollapsiblePrimitive } from "radix-ui";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { cn } from "@/lib/utils";
 
 import type { ChevronsDownUpIconHandle } from "../animated-icons/chevrons-down-up-icon";
 import { ChevronsDownUpIcon } from "../animated-icons/chevrons-down-up-icon";
@@ -15,11 +16,15 @@ function Collapsible(
 }
 
 function CollapsibleTrigger(
-  props: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>
+  {
+    className,
+    ...props
+  }: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>
 ) {
   return (
     <CollapsiblePrimitive.CollapsibleTrigger
       data-slot="collapsible-trigger"
+      className={cn("cursor-pointer", className)}
       {...props}
     />
   );
