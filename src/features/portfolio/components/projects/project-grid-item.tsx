@@ -48,6 +48,7 @@ export function ProjectGridItem({
                   src={project.background}
                   alt=""
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-black/40" />
