@@ -32,7 +32,7 @@ export const USER = {
 
 - I adapt quickly to project needs, prefer modern tooling, and actively look for problems that force me to learn something new.
 `,
-  avatar: "/assets/avatars/portfolio-pfp.jpg",
+  avatar: "/assets/avatars/portfolio-pfp.webp",
   ogImage: "/assets/og-image.png",
   timeZone: "Africa/Cairo",
   keywords: [
