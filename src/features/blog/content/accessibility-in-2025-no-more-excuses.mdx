@@ -1,0 +1,89 @@
+---
+title: "Accessibility in 2025: No More Excuses"
+description: "How to build accessible interfaces without making it a separate project."
+image: "/assets/blog/Accessibility in 2025 No More Excuses.webp"
+createdAt: "2025-12-25"
+updatedAt: "2025-12-25"
+tags: ["accessibility", "design-systems", "ui", "ux"]
+---
+
+Here's the thing about accessibility: everyone agrees it's important, and almost everyone treats it as an afterthought.
+
+In 2025, with the European Accessibility Act going into effect and lawsuits hitting record numbers in the US, "we'll add it later" isn't a plan anymore. The good news? Making things accessible isn't that hard if you do it right from the start.
+
+## 1. Design Tokens: Your Secret Weapon
+
+Hardcoding colors is how you end up with 37 slightly different shades of blue and exactly zero of them meeting WCAG contrast requirements.
+
+```css
+/* The "I'll fix it later" approach */
+.button {
+  background: #3b82f6;
+  color: white; /* Is this enough contrast? Who knows! */
+}
+
+/* The "I thought about this for 5 minutes" approach */
+.button {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+```
+
+When you use semantic tokens, you can guarantee contrast ratios at the theme level. Change the theme, contrast stays valid. Dark mode? Already handled.
+
+**Pro tip**: Tools like Figma Tokens or Style Dictionary make this manageable. Don't hand-roll your token system unless you enjoy suffering.
+
+## 2. Keyboard Navigation: The Test That Shows Everything
+
+Here's a free QA process: unplug your mouse and try to use your app.
+
+If you can't:
+
+- Tab through all interactive elements
+- See where focus is at all times
+- Activate buttons and links with Enter/Space
+
+...then your app is broken for a significant portion of users.
+
+The rules are simple:
+
+1. **Everything clickable must be focusable** (use real `<button>` and `<a>` elements)
+2. **Focus must be visible** (`:focus-visible` is your friend)
+3. **Focus order must make sense** (usually just follows DOM order)
+
+**The trap**: Custom dropdowns. Native `<select>` elements handle keyboard navigation automatically. Your fancy custom dropdown needs to handle Arrow keys, Home, End, Escape, and type-ahead search. Most don't. Consider if the custom styling is worth the accessibility debt.
+
+## 3. Semantic HTML: The Path of Least Resistance
+
+Every time you write `<div onClick={...}>`, a screen reader user sheds a tear.
+
+```tsx
+// This tells assistive tech nothing
+<div onClick={handleClick} className="button-looking-thing">
+  Click me
+</div>
+
+// This works everywhere
+<button onClick={handleClick}>
+  Click me
+</button>
+```
+
+The `<button>` element gives you:
+
+- Keyboard activation (Enter and Space)
+- Focus management
+- Screen reader announcement
+- Proper cursor behavior
+
+For free. You get all of that for free.
+
+ARIA attributes (`role="button"`, `aria-label`) are for situations where semantic HTML isn't possible. They're a fallback, not a first choice.
+
+## The 2025 Reality Check
+
+The EU Accessibility Act requires digital products to be accessible starting June 2025. Many companies are scrambling right now.
+
+If you build accessibility into your components from day one, it's a small ongoing cost. If you bolt it on later, it's a rewrite.
+
+Choose wisely.

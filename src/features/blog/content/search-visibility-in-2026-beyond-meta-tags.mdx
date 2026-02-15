@@ -1,0 +1,36 @@
+---
+title: "Search Visibility in 2026: Beyond Meta Tags"
+description: "Why sitemaps, structured data, and manifests are critical for discovery in the modern web."
+image: "/assets/blog/Search Visibility in 2026 Beyond Meta Tags.webp"
+createdAt: "2025-12-28"
+updatedAt: "2025-12-28"
+tags: ["SEO", "Next.js", "Web Engineering"]
+---
+
+Technical SEO in 2026 isn't just about keywords and meta descriptions. It's about providing a clear, machine-readable roadmap of your site to both search engines and platform crawlers.
+
+Here is the essential checklist for any modern web application.
+
+## 1. Dynamic Sitemaps
+
+Static sitemaps are dead. If you have a blog or a project gallery, your `sitemap.xml` needs to update automatically as content grows. In Next.js, we use a `sitemap.ts` file to generate this dynamically.
+
+It ensures that Google knows exactly where your dynamic routes (like `/blog/[slug]`) live without waiting for a crawler to stumble upon a link.
+
+## 2. Structured Data (JSON-LD)
+
+Structured data tells search engines exactly what your content is. Is it a person? A project? A professional service?
+
+By embedding JSON-LD, you enable "rich results"—those fancy boxes and cards you see in search results. For a portfolio, marking up your projects as `CreativeWork` links them directly to your professional identity in Google's Knowledge Graph.
+
+## 3. Robots.txt: The Traffic Controller
+
+Don't let crawlers waste their "crawl budget" on things they shouldn't see. A proper `robots.txt` points directly to your sitemap and explicitly bars bots from private APIs or internal folders like `/admin` or `/api`.
+
+## 4. Web Manifests
+
+The `manifest.json` (or `manifest.ts` in Next.js) isn't just for PWAs. It provides metadata that mobile browsers and operating systems use to understand your site's branding. It's the difference between a generic link and a professional-looking "Add to Home Screen" experience.
+
+## Summary
+
+SEO is about lowering the barrier for bots to understand your site. When you make it easy for machines to parse your data, they reward you with better visibility and higher-quality traffic.
