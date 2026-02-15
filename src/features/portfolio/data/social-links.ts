@@ -3,7 +3,7 @@ import type { SocialLink } from "../types/social-links";
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     icon: "/assets/logos/x.webp",
-    title: "X (formerly Twitter)",
+    title: "X",
     description: "@mo0hamed_gamal",
     href: "https://x.com/mo0hamed_gamal",
   },
