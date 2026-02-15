@@ -7,7 +7,7 @@ export const USER = {
   username: "mohamedgshoaib",
   gender: "male",
   pronouns: "he/him",
-  bio: "Learn, Struggle, Master.",
+  bio: "I'm Mohamed, a frontend developer focused on building fast, SEO-driven web applications with full RTL support.",
   flipSentences: [
     "Learn, Struggle, Master.",
     "Progress, Not Perfection.",
