@@ -20,12 +20,7 @@ export function Overview() {
       <h2 className="sr-only">Overview</h2>
 
       <PanelContent className="space-y-4">
-        <div
-          className={cn(
-            "relative grid gap-x-4 gap-y-2.5 sm:grid-cols-2",
-            "before:absolute before:-top-4 before:-right-8 before:w-[calc(50%+var(--spacing)*14)] before:border-t before:border-dashed before:border-edge/80 max-sm:before:content-none"
-          )}
-        >
+        <div className={cn("relative grid gap-x-4 gap-y-2.5 sm:grid-cols-2")}>
           <EmailItem email={USER.email} />
 
           <IntroItem>
