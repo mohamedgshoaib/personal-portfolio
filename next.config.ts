@@ -52,6 +52,14 @@ const nextConfig: NextConfig = {
         source: "/registry/rss",
         destination: "/components/rss",
       },
+      {
+        source: "/ph/array/:path*",
+        destination: "https://us-assets.i.posthog.com/array/:path*",
+      },
+      {
+        source: "/ph/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
     ];
   },
   // async headers() {
