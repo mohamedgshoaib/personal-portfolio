@@ -120,11 +120,13 @@ export default async function Page({
 
   const backHref = from === "home" ? "/" : "/projects";
   const backLabel = from === "home" ? "Home" : "Projects";
+  const hrefSuffix = from === "home" ? "?from=home" : "";
 
   return (
     <>
       <ProjectKeyboardShortcuts
         basePath="/projects"
+        hrefSuffix={hrefSuffix}
         previous={previous}
         next={next}
       />
@@ -152,7 +154,7 @@ export default async function Page({
               <TooltipTrigger
                 render={
                   <Button variant="secondary" size="icon-sm" asChild>
-                    <Link href={`/projects/${previous.slug}`} />
+                    <Link href={`/projects/${previous.slug}${hrefSuffix}`} replace />
                   </Button>
                 }
               >
@@ -176,7 +178,7 @@ export default async function Page({
               <TooltipTrigger
                 render={
                   <Button variant="secondary" size="icon-sm" asChild>
-                    <Link href={`/projects/${next.slug}`} />
+                    <Link href={`/projects/${next.slug}${hrefSuffix}`} replace />
                   </Button>
                 }
               >

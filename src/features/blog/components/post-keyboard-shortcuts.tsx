@@ -18,7 +18,7 @@ export function PostKeyboardShortcuts({
 
   const navigate = (post: Post | null) => {
     if (post) {
-      router.push(`${basePath}/${post.slug}`);
+      router.replace(`${basePath}/${post.slug}`);
     }
   };
 

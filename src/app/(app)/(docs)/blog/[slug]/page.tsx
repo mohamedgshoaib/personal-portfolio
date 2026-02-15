@@ -147,7 +147,7 @@ export default async function Page({
               <TooltipTrigger
                 render={
                   <Button variant="secondary" size="icon-sm" asChild>
-                    <Link href={`/blog/${previous.slug}`} />
+                    <Link href={`/blog/${previous.slug}`} replace />
                   </Button>
                 }
               >
@@ -171,7 +171,7 @@ export default async function Page({
               <TooltipTrigger
                 render={
                   <Button variant="secondary" size="icon-sm" asChild>
-                    <Link href={`/blog/${next.slug}`} />
+                    <Link href={`/blog/${next.slug}`} replace />
                   </Button>
                 }
               >

@@ -7,10 +7,12 @@ import type { Project } from "@/features/portfolio/types/projects";
 
 export function ProjectKeyboardShortcuts({
   basePath,
+  hrefSuffix,
   previous,
   next,
 }: {
   basePath: string;
+  hrefSuffix?: string;
   previous: Project | null;
   next: Project | null;
 }) {
@@ -18,7 +20,7 @@ export function ProjectKeyboardShortcuts({
 
   const navigate = (project: Project | null) => {
     if (project) {
-      router.push(`${basePath}/${project.slug}`);
+      router.replace(`${basePath}/${project.slug}${hrefSuffix ?? ""}`);
     }
   };
 
