@@ -26,7 +26,7 @@ export function BackButton({ fallbackHref, label }: BackButtonProps) {
 
   return (
     <Button
-      className="h-7 gap-2 rounded-lg px-0 font-mono text-muted-foreground transition-colors hover:text-foreground"
+      className="h-7 gap-2 rounded-lg px-0 text-muted-foreground transition-colors hover:text-foreground"
       variant="link"
       onClick={handleBack}
     >

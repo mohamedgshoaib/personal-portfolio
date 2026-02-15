@@ -25,7 +25,7 @@ export function ProfileHeader() {
 
       <div className="flex flex-1 flex-col">
         <div className="flex grow items-end pb-0.5 pl-2 sm:pb-1 sm:pl-4">
-          <div className="line-clamp-1 font-mono text-[10px] text-muted-foreground/50 select-none sm:text-xs">
+          <div className="line-clamp-1 text-[10px] text-muted-foreground/50 select-none sm:text-xs">
             {"text-3xl "}
             <span className="inline dark:hidden">text-stone-950</span>
             <span className="hidden dark:inline">text-stone-50</span>
@@ -48,7 +48,7 @@ export function ProfileHeader() {
 
           <div className="flex h-9 items-center border-t border-edge py-0.5 pl-2 sm:h-9 sm:pl-4">
             <FlipSentences
-              className="font-mono text-xs text-balance text-muted-foreground sm:text-sm"
+              className="text-xs text-balance text-muted-foreground sm:text-sm"
               variants={{
                 initial: { y: -10, opacity: 0 },
                 animate: { y: -1, opacity: 1 },

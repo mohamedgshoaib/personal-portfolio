@@ -89,7 +89,7 @@ export function ExperiencePositionItem({
               <dt className="sr-only">Employment Period</dt>
               <dd className="flex items-center gap-0.5">
                 <span>{start}</span>
-                <span className="font-mono">—</span>
+                <span>—</span>
                 {isOngoing ? (
                   <>
                     <InfinityIcon

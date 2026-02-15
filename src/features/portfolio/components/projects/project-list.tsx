@@ -33,7 +33,7 @@ export function ProjectList({
 
         {projects.length === 0 && (
           <div className="screen-line-before screen-line-after p-4">
-            <p className="font-mono text-sm">No projects found.</p>
+            <p className="text-sm">No projects found.</p>
           </div>
         )}
       </div>

@@ -34,7 +34,7 @@ export default function Page() {
       </div>
 
       <div className="p-4">
-        <p className="font-mono text-sm text-balance text-muted-foreground">
+        <p className="text-sm text-balance text-muted-foreground">
           {metadata.description}
         </p>
       </div>

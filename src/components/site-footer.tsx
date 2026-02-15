@@ -13,7 +13,7 @@ export function SiteFooter() {
           <MyWordmark className="wordmark h-8 w-auto text-brand" />
         </div>
 
-        <p className="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
+        <p className="mb-1 px-4 text-center text-sm text-balance text-muted-foreground">
           Inspired by{" "}
           <a
             className="link"
@@ -26,7 +26,7 @@ export function SiteFooter() {
           .
         </p>
 
-        <p className="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
+        <p className="mb-4 px-4 text-center text-sm text-balance text-muted-foreground">
           The source code is available on{" "}
           <a
             className="link"
