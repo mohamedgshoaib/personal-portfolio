@@ -28,8 +28,7 @@ export default function Error({
         Something went wrong!
       </h2>
       <p className="mb-8 max-w-125 text-muted-foreground">
-        We apologize for the inconvenience. An unexpected error occurred. Please
-        try again or return to the homepage.
+        Something went wrong. Please try again or head back home.
       </p>
       <div className="flex flex-col gap-2 sm:flex-row">
         <Button onClick={() => router.back()} variant="outline">

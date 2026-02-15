@@ -39,7 +39,7 @@ export function SiteHeader() {
       >
         <BrandContextMenu>
           <Link
-            className="transition-[scale] ease-out active:scale-[0.98] has-data-[visible=false]:pointer-events-none [&_svg]:h-6"
+            className="transition-[scale] ease-out active:scale-[0.98] [&_svg]:h-5"
             href="/"
             aria-label="Home"
           >

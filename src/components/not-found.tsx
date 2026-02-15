@@ -19,14 +19,13 @@ export function NotFound({ className }: { className?: string }) {
         className
       )}
     >
-      <MyMark className="h-20 w-full text-brand/20 md:h-28" />
+      <MyMark className="h-20 w-full text-brand md:h-28" />
 
       <h1 className="my-6 text-6xl font-medium tracking-tighter tabular-nums md:text-8xl">
         404
       </h1>
       <p className="mb-8 max-w-125 text-muted-foreground">
-        Sorry, we couldn&apos;t find the page you&apos;re looking for. It might
-        have been removed, renamed, or doesn&apos;t exist.
+        This page doesn't exist. Let's get you back on track.
       </p>
 
       <div className="flex flex-col gap-2 sm:flex-row">
