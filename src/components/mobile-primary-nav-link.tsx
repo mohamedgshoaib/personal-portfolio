@@ -19,7 +19,7 @@ export function MobilePrimaryNavLink({
     <Link
       href={href}
       className={cn(
-        "text-sm font-medium text-muted-foreground transition-[color] duration-300 sm:hidden",
+        "text-sm font-medium text-muted-foreground transition-[color] duration-300 hover:text-foreground sm:hidden",
         active && "text-foreground"
       )}
     >
