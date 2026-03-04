@@ -25,7 +25,7 @@ export function NotFound({ className }: { className?: string }) {
         404
       </h1>
       <p className="mb-8 max-w-125 text-muted-foreground">
-        This page doesn't exist. Let's get you back on track.
+        This page doesn&apos;t exist. Let&apos;s get you back on track.
       </p>
 
       <div className="flex flex-col gap-2 sm:flex-row">

@@ -1,16 +1,12 @@
 import React from "react";
 
 import { SOCIAL_LINKS } from "../../data/social-links";
-import { Panel, PanelHeader, PanelTitle } from "../panel";
+import { Panel } from "../panel";
 import { SocialLinkItem } from "./social-link-item";
 
 export function SocialLinks() {
   return (
     <Panel id="socials">
-      {/* <PanelHeader>
-        <PanelTitle>Connect</PanelTitle>
-      </PanelHeader> */}
-
       <div className="relative">
         <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
           <div className="border-r border-edge"></div>

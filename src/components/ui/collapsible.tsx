@@ -15,12 +15,10 @@ function Collapsible(
   return <CollapsiblePrimitive.Root data-slot="collapsible" {...props} />;
 }
 
-function CollapsibleTrigger(
-  {
-    className,
-    ...props
-  }: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>
-) {
+function CollapsibleTrigger({
+  className,
+  ...props
+}: React.ComponentProps<typeof CollapsiblePrimitive.CollapsibleTrigger>) {
   return (
     <CollapsiblePrimitive.CollapsibleTrigger
       data-slot="collapsible-trigger"
@@ -67,13 +65,18 @@ function CollapsibleWithContext({
   defaultOpenOnDesktop?: boolean;
 }) {
   const isDesktop = useMediaQuery("(min-width: 40rem)");
+
   const [open, setOpen] = useState(defaultOpen ?? false);
 
-  useEffect(() => {
+  // Avoid: Resetting state on prop change in an Effect
+  // Instead, adjust the state while rendering
+  const [prevIsDesktop, setPrevIsDesktop] = useState(isDesktop);
+  if (isDesktop !== prevIsDesktop) {
+    setPrevIsDesktop(isDesktop);
     if (typeof defaultOpenOnDesktop === "boolean") {
       setOpen(isDesktop ? defaultOpenOnDesktop : (defaultOpen ?? false));
     }
-  }, [defaultOpen, defaultOpenOnDesktop, isDesktop]);
+  }
 
   return (
     <CollapsibleContext.Provider value={{ open }}>

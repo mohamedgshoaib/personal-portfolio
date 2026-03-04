@@ -4,7 +4,6 @@ import Link from "next/link";
 import { DesktopNav } from "@/components/desktop-nav";
 import { MobilePrimaryNavLink } from "@/components/mobile-primary-nav-link";
 import { MAIN_NAV } from "@/config/site";
-import { getAllPosts } from "@/features/blog/data/posts";
 import { cn } from "@/lib/utils";
 
 import { SiteHeaderMark } from "./site-header-mark";
@@ -20,7 +19,6 @@ const MobileNav = dynamic(() =>
 );
 
 export function SiteHeader() {
-  const posts = getAllPosts();
   const mobilePrimaryItem = MAIN_NAV.find((item) => item.href === "/projects");
   const mobileMenuItems = MAIN_NAV.filter((item) => item.href !== "/projects");
 
