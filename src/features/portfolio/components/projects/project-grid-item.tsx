@@ -3,9 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { UTM_PARAMS } from "@/config/site";
-import type { Project } from "@/features/portfolio/types/projects";
 import { ProjectStatus } from "@/features/portfolio/components/projects/project-status";
 import { ProjectType } from "@/features/portfolio/components/projects/project-type";
+import type { Project } from "@/features/portfolio/types/projects";
 import { cn } from "@/lib/utils";
 import { addQueryParams } from "@/utils/url";
 

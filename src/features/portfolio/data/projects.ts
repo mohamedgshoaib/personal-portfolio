@@ -5,9 +5,9 @@ export const PROJECTS: Project[] = [
     id: "Reway",
     slug: "reway",
     title: "Reway",
-    link: "",
-    github: "",
-    post: "",
+    link: "https://www.reway.page/",
+    github: "https://github.com/mohamed-g-shoaib/reway",
+    post: "https://www.linkedin.com/posts/mohamed-g-shoaib_%D9%85%D8%B4%D9%83%D9%84%D8%A9-%D9%83%D9%84%D9%86%D8%A7-%D8%A8%D9%86%D9%82%D8%B9-%D9%81%D9%8A%D9%87%D8%A7-%D9%84%D9%85%D8%A7-%D8%A7%D9%84%D9%84%D9%8A%D9%86%D9%83%D8%A7%D8%AA-%D8%A7%D9%84%D9%84%D9%8A-%D8%A8%D9%86%D8%AD%D8%AA%D8%A7%D8%AC%D9%87%D8%A7-activity-7433162768834285568-gTXu?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFBpshwBEQfaP7_ezFl885oMg_0UXZ0vsZM",
     screenshot: "/assets/projects/reway/reway.webp",
     background: "/assets/projects/reway/reway-bg.webp",
     skills: [
@@ -16,7 +16,7 @@ export const PROJECTS: Project[] = [
       "Tailwind CSS",
       "shadcn/ui",
       "Supabase",
-      "Framer Motion",
+      "Motion",
       "Driver.js",
       "Dnd-kit",
     ],
@@ -30,12 +30,12 @@ Solution:
 - Built a centralized bookmarking platform with smart paste-to-bookmark extraction, grouped organization, real-time Supabase sync, and a Chrome MV3 extension for instant page capture and bulk actions.
 
 Architecture:
-- Next.js 16 App Router (Turbopack) + React 19 + Tailwind CSS + shadcn/ui, with Supabase (PostgreSQL + Auth + Realtime), Chrome MV3 extension, and optimistic UI patterns for responsive interactions..
+- Next.js 16 App Router (Turbopack) + React 19 + Tailwind CSS + shadcn/ui, with Supabase (PostgreSQL + Auth + Realtime), Chrome MV3 extension, and optimistic UI patterns for responsive interactions.
 `,
-    logo: "https://reway-app.vercel.app/favicon.ico",
+    logo: "https://www.reway.page/favicon.ico",
     isExpanded: true,
-    status: "soon",
-    type: "Agency",
+    status: "live",
+    type: "Open Source",
   },
   {
     id: "Devloop",
@@ -56,7 +56,7 @@ Architecture:
       "Resend",
       "next-intl",
       "React Hook Form",
-      "Framer Motion",
+      "Motion",
       "Cloudflare Turnstile",
     ],
     description: `
@@ -69,7 +69,7 @@ Solution:
 - Built a localized Next.js website with RTL support, theme switching, performance-focused loading strategies for animations, and a Resend-backed contact form.
 
 Architecture:
-- Next.js 16 App Router (Turbopack) + React 19 + Tailwind CSS 4, with next-intl for i18n (en/ar), next-themes for theming, Framer Motion for animations, and Resend for contact email delivery.
+- Next.js 16 App Router (Turbopack) + React 19 + Tailwind CSS 4, with next-intl for i18n (en/ar), next-themes for theming, Motion for animations, and Resend for contact email delivery.
 `,
     logo: "https://www.devloop.software/favicon.ico",
     isExpanded: true,
@@ -93,7 +93,7 @@ Architecture:
       "Resend",
       "next-intl",
       "React Hook Form",
-      "Framer Motion",
+      "Motion",
       "TanStack Query",
     ],
     description: `
