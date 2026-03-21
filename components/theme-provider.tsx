@@ -2,6 +2,27 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
+import { useSound } from "@/hooks/use-sound"
+import { clickSoftSound } from "@/lib/click-soft"
+import { switchOffSound } from "@/lib/switch-off"
+import { switchOnSound } from "@/lib/switch-on"
+
+const CLICKABLE_SELECTOR = [
+  "a[href]",
+  "button",
+  "input:not([type='hidden'])",
+  "select",
+  "summary",
+  "textarea",
+  "[data-slot='button']",
+  "[role='button']",
+  "[role='link']",
+  "[role='menuitem']",
+  "[role='option']",
+  "[role='radio']",
+  "[role='switch']",
+  "[role='tab']",
+].join(", ")
 
 function ThemeProvider({
   children,
@@ -15,6 +36,7 @@ function ThemeProvider({
       disableTransitionOnChange
       {...props}
     >
+      <ClickSound />
       <ThemeHotkey />
       {children}
     </NextThemesProvider>
@@ -34,8 +56,64 @@ function isTypingTarget(target: EventTarget | null) {
   )
 }
 
+function isDisabledTarget(target: HTMLElement) {
+  return (
+    target.dataset.clickSound === "off" ||
+    target.matches(":disabled, [aria-disabled='true'], [data-disabled]")
+  )
+}
+
+function getClickableTarget(target: EventTarget | null) {
+  if (!(target instanceof Element)) {
+    return null
+  }
+
+  const clickable = target.closest(CLICKABLE_SELECTOR)
+
+  if (!(clickable instanceof HTMLElement) || isDisabledTarget(clickable)) {
+    return null
+  }
+
+  return clickable
+}
+
+function ClickSound() {
+  const [playClickSound] = useSound(clickSoftSound, { interrupt: true })
+
+  const onClick = React.useEffectEvent((event: MouseEvent) => {
+    if (!getClickableTarget(event.target)) {
+      return
+    }
+
+    playClickSound()
+  })
+
+  React.useEffect(() => {
+    document.addEventListener("click", onClick, true)
+
+    return () => {
+      document.removeEventListener("click", onClick, true)
+    }
+  }, [])
+
+  return null
+}
+
 function ThemeHotkey() {
   const { resolvedTheme, setTheme } = useTheme()
+  const [playSwitchOn] = useSound(switchOnSound, { interrupt: true })
+  const [playSwitchOff] = useSound(switchOffSound, { interrupt: true })
+
+  const toggleTheme = React.useEffectEvent(() => {
+    if (resolvedTheme === "dark") {
+      playSwitchOn()
+      setTheme("light")
+      return
+    }
+
+    playSwitchOff()
+    setTheme("dark")
+  })
 
   React.useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -55,7 +133,7 @@ function ThemeHotkey() {
         return
       }
 
-      setTheme(resolvedTheme === "dark" ? "light" : "dark")
+      toggleTheme()
     }
 
     window.addEventListener("keydown", onKeyDown)
@@ -63,7 +141,7 @@ function ThemeHotkey() {
     return () => {
       window.removeEventListener("keydown", onKeyDown)
     }
-  }, [resolvedTheme, setTheme])
+  }, [])
 
   return null
 }
