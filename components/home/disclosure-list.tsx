@@ -9,6 +9,7 @@ import {
   PreviewCardContent,
   PreviewCardTrigger,
 } from "@/components/ui/preview-card"
+import { TextLink } from "@/components/home/text-link"
 import type { Experience, Project } from "@/lib/site-content"
 
 type DisclosureListProps =
@@ -111,12 +112,7 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
               <p>{item.details}</p>
               <p>{item.architecture.join(", ")}.</p>
               <p>
-                <a
-                  href={item.href}
-                  className="text-foreground decoration-border underline-offset-4 hover:underline"
-                >
-                  Visit project
-                </a>
+                <TextLink href={item.href}>Visit project</TextLink>
               </p>
             </div>
           </Accordion.Panel>

@@ -35,10 +35,7 @@ export default function WritingPage() {
                 {post.publishedLabel}
               </p>
               <h2 className="font-heading text-lg font-medium text-foreground">
-                <TextLink
-                  href={`/writing/${post.slug}`}
-                  className="text-base text-foreground decoration-border underline-offset-4 hover:text-foreground hover:decoration-foreground/30"
-                >
+                <TextLink href={`/writing/${post.slug}`} className="text-base">
                   {post.title}
                 </TextLink>
               </h2>

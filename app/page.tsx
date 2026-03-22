@@ -1,4 +1,3 @@
-import Link from "next/link"
 import type { ReactNode } from "react"
 
 import { Avatar } from "@/components/home/avatar"
@@ -55,17 +54,9 @@ export default function Page() {
             <p>Open to {siteProfile.opportunities.join(", ").toLowerCase()}.</p>
             <p>
               Reach me on{" "}
-              <TextLink
-                href="https://x.com/mo0hamed_gamal"
-                className="text-inherit"
-              >
-                X
-              </TextLink>{" "}
-              or check out my{" "}
-              <TextLink
-                href="https://github.com/mohamed-g-shoaib"
-                className="text-inherit"
-              >
+              <TextLink href="https://x.com/mo0hamed_gamal">X</TextLink> or
+              check out my{" "}
+              <TextLink href="https://github.com/mohamed-g-shoaib">
                 GitHub
               </TextLink>
               .
@@ -76,9 +67,7 @@ export default function Page() {
         <HomeSection id="projects" label="Projects">
           <div className="space-y-5">
             <DisclosureList type="projects" items={projects} />
-            <TextLink href="/projects" className="text-muted-foreground">
-              View all projects
-            </TextLink>
+            <TextLink href="/projects">View all projects</TextLink>
           </div>
         </HomeSection>
 
@@ -96,12 +85,12 @@ export default function Page() {
           <div className="max-w-[33rem] space-y-5">
             {latestPost ? (
               <article className="space-y-1.5">
-                <Link
+                <TextLink
                   href={`/writing/${latestPost.slug}`}
-                  className="font-heading text-lg font-medium text-foreground decoration-border underline-offset-4 hover:underline"
+                  className="font-heading text-lg font-medium"
                 >
                   {latestPost.title}
-                </Link>
+                </TextLink>
                 <p className="text-[0.96rem] leading-8 text-muted-foreground">
                   {latestPost.summary}
                 </p>
@@ -111,9 +100,7 @@ export default function Page() {
                 No writing published yet.
               </p>
             )}
-            <TextLink href="/writing" className="text-muted-foreground">
-              View all writing
-            </TextLink>
+            <TextLink href="/writing">View all writing</TextLink>
           </div>
         </HomeSection>
 
@@ -127,11 +114,7 @@ export default function Page() {
           <p>Based in {siteProfile.location}</p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 sm:justify-end">
             {socialLinks.map((link) => (
-              <TextLink
-                key={link.label}
-                href={link.href}
-                className="text-muted-foreground"
-              >
+              <TextLink key={link.label} href={link.href}>
                 {link.label}
               </TextLink>
             ))}

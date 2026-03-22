@@ -9,7 +9,7 @@ export function Avatar() {
         fill
         sizes="(min-width: 640px) 3.5rem, 3rem"
         className="object-cover dark:hidden"
-        priority
+        fetchPriority="high"
       />
       <Image
         src="/assets/avatar/avatar-dark.webp"
@@ -17,7 +17,7 @@ export function Avatar() {
         fill
         sizes="(min-width: 640px) 3.5rem, 3rem"
         className="hidden object-cover dark:block"
-        priority
+        fetchPriority="high"
       />
     </div>
   )

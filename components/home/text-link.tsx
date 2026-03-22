@@ -1,18 +1,26 @@
 import Link from "next/link"
-import type { ComponentProps } from "react"
+import type { ComponentPropsWithoutRef } from "react"
+import type { LinkProps } from "next/link"
 
 import { cn } from "@/lib/utils"
 
-type TextLinkProps = ComponentProps<typeof Link>
+type TextLinkProps = Omit<ComponentPropsWithoutRef<"a">, "href"> &
+  Omit<LinkProps, "href"> & {
+    href: LinkProps["href"]
+  }
+
+function isInternalHref(href: LinkProps["href"]) {
+  return (
+    typeof href !== "string" || href.startsWith("/") || href.startsWith("#")
+  )
+}
 
 export function TextLink({ className, ...props }: TextLinkProps) {
-  return (
-    <Link
-      className={cn(
-        "inline-flex items-center gap-1.5 text-sm text-foreground decoration-border underline-offset-4 transition-[color,text-decoration-color] duration-150 ease-[var(--ease-out)] hover:text-muted-foreground hover:decoration-foreground/30",
-        className
-      )}
-      {...props}
-    />
-  )
+  const { href, ...rest } = props
+
+  if (isInternalHref(href)) {
+    return <Link className={cn("text-link", className)} href={href} {...rest} />
+  }
+
+  return <a className={cn("text-link", className)} href={href} {...rest} />
 }

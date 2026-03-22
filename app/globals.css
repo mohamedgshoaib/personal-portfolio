@@ -118,6 +118,18 @@
   --surface-shadow-md:
     0 1px 0 0 color-mix(in srgb, var(--color-black) 7%, transparent),
     0 20px 40px -26px color-mix(in srgb, var(--color-black) 24%, transparent);
+  --link-foreground: var(--muted-foreground);
+  --link-foreground-hover: color-mix(
+    in srgb,
+    var(--foreground) 38%,
+    var(--muted-foreground)
+  );
+  --link-decoration: color-mix(in srgb, var(--foreground) 14%, transparent);
+  --link-decoration-hover: color-mix(
+    in srgb,
+    var(--foreground) 24%,
+    transparent
+  );
 }
 
 .dark {
@@ -300,4 +312,27 @@
 
 ::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+@utility text-link {
+  color: var(--link-foreground);
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-decoration);
+  text-underline-offset: 0.25rem;
+  transition-duration: 150ms;
+  transition-property: color, text-decoration-color;
+  transition-timing-function: var(--ease-out);
+
+  &:focus-visible {
+    color: var(--link-foreground-hover);
+    text-decoration-color: var(--link-decoration-hover);
+    outline: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--link-foreground-hover);
+      text-decoration-color: var(--link-decoration-hover);
+    }
+  }
 }

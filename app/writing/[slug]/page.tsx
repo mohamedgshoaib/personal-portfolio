@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 
 import { TextLink } from "@/components/home/text-link"
@@ -45,9 +44,7 @@ export default async function WritingPostPage({ params }: PageProps) {
     <main className="mx-auto flex min-h-svh w-full max-w-[42rem] flex-col px-6 pt-10 pb-16 sm:px-8 sm:pt-14">
       <div className="space-y-12 sm:space-y-16">
         <header className="space-y-5">
-          <TextLink href="/writing" className="text-muted-foreground">
-            Writing
-          </TextLink>
+          <TextLink href="/writing">Writing</TextLink>
           <div className="max-w-[33rem] space-y-4">
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground">
@@ -121,20 +118,8 @@ export default async function WritingPostPage({ params }: PageProps) {
       <footer className="mt-auto pt-16 text-sm text-muted-foreground">
         <p className="max-w-[33rem]">
           Written by {siteProfile.name}. You can also find me on{" "}
-          <Link
-            href="https://github.com/mohamed-g-shoaib"
-            className="text-foreground decoration-border underline-offset-4 hover:underline"
-          >
-            GitHub
-          </Link>{" "}
-          and{" "}
-          <Link
-            href="https://x.com/mo0hamed_gamal"
-            className="text-foreground decoration-border underline-offset-4 hover:underline"
-          >
-            X
-          </Link>
-          .
+          <TextLink href="https://github.com/mohamed-g-shoaib">GitHub</TextLink>{" "}
+          and <TextLink href="https://x.com/mo0hamed_gamal">X</TextLink>.
         </p>
       </footer>
     </main>

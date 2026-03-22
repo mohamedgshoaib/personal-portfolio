@@ -365,15 +365,27 @@ function DockIcon({
 
 function ContactAction({ href, label }: { href: string; label: string }) {
   const isExternal = href.startsWith("http")
+  const isClientRoute = href.startsWith("/") || href.startsWith("#")
+
+  const className =
+    "relative z-10 inline-flex h-9 min-w-0 items-center rounded-xl border border-border/70 bg-card px-3 py-1.5 font-sans text-[0.875rem] leading-none text-card-foreground transition-[background-color,color,transform,border-color] duration-200 ease-[var(--ease-out)] hover:border-border/90 hover:bg-muted focus-visible:border-border/90 focus-visible:bg-muted focus-visible:outline-none sm:h-10 sm:px-3.5 sm:text-[0.95rem]"
+
+  if (isClientRoute) {
+    return (
+      <Link href={href} className={className}>
+        <span className="truncate">{label}</span>
+      </Link>
+    )
+  }
 
   return (
-    <Link
+    <a
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer noopener" : undefined}
-      className="relative z-10 inline-flex h-9 min-w-0 items-center rounded-xl border border-border/70 bg-card px-3 py-1.5 font-sans text-[0.875rem] leading-none text-card-foreground transition-[background-color,color,transform,border-color] duration-200 ease-[var(--ease-out)] hover:border-border/90 hover:bg-muted focus-visible:border-border/90 focus-visible:bg-muted focus-visible:outline-none sm:h-10 sm:px-3.5 sm:text-[0.95rem]"
+      className={className}
     >
       <span className="truncate">{label}</span>
-    </Link>
+    </a>
   )
 }
