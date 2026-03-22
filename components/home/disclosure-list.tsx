@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import { Accordion } from "@base-ui/react/accordion"
 
 import type { Experience, Project } from "@/lib/site-content"
@@ -16,20 +17,31 @@ type DisclosureListProps =
 
 export function DisclosureList(props: DisclosureListProps) {
   if (props.type === "projects") {
-    return <ProjectDisclosureList items={props.items} />
+    return (
+      <ProjectDisclosureList
+        key={props.items.map((item) => item.slug).join("|")}
+        items={props.items}
+      />
+    )
   }
 
-  return <ExperienceDisclosureList items={props.items} />
+  return (
+    <ExperienceDisclosureList
+      key={props.items.map((item) => `${item.company}-${item.role}`).join("|")}
+      items={props.items}
+    />
+  )
 }
 
 function ProjectDisclosureList({ items }: { items: Project[] }) {
-  const defaultValue = items.length === 1 ? [items[0].slug] : []
+  const [value, setValue] = React.useState<string[]>([])
 
   return (
     <Accordion.Root
       className="w-full space-y-2"
-      defaultValue={defaultValue}
       hiddenUntilFound
+      value={value}
+      onValueChange={setValue}
     >
       {items.map((item, index) => (
         <Accordion.Item
@@ -76,14 +88,14 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
 }
 
 function ExperienceDisclosureList({ items }: { items: Experience[] }) {
-  const defaultValue =
-    items.length === 1 ? [`${items[0].company}-${items[0].role}`] : []
+  const [value, setValue] = React.useState<string[]>([])
 
   return (
     <Accordion.Root
       className="w-full space-y-2"
-      defaultValue={defaultValue}
       hiddenUntilFound
+      value={value}
+      onValueChange={setValue}
     >
       {items.map((item, index) => {
         const value = `${item.company}-${item.role}`
