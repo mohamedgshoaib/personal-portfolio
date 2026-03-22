@@ -20,11 +20,7 @@ export function TextLink({ className, ...props }: TextLinkProps) {
 
   if (isInternalHref(href)) {
     return (
-      <Link
-        className={cn("text-link text-link-chrome", className)}
-        href={href}
-        {...rest}
-      >
+      <Link className={cn("text-link", className)} href={href} {...rest}>
         {children}
       </Link>
     )
@@ -32,7 +28,7 @@ export function TextLink({ className, ...props }: TextLinkProps) {
 
   return (
     <a
-      className={cn("text-link text-link-chrome", className)}
+      className={cn("text-link", className)}
       href={typeof href === "string" ? href : "#"}
       {...rest}
     >

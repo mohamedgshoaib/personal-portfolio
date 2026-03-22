@@ -38,7 +38,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("antialiased", mono.variable, "font-sans", sans.variable)}
     >
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider>
           {children}
           <FloatingDock />

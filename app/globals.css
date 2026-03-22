@@ -321,15 +321,10 @@
 }
 
 @utility text-link {
-  @apply text-link-chrome;
   color: var(--link-foreground);
   text-decoration-line: underline;
   text-decoration-color: var(--link-decoration);
   text-underline-offset: 0.25rem;
-}
-
-@utility text-link-chrome {
-  color: var(--link-foreground);
   transition-duration: 150ms;
   transition-property: color, text-decoration-color;
   transition-timing-function: var(--ease-out);
