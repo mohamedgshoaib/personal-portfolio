@@ -118,7 +118,7 @@ export function ContactCopy({ email }: { email: string }) {
         onFocus={setHoverState}
         onBlur={setIdleState}
         aria-label="Copy email address"
-        className="inline-flex min-h-11 flex-col items-center justify-center rounded-[1.15rem] bg-muted px-6 py-3 text-lg text-foreground transition-[background-color,color,transform] duration-150 ease-[var(--ease-out)] hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none motion-safe:hover:-translate-y-px"
+        className="inline-flex min-h-11 flex-col items-center justify-center rounded-[1.15rem] bg-muted px-6 py-3 text-lg text-foreground transition-[background-color,color,transform] duration-150 ease-[var(--ease-out)] hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none"
       >
         <span>{email}</span>
       </button>

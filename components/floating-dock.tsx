@@ -231,7 +231,7 @@ export function FloatingDock() {
                         setContactOpen(false)
                       }}
                       className={cn(
-                        "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground transition-[color,transform] duration-150 ease-[var(--ease-out)] outline-none hover:text-foreground focus-visible:text-foreground motion-safe:hover:-translate-y-px",
+                        "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground transition-[color,transform] duration-150 ease-[var(--ease-out)] outline-none hover:text-foreground focus-visible:text-foreground",
                         activeKey === item.key && "text-foreground"
                       )}
                     >
@@ -259,7 +259,7 @@ export function FloatingDock() {
                   aria-label="Toggle theme"
                   data-click-sound="off"
                   onClick={handleThemeToggle}
-                  className="flex size-9 items-center justify-center rounded-xl bg-transparent text-foreground transition-[transform] duration-150 ease-[var(--ease-out)] outline-none motion-safe:hover:-translate-y-px"
+                  className="flex size-9 items-center justify-center rounded-xl bg-transparent text-foreground transition-[transform] duration-150 ease-[var(--ease-out)] outline-none"
                 >
                   <span className="size-[22px] rounded-md bg-foreground transition-transform duration-200 ease-[var(--ease-out)] dark:bg-[#F3F4F6]" />
                 </button>
@@ -320,7 +320,7 @@ function DockContactPopover({
             type="button"
             aria-label="Open contact options"
             className={cn(
-              "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground transition-[color,transform] duration-150 ease-[var(--ease-out)] outline-none hover:text-foreground focus-visible:text-foreground motion-safe:hover:-translate-y-px",
+              "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground transition-[color,transform] duration-150 ease-[var(--ease-out)] outline-none hover:text-foreground focus-visible:text-foreground",
               isActive && "text-foreground"
             )}
           >
@@ -371,7 +371,7 @@ function ContactAction({ href, label }: { href: string; label: string }) {
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer noopener" : undefined}
-      className="relative z-10 inline-flex h-9 min-w-0 items-center rounded-xl border border-border/70 bg-card px-3 py-1.5 font-sans text-[0.875rem] leading-none text-card-foreground transition-[background-color,color,transform,border-color] duration-200 ease-[var(--ease-out)] hover:border-border/90 hover:bg-muted focus-visible:border-border/90 focus-visible:bg-muted focus-visible:outline-none motion-safe:hover:-translate-y-px sm:h-10 sm:px-3.5 sm:text-[0.95rem]"
+      className="relative z-10 inline-flex h-9 min-w-0 items-center rounded-xl border border-border/70 bg-card px-3 py-1.5 font-sans text-[0.875rem] leading-none text-card-foreground transition-[background-color,color,transform,border-color] duration-200 ease-[var(--ease-out)] hover:border-border/90 hover:bg-muted focus-visible:border-border/90 focus-visible:bg-muted focus-visible:outline-none sm:h-10 sm:px-3.5 sm:text-[0.95rem]"
     >
       <span className="truncate">{label}</span>
     </Link>
