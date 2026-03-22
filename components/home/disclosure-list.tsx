@@ -91,7 +91,7 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
                 </div>
 
                 {showPersistentImage ? (
-                  <div className="overflow-hidden rounded-[1.1rem]">
+                  <div className="mb-1 w-full max-w-[18rem] translate-x-[1.125rem] justify-self-center overflow-hidden rounded-[1.1rem] sm:mb-0 sm:max-w-none sm:translate-x-0 sm:justify-self-auto">
                     {supportsHoverPreview ? (
                       <ProjectPreviewCard item={item}>
                         <span className="block">
