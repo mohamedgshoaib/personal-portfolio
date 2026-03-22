@@ -42,7 +42,10 @@ export type PostContentBlock =
   | {
       id: string
       type: "list"
-      items: string[]
+      items: {
+        id: string
+        content: string
+      }[]
       ordered?: boolean
     }
   | {
@@ -179,9 +182,21 @@ export const posts: Post[] = [
         type: "list",
         ordered: true,
         items: [
-          "Learning sticks better when you explain it. Writing forces me to actually understand what I'm doing instead of just copy-pasting from Stack Overflow (well, mostly).",
-          "It's a time capsule. Future me will appreciate having notes on why past me made certain decisions.",
-          "Sharing is caring. If something helped me, maybe it'll help you too.",
+          {
+            id: "why-write-learn",
+            content:
+              "Learning sticks better when you explain it. Writing forces me to actually understand what I'm doing instead of just copy-pasting from Stack Overflow (well, mostly).",
+          },
+          {
+            id: "why-write-time-capsule",
+            content:
+              "It's a time capsule. Future me will appreciate having notes on why past me made certain decisions.",
+          },
+          {
+            id: "why-write-share",
+            content:
+              "Sharing is caring. If something helped me, maybe it'll help you too.",
+          },
         ],
       },
       {
@@ -198,10 +213,26 @@ export const posts: Post[] = [
         id: "whats-coming-list",
         type: "list",
         items: [
-          "React and Next.js in 2025: Server Components, the App Router, and patterns that actually work in production.",
-          "Making things accessible: because if your site doesn't work for everyone, it doesn't really work.",
-          "Architecture decisions: the fun part where we debate SSR vs. CSR and whether you really need Redux.",
-          "Project breakdowns: real builds, real mistakes, real lessons.",
+          {
+            id: "whats-coming-react-next",
+            content:
+              "React and Next.js in 2025: Server Components, the App Router, and patterns that actually work in production.",
+          },
+          {
+            id: "whats-coming-accessibility",
+            content:
+              "Making things accessible: because if your site doesn't work for everyone, it doesn't really work.",
+          },
+          {
+            id: "whats-coming-architecture",
+            content:
+              "Architecture decisions: the fun part where we debate SSR vs. CSR and whether you really need Redux.",
+          },
+          {
+            id: "whats-coming-breakdowns",
+            content:
+              "Project breakdowns: real builds, real mistakes, real lessons.",
+          },
         ],
       },
       {

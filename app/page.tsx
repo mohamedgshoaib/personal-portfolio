@@ -2,6 +2,7 @@ import Link from "next/link"
 import type { ReactNode } from "react"
 
 import { Avatar } from "@/components/home/avatar"
+import { ContactCopy } from "@/components/home/contact-copy"
 import { DisclosureList } from "@/components/home/disclosure-list"
 import { TextLink } from "@/components/home/text-link"
 import {
@@ -14,6 +15,7 @@ import {
 } from "@/lib/site-content"
 
 const latestPost = posts[0]
+const emailLink = socialLinks.find((link) => link.label === "Email")
 
 function HomeSection({
   id,
@@ -110,17 +112,7 @@ export default function Page() {
         </HomeSection>
 
         <section id="contact" className="scroll-mt-24 space-y-6 pt-4">
-          <div className="space-y-4 text-center">
-            <p className="text-sm text-muted-foreground">
-              Want to get in touch?
-            </p>
-            <a
-              href="mailto:mohamed.g.shoaib@gmail.com"
-              className="inline-flex min-h-11 items-center justify-center rounded-[1.15rem] bg-muted px-6 py-3 text-lg text-foreground transition-[background-color,color] duration-150 ease-[var(--ease-out)] hover:bg-secondary"
-            >
-              mohamed.g.shoaib@gmail.com
-            </a>
-          </div>
+          {emailLink ? <ContactCopy email={emailLink.href.slice(7)} /> : null}
         </section>
       </div>
 

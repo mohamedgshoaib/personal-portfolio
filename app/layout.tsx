@@ -1,4 +1,4 @@
-import { Google_Sans, Google_Sans_Code } from "next/font/google"
+import localFont from "next/font/local"
 import type { Metadata } from "next"
 
 import "./globals.css"
@@ -15,13 +15,15 @@ export const metadata: Metadata = {
     "Frontend Developer building fast, SEO-driven web applications with full RTL support, clean architecture, and durable frontend systems.",
 }
 
-const sans = Google_Sans({
-  subsets: ["latin"],
+const sans = localFont({
+  src: "../public/fonts/google-sans-variable.ttf",
+  display: "swap",
   variable: "--font-sans",
 })
 
-const mono = Google_Sans_Code({
-  subsets: ["latin"],
+const mono = localFont({
+  src: "../public/fonts/google-sans-code-variable.ttf",
+  display: "swap",
   variable: "--font-mono",
 })
 

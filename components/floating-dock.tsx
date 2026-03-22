@@ -51,6 +51,10 @@ export function FloatingDock() {
   const pathname = usePathname()
   const { resolvedTheme, setTheme } = useTheme()
   const [contactOpen, setContactOpen] = React.useState(false)
+  const [pendingActiveKey, setPendingActiveKey] = React.useState<Exclude<
+    DockKey,
+    "contact"
+  > | null>(null)
   const [playSwitchOn] = useSound(switchOnSound, { interrupt: true })
   const [playSwitchOff] = useSound(switchOffSound, { interrupt: true })
   const clusterRef = React.useRef<HTMLDivElement | null>(null)
@@ -90,7 +94,9 @@ export function FloatingDock() {
         ? "home"
         : null
 
-  const activeKey: DockKey | null = contactOpen ? "contact" : baseActiveKey
+  const activeKey: DockKey | null = contactOpen
+    ? "contact"
+    : (pendingActiveKey ?? baseActiveKey)
 
   const updateActiveFrame = React.useCallback((key: DockKey | null) => {
     if (!key) {
@@ -128,6 +134,10 @@ export function FloatingDock() {
   React.useLayoutEffect(() => {
     updateActiveFrame(activeKey)
   }, [activeKey, updateActiveFrame])
+
+  React.useEffect(() => {
+    setPendingActiveKey(null)
+  }, [pathname])
 
   React.useEffect(() => {
     const cluster = clusterRef.current
@@ -212,7 +222,13 @@ export function FloatingDock() {
                     ref={(element) => {
                       itemRefs.current[item.key] = element
                     }}
-                    onClick={() => setContactOpen(false)}
+                    onPointerDownCapture={() => {
+                      setPendingActiveKey(item.key)
+                    }}
+                    onClick={() => {
+                      setPendingActiveKey(item.key)
+                      setContactOpen(false)
+                    }}
                     className={cn(
                       "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground transition-[color,transform] duration-150 ease-[var(--ease-out)] outline-none hover:text-foreground focus-visible:text-foreground motion-safe:hover:-translate-y-px",
                       activeKey === item.key && "text-foreground"
@@ -239,11 +255,7 @@ export function FloatingDock() {
             >
               <button
                 type="button"
-                aria-label={
-                  resolvedTheme === "dark"
-                    ? "switch to light theme"
-                    : "switch to dark theme"
-                }
+                aria-label="Toggle theme"
                 data-click-sound="off"
                 onClick={handleThemeToggle}
                 className="flex size-9 items-center justify-center rounded-xl bg-transparent text-foreground transition-[transform] duration-150 ease-[var(--ease-out)] outline-none motion-safe:hover:-translate-y-px"
@@ -287,17 +299,15 @@ function DockContactPopover({
         handle={popoverHandle}
         triggerId={triggerId}
       >
-        <PopoverContent className="max-w-[calc(100vw-2rem)] rounded-2xl border border-border/70 bg-background/60 p-2 backdrop-blur-xl">
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:flex-nowrap">
+        <PopoverContent className="max-w-[calc(100vw-1rem)] rounded-2xl border border-border/70 bg-background/60 p-1.5 backdrop-blur-xl sm:max-w-[calc(100vw-2rem)] sm:p-2">
+          <div className="flex flex-nowrap items-center justify-center gap-1.5 sm:gap-2">
             {emailLink ? (
               <ContactAction href={emailLink.href} label="Email me" />
             ) : null}
             {linkedInLink ? (
               <ContactAction href={linkedInLink.href} label="LinkedIn" />
             ) : null}
-            {xLink ? (
-              <ContactAction href={xLink.href} label="@mo0hamed_gamal" />
-            ) : null}
+            {xLink ? <ContactAction href={xLink.href} label="X" /> : null}
           </div>
         </PopoverContent>
       </Popover>
@@ -359,7 +369,7 @@ function ContactAction({ href, label }: { href: string; label: string }) {
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer noopener" : undefined}
-      className="relative z-10 inline-flex h-10 min-w-0 items-center rounded-xl border border-border/70 bg-card px-3.5 py-1.5 font-sans text-[0.95rem] leading-none text-card-foreground transition-[background-color,color,transform,border-color] duration-200 ease-[var(--ease-out)] hover:border-border/90 hover:bg-muted focus-visible:border-border/90 focus-visible:bg-muted focus-visible:outline-none motion-safe:hover:-translate-y-px"
+      className="relative z-10 inline-flex h-9 min-w-0 items-center rounded-xl border border-border/70 bg-card px-3 py-1.5 font-sans text-[0.875rem] leading-none text-card-foreground transition-[background-color,color,transform,border-color] duration-200 ease-[var(--ease-out)] hover:border-border/90 hover:bg-muted focus-visible:border-border/90 focus-visible:bg-muted focus-visible:outline-none motion-safe:hover:-translate-y-px sm:h-10 sm:px-3.5 sm:text-[0.95rem]"
     >
       <span className="truncate">{label}</span>
     </Link>

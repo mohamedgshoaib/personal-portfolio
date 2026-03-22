@@ -93,8 +93,8 @@ export default async function WritingPostPage({ params }: PageProps) {
                   }
                 >
                   {block.items.map((item) => (
-                    <li key={item} className="pl-1">
-                      {item}
+                    <li key={item.id} className="pl-1">
+                      {item.content}
                     </li>
                   ))}
                 </ListTag>
