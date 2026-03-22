@@ -6,12 +6,12 @@ import { DisclosureList } from "@/components/home/disclosure-list"
 import { TextLink } from "@/components/home/text-link"
 import {
   experiences,
-  posts,
   projects,
   siteProfile,
   socialLinks,
   technologies,
 } from "@/lib/site-content"
+import { posts } from "@/lib/writing"
 
 const latestPost = posts[0] ?? null
 const emailLink = socialLinks.find((link) => link.label === "Email")

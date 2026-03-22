@@ -406,6 +406,8 @@ Completed work in this repo:
 - blog post pages now use the same narrow shell and calmer spacing as the homepage instead of a louder article template
 - article pages now rely on restrained metadata, simple prose rhythm, and lighter code surfaces rather than hero imagery
 - post content now supports ordered and unordered lists explicitly in the typed content model
+- post pages now include a compact header utility row with `Home`, `Back to writings`, and a copy-as-markdown action instead of a single `Writing` back link
+- the copy action uses a restrained three-line morphing SVG state icon and copies a markdown-formatted version of the post composed from MDX metadata plus the authored body
 
 13. Shared text-link state and interaction cleanup
 
@@ -420,6 +422,17 @@ Completed work in this repo:
 - the persistent project preview image inside the homepage disclosure list needed a mobile-only visual centering adjustment
 - the current solution is implemented in `components/home/disclosure-list.tsx` at the wrapper level, without changing the underlying image sizing logic
 - this was adjusted manually in the repo after an earlier attempted fix was reverted
+
+15. Writing system moved to MDX
+
+- the temporary typed post-content model in `lib/site-content.ts` has now been replaced for writing by a real MDX-backed content flow
+- Next.js MDX integration is now configured through `@next/mdx` in `next.config.mjs`
+- writing content now lives under `content/writing/*.mdx`
+- MDX component mapping now lives in `mdx-components.tsx`
+- the writing registry now lives in `lib/writing.ts`, which provides post metadata and the rendered MDX component for routes and indexes
+- the first post, `hello-world-what-this-blog-is-about`, has been migrated from the typed content model into MDX
+- the homepage writing preview, writing index, and writing post route now all read from the MDX-backed writing registry instead of the old typed post array
+- post metadata is now authored as a native `export const metadata = { ... }` inside each MDX file rather than being transformed from frontmatter at build time
 
 ## Important Constraints And Reminders
 
@@ -451,20 +464,21 @@ Known current gaps between project intent and implementation:
 - the reference-informed visual direction is now partially implemented, but not yet carried through a full site-wide system
 - the homepage should continue moving toward the quieter Emil + Dimi synthesis, not back toward a product marketing layout
 - the dock is now part of the reusable site shell, but its blur/offset/details should still be judged against the Dimi reference during future polish
-- the current content model is lightweight and local, not a full blog/project CMS or MDX pipeline
-- only one project, one experience entry, and one post are currently represented in the new typed content layer
+- the broader content model is still lightweight and local rather than a full CMS
+- writing now uses MDX, but projects and experience are still represented through the local typed content layer
+- only one project, one experience entry, and one post are currently represented in the current local content setup
 - broader project, experience, and long-form content surfaces are not yet fully built out
 
 Current immediate likely next milestone:
 
 - expand the new homepage/content system with more real portfolio entries
 - deepen the page polish and layout rhythm based on the reference synthesis
-- move the writing system from the temporary typed local content model to an MDX-backed flow
+- expand the new MDX-backed writing system with more real posts and any supporting authoring utilities it needs
 
 Current writing-direction decision:
 
 - MDX is now the intended direction for the writing system
-- the current typed post-content model should be treated as a temporary bridge, not the long-term content architecture
+- the old typed post-content model should be treated as a temporary bridge that has now been superseded for writing
 
 MDX implementation guidance now established from the official MDX docs:
 
@@ -472,7 +486,7 @@ MDX implementation guidance now established from the official MDX docs:
 - do not plan around `providerImportSource` or `@mdx-js/react` for component injection in Next.js; use the Next-style `mdx-components.tsx` pattern instead
 - treat each MDX file as a module with a default export for content and optional named exports for metadata or other authored values
 - keep the initial setup lightweight and plugin-driven: add remark/rehype plugins only when they solve a clear need
-- likely first plugin candidates for this project are frontmatter support and GFM-style markdown features, but those should still be chosen deliberately during implementation
+- the current implementation keeps the loader setup minimal and only uses `remark-gfm`; metadata is authored through native MDX exports instead of frontmatter transformation
 - remember key MDX syntax constraints when authoring content:
   - HTML syntax is replaced by JSX syntax
   - autolink literals do not work like plain markdown and should use explicit link syntax

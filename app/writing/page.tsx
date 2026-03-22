@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 
 import { TextLink } from "@/components/home/text-link"
-import { posts, siteProfile } from "@/lib/site-content"
+import { siteProfile } from "@/lib/site-content"
+import { posts } from "@/lib/writing"
 
 export const metadata: Metadata = {
   title: "Writing",

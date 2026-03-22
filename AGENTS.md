@@ -84,8 +84,9 @@ The current reference synthesis is:
 ## Content And Architecture Notes
 
 - the current content layer is lightweight and local, not a full CMS
-- `lib/site-content.ts` is the main typed content source right now
-- writing is not yet a full MDX pipeline, but moving writing to MDX is now the intended direction
+- `lib/site-content.ts` is still the main typed content source for profile, projects, experience, and links
+- writing now uses an MDX-backed flow with content under `content/writing/` and registry logic in `lib/writing.ts`
+- post metadata is currently authored through native MDX exports rather than frontmatter transformation
 - only a small amount of real content is currently populated
 
 Do not assume older planned files like `user.ts`, `projects.ts`, or `experiences.ts` already exist unless they are actually in the tree.
