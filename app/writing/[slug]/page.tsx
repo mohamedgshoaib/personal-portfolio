@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -43,50 +42,38 @@ export default async function WritingPostPage({ params }: PageProps) {
   }
 
   return (
-    <main className="mx-auto flex min-h-svh w-full max-w-3xl flex-col px-6 pt-10 pb-20 sm:px-8 sm:pt-14">
-      <div className="space-y-6 border-b border-border/80 pb-8 sm:space-y-7 sm:pb-10">
-        <TextLink href="/writing" className="text-muted-foreground">
-          Back to writing
-        </TextLink>
-        <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+    <main className="mx-auto flex min-h-svh w-full max-w-[42rem] flex-col px-6 pt-10 pb-16 sm:px-8 sm:pt-14">
+      <div className="space-y-12 sm:space-y-16">
+        <header className="space-y-5">
+          <TextLink href="/writing" className="text-muted-foreground">
             Writing
-          </p>
-          <h1 className="max-w-2xl font-heading text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-            {post.title}
-          </h1>
-          <p className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-[0.95rem]">
-            {post.description}
-          </p>
-          <p className="text-xs text-muted-foreground">
-            Last updated on {post.publishedLabel}
-          </p>
-        </div>
-      </div>
+          </TextLink>
+          <div className="max-w-[33rem] space-y-4">
+            <div className="space-y-2">
+              <p className="text-sm text-muted-foreground">
+                {post.publishedLabel}
+              </p>
+              <h1 className="max-w-[28rem] font-heading text-2xl font-medium tracking-tight text-foreground sm:text-[2rem]">
+                {post.title}
+              </h1>
+            </div>
+            <p className="text-[0.96rem] leading-8 text-muted-foreground">
+              {post.description}
+            </p>
+          </div>
+        </header>
 
-      <article className="space-y-8 py-8 sm:space-y-10 sm:py-10">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-[calc(var(--radius)*1.6)] border border-border/70 bg-card shadow-[var(--surface-shadow-md)]">
-          <Image
-            src={post.image.src}
-            alt={post.image.alt}
-            fill
-            sizes="(min-width: 768px) 42rem, 100vw"
-            className="object-cover"
-            priority
-          />
-        </div>
-
-        <div className="space-y-5 text-[0.98rem] leading-8 text-foreground/88">
-          {post.content.map((block, index) => {
+        <article className="max-w-[33rem] space-y-5 text-[0.96rem] leading-8 text-muted-foreground">
+          {post.content.map((block) => {
             if (block.type === "paragraph") {
-              return <p key={index}>{block.content}</p>
+              return <p key={block.id}>{block.content}</p>
             }
 
             if (block.type === "heading") {
               return (
                 <h2
-                  key={index}
-                  className="pt-3 font-heading text-xl font-medium text-foreground sm:text-2xl"
+                  key={block.id}
+                  className="pt-4 font-heading text-lg font-medium text-foreground"
                 >
                   {block.content}
                 </h2>
@@ -94,39 +81,45 @@ export default async function WritingPostPage({ params }: PageProps) {
             }
 
             if (block.type === "list") {
+              const ListTag = block.ordered ? "ol" : "ul"
+
               return (
-                <ol
-                  key={index}
-                  className="space-y-3 pl-5 text-foreground/88 marker:text-muted-foreground"
+                <ListTag
+                  key={block.id}
+                  className={
+                    block.ordered
+                      ? "space-y-3 pl-5 marker:text-muted-foreground"
+                      : "list-disc space-y-3 pl-5 marker:text-muted-foreground"
+                  }
                 >
                   {block.items.map((item) => (
                     <li key={item} className="pl-1">
                       {item}
                     </li>
                   ))}
-                </ol>
+                </ListTag>
               )
             }
 
             return (
               <div
-                key={index}
-                className="overflow-hidden rounded-[calc(var(--radius)*1.4)] border border-border/80 bg-card shadow-[var(--surface-shadow-sm)]"
+                key={block.id}
+                className="overflow-hidden rounded-[1rem] border border-border/80 bg-muted/30"
               >
-                <div className="border-b border-border/70 px-4 py-3 text-xs font-medium tracking-[0.16em] text-muted-foreground uppercase">
+                <div className="border-b border-border/70 px-4 py-2.5 text-[0.7rem] font-medium tracking-[0.16em] text-muted-foreground uppercase">
                   {block.language}
                 </div>
-                <pre className="overflow-x-auto p-4 text-sm leading-7 text-foreground/90">
+                <pre className="overflow-x-auto px-4 py-4 text-sm leading-7 text-foreground">
                   <code>{block.code}</code>
                 </pre>
               </div>
             )
           })}
-        </div>
-      </article>
+        </article>
+      </div>
 
-      <footer className="mt-auto border-t border-border/80 pt-8 text-sm text-muted-foreground">
-        <p>
+      <footer className="mt-auto pt-16 text-sm text-muted-foreground">
+        <p className="max-w-[33rem]">
           Written by {siteProfile.name}. You can also find me on{" "}
           <Link
             href="https://github.com/mohamed-g-shoaib"

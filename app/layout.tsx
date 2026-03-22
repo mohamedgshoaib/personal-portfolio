@@ -2,6 +2,7 @@ import { Google_Sans, Google_Sans_Code } from "next/font/google"
 import type { Metadata } from "next"
 
 import "./globals.css"
+import { FloatingDock } from "@/components/floating-dock"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
@@ -36,7 +37,10 @@ export default function RootLayout({
       className={cn("antialiased", mono.variable, "font-sans", sans.variable)}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <FloatingDock />
+        </ThemeProvider>
       </body>
     </html>
   )

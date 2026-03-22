@@ -140,7 +140,7 @@ Important implementation detail:
   - `lib/switch-on.ts`
   - `lib/switch-off.ts`
 
-There is currently no dedicated clickable light/dark toggle component in the tree. The only theme toggle path that exists today is the keyboard shortcut inside `ThemeHotkey`.
+There is now a visible light/dark toggle inside the floating dock, in addition to the `d` keyboard shortcut inside `ThemeHotkey`.
 
 ### Skills documentation
 
@@ -293,12 +293,17 @@ High-value files to check before making changes:
 - `app/layout.tsx`: root fonts, root HTML setup, theme provider mount
 - `app/globals.css`: tokens, dark mode variables, base typography rules
 - `app/page.tsx`: current homepage implementation
+- `app/projects/page.tsx`: projects index route used by the dock and project archive
+- `components/floating-dock.tsx`: site-wide floating dock navigation and theme toggle
 - `app/writing/page.tsx`: writing index page
 - `app/writing/[slug]/page.tsx`: first post route and article rendering
 - `components/theme-provider.tsx`: theme hotkey and all current interaction sound behavior
 - `components/home/*`: homepage-specific UI primitives
 - `components/ui/button.tsx`: shared button primitive
 - `components/ui/button-styles.ts`: server-safe shared button variant definitions
+- `components/ui/popover.tsx`: Base UI popover primitive used by the dock contact panel
+- `components/ui/tooltip.tsx`: Base UI tooltip primitive adapted for compact utility UI
+- `components/ui/kbd.tsx`: keyboard hint primitive used inside tooltips and utility surfaces
 - `hooks/use-sound.ts`: Web Audio hook used by Soundcn assets
 - `lib/sound-engine.ts`: audio context and decode/play helpers
 - `lib/site-content.ts`: current typed portfolio content source
@@ -360,6 +365,43 @@ Completed work in this repo:
 - projects and experience now use quiet disclosure patterns to keep the page compact as more entries are added
 - disclosure affordances now use a small edge-aligned SVG chevron instead of casual `+ / -` text
 - the disclosure behavior is meant to feel like progressive text reveal, not a dashboard accordion
+- the current section order is:
+  - About
+  - Projects
+  - Experience
+  - Stack
+  - Writing
+  - Contact
+- section rules were later removed again so the shell stays closer to Emil's spacing-led separation than to Dimi's homepage separators
+
+11. Floating dock shell
+
+- a shared floating dock now lives in the root layout as a site-wide navigation and theme-control surface
+- the dock uses Hugeicons, Base UI tooltips, Base UI popovers, the `kbd` primitive, and the existing theme sound behavior
+- the dock currently links to:
+  - Home
+  - Projects
+  - Writings
+- `Projects` is now a real route at `app/projects/page.tsx`, not only a homepage hash target
+- the contact icon now opens a compact popover panel above the dock instead of jumping to the footer
+- the contact control now uses Base UI detached tooltip/popover triggers with a stable trigger id in controlled mode so click-to-open and click-again-to-close both work reliably
+- tooltip timing and motion follow the Emil design-engineering guidance: delayed first hover, instant subsequent hovers, short transitions, and trigger-origin-aware animation
+- the tooltip surface is now solid and arrowless after review, with the theme tooltip showing `Light mode` or `Dark mode` plus `Kbd(D)` and the contact tooltip suppressed while its popover is open
+- the dock is intentionally small, blurred, and restrained so it reads as a compact utility object rather than app chrome
+- the dock now uses a Dimi-inspired layered backdrop-blur field so content can visually blur underneath it instead of being pushed away by page spacing
+- the contact popover currently exposes direct actions for email, LinkedIn, and X in a text-led panel that matches the site's calmer editorial system rather than copying Dimi's internal button styling
+- the dock now uses a single measured active surface that animates between Home, Projects, Writings, and Contact rather than relying on per-item backgrounds or hard-coded spacing math
+- the heavier multi-layer backdrop blur is now gated off on small screens, leaving the simpler dock surface blur in place for mobile performance
+- the dock shell now uses the same `bg-background/60` + `backdrop-blur-xl` surface treatment as the contact popover so both utility layers feel like one system
+- mobile sizing was tightened so the dock and contact popover do not introduce horizontal scroll
+
+12. Writing surface refinement
+
+- the writing index was pulled away from the earlier card and cover-image treatment
+- the writing list is now a quiet text-led archive closer to Emil's editorial rhythm and Dimi's system consistency
+- blog post pages now use the same narrow shell and calmer spacing as the homepage instead of a louder article template
+- article pages now rely on restrained metadata, simple prose rhythm, and lighter code surfaces rather than hero imagery
+- post content now supports ordered and unordered lists explicitly in the typed content model
 
 ## Important Constraints And Reminders
 
@@ -390,8 +432,8 @@ Known current gaps between project intent and implementation:
 - only the first implementation pass of the homepage exists
 - the reference-informed visual direction is now partially implemented, but not yet carried through a full site-wide system
 - the homepage should continue moving toward the quieter Emil + Dimi synthesis, not back toward a product marketing layout
+- the dock is now part of the reusable site shell, but its blur/offset/details should still be judged against the Dimi reference during future polish
 - the current content model is lightweight and local, not a full blog/project CMS or MDX pipeline
-- there is no visible UI theme toggle component yet
 - only one project, one experience entry, and one post are currently represented in the new typed content layer
 - broader project, experience, and long-form content surfaces are not yet fully built out
 

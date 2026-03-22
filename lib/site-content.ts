@@ -30,18 +30,23 @@ export type Experience = {
 
 export type PostContentBlock =
   | {
+      id: string
       type: "paragraph"
       content: string
     }
   | {
+      id: string
       type: "heading"
       content: string
     }
   | {
+      id: string
       type: "list"
       items: string[]
+      ordered?: boolean
     }
   | {
+      id: string
       type: "code"
       language: string
       code: string
@@ -149,24 +154,30 @@ export const posts: Post[] = [
     },
     content: [
       {
+        id: "intro-thanks",
         type: "paragraph",
         content: "Hey, thanks for stopping by!",
       },
       {
+        id: "intro-about",
         type: "paragraph",
         content:
           "This is where I write about things I'm learning, building, and occasionally breaking. If you're into React, Next.js, or just enjoy watching someone figure things out in public, you're in the right place.",
       },
       {
+        id: "why-write",
         type: "heading",
         content: "Why Write?",
       },
       {
+        id: "why-write-intro",
         type: "paragraph",
         content: "Three reasons, really:",
       },
       {
+        id: "why-write-list",
         type: "list",
+        ordered: true,
         items: [
           "Learning sticks better when you explain it. Writing forces me to actually understand what I'm doing instead of just copy-pasting from Stack Overflow (well, mostly).",
           "It's a time capsule. Future me will appreciate having notes on why past me made certain decisions.",
@@ -174,14 +185,17 @@ export const posts: Post[] = [
         ],
       },
       {
+        id: "whats-coming",
         type: "heading",
         content: "What's Coming",
       },
       {
+        id: "whats-coming-intro",
         type: "paragraph",
         content: "Here's a rough roadmap of topics I'll be covering:",
       },
       {
+        id: "whats-coming-list",
         type: "list",
         items: [
           "React and Next.js in 2025: Server Components, the App Router, and patterns that actually work in production.",
@@ -191,14 +205,17 @@ export const posts: Post[] = [
         ],
       },
       {
+        id: "code-samples-heading",
         type: "heading",
         content: "Code Samples Look Like This",
       },
       {
+        id: "code-samples-intro",
         type: "paragraph",
         content: "Just so you know what to expect:",
       },
       {
+        id: "code-samples-example",
         type: "code",
         language: "tsx",
         code: `function Greeting({ name }: { name: string }) {
@@ -210,11 +227,13 @@ export const posts: Post[] = [
 }`,
       },
       {
+        id: "code-samples-note",
         type: "paragraph",
         content:
           "Nothing fancy. Just practical stuff that you can actually use.",
       },
       {
+        id: "outro",
         type: "paragraph",
         content: "Let's see where this goes!",
       },

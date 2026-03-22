@@ -16,14 +16,16 @@ import {
 const latestPost = posts[0]
 
 function HomeSection({
+  id,
   label,
   children,
 }: {
+  id?: string
   label: string
   children: ReactNode
 }) {
   return (
-    <section className="space-y-5">
+    <section id={id} className="scroll-mt-24 space-y-5">
       <p className="text-sm font-medium text-foreground">{label}</p>
       {children}
     </section>
@@ -44,7 +46,7 @@ export default function Page() {
           </div>
         </header>
 
-        <HomeSection label="About">
+        <HomeSection id="about" label="About">
           <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
             <p>{siteProfile.intro}</p>
             <p>{siteProfile.bio}</p>
@@ -69,21 +71,26 @@ export default function Page() {
           </div>
         </HomeSection>
 
-        <HomeSection label="Projects">
-          <DisclosureList type="projects" items={projects} />
+        <HomeSection id="projects" label="Projects">
+          <div className="space-y-5">
+            <DisclosureList type="projects" items={projects} />
+            <TextLink href="/projects" className="text-muted-foreground">
+              View all projects
+            </TextLink>
+          </div>
         </HomeSection>
 
-        <HomeSection label="Experience">
+        <HomeSection id="experience" label="Experience">
           <DisclosureList type="experience" items={experiences} />
         </HomeSection>
 
-        <HomeSection label="Stack">
+        <HomeSection id="stack" label="Stack">
           <p className="max-w-[33rem] text-[0.96rem] leading-8 text-muted-foreground">
             {technologies.map((item) => item.name).join(", ")}.
           </p>
         </HomeSection>
 
-        <HomeSection label="Writing">
+        <HomeSection id="writing" label="Writing">
           <div className="max-w-[33rem] space-y-5">
             <article className="space-y-1.5">
               <Link
@@ -102,7 +109,7 @@ export default function Page() {
           </div>
         </HomeSection>
 
-        <section className="space-y-6 pt-4">
+        <section id="contact" className="scroll-mt-24 space-y-6 pt-4">
           <div className="space-y-4 text-center">
             <p className="text-sm text-muted-foreground">
               Want to get in touch?
