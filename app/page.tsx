@@ -44,7 +44,7 @@ export default function Page() {
           </div>
         </header>
 
-        <HomeSection label="Now">
+        <HomeSection label="About">
           <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
             <p>{siteProfile.intro}</p>
             <p>{siteProfile.bio}</p>
@@ -69,8 +69,18 @@ export default function Page() {
           </div>
         </HomeSection>
 
-        <HomeSection label="Work">
+        <HomeSection label="Projects">
           <DisclosureList type="projects" items={projects} />
+        </HomeSection>
+
+        <HomeSection label="Experience">
+          <DisclosureList type="experience" items={experiences} />
+        </HomeSection>
+
+        <HomeSection label="Stack">
+          <p className="max-w-[33rem] text-[0.96rem] leading-8 text-muted-foreground">
+            {technologies.map((item) => item.name).join(", ")}.
+          </p>
         </HomeSection>
 
         <HomeSection label="Writing">
@@ -90,16 +100,6 @@ export default function Page() {
               View all writing
             </TextLink>
           </div>
-        </HomeSection>
-
-        <HomeSection label="Experience">
-          <DisclosureList type="experience" items={experiences} />
-        </HomeSection>
-
-        <HomeSection label="Stack">
-          <p className="max-w-[33rem] text-[0.96rem] leading-8 text-muted-foreground">
-            {technologies.map((item) => item.name).join(", ")}.
-          </p>
         </HomeSection>
 
         <section className="space-y-6 pt-4">
