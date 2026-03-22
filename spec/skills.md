@@ -18,21 +18,19 @@ Skills in this repository live under `.agents/skills/`. Depending on the skill p
 
 ## Skills Index
 
-| #   | Skill                                                              | Publisher      | Version / Notes                                         | Path                                           |
-| --- | ------------------------------------------------------------------ | -------------- | ------------------------------------------------------- | ---------------------------------------------- |
-| 1   | [Vercel React Best Practices](#1-vercel-react-best-practices)      | Vercel         | `v1.0.0`                                                | `.agents/skills/vercel-react-best-practices/`  |
-| 2   | [Next.js Best Practices](#2-nextjs-best-practices)                 | Project-local  | Topic index skill                                       | `.agents/skills/next-best-practices/`          |
-| 3   | [React Composition Patterns](#3-react-composition-patterns)        | Vercel         | `v1.0.0`                                                | `.agents/skills/vercel-composition-patterns/`  |
-| 4   | [Design Engineering](#4-design-engineering)                        | Project-local  | Single-file skill                                       | `.agents/skills/emil-design-eng/`              |
-| 5   | [Fixing Motion Performance](#5-fixing-motion-performance)          | Project-local  | Single-file audit/fix skill                             | `.agents/skills/fixing-motion-performance/`    |
-| 6   | [React useEffect](#6-react-useeffect)                              | Project-local  | Official-docs-inspired guidance                         | `.agents/skills/react-useeffect/`              |
-| 7   | [SEO Audit](#7-seo-audit)                                          | Project-local  | `v1.1.0`                                                | `.agents/skills/seo-audit/`                    |
-| 8   | [Make Interfaces Feel Better](#8-make-interfaces-feel-better)      | Project-local  | UI polish skill with focused reference files            | `.agents/skills/make-interfaces-feel-better/`  |
-| 9   | [User Interface Wiki](#9-user-interface-wiki)                      | Raphael Salaja | `v3.0.0`                                                | `.agents/skills/userinterface-wiki/`           |
-| 10  | [Tailwind CSS Patterns](#10-tailwind-css-patterns)                 | Project-local  | Utility-first styling guide                             | `.agents/skills/tailwind-css-patterns/`        |
-| 11  | [Tailwind Design System](#11-tailwind-design-system)               | Project-local  | Tailwind v4 design-system skill                         | `.agents/skills/tailwind-design-system/`       |
-| 12  | [Tailwind CSS Advanced Layouts](#12-tailwind-css-advanced-layouts) | Project-local  | Grid, flex, sticky, overflow, and fluid sizing patterns | `.agents/skills/tailwindcss-advanced-layouts/` |
-| 13  | [TypeScript Advanced Types](#13-typescript-advanced-types)         | Project-local  | Single-file advanced type-system guide                  | `.agents/skills/typescript-advanced-types/`    |
+| #   | Skill                                                         | Publisher      | Version / Notes                              | Path                                          |
+| --- | ------------------------------------------------------------- | -------------- | -------------------------------------------- | --------------------------------------------- |
+| 1   | [Vercel React Best Practices](#1-vercel-react-best-practices) | Vercel         | `v1.0.0`                                     | `.agents/skills/vercel-react-best-practices/` |
+| 2   | [Next.js Best Practices](#2-nextjs-best-practices)            | Project-local  | Topic index skill                            | `.agents/skills/next-best-practices/`         |
+| 3   | [React Composition Patterns](#3-react-composition-patterns)   | Vercel         | `v1.0.0`                                     | `.agents/skills/vercel-composition-patterns/` |
+| 4   | [Design Engineering](#4-design-engineering)                   | Project-local  | Single-file skill                            | `.agents/skills/emil-design-eng/`             |
+| 5   | [React useEffect](#5-react-useeffect)                         | Project-local  | Official-docs-inspired guidance              | `.agents/skills/react-useeffect/`             |
+| 6   | [SEO Audit](#6-seo-audit)                                     | Project-local  | `v1.1.0`                                     | `.agents/skills/seo-audit/`                   |
+| 7   | [Make Interfaces Feel Better](#7-make-interfaces-feel-better) | Project-local  | UI polish skill with focused reference files | `.agents/skills/make-interfaces-feel-better/` |
+| 8   | [User Interface Wiki](#8-user-interface-wiki)                 | Raphael Salaja | `v3.0.0`                                     | `.agents/skills/userinterface-wiki/`          |
+| 9   | [Tailwind CSS Patterns](#9-tailwind-css-patterns)             | Project-local  | Utility-first styling guide                  | `.agents/skills/tailwind-css-patterns/`       |
+| 10  | [Tailwind Design System](#10-tailwind-design-system)          | Project-local  | Tailwind v4 design-system skill              | `.agents/skills/tailwind-design-system/`      |
+| 11  | [TypeScript Advanced Types](#11-typescript-advanced-types)    | Project-local  | Single-file advanced type-system guide       | `.agents/skills/typescript-advanced-types/`   |
 
 ---
 
@@ -183,38 +181,7 @@ This skill encodes a design-engineering mindset rather than a narrow API checkli
 
 ---
 
-## 5. Fixing Motion Performance
-
-**Publisher:** Project-local  
-**Version / Notes:** Single-file audit and remediation skill  
-**When to load:** Investigating janky animations, layout thrash, scroll-linked motion problems, heavy blur/filter effects, or mixed animation systems in existing UI code
-
-### Purpose
-
-Focused performance-review guidance for animation systems. The skill defines a rendering glossary, 9 priority-ranked rule categories, concrete anti-patterns, and code-level remediation strategies while explicitly requiring fixes to stay within the existing animation stack unless a migration is requested.
-
-### Top 10 Rules by Priority
-
-1. **Do not interleave layout reads and writes** - Avoid layout thrash inside the same frame
-2. **Default to `transform` and `opacity`** - Start with compositor-friendly motion before considering paint or layout animation
-3. **Do not animate layout continuously on large surfaces** - Layout animation is only acceptable on small, isolated areas
-4. **Do not drive animation from scroll events** - Prefer Scroll/View Timelines or IntersectionObserver-based triggers
-5. **Measure once, animate later** - Batch DOM reads, then animate with FLIP-style transforms or opacity
-6. **Pause work when off-screen** - Stop or reduce motion users cannot currently see
-7. **Avoid paint-heavy animation on large elements** - Filters, masks, gradients, and similar properties need strict limits
-8. **Do not animate inherited CSS variables for motion** - Scope animated variables locally or write transforms directly
-9. **Keep blur small and short-lived** - Blur should stay modest, never run continuously, and never cover large surfaces
-10. **Do not partially migrate animation tools** - Fix issues inside the current stack unless the user explicitly requests a rewrite
-
-### Available Files
-
-| File       | Description                                                                       |
-| ---------- | --------------------------------------------------------------------------------- |
-| `SKILL.md` | Full self-contained skill with rules, glossary, common fixes, and review guidance |
-
----
-
-## 6. React useEffect
+## 5. React useEffect
 
 **Publisher:** Project-local  
 **Version / Notes:** Official-docs-inspired guidance focused on when not to use `useEffect`  
@@ -248,7 +215,7 @@ Focused React guidance based on the principle that Effects are an escape hatch f
 
 ---
 
-## 7. SEO Audit
+## 6. SEO Audit
 
 **Publisher:** Project-local  
 **Version:** `1.1.0`  
@@ -281,7 +248,7 @@ Structured SEO audit guidance for diagnosing why a site is underperforming in or
 
 ---
 
-## 8. Make Interfaces Feel Better
+## 7. Make Interfaces Feel Better
 
 **Publisher:** Project-local  
 **Version / Notes:** UI polish skill with 4 focused reference files  
@@ -316,7 +283,7 @@ Practical design-engineering guidance focused on the small details that compound
 
 ---
 
-## 9. User Interface Wiki
+## 8. User Interface Wiki
 
 **Publisher:** Raphael Salaja  
 **Version:** `3.0.0`  
@@ -349,7 +316,7 @@ Comprehensive UI/UX best-practices reference for web interfaces. The skill conta
 
 ---
 
-## 10. Tailwind CSS Patterns
+## 9. Tailwind CSS Patterns
 
 **Publisher:** Project-local  
 **Version / Notes:** Single-file utility-first styling guide with a supporting reference  
@@ -381,7 +348,7 @@ Practical Tailwind guidance for day-to-day component work. The skill focuses on 
 
 ---
 
-## 11. Tailwind Design System
+## 10. Tailwind Design System
 
 **Publisher:** Project-local  
 **Version / Notes:** Single-file Tailwind v4 design-system skill  
@@ -412,38 +379,7 @@ Tailwind CSS v4 design-system guidance centered on CSS-first configuration, sema
 
 ---
 
-## 12. Tailwind CSS Advanced Layouts
-
-**Publisher:** Project-local  
-**Version / Notes:** Single-file advanced layout technique guide  
-**When to load:** Solving tricky layout problems with CSS Grid, Flexbox, sticky positioning, scrolling containers, fluid sizing, or layered responsive structure
-
-### Purpose
-
-Focused layout guidance for more complex Tailwind work. The skill emphasizes robust grid and flex patterns, fluid sizing, safe overflow handling, sticky and fixed positioning, scroll behavior, and layout patterns that hold up across breakpoints.
-
-### Top 10 Rules by Priority
-
-1. **Use the right layout model** - Reach for grid for two-dimensional composition and flex for one-dimensional alignment
-2. **Prevent overflow blowouts** - Add `min-w-0`, `overflow-hidden`, and resilient track sizing where text or content can stretch containers
-3. **Use fluid sizing where fixed widths fail** - Prefer `min()`, `max()`, `minmax()`, and `clamp()` for responsive surfaces
-4. **Handle mobile toolbars deliberately** - Use scrollable rows, sticky positioning, and fixed actions intentionally on small screens
-5. **Build safe sticky layers** - Sticky headers and sidebars need explicit offsets, z-index discipline, and backdrop treatment
-6. **Use scroll containers intentionally** - Horizontal overflow, snap, and scroll padding should feel designed rather than incidental
-7. **Design for shrinking content** - Flex and grid children should opt into shrink behavior when labels or values can be long
-8. **Prefer semantic spacing structures** - Use gaps and logical spacing instead of brittle margins
-9. **Use container-aware responsiveness when helpful** - Let components respond to their own space, not only the viewport
-10. **Test breakpoint edge cases** - Validate narrow mobile widths, intermediate tablet widths, and dense desktop layouts for blowouts and awkward wrapping
-
-### Available Files
-
-| File       | Description                                                                                                                      |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `SKILL.md` | Full self-contained layout guide covering grid, flex, sticky/fixed positioning, scrolling, fluid sizing, and responsive patterns |
-
----
-
-## 13. TypeScript Advanced Types
+## 11. TypeScript Advanced Types
 
 **Publisher:** Project-local  
 **Version / Notes:** Single-file advanced type system skill  

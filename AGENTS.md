@@ -1,99 +1,128 @@
-# AI Agent Guidelines for Mohamed Gamal's Portfolio
+# AI Agent Guidelines For Mohamed Gamal's Portfolio
 
-This guide provides information for AI agents working with this codebase. This is a Next.js portfolio and blog.
+This file is the short entrypoint for agents working in this repository. Use it for orientation, then read the richer project memory in `spec/context.md` before making meaningful changes.
 
-## Project Overview
+## Current Project State
 
-A Next.js portfolio and blog with:
+This repository is no longer a generic starter. It is an in-progress personal portfolio and writing site with a real first implementation pass already shipped.
 
-- Blog with MDX content
-- Custom React components
-- Contact form integration
-- Project showcase with visual grid
+What exists today:
 
-### Tech Stack
+- Next.js App Router application under `app/`
+- a real homepage in `app/page.tsx`
+- a projects index in `app/projects/page.tsx`
+- a writing index and post route under `app/writing/`
+- shared UI and homepage components under `components/`
+- typed local content in `lib/site-content.ts`
+- theme switching and interaction sounds
+- internal project docs under `spec/`
 
-- **Framework**: Next.js 16.2 (App Router)
-- **Styling**: Tailwind CSS v4
-- **UI Components**: shadcn/ui
-- **Package Manager**: pnpm
-- **Language**: TypeScript
-- **Content**: MDX for blog posts
-- **Deployment**: Vercel
-- **Agents Skills**: Load skills from `.agents/`
+Important:
 
-### Code Standards
+- the product direction is clearer than the amount of implemented content
+- do not treat planned features as already built
+- preserve the current portfolio + writing direction rather than reintroducing starter patterns
 
-- **TypeScript**: Strict mode enabled
-- **Oxlint**: Linting with TypeScript support
-- **Oxfmt**: Code formatting
-- **File naming**: Use kebab-case for files and component files
+## Source Of Truth
 
-### Coding Guidelines
+Read these in order when you need project guidance:
 
-Follow these principles when writing code:
+1. `AGENTS.md`
+2. `spec/context.md`
+3. `spec/skills.md`
+4. `spec/styling.md`
+5. `spec/references/*.md`
+6. the actual code
 
-- Write type-safe TypeScript code with explicit types
-- Use descriptive variable and function names for self-documenting code
-- Add comments only for complex logic or non-obvious behavior
-- Avoid emojis in code, comments, or commit messages
-- Use JSDoc for public APIs when the signature is not clear
-- Follow SOLID principles by keeping functions small and focused
+## Stack And Standards
 
-## Working with Content
+- framework: Next.js 16 App Router
+- language: TypeScript with strict mode
+- styling: Tailwind CSS v4
+- primitives: Base UI
+- component style: shadcn-style composition where useful
+- package manager: pnpm
+- linting: Oxlint
+- formatting: Oxfmt
+- file naming: kebab-case for files and component files
 
-### Blog Posts
+Working rules:
 
-- Format: MDX files
-- Supports: Custom components, code blocks, and metadata
+- write explicit, type-safe TypeScript
+- prefer small, focused functions and components
+- use descriptive names
+- add comments only when behavior is not obvious
+- avoid emojis in code, comments, and commit messages
+- use CSS variables and shared tokens rather than scattered one-off values
 
-### User Portfolio
+## Design Direction
 
-- `user.ts`: Core personal information, bio, contact details, and job history
-- `experiences.ts`: Detailed work experience and company information
-- `projects.ts`: Portfolio projects with descriptions, links, and skills
-- `tech-stack.ts`: Technology stack and frameworks
-- `social-links.ts`: Social media profiles and contact links
+The target experience is:
 
-## Environment and Configuration
+- calm
+- narrow
+- editorial
+- text-led
+- design-engineer flavored
+- minimal without feeling empty
 
-### Environment Variables
+Avoid:
 
-See `.env.example` for required variables:
+- giant marketing heroes
+- card piles by default
+- badge walls
+- noisy section chrome
+- generic startup portfolio language
 
-**Core Application**:
+The current reference synthesis is:
 
-- `APP_URL`: Application base URL
+- Dimi for reusable shell and design-engineering system thinking
+- Emil for editorial restraint and rhythm
+- Samet for clarity, proof, and selective warmth
+- Shu for structural discipline and archive thinking
 
-**External Services**:
+## Content And Architecture Notes
 
-- `GITHUB_API_TOKEN`: GitHub Personal Access Token for API calls
+- the current content layer is lightweight and local, not a full CMS
+- `lib/site-content.ts` is the main typed content source right now
+- writing is not yet a full MDX pipeline even if the longer-term direction may move there
+- only a small amount of real content is currently populated
 
-## Common Tasks
+Do not assume older planned files like `user.ts`, `projects.ts`, or `experiences.ts` already exist unless they are actually in the tree.
 
-### Updating User Information
+## Base UI And Styling Notes
 
-- Personal information
-- Job details
-- Project descriptions
-- Contact information
+- Base UI primitives are intentionally unstyled; styling belongs in our Tailwind and token layer
+- prefer `className`, data attributes, CSS variables, and documented composition patterns over ad hoc wrappers
+- preserve light and dark mode support
+- keep motion purposeful, fast, and localized
+- do not regress the styling system back toward stock starter aesthetics
 
-### Adding Blog Posts
+For deeper Base UI and styling guidance, check:
 
-- Include frontmatter metadata
-- Use custom components for enhanced content
+- `spec/base-ui/*.md`
+- `spec/styling.md`
 
-### Styling Guidelines
+## Skills
 
-- Use Tailwind CSS v4 syntax
-- Follow the existing color scheme
-- Support dark and light modes
-- Use CSS variables for theme colors
+Project-local skills live in `.agents/skills/`. The current installed set is indexed in `spec/skills.md`.
 
-## Important Notes
+When a task clearly matches a skill, read that skill's `SKILL.md` before implementing.
 
-### Performance Considerations
+## Common Agent Tasks
 
-- Components use React.lazy for code splitting
-- Images are optimized with the Next.js Image component
-- MDX content is statically generated
+- updating portfolio content
+- refining homepage and writing surfaces
+- extending reusable UI primitives
+- polishing layout, typography, and interaction details
+- keeping docs and internal references accurate as the project evolves
+
+## Documentation Strategy
+
+Keep documentation layered:
+
+- `AGENTS.md` for short orientation
+- `spec/context.md` for richer project memory and implementation history
+- `spec/skills.md` for the live skill index
+
+Do not duplicate long explanations across all three files unless there is a clear reason.

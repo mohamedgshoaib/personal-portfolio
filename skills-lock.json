@@ -6,11 +6,6 @@
       "sourceType": "github",
       "computedHash": "eff737930f2b993a2a6cb4df3cf4876ba0cf8383db591819e2398f439217d85a"
     },
-    "fixing-motion-performance": {
-      "source": "ibelick/ui-skills",
-      "sourceType": "github",
-      "computedHash": "c1aca76fe18e8594f401cf78e5e76be24f182ce63167a398bdd4458f2a07639f"
-    },
     "make-interfaces-feel-better": {
       "source": "jakubkrehel/make-interfaces-feel-better",
       "sourceType": "github",
@@ -40,11 +35,6 @@
       "source": "wshobson/agents",
       "sourceType": "github",
       "computedHash": "0fc7b79d08ee5168d46c6887014cbe5bd02f2c5e458858470e20fc8ecedefb46"
-    },
-    "tailwindcss-advanced-layouts": {
-      "source": "josiahsiegel/claude-plugin-marketplace",
-      "sourceType": "github",
-      "computedHash": "bf3eb96bcdcceb54cf2c0ba01daa18275c169627f37f5a861490c78e8055a5ce"
     },
     "typescript-advanced-types": {
       "source": "wshobson/agents",

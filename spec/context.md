@@ -148,6 +148,10 @@ The installed `.agents` skills are already indexed in:
 
 - `spec/skills.md`
 
+Current note:
+
+- `spec/skills.md` is intended to stay as a concise filesystem-backed index of the currently installed project-local skills under `.agents/skills/`
+
 When a task fits an installed skill, load the relevant skill instead of guessing.
 
 ### Base styling direction
