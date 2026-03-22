@@ -229,9 +229,39 @@
       0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent),
       var(--surface-shadow-sm);
   }
+  html {
+    scrollbar-color: color-mix(in srgb, var(--foreground) 26%, transparent)
+      color-mix(in srgb, var(--foreground) 6%, transparent);
+    scrollbar-width: thin;
+  }
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--foreground) 14%, transparent);
+  background: color-mix(in srgb, var(--foreground) 92%, transparent);
   color: var(--background);
+}
+
+::-webkit-scrollbar {
+  width: 0.7rem;
+  height: 0.7rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 0.2rem solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--foreground) 18%, transparent);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--foreground) 28%, transparent);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
