@@ -72,6 +72,8 @@ Design standards already established:
 - let structure, typography, and curation create quality before adding decorative UI
 - keep motion purposeful and localized; do not make the shell itself noisy
 - preserve light/dark mode support and app-wide token discipline
+- bias the homepage toward Emil + Dimi more than Samet when tradeoffs appear
+- avoid shadows and obvious product-UI surfaces on the homepage unless clearly earned
 
 ## Tooling Decisions Already Made
 
@@ -350,6 +352,15 @@ Completed work in this repo:
    - a writing index and the first blog post route were added under `app/writing/`
    - `app/layout.tsx` now includes basic site metadata
 
+10. Homepage refinement toward Emil + Dimi
+
+- the homepage was pulled away from a warmer, more product-like first pass
+- cards, badge-like treatments, screenshot-heavy sections, and obvious shadows were removed from the homepage shell
+- section structure was simplified into calmer text-led blocks with minimal rules and tighter hierarchy
+- projects and experience now use quiet disclosure patterns to keep the page compact as more entries are added
+- disclosure affordances now use a small edge-aligned SVG chevron instead of casual `+ / -` text
+- the disclosure behavior is meant to feel like progressive text reveal, not a dashboard accordion
+
 ## Important Constraints And Reminders
 
 - Do not assume blog/content modules already exist just because `AGENTS.md` describes them.
@@ -378,6 +389,7 @@ Known current gaps between project intent and implementation:
 
 - only the first implementation pass of the homepage exists
 - the reference-informed visual direction is now partially implemented, but not yet carried through a full site-wide system
+- the homepage should continue moving toward the quieter Emil + Dimi synthesis, not back toward a product marketing layout
 - the current content model is lightweight and local, not a full blog/project CMS or MDX pipeline
 - there is no visible UI theme toggle component yet
 - only one project, one experience entry, and one post are currently represented in the new typed content layer
