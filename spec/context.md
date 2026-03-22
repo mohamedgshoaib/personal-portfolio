@@ -22,7 +22,8 @@ What exists today:
 
 - basic App Router setup under `app/`
 - root layout and global theme styles
-- a starter homepage in `app/page.tsx`
+- a real first-pass portfolio homepage in `app/page.tsx`
+- a writing index and first post route under `app/writing/`
 - a small shared component set under `components/`
 - utility and sound files under `lib/`
 - sound playback hook under `hooks/use-sound.ts`
@@ -186,6 +187,65 @@ Current desired outcome:
 
 Important: the goal is not to copy any single reference. The likely future design should synthesize the references below into one original direction for Mohamed.
 
+### Core conclusion from the reference study
+
+The strongest portfolio references do not feel like "portfolio websites". They feel like personal systems.
+
+That means:
+
+- not a landing page
+- not a card gallery
+- not a self-branding performance
+- not a stack of loud sections
+
+Instead, the target should feel like:
+
+- a calm, durable personal place
+- an authored system for work, writing, and experiments
+- a site where curation is stronger than volume
+- a design-engineering portfolio with taste and restraint
+
+Minimalism in this project should be understood as editorial restraint, not visual emptiness.
+
+### Shared design language across the references
+
+The four references differ in flavor, but they share a strong common system.
+
+Common patterns:
+
+- compact identity instead of a giant hero
+- narrow reading widths
+- generous whitespace
+- modest, quiet typography
+- text-led hierarchy
+- low visual chrome
+- calm navigation
+- curated lists and indexes
+- proof over claims
+- consistent shell across page types
+- soft utility surfaces when needed
+- restrained palette with sparing color use
+
+Practical translation:
+
+The portfolio should be a narrow, calm, text-led system where structure, curation, and proof carry the design. Richer UI should appear only where it earns its place.
+
+### Roles of the references in the synthesis
+
+When designing future pages, think of the references as complementary inputs:
+
+- Emil Kowalski: editorial calm and curated rhythm
+- Shu Ding: archival structure and severe restraint
+- Samet Ozkale: warm product clarity and trust-building proof
+- Dimi: design-engineering platform feel, demos, and reusable shell
+
+The likely direction for Mohamed is not any one of these alone. It is a synthesis:
+
+- Emil's calm
+- Shu's structure
+- Samet's clarity
+- Dimi's system thinking
+
 ## Reference Library
 
 The design reference set lives in `spec/references/`.
@@ -230,11 +290,16 @@ High-value files to check before making changes:
 
 - `app/layout.tsx`: root fonts, root HTML setup, theme provider mount
 - `app/globals.css`: tokens, dark mode variables, base typography rules
-- `app/page.tsx`: current placeholder homepage
+- `app/page.tsx`: current homepage implementation
+- `app/writing/page.tsx`: writing index page
+- `app/writing/[slug]/page.tsx`: first post route and article rendering
 - `components/theme-provider.tsx`: theme hotkey and all current interaction sound behavior
+- `components/home/*`: homepage-specific UI primitives
 - `components/ui/button.tsx`: shared button primitive
+- `components/ui/button-styles.ts`: server-safe shared button variant definitions
 - `hooks/use-sound.ts`: Web Audio hook used by Soundcn assets
 - `lib/sound-engine.ts`: audio context and decode/play helpers
+- `lib/site-content.ts`: current typed portfolio content source
 - `README.md`: short project overview for humans
 - `AGENTS.md`: project intent and coding guidance
 - `spec/skills.md`: installed skill catalog
@@ -276,7 +341,14 @@ Completed work in this repo:
 
 8. Visual direction clarification
    - the intended visual direction is now substantially clearer than the current UI
-   - however, that direction has not yet been implemented in `app/page.tsx`
+   - the first real implementation pass is now in place, but the full product scope is still not finished
+
+9. First implementation pass
+   - the generic starter homepage was replaced with a real portfolio homepage
+   - a typed content source was added in `lib/site-content.ts`
+   - the homepage now presents Mohamed's identity, selected work, experience, writing, stack, and contact details
+   - a writing index and the first blog post route were added under `app/writing/`
+   - `app/layout.tsx` now includes basic site metadata
 
 ## Important Constraints And Reminders
 
@@ -304,16 +376,17 @@ When returning to this repo later:
 
 Known current gaps between project intent and implementation:
 
-- homepage is still a starter placeholder
-- the reference-informed visual direction has not yet been translated into a real homepage or layout system
-- there is no real portfolio data model implemented in the current top-level app tree
+- only the first implementation pass of the homepage exists
+- the reference-informed visual direction is now partially implemented, but not yet carried through a full site-wide system
+- the current content model is lightweight and local, not a full blog/project CMS or MDX pipeline
 - there is no visible UI theme toggle component yet
-- the broader blog/project/experience pages described by the project intent are not yet rebuilt in the current structure
+- only one project, one experience entry, and one post are currently represented in the new typed content layer
+- broader project, experience, and long-form content surfaces are not yet fully built out
 
 Current immediate likely next milestone:
 
-- synthesize the four design references into one concrete homepage and system direction
-- rebuild `app/page.tsx` and supporting shared UI accordingly
-- preserve the new minimal/editorial direction while keeping the implementation original
+- expand the new homepage/content system with more real portfolio entries
+- deepen the page polish and layout rhythm based on the reference synthesis
+- decide whether to keep the lightweight typed content model or move the blog/project content to a fuller MDX-backed flow
 
 Treat those as future build areas, not already-completed features.

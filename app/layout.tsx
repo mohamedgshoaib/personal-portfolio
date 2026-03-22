@@ -1,8 +1,18 @@
 import { Google_Sans, Google_Sans_Code } from "next/font/google"
+import type { Metadata } from "next"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+
+export const metadata: Metadata = {
+  title: {
+    default: "Mohamed Gamal",
+    template: "%s | Mohamed Gamal",
+  },
+  description:
+    "Frontend Developer building fast, SEO-driven web applications with full RTL support, clean architecture, and durable frontend systems.",
+}
 
 const sans = Google_Sans({
   subsets: ["latin"],
