@@ -407,6 +407,20 @@ Completed work in this repo:
 - article pages now rely on restrained metadata, simple prose rhythm, and lighter code surfaces rather than hero imagery
 - post content now supports ordered and unordered lists explicitly in the typed content model
 
+13. Shared text-link state and interaction cleanup
+
+- text-led links across the homepage, writing index, writing post pages, and project disclosure content now use a shared monochrome link treatment
+- the shared link state keeps links muted at rest and slightly clearer on hover/focus, without introducing bright accent color
+- this shared behavior now lives in the global styling layer and the `components/home/text-link.tsx` primitive instead of being repeated per component
+- internal route links still use `next/link`, while external and `mailto:` links in the shared text-link primitive now render as plain anchors
+- hover lift was removed from the dock and the contact copy CTA so the project keeps shared press feedback without upward hover motion on those controls
+
+14. Mobile project disclosure image alignment
+
+- the persistent project preview image inside the homepage disclosure list needed a mobile-only visual centering adjustment
+- the current solution is implemented in `components/home/disclosure-list.tsx` at the wrapper level, without changing the underlying image sizing logic
+- this was adjusted manually in the repo after an earlier attempted fix was reverted
+
 ## Important Constraints And Reminders
 
 - Do not assume blog/content modules already exist just because `AGENTS.md` describes them.
@@ -445,6 +459,26 @@ Current immediate likely next milestone:
 
 - expand the new homepage/content system with more real portfolio entries
 - deepen the page polish and layout rhythm based on the reference synthesis
-- decide whether to keep the lightweight typed content model or move the blog/project content to a fuller MDX-backed flow
+- move the writing system from the temporary typed local content model to an MDX-backed flow
+
+Current writing-direction decision:
+
+- MDX is now the intended direction for the writing system
+- the current typed post-content model should be treated as a temporary bridge, not the long-term content architecture
+
+MDX implementation guidance now established from the official MDX docs:
+
+- for this Next.js project, prefer the framework integration route with `@next/mdx`
+- do not plan around `providerImportSource` or `@mdx-js/react` for component injection in Next.js; use the Next-style `mdx-components.tsx` pattern instead
+- treat each MDX file as a module with a default export for content and optional named exports for metadata or other authored values
+- keep the initial setup lightweight and plugin-driven: add remark/rehype plugins only when they solve a clear need
+- likely first plugin candidates for this project are frontmatter support and GFM-style markdown features, but those should still be chosen deliberately during implementation
+- remember key MDX syntax constraints when authoring content:
+  - HTML syntax is replaced by JSX syntax
+  - autolink literals do not work like plain markdown and should use explicit link syntax
+  - indented code blocks do not work in MDX
+  - raw `<` and `{` often need escaping when meant as plain text
+  - invalid `import` or `export` lines will hard-fail parsing because they are treated as JavaScript
+- layout and component mapping should preserve the current quiet writing presentation rather than introducing a louder docs-like shell by default
 
 Treat those as future build areas, not already-completed features.

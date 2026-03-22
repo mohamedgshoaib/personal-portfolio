@@ -356,6 +356,18 @@ These should follow composition-friendly patterns and avoid boolean mode sprawl.
 - add Devloop content and the first blog post in a maintainable way
 - avoid overengineering the data layer before the real content justifies it
 
+### Phase 3.5. Move writing to MDX
+
+- replace the temporary typed post-content model with an MDX-backed writing flow
+- preserve the current quiet writing index and article presentation while changing the content source
+- keep the MDX setup lightweight and aligned with App Router patterns
+- support frontmatter-style metadata and maintainable long-form content authoring
+- treat this as the chosen direction for writing, not an open question
+- use the Next.js integration path with `@next/mdx`
+- use `mdx-components.tsx` for component mapping instead of planning around `providerImportSource`
+- begin with a minimal plugin surface and only add remark/rehype plugins that serve real content needs
+- preserve room for named exports from MDX files where useful for metadata or derived content
+
 ### Phase 4. Refine motion and interaction quality
 
 - keep motion minimal and purposeful

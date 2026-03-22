@@ -85,10 +85,16 @@ The current reference synthesis is:
 
 - the current content layer is lightweight and local, not a full CMS
 - `lib/site-content.ts` is the main typed content source right now
-- writing is not yet a full MDX pipeline even if the longer-term direction may move there
+- writing is not yet a full MDX pipeline, but moving writing to MDX is now the intended direction
 - only a small amount of real content is currently populated
 
 Do not assume older planned files like `user.ts`, `projects.ts`, or `experiences.ts` already exist unless they are actually in the tree.
+
+MDX direction notes:
+
+- when the writing system is migrated, prefer the Next.js integration path with `@next/mdx`
+- in Next.js, plan around `mdx-components.tsx` for component mapping rather than `providerImportSource`
+- keep the first MDX setup minimal and add remark/rehype plugins only when they clearly support the writing needs of this project
 
 ## Base UI And Styling Notes
 
