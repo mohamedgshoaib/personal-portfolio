@@ -16,7 +16,11 @@ function copyTextToClipboard(text: string) {
   textarea.select()
 
   try {
-    document.execCommand("copy")
+    const didCopy = document.execCommand("copy")
+
+    if (!didCopy) {
+      return Promise.reject(new Error("Clipboard copy command was rejected."))
+    }
   } finally {
     document.body.removeChild(textarea)
   }
@@ -102,6 +106,9 @@ export function ContactCopy({ email }: { email: string }) {
           Want to get in touch?
         </span>
       </div>
+      <span className="sr-only" aria-live="polite" role="status">
+        {state === "copied" ? "Email copied to clipboard." : ""}
+      </span>
 
       <button
         type="button"

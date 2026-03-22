@@ -14,7 +14,7 @@ import {
   technologies,
 } from "@/lib/site-content"
 
-const latestPost = posts[0]
+const latestPost = posts[0] ?? null
 const emailLink = socialLinks.find((link) => link.label === "Email")
 
 function HomeSection({
@@ -94,17 +94,23 @@ export default function Page() {
 
         <HomeSection id="writing" label="Writing">
           <div className="max-w-[33rem] space-y-5">
-            <article className="space-y-1.5">
-              <Link
-                href={`/writing/${latestPost.slug}`}
-                className="font-heading text-lg font-medium text-foreground decoration-border underline-offset-4 hover:underline"
-              >
-                {latestPost.title}
-              </Link>
+            {latestPost ? (
+              <article className="space-y-1.5">
+                <Link
+                  href={`/writing/${latestPost.slug}`}
+                  className="font-heading text-lg font-medium text-foreground decoration-border underline-offset-4 hover:underline"
+                >
+                  {latestPost.title}
+                </Link>
+                <p className="text-[0.96rem] leading-8 text-muted-foreground">
+                  {latestPost.summary}
+                </p>
+              </article>
+            ) : (
               <p className="text-[0.96rem] leading-8 text-muted-foreground">
-                {latestPost.summary}
+                No writing published yet.
               </p>
-            </article>
+            )}
             <TextLink href="/writing" className="text-muted-foreground">
               View all writing
             </TextLink>

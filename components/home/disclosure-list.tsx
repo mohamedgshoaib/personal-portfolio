@@ -1,8 +1,14 @@
 "use client"
 
+import Image from "next/image"
 import * as React from "react"
 import { Accordion } from "@base-ui/react/accordion"
 
+import {
+  PreviewCard,
+  PreviewCardContent,
+  PreviewCardTrigger,
+} from "@/components/ui/preview-card"
 import type { Experience, Project } from "@/lib/site-content"
 
 type DisclosureListProps =
@@ -35,6 +41,23 @@ export function DisclosureList(props: DisclosureListProps) {
 
 function ProjectDisclosureList({ items }: { items: Project[] }) {
   const [value, setValue] = React.useState<string[]>([])
+  const [supportsHoverPreview, setSupportsHoverPreview] = React.useState(false)
+  const showPersistentImage = true
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)")
+
+    function updatePreviewSupport(event?: MediaQueryListEvent) {
+      setSupportsHoverPreview(event ? event.matches : mediaQuery.matches)
+    }
+
+    updatePreviewSupport()
+    mediaQuery.addEventListener("change", updatePreviewSupport)
+
+    return () => {
+      mediaQuery.removeEventListener("change", updatePreviewSupport)
+    }
+  }, [])
 
   return (
     <Accordion.Root
@@ -51,18 +74,34 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
         >
           <Accordion.Header>
             <Accordion.Trigger className="flex w-full items-start justify-between gap-6 py-3 text-left transition-[color] duration-150 ease-[var(--ease-out)] outline-none focus-visible:text-foreground data-[panel-open]:text-foreground">
-              <div className="max-w-[33rem] min-w-0 space-y-1">
-                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  <span className="font-heading text-lg font-medium text-foreground decoration-border underline-offset-4 group-hover:underline">
-                    {item.name}
-                  </span>
-                  <span className="text-sm text-muted-foreground">
-                    {item.status}
-                  </span>
+              <div className="grid min-w-0 flex-1 gap-4 sm:grid-cols-[minmax(0,1fr)_8.75rem] sm:items-start">
+                <div className="min-w-0 space-y-1">
+                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                    <span className="font-heading text-lg font-medium text-foreground decoration-border underline-offset-4 group-hover:underline">
+                      {item.name}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      {item.status}
+                    </span>
+                  </div>
+                  <p className="text-[0.96rem] leading-8 text-muted-foreground">
+                    {item.summary}
+                  </p>
                 </div>
-                <p className="text-[0.96rem] leading-8 text-muted-foreground">
-                  {item.summary}
-                </p>
+
+                {showPersistentImage ? (
+                  <div className="overflow-hidden rounded-[1.1rem]">
+                    {supportsHoverPreview ? (
+                      <ProjectPreviewCard item={item}>
+                        <span className="block">
+                          <ProjectImage item={item} />
+                        </span>
+                      </ProjectPreviewCard>
+                    ) : (
+                      <ProjectImage item={item} />
+                    )}
+                  </div>
+                ) : null}
               </div>
               <DisclosureChevron />
             </Accordion.Trigger>
@@ -84,6 +123,50 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
         </Accordion.Item>
       ))}
     </Accordion.Root>
+  )
+}
+
+function ProjectPreviewCard({
+  children,
+  item,
+}: {
+  children: React.ReactElement
+  item: Project
+}) {
+  return (
+    <PreviewCard>
+      <PreviewCardTrigger>{children}</PreviewCardTrigger>
+      <PreviewCardContent
+        side="bottom"
+        align="center"
+        sideOffset={-10}
+        className="w-[min(32rem,80vw)]"
+      >
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <Image
+            src={item.image.src}
+            alt={item.image.alt}
+            fill
+            sizes="(min-width: 640px) 32rem, 80vw"
+            className="object-cover shadow-none!"
+          />
+        </div>
+      </PreviewCardContent>
+    </PreviewCard>
+  )
+}
+
+function ProjectImage({ item }: { item: Project }) {
+  return (
+    <div className="relative aspect-[4/3] w-full overflow-hidden">
+      <Image
+        src={item.image.src}
+        alt={item.image.alt}
+        fill
+        sizes="(min-width: 640px) 140px, 100vw"
+        className="object-cover shadow-none!"
+      />
+    </div>
   )
 }
 

@@ -184,7 +184,7 @@ export function FloatingDock() {
   return (
     <TooltipProvider>
       <div className="fixed bottom-0 left-1/2 z-50 flex w-full -translate-x-1/2 justify-center px-4 pb-2.5 sm:pb-5">
-        <div className="pointer-events-none absolute bottom-0 left-0 hidden h-full w-full sm:block">
+        <div className="pointer-events-none absolute bottom-0 left-1/2 hidden h-[calc(100%+0.75rem)] w-[min(42rem,calc(100vw-2rem))] -translate-x-1/2 sm:block">
           <div className="absolute inset-0 z-[1] backdrop-blur-[0.5px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_0%,_rgba(0,0,0,1)_12.5%,_rgba(0,0,0,1)_25%,_rgba(0,0,0,0)_37.5%)]" />
           <div className="absolute inset-0 z-[2] backdrop-blur-[1px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_12.5%,_rgba(0,0,0,1)_25%,_rgba(0,0,0,1)_37.5%,_rgba(0,0,0,0)_50%)]" />
           <div className="absolute inset-0 z-[3] backdrop-blur-[2px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_25%,_rgba(0,0,0,1)_37.5%,_rgba(0,0,0,1)_50%,_rgba(0,0,0,0)_62.5%)]" />
@@ -194,77 +194,79 @@ export function FloatingDock() {
           <div className="absolute inset-0 z-[7] backdrop-blur-[6px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_75%,_rgba(0,0,0,1)_87.5%,_rgba(0,0,0,1)_100%)]" />
           <div className="absolute inset-0 z-[8] backdrop-blur-[12px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_87.5%,_rgba(0,0,0,1)_100%)]" />
         </div>
-        <nav
-          aria-label="Quick navigation"
-          className="pointer-events-auto relative z-30 max-w-[calc(100vw-2rem)] rounded-2xl border border-border/70 bg-background/60 p-2 backdrop-blur-xl"
-        >
-          <div className="flex items-center gap-1.5">
-            <div
-              ref={clusterRef}
-              className="relative flex items-center gap-1.5"
-            >
-              {activeFrame ? (
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute top-0 left-0 z-0 rounded-xl bg-muted transition-[transform,width,height] duration-250 ease-[var(--ease-out)]"
-                  style={{
-                    height: `${activeFrame.height}px`,
-                    transform: `translateX(${activeFrame.left}px)`,
-                    width: `${activeFrame.width}px`,
+        <div className="relative inline-flex max-w-[calc(100vw-2rem)]">
+          <nav
+            aria-label="Quick navigation"
+            className="pointer-events-auto relative z-30 max-w-[calc(100vw-2rem)] rounded-2xl border border-border/70 bg-background/60 p-2 backdrop-blur-xl"
+          >
+            <div className="flex items-center gap-1.5">
+              <div
+                ref={clusterRef}
+                className="relative flex items-center gap-1.5"
+              >
+                {activeFrame ? (
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute top-0 left-0 z-0 rounded-xl bg-muted transition-[transform,width,height] duration-250 ease-[var(--ease-out)]"
+                    style={{
+                      height: `${activeFrame.height}px`,
+                      transform: `translateX(${activeFrame.left}px)`,
+                      width: `${activeFrame.width}px`,
+                    }}
+                  />
+                ) : null}
+                {items.map((item) => (
+                  <DockTooltip key={item.key} label={item.label}>
+                    <Link
+                      href={item.href}
+                      aria-label={item.label}
+                      ref={(element) => {
+                        itemRefs.current[item.key] = element
+                      }}
+                      onPointerDownCapture={() => {
+                        setPendingActiveKey(item.key)
+                      }}
+                      onClick={() => {
+                        setPendingActiveKey(item.key)
+                        setContactOpen(false)
+                      }}
+                      className={cn(
+                        "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground transition-[color,transform] duration-150 ease-[var(--ease-out)] outline-none hover:text-foreground focus-visible:text-foreground motion-safe:hover:-translate-y-px",
+                        activeKey === item.key && "text-foreground"
+                      )}
+                    >
+                      {item.icon}
+                    </Link>
+                  </DockTooltip>
+                ))}
+
+                <DockContactPopover
+                  open={contactOpen}
+                  onOpenChange={setContactOpen}
+                  isActive={activeKey === "contact"}
+                  onTriggerRefChange={(element) => {
+                    itemRefs.current.contact = element
                   }}
                 />
-              ) : null}
-              {items.map((item) => (
-                <DockTooltip key={item.key} label={item.label}>
-                  <Link
-                    href={item.href}
-                    aria-label={item.label}
-                    ref={(element) => {
-                      itemRefs.current[item.key] = element
-                    }}
-                    onPointerDownCapture={() => {
-                      setPendingActiveKey(item.key)
-                    }}
-                    onClick={() => {
-                      setPendingActiveKey(item.key)
-                      setContactOpen(false)
-                    }}
-                    className={cn(
-                      "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground transition-[color,transform] duration-150 ease-[var(--ease-out)] outline-none hover:text-foreground focus-visible:text-foreground motion-safe:hover:-translate-y-px",
-                      activeKey === item.key && "text-foreground"
-                    )}
-                  >
-                    {item.icon}
-                  </Link>
-                </DockTooltip>
-              ))}
+              </div>
 
-              <DockContactPopover
-                open={contactOpen}
-                onOpenChange={setContactOpen}
-                isActive={activeKey === "contact"}
-                onTriggerRefChange={(element) => {
-                  itemRefs.current.contact = element
-                }}
-              />
-            </div>
-
-            <DockTooltip
-              label={resolvedTheme === "dark" ? "Light mode" : "Dark mode"}
-              shortcut="D"
-            >
-              <button
-                type="button"
-                aria-label="Toggle theme"
-                data-click-sound="off"
-                onClick={handleThemeToggle}
-                className="flex size-9 items-center justify-center rounded-xl bg-transparent text-foreground transition-[transform] duration-150 ease-[var(--ease-out)] outline-none motion-safe:hover:-translate-y-px"
+              <DockTooltip
+                label={resolvedTheme === "dark" ? "Light mode" : "Dark mode"}
+                shortcut="D"
               >
-                <span className="size-[22px] rounded-md bg-foreground transition-transform duration-200 ease-[var(--ease-out)] dark:bg-[#F3F4F6]" />
-              </button>
-            </DockTooltip>
-          </div>
-        </nav>
+                <button
+                  type="button"
+                  aria-label="Toggle theme"
+                  data-click-sound="off"
+                  onClick={handleThemeToggle}
+                  className="flex size-9 items-center justify-center rounded-xl bg-transparent text-foreground transition-[transform] duration-150 ease-[var(--ease-out)] outline-none motion-safe:hover:-translate-y-px"
+                >
+                  <span className="size-[22px] rounded-md bg-foreground transition-transform duration-200 ease-[var(--ease-out)] dark:bg-[#F3F4F6]" />
+                </button>
+              </DockTooltip>
+            </div>
+          </nav>
+        </div>
       </div>
     </TooltipProvider>
   )
