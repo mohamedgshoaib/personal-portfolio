@@ -27,7 +27,9 @@ function HomeSection({
 }) {
   return (
     <section id={id} className="scroll-mt-24 space-y-5">
-      <p className="text-sm font-medium text-foreground">{label}</p>
+      <p className="text-sm font-medium tracking-[-0.01em] text-foreground">
+        {label}
+      </p>
       {children}
     </section>
   )
@@ -40,10 +42,12 @@ export default function Page() {
         <header className="flex items-center gap-4">
           <Avatar />
           <div className="translate-y-px space-y-0.5">
-            <p className="font-heading text-base font-medium text-foreground">
+            <p className="font-heading text-[1.06rem] font-medium tracking-[-0.012em] text-foreground sm:text-[1.12rem]">
               {siteProfile.name}
             </p>
-            <p className="text-sm text-muted-foreground">{siteProfile.role}</p>
+            <p className="text-[0.96rem] text-muted-foreground">
+              {siteProfile.role}
+            </p>
           </div>
         </header>
 
@@ -87,7 +91,7 @@ export default function Page() {
               <article className="space-y-1.5">
                 <TextLink
                   href={`/writing/${latestPost.slug}`}
-                  className="font-heading text-lg font-medium"
+                  className="font-heading text-[1.03rem] font-medium tracking-[-0.01em]"
                 >
                   {latestPost.title}
                 </TextLink>

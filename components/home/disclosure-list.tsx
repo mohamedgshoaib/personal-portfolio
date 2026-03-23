@@ -74,7 +74,7 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
               <div className="grid min-w-0 flex-1 gap-4 sm:grid-cols-[minmax(0,1fr)_8.75rem] sm:items-start">
                 <div className="min-w-0 space-y-1">
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                    <span className="font-heading text-lg font-medium text-foreground decoration-border underline-offset-4 group-hover:underline">
+                    <span className="font-heading text-[1.03rem] font-medium tracking-[-0.01em] text-foreground decoration-border underline-offset-4 group-hover:underline sm:text-[1.06rem]">
                       {item.name}
                     </span>
                     <span className="text-sm text-muted-foreground">
@@ -172,7 +172,7 @@ function ExperienceDisclosureList({ items }: { items: Experience[] }) {
               <Accordion.Trigger className={DISCLOSURE_TRIGGER_CLASS}>
                 <div className="max-w-[33rem] min-w-0 space-y-1">
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                    <span className="font-heading text-lg font-medium text-foreground">
+                    <span className="font-heading text-[1.03rem] font-medium tracking-[-0.01em] text-foreground sm:text-[1.06rem]">
                       {item.role}
                     </span>
                     <span className="text-sm text-muted-foreground">
