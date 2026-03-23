@@ -1,14 +1,14 @@
-import type { Metadata } from "next"
-
 import { TextLink } from "@/components/home/text-link"
+import { createPageMetadata } from "@/lib/site-metadata"
 import { siteProfile } from "@/lib/site-content"
 import { posts } from "@/lib/writing"
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Writing",
   description:
     "Notes on React, Next.js, frontend architecture, accessibility, and building for the web.",
-}
+  path: "/writing",
+})
 
 export default function WritingPage() {
   return (

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 
 import { CopyMarkdownButton } from "@/components/writing/copy-markdown-button"
 import { PostHeaderLinks } from "@/components/writing/post-header-links"
+import { createArticleMetadata } from "@/lib/site-metadata"
 import { siteProfile } from "@/lib/site-content"
 import { getPostBySlug, posts } from "@/lib/writing"
 
@@ -29,10 +30,12 @@ export async function generateMetadata({
     }
   }
 
-  return {
+  return createArticleMetadata({
     title: post.title,
     description: post.description,
-  }
+    path: `/writing/${post.slug}`,
+    publishedTime: post.publishedAt,
+  })
 }
 
 export default async function WritingPostPage({ params }: PageProps) {
