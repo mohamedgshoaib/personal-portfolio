@@ -82,7 +82,10 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
           className={index === 0 ? "group" : "group pt-1"}
         >
           <Accordion.Header>
-            <Accordion.Trigger className={DISCLOSURE_TRIGGER_CLASS}>
+            <Accordion.Trigger
+              data-press-scale="off"
+              className={DISCLOSURE_TRIGGER_CLASS}
+            >
               <div className="grid min-w-0 flex-1 gap-4 sm:grid-cols-[minmax(0,1fr)_8.75rem] sm:items-start">
                 <div className="min-w-0 space-y-1">
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -194,7 +197,10 @@ function ExperienceDisclosureList({ items }: { items: Experience[] }) {
             className={index === 0 ? "group" : "group pt-1"}
           >
             <Accordion.Header>
-              <Accordion.Trigger className={DISCLOSURE_TRIGGER_CLASS}>
+              <Accordion.Trigger
+                data-press-scale="off"
+                className={DISCLOSURE_TRIGGER_CLASS}
+              >
                 <div className="max-w-[33rem] min-w-0 space-y-1">
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                     <span className="font-heading text-lg font-medium text-foreground">
