@@ -250,9 +250,9 @@
     -webkit-tap-highlight-color: transparent;
   }
   a[href],
-  button:not(:disabled):not([data-press-scale="off"]),
-  [role="button"]:not(:disabled):not([data-press-scale="off"]),
-  [aria-haspopup]:not(:disabled):not([data-press-scale="off"]),
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  [aria-haspopup]:not(:disabled),
   [aria-expanded] {
     cursor: pointer;
     transition-duration: 160ms;
@@ -261,9 +261,9 @@
     transform-origin: center;
   }
   a[href]:active,
-  button:not(:disabled):not([data-press-scale="off"]):active,
-  [role="button"]:not(:disabled):not([data-press-scale="off"]):active,
-  [aria-haspopup]:not(:disabled):not([data-press-scale="off"]):active,
+  button:not(:disabled):active,
+  [role="button"]:not(:disabled):active,
+  [aria-haspopup]:not(:disabled):active,
   [aria-expanded]:active {
     scale: 0.97;
   }
@@ -281,9 +281,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     a[href],
-    button:not(:disabled):not([data-press-scale="off"]),
-    [role="button"]:not(:disabled):not([data-press-scale="off"]),
-    [aria-haspopup]:not(:disabled):not([data-press-scale="off"]),
+    button:not(:disabled),
+    [role="button"]:not(:disabled),
+    [aria-haspopup]:not(:disabled),
     [aria-expanded] {
       transition-duration: 0ms;
     }
