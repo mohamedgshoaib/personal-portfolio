@@ -4,15 +4,42 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { FloatingDock } from "@/components/floating-dock"
 import { ThemeProvider } from "@/components/theme-provider"
+import {
+  siteDescription,
+  siteKeywords,
+  siteName,
+  siteUrl,
+  siteXHandle,
+} from "@/lib/site-metadata"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: {
-    default: "Mohamed Gamal",
-    template: "%s | Mohamed Gamal",
+    default: siteName,
+    template: `%s | ${siteName}`,
   },
-  description:
-    "Frontend Developer building fast, SEO-driven web applications with full RTL support, clean architecture, and durable frontend systems.",
+  description: siteDescription,
+  applicationName: siteName,
+  keywords: [...siteKeywords],
+  authors: [{ name: siteName }],
+  creator: siteName,
+  publisher: siteName,
+  category: "technology",
+  openGraph: {
+    title: siteName,
+    description: siteDescription,
+    url: "/",
+    siteName,
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: siteDescription,
+    creator: siteXHandle,
+  },
 }
 
 const sans = localFont({

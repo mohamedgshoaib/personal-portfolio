@@ -1,13 +1,13 @@
-import type { Metadata } from "next"
-
 import { DisclosureList } from "@/components/home/disclosure-list"
+import { createPageMetadata } from "@/lib/site-metadata"
 import { projects, siteProfile } from "@/lib/site-content"
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Projects",
   description:
     "Selected frontend projects focused on performance, SEO, RTL support, and maintainable implementation.",
-}
+  path: "/projects",
+})
 
 export default function ProjectsPage() {
   return (

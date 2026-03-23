@@ -1,9 +1,11 @@
+import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
 import { Avatar } from "@/components/home/avatar"
 import { ContactCopy } from "@/components/home/contact-copy"
 import { DisclosureList } from "@/components/home/disclosure-list"
 import { TextLink } from "@/components/home/text-link"
+import { siteDescription, siteName, siteXHandle } from "@/lib/site-metadata"
 import {
   experiences,
   featuredProjects,
@@ -15,6 +17,27 @@ import { posts } from "@/lib/writing"
 
 const latestPost = posts[0] ?? null
 const emailLink = socialLinks.find((link) => link.label === "Email")
+
+export const metadata: Metadata = {
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: siteName,
+    description: siteDescription,
+    url: "/",
+    siteName,
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: siteDescription,
+    creator: siteXHandle,
+  },
+}
 
 function HomeSection({
   id,
