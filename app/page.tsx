@@ -39,7 +39,7 @@ export default function Page() {
       <div className="space-y-12 sm:space-y-16">
         <header className="flex items-center gap-4">
           <Avatar />
-          <div className="space-y-0.5">
+          <div className="translate-y-px space-y-0.5">
             <p className="font-heading text-base font-medium text-foreground">
               {siteProfile.name}
             </p>
