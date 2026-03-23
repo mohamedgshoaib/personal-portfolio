@@ -4,7 +4,7 @@
 
 ## Project Purpose
 
-This repository is meant to become Mohamed Gamal's personal portfolio and blog.
+This repository is Mohamed Gamal's personal portfolio and writing site.
 
 The intended product includes:
 
@@ -16,15 +16,20 @@ The intended product includes:
 
 ## Current Reality
 
-The repository is still early in implementation and currently looks closer to a minimal Next.js + shadcn starter than a finished portfolio product.
+The repository is no longer a starter-level shell. It now has a real first implementation pass, a functioning content system, and a clearer shared interaction language, but it is still early in content breadth and overall site depth.
 
 What exists today:
 
-- basic App Router setup under `app/`
-- root layout and global theme styles
-- a real first-pass portfolio homepage in `app/page.tsx`
-- a writing index and first post route under `app/writing/`
-- a small shared component set under `components/`
+- App Router application under `app/`
+- root layout, global theme tokens, and shared motion utilities
+- a real first-pass homepage in `app/page.tsx`
+- a projects index in `app/projects/page.tsx`
+- a writing index and MDX-backed post route under `app/writing/`
+- a site-wide floating dock with theme and contact controls
+- shared UI, homepage, and writing components under `components/`
+- local portfolio content in `lib/site-content.ts`
+- MDX writing registry in `lib/writing.ts`
+- authored writing content under `content/writing/`
 - utility and sound files under `lib/`
 - sound playback hook under `hooks/use-sound.ts`
 - static assets under `public/`
@@ -300,17 +305,22 @@ High-value files to check before making changes:
 - `app/projects/page.tsx`: projects index route used by the dock and project archive
 - `components/floating-dock.tsx`: site-wide floating dock navigation and theme toggle
 - `app/writing/page.tsx`: writing index page
-- `app/writing/[slug]/page.tsx`: first post route and article rendering
+- `app/writing/[slug]/page.tsx`: post route, metadata, and article rendering
 - `components/theme-provider.tsx`: theme hotkey and all current interaction sound behavior
 - `components/home/*`: homepage-specific UI primitives
+- `components/writing/*`: writing-page header and copy utilities
 - `components/ui/button.tsx`: shared button primitive
 - `components/ui/button-styles.ts`: server-safe shared button variant definitions
+- `components/ui/disclosure-chevron.tsx`: shared disclosure icon primitive
 - `components/ui/popover.tsx`: Base UI popover primitive used by the dock contact panel
 - `components/ui/tooltip.tsx`: Base UI tooltip primitive adapted for compact utility UI
 - `components/ui/kbd.tsx`: keyboard hint primitive used inside tooltips and utility surfaces
 - `hooks/use-sound.ts`: Web Audio hook used by Soundcn assets
 - `lib/sound-engine.ts`: audio context and decode/play helpers
 - `lib/site-content.ts`: current typed portfolio content source
+- `lib/writing.ts`: MDX writing registry and markdown export generation
+- `content/writing/*.mdx`: authored writing source files
+- `mdx-components.tsx`: shared MDX component mapping
 - `README.md`: short project overview for humans
 - `AGENTS.md`: project intent and coding guidance
 - `spec/skills.md`: installed skill catalog
@@ -393,10 +403,13 @@ Completed work in this repo:
 - the tooltip surface is now solid and arrowless after review, with the theme tooltip showing `Light mode` or `Dark mode` plus `Kbd(D)` and the contact tooltip suppressed while its popover is open
 - the dock is intentionally small, blurred, and restrained so it reads as a compact utility object rather than app chrome
 - the dock now uses a Dimi-inspired layered backdrop-blur field so content can visually blur underneath it instead of being pushed away by page spacing
-- the contact popover currently exposes direct actions for email, LinkedIn, and X in a text-led panel that matches the site's calmer editorial system rather than copying Dimi's internal button styling
+- the contact popover currently exposes direct actions for `Email me`, `GitHub`, `LinkedIn`, and `X`
 - the dock now uses a single measured active surface that animates between Home, Projects, Writings, and Contact rather than relying on per-item backgrounds or hard-coded spacing math
 - the heavier multi-layer backdrop blur is now gated off on small screens, leaving the simpler dock surface blur in place for mobile performance
 - the dock shell now uses the same `bg-background/60` + `backdrop-blur-xl` surface treatment as the contact popover so both utility layers feel like one system
+- the dock navigation shell and contact popover shell now share extracted class tokens inside `components/floating-dock.tsx`, and the popover contact actions were reworked away from heavier mini-panel buttons so the popover reads more like a dock extension than a separate control cluster
+- the contact popover was later tightened again so its shell is slightly smaller than the dock while keeping the same material language, and its actions now use always-on quiet backgrounds because they behave like contact chips rather than navigation tabs
+- those contact chips now rely on stronger background/text hover contrast and border-driven depth instead of hover shadow so they stay readable without leaving the styling system
 - mobile sizing was tightened so the dock and contact popover do not introduce horizontal scroll
 
 12. Writing surface refinement
@@ -405,9 +418,10 @@ Completed work in this repo:
 - the writing list is now a quiet text-led archive closer to Emil's editorial rhythm and Dimi's system consistency
 - blog post pages now use the same narrow shell and calmer spacing as the homepage instead of a louder article template
 - article pages now rely on restrained metadata, simple prose rhythm, and lighter code surfaces rather than hero imagery
-- post content now supports ordered and unordered lists explicitly in the typed content model
-- post pages now include a compact header utility row with `Home`, `Back to writings`, and a copy-as-markdown action instead of a single `Writing` back link
-- the copy action uses a restrained three-line morphing SVG state icon and copies a markdown-formatted version of the post composed from MDX metadata plus the authored body
+- MDX prose now supports ordered and unordered lists through the shared writing presentation
+- post pages now include a compact header utility row with `Home`, `Back to writings`, and a copy action instead of a single `Writing` back link
+- the copy action now uses a text-only shared action style with `Copy article` and `Article copied` states, and it copies a markdown-formatted version of the post composed from MDX metadata plus the authored body
+- writing posts now support a lead image below the description; the first article uses `public/assets/writings/01-hello-world.webp`
 
 13. Shared text-link state and interaction cleanup
 
@@ -415,6 +429,9 @@ Completed work in this repo:
 - the shared link state keeps links muted at rest and slightly clearer on hover/focus, without introducing bright accent color
 - this shared behavior now lives in the global styling layer and the `components/home/text-link.tsx` primitive instead of being repeated per component
 - internal route links still use `next/link`, while external and `mailto:` links in the shared text-link primitive now render as plain anchors
+- the shared text-link and text-action utilities now preserve the global press-feedback transition instead of overriding it, so text-led actions still get the same click response as the rest of the interface
+- `text-link` now renders as a transformable inline-block utility, which ensures inline text links get the same press feedback as footer links, dock actions, and other interactive controls
+- external `http` and `https` URLs passed through `TextLink` now open in a new tab with safe `rel` defaults, which covers project links and social/profile links that should not replace the current page
 - hover lift was removed from the dock and the contact copy CTA so the project keeps shared press feedback without upward hover motion on those controls
 
 14. Mobile project disclosure image alignment
@@ -427,6 +444,7 @@ Completed work in this repo:
 
 - the temporary typed post-content model in `lib/site-content.ts` has now been replaced for writing by a real MDX-backed content flow
 - Next.js MDX integration is now configured through `@next/mdx` in `next.config.mjs`
+- `@mdx-js/loader` is installed because the Next.js MDX integration expects it at runtime
 - writing content now lives under `content/writing/*.mdx`
 - MDX component mapping now lives in `mdx-components.tsx`
 - the writing registry now lives in `lib/writing.ts`, which provides post metadata and the rendered MDX component for routes and indexes
@@ -434,16 +452,42 @@ Completed work in this repo:
 - the homepage writing preview, writing index, and writing post route now all read from the MDX-backed writing registry instead of the old typed post array
 - post metadata is now authored as a native `export const metadata = { ... }` inside each MDX file rather than being transformed from frontmatter at build time
 
+16. Motion cleanup for disclosure interactions
+
+- accordion disclosure motion is now rooted in shared global motion tokens and utilities in `app/globals.css` instead of repeated per-instance class strings
+- a shared `DisclosureChevron` primitive now lives in `components/ui/disclosure-chevron.tsx` and replaces duplicated inline chevron SVG behavior
+- homepage project and experience disclosures now consume extracted shared trigger/panel motion classes for more consistent open/close rhythm
+- shared overlay motion utilities now drive tooltip, popover, and preview-card enter/exit behavior so overlay timing/easing are no longer repeated per component
+- floating dock interactive icon color transitions now use shared root motion utility classes for cleaner motion consistency
+- the motion utility set now also includes shared layout-frame, surface-interaction, fade, and fade+blur patterns so repeated transition declarations are minimized at component level
+- floating dock active-frame motion, contact actions, contact copy feedback, and writing copy feedback now all consume those shared motion utilities
+- shared button variants in `components/ui/button-styles.ts` now consume the root motion-surface utility so interaction timing and easing stay consistent across primitives
+- disclosure motion now separates responsibilities: the panel handles height collapse while the inner content handles the softer opacity/blur exit, which keeps the close path lighter and more interruptible
+- overlay utilities were later tightened again so exits are shorter than enters, and height animations no longer use `will-change`, keeping the motion layer closer to the interface-performance guidance in the installed skills
+
+17. Content growth and asset adjustments
+
+- the local projects content now includes four shipped entries:
+  - Devloop
+  - Reway
+  - Mo's Experiences
+  - Dana Doors
+- the homepage and projects index now reflect that broader project set through the shared disclosure system
+- the avatar now uses theme-aware local PNG assets instead of WebP for better color accuracy:
+  - `public/assets/avatar/avatar-light.png`
+  - `public/assets/avatar/avatar-dark.png`
+- the footer now uses `Email me` copy, matching the contact popover language
+
 ## Important Constraints And Reminders
 
 - Do not assume blog/content modules already exist just because `AGENTS.md` describes them.
 - Do not remove the current Oxc setup.
 - Do not replace the centralized click-sound approach with per-component duplication unless there is a strong reason.
 - Keep sound imports pointed at `lib/*` unless the user explicitly reorganizes them.
-- Preserve the portfolio/blog direction even though the current UI is still mostly starter-level.
+- Preserve the portfolio/blog direction even though the broader site scope is still unfinished.
 - Prefer extending the current architecture rather than introducing a parallel pattern for the same concern.
 - Use the reference notes to guide design choices, but do not copy any referenced site literally.
-- Remember that the project is now in a "clear direction, low implementation" state: the vision is richer than the shipped UI.
+- Remember that the project is now in a "clear direction, partial implementation" state: the vision is still richer than the shipped UI.
 
 ## Recommended Workflow For Future Changes
 
@@ -466,12 +510,13 @@ Known current gaps between project intent and implementation:
 - the dock is now part of the reusable site shell, but its blur/offset/details should still be judged against the Dimi reference during future polish
 - the broader content model is still lightweight and local rather than a full CMS
 - writing now uses MDX, but projects and experience are still represented through the local typed content layer
-- only one project, one experience entry, and one post are currently represented in the current local content setup
+- four shipped projects are now represented in the local content setup
+- only one experience entry and one published writing post are currently represented
 - broader project, experience, and long-form content surfaces are not yet fully built out
 
 Current immediate likely next milestone:
 
-- expand the new homepage/content system with more real portfolio entries
+- continue expanding the homepage/content system with more real experience entries and writing posts
 - deepen the page polish and layout rhythm based on the reference synthesis
 - expand the new MDX-backed writing system with more real posts and any supporting authoring utilities it needs
 

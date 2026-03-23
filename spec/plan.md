@@ -12,12 +12,14 @@ Rebuild the current starter homepage into a clean, minimal portfolio for Mohamed
 - design-engineer aware
 - original to Mohamed
 
-The result should synthesize the reference set rather than copy any one site:
+The result should synthesize the reference set rather than copy any one site.
 
-- Dimi first
-- Samet second
-- Emil third
-- Shu as the least direct influence
+Current weighting in the shipped implementation is closer to:
+
+- Emil for restraint and editorial rhythm
+- Dimi for shell and system thinking
+- Samet for selective warmth, clarity, and proof
+- Shu as a structural reference rather than a direct visual target
 
 ## What The User Provided
 
@@ -51,9 +53,86 @@ The user already added theme-aware profile images under:
 
 - `public/assets/avatar`
 
-There is a dark version for dark mode and a light version for light mode.
+The current implementation uses PNG assets:
+
+- `avatar-light.png`
+- `avatar-dark.png`
 
 ### Project content currently provided
+
+#### Reway
+
+- Status: shipped
+- Link: [reway.page](https://www.reway.page/)
+- Screenshot: `public/assets/projects/reway/reway.webp`
+
+Core substance:
+
+- centralized bookmarking workspace
+- intelligent link extraction
+- real-time sync
+- Chrome extension for instant capture
+- keyboard-first navigation and flexible view modes
+- reduced-motion support and optimistic updates
+
+Architecture notes provided by the user:
+
+- Next.js 16 App Router (Turbopack)
+- React 19
+- Tailwind CSS
+- shadcn/ui
+- Supabase
+- Chrome MV3 extension
+- optimistic UI patterns
+
+#### Mo's Experiences
+
+- Status: shipped
+- Link: [mosexperiences.com](http://mosexperiences.com/)
+- Screenshot: `public/assets/projects/mosexperiences/mosexperiences.webp`
+
+Core substance:
+
+- production-ready travel platform
+- destinations, packages, and VIP tours
+- multi-channel booking and contact flows
+- admin dashboard and analytics coverage
+- SEO and Core Web Vitals awareness
+
+Architecture notes provided by the user:
+
+- Next.js 15.5.5 App Router
+- TypeScript
+- Tailwind CSS 4
+- shadcn/ui
+- Supabase
+- TanStack Query
+- Resend
+- next-themes
+
+#### Dana Doors
+
+- Status: shipped
+- Link: [danadoors.net](https://danadoors.net/)
+- Screenshot: `public/assets/projects/danadoors/danadoors.webp`
+
+Core substance:
+
+- bilingual EN/AR product catalog
+- full RTL support
+- Cloudinary-powered gallery browsing
+- dark and light themes
+- SEO-friendly product pages
+
+Architecture notes provided by the user:
+
+- Next.js 16 App Router
+- TypeScript
+- Tailwind CSS
+- Radix UI
+- shadcn/ui
+- Cloudinary
+- Upstash Redis
 
 #### Devloop
 
@@ -244,7 +323,7 @@ Already established in the repo:
 - Coss semantic color palette is now applied directly in `app/globals.css`
 - light mode uses a custom off-white canvas token instead of pure white
 
-This means the visual foundation exists, but the actual page implementation is still mostly starter-level.
+This means the visual foundation exists and the first real implementation pass is already in place, but the site still needs broader content depth and ongoing polish.
 
 ## Planned Homepage Information Architecture
 
@@ -323,10 +402,8 @@ The user has provided enough to start, but not enough to fully populate the whol
 
 Missing or still sparse:
 
-- more featured projects
 - more experience entries
 - more writing/posts if the homepage should feel fuller
-- confirmation of exact avatar filenames in `public/assets/avatar`
 - any preference on whether the avatar should be prominent or subtle
 
 These are not blockers for starting the first implementation pass.
@@ -358,10 +435,12 @@ These should follow composition-friendly patterns and avoid boolean mode sprawl.
 
 ### Phase 3.5. Move writing to MDX
 
+Status: completed
+
 - replace the temporary typed post-content model with an MDX-backed writing flow
 - preserve the current quiet writing index and article presentation while changing the content source
 - keep the MDX setup lightweight and aligned with App Router patterns
-- support frontmatter-style metadata and maintainable long-form content authoring
+- support maintainable long-form content authoring with native MDX metadata exports
 - treat this as the chosen direction for writing, not an open question
 - use the Next.js integration path with `@next/mdx`
 - use `mdx-components.tsx` for component mapping instead of planning around `providerImportSource`
@@ -394,4 +473,8 @@ These should follow composition-friendly patterns and avoid boolean mode sprawl.
 
 ## Immediate Next Step
 
-Start the real homepage rebuild using the current provided content, with Devloop as the first featured project and `Hello World` as the first writing entry.
+Continue expanding the real content set and polishing the shared system, with particular focus on:
+
+- adding more experience and writing entries
+- preserving shared interaction primitives instead of per-component drift
+- continuing the quieter Emil + Dimi synthesis across unfinished surfaces
