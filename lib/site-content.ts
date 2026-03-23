@@ -165,6 +165,8 @@ export const projects: Project[] = [
   },
 ]
 
+export const featuredProjects = projects.slice(0, 3)
+
 export const experiences: Experience[] = [
   {
     company: "TELUS International",

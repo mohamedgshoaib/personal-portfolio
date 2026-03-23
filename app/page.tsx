@@ -6,7 +6,7 @@ import { DisclosureList } from "@/components/home/disclosure-list"
 import { TextLink } from "@/components/home/text-link"
 import {
   experiences,
-  projects,
+  featuredProjects,
   siteProfile,
   socialLinks,
   technologies,
@@ -66,7 +66,7 @@ export default function Page() {
 
         <HomeSection id="projects" label="Projects">
           <div className="space-y-5">
-            <DisclosureList type="projects" items={projects} />
+            <DisclosureList type="projects" items={featuredProjects} />
             <TextLink href="/projects">View all projects</TextLink>
           </div>
         </HomeSection>
