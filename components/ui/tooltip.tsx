@@ -64,7 +64,7 @@ function TooltipContent({
         <BaseTooltip.Popup
           data-slot="tooltip-content"
           className={cn(
-            "tooltip motion-overlay-scale relative rounded-xl border border-border/80 bg-background px-3 py-1.5 text-xs text-foreground shadow-none data-[instant]:duration-0",
+            "tooltip relative motion-overlay-scale rounded-xl border border-border/80 bg-background px-3 py-1.5 text-xs text-foreground shadow-none data-[instant]:duration-0",
             className
           )}
         >

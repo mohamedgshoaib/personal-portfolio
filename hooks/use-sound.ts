@@ -30,18 +30,26 @@ export function useSound(
   const sourceRef = useRef<AudioBufferSourceNode | null>(null)
   const gainRef = useRef<GainNode | null>(null)
   const bufferRef = useRef<AudioBuffer | null>(null)
+  const loadingRef = useRef<Promise<AudioBuffer> | null>(null)
 
-  useEffect(() => {
-    let cancelled = false
-    decodeAudioData(sound.dataUri).then((buffer) => {
-      if (!cancelled) {
+  const ensureBuffer = useCallback(async () => {
+    if (bufferRef.current) {
+      return bufferRef.current
+    }
+
+    const pendingLoad =
+      loadingRef.current ??
+      decodeAudioData(sound.dataUri).then((buffer) => {
         bufferRef.current = buffer
         setDuration(buffer.duration)
-      }
-    })
-    return () => {
-      cancelled = true
-    }
+        loadingRef.current = null
+
+        return buffer
+      })
+
+    loadingRef.current = pendingLoad
+
+    return pendingLoad
   }, [sound.dataUri])
 
   const stop = useCallback(() => {
@@ -59,40 +67,52 @@ export function useSound(
 
   const play = useCallback(
     (overrides?: { volume?: number; playbackRate?: number }) => {
-      if (!soundEnabled || !bufferRef.current) return
+      if (!soundEnabled) return
 
-      const ctx = getAudioContext()
+      void (async () => {
+        const buffer = await ensureBuffer()
+        const ctx = getAudioContext()
 
-      if (ctx.state === "suspended") {
-        ctx.resume()
-      }
+        if (ctx.state === "suspended") {
+          await ctx.resume()
+        }
 
-      if (interrupt && sourceRef.current) {
-        stop()
-      }
+        if (interrupt && sourceRef.current) {
+          stop()
+        }
 
-      const source = ctx.createBufferSource()
-      const gain = ctx.createGain()
+        const source = ctx.createBufferSource()
+        const gain = ctx.createGain()
 
-      source.buffer = bufferRef.current
-      source.playbackRate.value = overrides?.playbackRate ?? playbackRate
-      gain.gain.value = overrides?.volume ?? volume
+        source.buffer = buffer
+        source.playbackRate.value = overrides?.playbackRate ?? playbackRate
+        gain.gain.value = overrides?.volume ?? volume
 
-      source.connect(gain)
-      gain.connect(ctx.destination)
+        source.connect(gain)
+        gain.connect(ctx.destination)
 
-      source.onended = () => {
-        setIsPlaying(false)
-        onEnd?.()
-      }
+        source.onended = () => {
+          setIsPlaying(false)
+          onEnd?.()
+        }
 
-      source.start(0)
-      sourceRef.current = source
-      gainRef.current = gain
-      setIsPlaying(true)
-      onPlay?.()
+        source.start(0)
+        sourceRef.current = source
+        gainRef.current = gain
+        setIsPlaying(true)
+        onPlay?.()
+      })()
     },
-    [soundEnabled, playbackRate, volume, interrupt, stop, onPlay, onEnd]
+    [
+      soundEnabled,
+      ensureBuffer,
+      playbackRate,
+      volume,
+      interrupt,
+      stop,
+      onPlay,
+      onEnd,
+    ]
   )
 
   const pause = useCallback(() => {

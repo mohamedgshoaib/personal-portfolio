@@ -4,6 +4,7 @@ import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
 import { useSound } from "@/hooks/use-sound"
 import { clickSoftSound } from "@/lib/click-soft"
+import { playSound } from "@/lib/sound-engine"
 import { switchOffSound } from "@/lib/switch-off"
 import { switchOnSound } from "@/lib/switch-on"
 
@@ -101,17 +102,15 @@ function ClickSound() {
 
 function ThemeHotkey() {
   const { resolvedTheme, setTheme } = useTheme()
-  const [playSwitchOn] = useSound(switchOnSound, { interrupt: true })
-  const [playSwitchOff] = useSound(switchOffSound, { interrupt: true })
 
   const toggleTheme = React.useEffectEvent(() => {
     if (resolvedTheme === "dark") {
-      playSwitchOn()
+      void playSound(switchOnSound.dataUri)
       setTheme("light")
       return
     }
 
-    playSwitchOff()
+    void playSound(switchOffSound.dataUri)
     setTheme("dark")
   })
 

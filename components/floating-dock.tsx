@@ -26,7 +26,7 @@ import {
   TooltipTrigger,
   createTooltipHandle,
 } from "@/components/ui/tooltip"
-import { useSound } from "@/hooks/use-sound"
+import { playSound } from "@/lib/sound-engine"
 import { socialLinks } from "@/lib/site-content"
 import { switchOffSound } from "@/lib/switch-off"
 import { switchOnSound } from "@/lib/switch-on"
@@ -64,8 +64,6 @@ export function FloatingDock() {
     DockKey,
     "contact"
   > | null>(null)
-  const [playSwitchOn] = useSound(switchOnSound, { interrupt: true })
-  const [playSwitchOff] = useSound(switchOffSound, { interrupt: true })
   const clusterRef = React.useRef<HTMLDivElement | null>(null)
   const itemRefs = React.useRef<Partial<Record<DockKey, HTMLElement | null>>>(
     {}
@@ -181,12 +179,12 @@ export function FloatingDock() {
 
   function handleThemeToggle() {
     if (resolvedTheme === "dark") {
-      playSwitchOn()
+      void playSound(switchOnSound.dataUri)
       setTheme("light")
       return
     }
 
-    playSwitchOff()
+    void playSound(switchOffSound.dataUri)
     setTheme("dark")
   }
 
@@ -219,7 +217,7 @@ export function FloatingDock() {
                 {activeFrame ? (
                   <span
                     aria-hidden="true"
-                    className="motion-layout-frame pointer-events-none absolute top-0 left-0 z-0 rounded-xl bg-muted"
+                    className="pointer-events-none absolute top-0 left-0 z-0 rounded-xl bg-muted motion-layout-frame"
                     style={{
                       height: `${activeFrame.height}px`,
                       transform: `translateX(${activeFrame.left}px)`,
@@ -243,7 +241,7 @@ export function FloatingDock() {
                         setContactOpen(false)
                       }}
                       className={cn(
-                        "motion-interactive-color relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground outline-none hover:text-foreground focus-visible:text-foreground",
+                        "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground motion-interactive-color outline-none hover:text-foreground focus-visible:text-foreground",
                         activeKey === item.key && "text-foreground"
                       )}
                     >
@@ -273,7 +271,7 @@ export function FloatingDock() {
                   onClick={handleThemeToggle}
                   className="flex size-9 items-center justify-center rounded-xl bg-transparent text-foreground outline-none"
                 >
-                  <span className="motion-surface-interaction size-[22px] rounded-md bg-foreground dark:bg-[#F3F4F6]" />
+                  <span className="size-[22px] rounded-md bg-foreground motion-surface-interaction dark:bg-[#F3F4F6]" />
                 </button>
               </DockTooltip>
             </div>
@@ -336,7 +334,7 @@ function DockContactPopover({
             type="button"
             aria-label="Open contact options"
             className={cn(
-              "motion-interactive-color relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground outline-none hover:text-foreground focus-visible:text-foreground",
+              "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground motion-interactive-color outline-none hover:text-foreground focus-visible:text-foreground",
               isActive && "text-foreground"
             )}
           >

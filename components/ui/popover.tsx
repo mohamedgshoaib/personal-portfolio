@@ -65,7 +65,7 @@ function PopoverContent({
         <BasePopover.Popup
           data-slot="popover-content"
           className={cn(
-            "motion-overlay-lift-blur z-40 rounded-2xl border border-border/70 bg-background/22 p-2 backdrop-blur-md",
+            "z-40 motion-overlay-lift-blur rounded-2xl border border-border/70 bg-background/22 p-2 backdrop-blur-md",
             className
           )}
         >
