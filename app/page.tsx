@@ -115,7 +115,7 @@ export default function Page() {
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 sm:justify-end">
             {socialLinks.map((link) => (
               <TextLink key={link.label} href={link.href}>
-                {link.label}
+                {link.label === "Email" ? "Email me" : link.label}
               </TextLink>
             ))}
           </div>

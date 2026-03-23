@@ -47,6 +47,15 @@ type ActiveFrame = {
   width: number
 }
 
+const DOCK_SURFACE_CLASS =
+  "max-w-[calc(100vw-2rem)] rounded-2xl border border-border/70 bg-background/60 p-1.5 backdrop-blur-xl"
+
+const DOCK_POPOVER_SURFACE_CLASS =
+  "max-w-[calc(100vw-2rem)] rounded-2xl border border-border/70 bg-background/60 p-1.5 backdrop-blur-xl"
+
+const DOCK_CONTACT_ACTION_CLASS =
+  "motion-surface-interaction relative z-10 inline-flex h-8 min-w-0 items-center rounded-xl border border-border/60 bg-muted px-2.5 py-1.5 font-sans text-[0.84rem] leading-none text-muted-foreground hover:border-border/90 hover:bg-card hover:text-foreground focus-visible:border-border/90 focus-visible:bg-card focus-visible:text-foreground focus-visible:outline-none sm:h-9 sm:px-3 sm:text-[0.875rem]"
+
 export function FloatingDock() {
   const pathname = usePathname()
   const { resolvedTheme, setTheme } = useTheme()
@@ -197,7 +206,10 @@ export function FloatingDock() {
         <div className="relative inline-flex max-w-[calc(100vw-2rem)]">
           <nav
             aria-label="Quick navigation"
-            className="pointer-events-auto relative z-30 max-w-[calc(100vw-2rem)] rounded-2xl border border-border/70 bg-background/60 p-2 backdrop-blur-xl"
+            className={cn(
+              "pointer-events-auto relative z-30",
+              DOCK_SURFACE_CLASS
+            )}
           >
             <div className="flex items-center gap-1.5">
               <div
@@ -207,7 +219,7 @@ export function FloatingDock() {
                 {activeFrame ? (
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute top-0 left-0 z-0 rounded-xl bg-muted transition-[transform,width,height] duration-250 ease-[var(--ease-out)]"
+                    className="motion-layout-frame pointer-events-none absolute top-0 left-0 z-0 rounded-xl bg-muted"
                     style={{
                       height: `${activeFrame.height}px`,
                       transform: `translateX(${activeFrame.left}px)`,
@@ -231,7 +243,7 @@ export function FloatingDock() {
                         setContactOpen(false)
                       }}
                       className={cn(
-                        "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground transition-[color,transform] duration-150 ease-[var(--ease-out)] outline-none hover:text-foreground focus-visible:text-foreground",
+                        "motion-interactive-color relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground outline-none hover:text-foreground focus-visible:text-foreground",
                         activeKey === item.key && "text-foreground"
                       )}
                     >
@@ -259,9 +271,9 @@ export function FloatingDock() {
                   aria-label="Toggle theme"
                   data-click-sound="off"
                   onClick={handleThemeToggle}
-                  className="flex size-9 items-center justify-center rounded-xl bg-transparent text-foreground transition-[transform] duration-150 ease-[var(--ease-out)] outline-none"
+                  className="flex size-9 items-center justify-center rounded-xl bg-transparent text-foreground outline-none"
                 >
-                  <span className="size-[22px] rounded-md bg-foreground transition-transform duration-200 ease-[var(--ease-out)] dark:bg-[#F3F4F6]" />
+                  <span className="motion-surface-interaction size-[22px] rounded-md bg-foreground dark:bg-[#F3F4F6]" />
                 </button>
               </DockTooltip>
             </div>
@@ -287,6 +299,7 @@ function DockContactPopover({
   const tooltipHandle = React.useMemo(() => createTooltipHandle(), [])
   const triggerId = "dock-contact-trigger"
   const emailLink = socialLinks.find((link) => link.label === "Email")
+  const githubLink = socialLinks.find((link) => link.label === "GitHub")
   const linkedInLink = socialLinks.find((link) => link.label === "LinkedIn")
   const xLink = socialLinks.find((link) => link.label === "X")
 
@@ -301,10 +314,13 @@ function DockContactPopover({
         handle={popoverHandle}
         triggerId={triggerId}
       >
-        <PopoverContent className="max-w-[calc(100vw-1rem)] rounded-2xl border border-border/70 bg-background/60 p-1.5 backdrop-blur-xl sm:max-w-[calc(100vw-2rem)] sm:p-2">
-          <div className="flex flex-nowrap items-center justify-center gap-1.5 sm:gap-2">
+        <PopoverContent className={DOCK_POPOVER_SURFACE_CLASS}>
+          <div className="flex flex-nowrap items-center justify-center gap-1 sm:gap-1.5">
             {emailLink ? (
               <ContactAction href={emailLink.href} label="Email me" />
+            ) : null}
+            {githubLink ? (
+              <ContactAction href={githubLink.href} label="GitHub" />
             ) : null}
             {linkedInLink ? (
               <ContactAction href={linkedInLink.href} label="LinkedIn" />
@@ -320,7 +336,7 @@ function DockContactPopover({
             type="button"
             aria-label="Open contact options"
             className={cn(
-              "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground transition-[color,transform] duration-150 ease-[var(--ease-out)] outline-none hover:text-foreground focus-visible:text-foreground",
+              "motion-interactive-color relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground outline-none hover:text-foreground focus-visible:text-foreground",
               isActive && "text-foreground"
             )}
           >
@@ -367,12 +383,9 @@ function ContactAction({ href, label }: { href: string; label: string }) {
   const isExternal = href.startsWith("http")
   const isClientRoute = href.startsWith("/") || href.startsWith("#")
 
-  const className =
-    "relative z-10 inline-flex h-9 min-w-0 items-center rounded-xl border border-border/70 bg-card px-3 py-1.5 font-sans text-[0.875rem] leading-none text-card-foreground transition-[background-color,color,transform,border-color] duration-200 ease-[var(--ease-out)] hover:border-border/90 hover:bg-muted focus-visible:border-border/90 focus-visible:bg-muted focus-visible:outline-none sm:h-10 sm:px-3.5 sm:text-[0.95rem]"
-
   if (isClientRoute) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={DOCK_CONTACT_ACTION_CLASS}>
         <span className="truncate">{label}</span>
       </Link>
     )
@@ -383,7 +396,7 @@ function ContactAction({ href, label }: { href: string; label: string }) {
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer noopener" : undefined}
-      className={className}
+      className={DOCK_CONTACT_ACTION_CLASS}
     >
       <span className="truncate">{label}</span>
     </a>
