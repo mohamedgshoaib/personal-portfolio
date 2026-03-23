@@ -68,6 +68,79 @@ export const technologies: Technology[] = [
 
 export const projects: Project[] = [
   {
+    name: "Dana Doors",
+    slug: "dana-doors",
+    status: "shipped",
+    href: "https://danadoors.net/",
+    summary:
+      "A bilingual product catalog for aluminum doors, windows, handrails, kitchens, and related offerings.",
+    details:
+      "Built as a modern EN/AR showcase experience with full RTL localization and image-first product browsing. The site pairs Cloudinary-powered galleries with responsive layouts, dark/light themes, and a search-friendly SEO setup including metadata, sitemap coverage, and structured data so catalog pages stay discoverable.",
+    architecture: [
+      "Next.js 16 App Router",
+      "TypeScript",
+      "Tailwind CSS",
+      "Radix UI",
+      "shadcn/ui",
+      "Cloudinary (image delivery + CDN)",
+      "Upstash Redis (visit analytics counter)",
+      "SEO metadata + sitemap + structured data",
+    ],
+    image: {
+      src: "/assets/projects/danadoors/danadoors.webp",
+      alt: "Homepage preview for Dana Doors bilingual product catalog website.",
+    },
+  },
+  {
+    name: "Mo's Experiences",
+    slug: "mos-experiences",
+    status: "shipped",
+    href: "http://mosexperiences.com/",
+    summary:
+      "A production-ready travel platform with destinations, packages, VIP tours, and multi-channel booking flows.",
+    details:
+      "Built to give a tourism business one managed system for discovery, inquiries, and booking operations across languages. The platform includes en/fr routing, searchable content, favorites, multiple contact and booking flows with email and WhatsApp integration, plus an admin dashboard for CRUD content management and analytics coverage for engagement, Core Web Vitals, and SEO health.",
+    architecture: [
+      "Next.js 15.5.5 App Router",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "shadcn/ui",
+      "Supabase (PostgreSQL, Auth)",
+      "TanStack Query",
+      "Resend",
+      "next-themes",
+      "Custom analytics tracking layer",
+      "OpenGraph + JSON-LD + sitemap + robots + hreflang",
+    ],
+    image: {
+      src: "/assets/projects/mosexperiences/mosexperiences.webp",
+      alt: "Homepage preview for Mo's Experiences travel platform.",
+    },
+  },
+  {
+    name: "Reway",
+    slug: "reway",
+    status: "shipped",
+    href: "https://www.reway.page/",
+    summary:
+      "A bookmarking workspace with intelligent link extraction, real-time sync, and a Chrome extension for instant capture.",
+    details:
+      "Built to replace browser-siloed bookmark flows with one searchable workspace across devices. Reway supports smart paste-to-bookmark metadata enrichment, grouped organization, keyboard-first navigation, flexible view modes, reduced-motion support, and optimistic updates to keep interactions fast and responsive.",
+    architecture: [
+      "Next.js 16 App Router (Turbopack)",
+      "React 19",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Supabase (PostgreSQL, Auth, Realtime)",
+      "Chrome Extension (Manifest V3)",
+      "Optimistic UI patterns",
+    ],
+    image: {
+      src: "/assets/projects/reway/reway.webp",
+      alt: "Workspace preview for the Reway bookmarking platform.",
+    },
+  },
+  {
     name: "Devloop",
     slug: "devloop",
     status: "shipped",
