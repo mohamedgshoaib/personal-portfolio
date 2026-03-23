@@ -37,13 +37,13 @@ export async function decodeAudioData(dataUri: string): Promise<AudioBuffer> {
   return loadPromise
 }
 
-export interface PlaySoundOptions {
+interface PlaySoundOptions {
   volume?: number
   playbackRate?: number
   onEnd?: () => void
 }
 
-export interface SoundPlayback {
+interface SoundPlayback {
   stop: () => void
 }
 

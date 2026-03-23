@@ -1,9 +1,9 @@
-export type SocialLink = {
+type SocialLink = {
   href: string
   label: string
 }
 
-export type Technology = {
+type Technology = {
   name: string
 }
 

@@ -76,37 +76,6 @@ function PopoverContent({
   )
 }
 
-function PopoverTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof BasePopover.Title>) {
-  return (
-    <BasePopover.Title
-      className={cn("text-sm font-medium text-foreground", className)}
-      {...props}
-    />
-  )
-}
-
-function PopoverDescription({
-  className,
-  ...props
-}: React.ComponentProps<typeof BasePopover.Description>) {
-  return (
-    <BasePopover.Description
-      className={cn("text-sm leading-6 text-muted-foreground", className)}
-      {...props}
-    />
-  )
-}
-
 const createPopoverHandle = BasePopover.createHandle
 
-export {
-  createPopoverHandle,
-  Popover,
-  PopoverContent,
-  PopoverDescription,
-  PopoverTitle,
-  PopoverTrigger,
-}
+export { createPopoverHandle, Popover, PopoverContent, PopoverTrigger }

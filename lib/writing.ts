@@ -5,7 +5,7 @@ import type { ComponentType } from "react"
 import helloWorldPostModule from "@/content/writing/hello-world-what-this-blog-is-about.mdx"
 import { metadata as helloWorldPostMetadata } from "@/content/writing/hello-world-what-this-blog-is-about.mdx"
 
-export type WritingPostMetadata = {
+type WritingPostMetadata = {
   title: string
   description: string
   summary: string
@@ -17,7 +17,7 @@ export type WritingPostMetadata = {
   }
 }
 
-export type WritingPost = WritingPostMetadata & {
+type WritingPost = WritingPostMetadata & {
   Component: ComponentType
   markdown: string
   slug: string
