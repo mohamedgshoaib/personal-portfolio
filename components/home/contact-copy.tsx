@@ -78,8 +78,8 @@ export function ContactCopy({ email }: { email: string }) {
         <span
           className={
             state === "idle"
-              ? "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100 transition-opacity duration-200 ease-[var(--ease-out)]"
-              : "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0 transition-opacity duration-200 ease-[var(--ease-out)]"
+              ? "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100"
+              : "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0"
           }
         >
           Want to get in touch?
@@ -87,8 +87,8 @@ export function ContactCopy({ email }: { email: string }) {
         <span
           className={
             state === "hover"
-              ? "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100 transition-opacity duration-200 ease-[var(--ease-out)]"
-              : "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0 transition-opacity duration-200 ease-[var(--ease-out)]"
+              ? "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100"
+              : "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0"
           }
         >
           Click to copy
@@ -96,8 +96,8 @@ export function ContactCopy({ email }: { email: string }) {
         <span
           className={
             state === "copied"
-              ? "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100 transition-opacity duration-200 ease-[var(--ease-out)]"
-              : "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0 transition-opacity duration-200 ease-[var(--ease-out)]"
+              ? "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100"
+              : "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0"
           }
         >
           Copied
@@ -118,7 +118,7 @@ export function ContactCopy({ email }: { email: string }) {
         onFocus={setHoverState}
         onBlur={setIdleState}
         aria-label="Copy email address"
-        className="inline-flex min-h-11 flex-col items-center justify-center rounded-[1.15rem] bg-muted px-6 py-3 text-lg text-foreground transition-[background-color,color,transform] duration-150 ease-[var(--ease-out)] hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none"
+        className="motion-surface-interaction inline-flex min-h-11 flex-col items-center justify-center rounded-[1.15rem] bg-muted px-6 py-3 text-lg text-foreground hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none"
       >
         <span>{email}</span>
       </button>

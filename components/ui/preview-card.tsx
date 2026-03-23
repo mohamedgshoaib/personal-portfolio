@@ -51,7 +51,7 @@ function PreviewCardContent({
       >
         <BasePreviewCard.Popup
           className={cn(
-            "overflow-hidden rounded-2xl bg-transparent transition-[transform,opacity] duration-180 ease-[var(--ease-out)] data-[ending-style]:scale-[0.97] data-[ending-style]:opacity-0 data-[starting-style]:scale-[0.97] data-[starting-style]:opacity-0",
+            "motion-overlay-scale overflow-hidden rounded-2xl bg-transparent",
             className
           )}
           style={{ transformOrigin: "var(--transform-origin)" }}

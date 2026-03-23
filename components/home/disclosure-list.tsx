@@ -9,6 +9,7 @@ import {
   PreviewCardContent,
   PreviewCardTrigger,
 } from "@/components/ui/preview-card"
+import { DisclosureChevron } from "@/components/ui/disclosure-chevron"
 import { TextLink } from "@/components/home/text-link"
 import type { Experience, Project } from "@/lib/site-content"
 
@@ -21,6 +22,13 @@ type DisclosureListProps =
       type: "experience"
       items: Experience[]
     }
+
+const DISCLOSURE_TRIGGER_CLASS =
+  "flex w-full items-start justify-between gap-6 py-3 text-left motion-interactive-color outline-none focus-visible:text-foreground data-[panel-open]:text-foreground"
+
+const DISCLOSURE_PANEL_CLASS = "motion-disclosure-panel"
+const DISCLOSURE_CONTENT_CLASS =
+  "motion-disclosure-content max-w-[33rem] space-y-3 pb-4 text-[0.96rem] leading-8 text-muted-foreground"
 
 export function DisclosureList(props: DisclosureListProps) {
   if (props.type === "projects") {
@@ -74,7 +82,7 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
           className={index === 0 ? "group" : "group pt-1"}
         >
           <Accordion.Header>
-            <Accordion.Trigger className="flex w-full items-start justify-between gap-6 py-3 text-left transition-[color] duration-150 ease-[var(--ease-out)] outline-none focus-visible:text-foreground data-[panel-open]:text-foreground">
+            <Accordion.Trigger className={DISCLOSURE_TRIGGER_CLASS}>
               <div className="grid min-w-0 flex-1 gap-4 sm:grid-cols-[minmax(0,1fr)_8.75rem] sm:items-start">
                 <div className="min-w-0 space-y-1">
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -107,8 +115,8 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
               <DisclosureChevron />
             </Accordion.Trigger>
           </Accordion.Header>
-          <Accordion.Panel className="overflow-hidden transition-[height,opacity,transform] duration-200 ease-[var(--ease-out)] data-[ending-style]:-translate-y-1 data-[ending-style]:opacity-0 data-[starting-style]:-translate-y-1 data-[starting-style]:opacity-0">
-            <div className="max-w-[33rem] space-y-3 pb-4 text-[0.96rem] leading-8 text-muted-foreground">
+          <Accordion.Panel className={DISCLOSURE_PANEL_CLASS}>
+            <div className={DISCLOSURE_CONTENT_CLASS}>
               <p>{item.details}</p>
               <p>{item.architecture.join(", ")}.</p>
               <p>
@@ -186,7 +194,7 @@ function ExperienceDisclosureList({ items }: { items: Experience[] }) {
             className={index === 0 ? "group" : "group pt-1"}
           >
             <Accordion.Header>
-              <Accordion.Trigger className="flex w-full items-start justify-between gap-6 py-3 text-left transition-[color] duration-150 ease-[var(--ease-out)] outline-none focus-visible:text-foreground data-[panel-open]:text-foreground">
+              <Accordion.Trigger className={DISCLOSURE_TRIGGER_CLASS}>
                 <div className="max-w-[33rem] min-w-0 space-y-1">
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                     <span className="font-heading text-lg font-medium text-foreground">
@@ -203,8 +211,8 @@ function ExperienceDisclosureList({ items }: { items: Experience[] }) {
                 <DisclosureChevron />
               </Accordion.Trigger>
             </Accordion.Header>
-            <Accordion.Panel className="overflow-hidden transition-[height,opacity,transform] duration-200 ease-[var(--ease-out)] data-[ending-style]:-translate-y-1 data-[ending-style]:opacity-0 data-[starting-style]:-translate-y-1 data-[starting-style]:opacity-0">
-              <div className="max-w-[33rem] space-y-3 pb-4 text-[0.96rem] leading-8 text-muted-foreground">
+            <Accordion.Panel className={DISCLOSURE_PANEL_CLASS}>
+              <div className={DISCLOSURE_CONTENT_CLASS}>
                 <p>{item.summary}</p>
               </div>
             </Accordion.Panel>
@@ -212,22 +220,5 @@ function ExperienceDisclosureList({ items }: { items: Experience[] }) {
         )
       })}
     </Accordion.Root>
-  )
-}
-
-function DisclosureChevron() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 14 14"
-      className="mt-0.5 size-3 shrink-0 text-muted-foreground transition-[color,transform] duration-200 ease-[var(--ease-out)] group-hover:text-foreground group-data-[open]:rotate-90 motion-reduce:transition-none"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 3.5 8.5 7 5 10.5" />
-    </svg>
   )
 }

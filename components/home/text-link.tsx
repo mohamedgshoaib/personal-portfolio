@@ -15,8 +15,15 @@ function isInternalHref(href: LinkProps["href"]) {
   )
 }
 
+function isExternalHttpHref(href: LinkProps["href"]) {
+  return (
+    typeof href === "string" &&
+    (href.startsWith("https://") || href.startsWith("http://"))
+  )
+}
+
 export function TextLink({ className, ...props }: TextLinkProps) {
-  const { children, href, ...rest } = props
+  const { children, href, rel, target, ...rest } = props
 
   if (isInternalHref(href)) {
     return (
@@ -30,6 +37,8 @@ export function TextLink({ className, ...props }: TextLinkProps) {
     <a
       className={cn("text-link", className)}
       href={typeof href === "string" ? href : "#"}
+      target={isExternalHttpHref(href) ? "_blank" : target}
+      rel={isExternalHttpHref(href) ? "noreferrer noopener" : rel}
       {...rest}
     >
       {children}
