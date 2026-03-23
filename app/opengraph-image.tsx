@@ -5,7 +5,7 @@ export const alt = `${siteProfile.name} portfolio`
 export const size = ogImageSize
 export const contentType = pngContentType
 
-export default function Image() {
+export default async function Image() {
   return createOgImage({
     eyebrow: "Portfolio",
     title: siteProfile.name,

@@ -4,7 +4,7 @@ export const alt = "Projects by Mohamed Gamal"
 export const size = ogImageSize
 export const contentType = pngContentType
 
-export default function Image() {
+export default async function Image() {
   return createOgImage({
     eyebrow: "Projects",
     title: "Selected frontend work.",

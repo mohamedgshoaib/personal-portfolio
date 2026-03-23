@@ -1,7 +1,4 @@
-import { readFile } from "node:fs/promises"
-import { join } from "node:path"
 import { ImageResponse } from "next/og"
-import { cache } from "react"
 
 import { siteName } from "@/lib/site-metadata"
 import { siteProfile } from "@/lib/site-content"
@@ -10,10 +7,6 @@ const OG_BACKGROUND = "#f7f5f1"
 const OG_FOREGROUND = "#18181b"
 const OG_MUTED = "#686867"
 const OG_BORDER = "rgba(24, 24, 27, 0.1)"
-
-const loadSansFont = cache(async () =>
-  readFile(join(process.cwd(), "public", "fonts", "google-sans-variable.ttf"))
-)
 
 export const ogImageSize = {
   width: 1200,
@@ -41,13 +34,12 @@ function getTitleFontSize(title: string) {
   return 82
 }
 
-export async function createOgImage({
+export function createOgImage({
   eyebrow,
   title,
   description,
   footer,
 }: CreateOgImageOptions) {
-  const sans = await loadSansFont()
   const titleFontSize = getTitleFontSize(title)
 
   return new ImageResponse(
@@ -59,7 +51,7 @@ export async function createOgImage({
         background: OG_BACKGROUND,
         color: OG_FOREGROUND,
         padding: "36px",
-        fontFamily: "Google Sans",
+        fontFamily: "sans-serif",
       }}
     >
       <div
@@ -147,16 +139,6 @@ export async function createOgImage({
         </div>
       </div>
     </div>,
-    {
-      ...ogImageSize,
-      fonts: [
-        {
-          name: "Google Sans",
-          data: sans,
-          style: "normal",
-          weight: 500,
-        },
-      ],
-    }
+    { ...ogImageSize }
   )
 }
