@@ -74,8 +74,8 @@ export function CopyMarkdownButton({ markdown }: { markdown: string }) {
             aria-hidden="true"
             className={
               copied
-                ? "motion-fade-blur absolute inset-0 inline-flex items-center whitespace-nowrap opacity-0 blur-[2px]"
-                : "motion-fade-blur absolute inset-0 inline-flex items-center whitespace-nowrap opacity-100 blur-0"
+                ? "absolute inset-0 inline-flex items-center whitespace-nowrap opacity-0 blur-[2px] motion-fade-blur"
+                : "blur-0 absolute inset-0 inline-flex items-center whitespace-nowrap opacity-100 motion-fade-blur"
             }
           >
             <span>Copy article</span>
@@ -84,8 +84,8 @@ export function CopyMarkdownButton({ markdown }: { markdown: string }) {
             aria-hidden="true"
             className={
               copied
-                ? "motion-fade-blur absolute inset-0 inline-flex items-center whitespace-nowrap opacity-100 blur-0"
-                : "motion-fade-blur absolute inset-0 inline-flex items-center whitespace-nowrap opacity-0 blur-[2px]"
+                ? "blur-0 absolute inset-0 inline-flex items-center whitespace-nowrap opacity-100 motion-fade-blur"
+                : "absolute inset-0 inline-flex items-center whitespace-nowrap opacity-0 blur-[2px] motion-fade-blur"
             }
           >
             <span>Article copied</span>

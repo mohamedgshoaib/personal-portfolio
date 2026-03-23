@@ -72,7 +72,7 @@ export default async function WritingPostPage({ params }: PageProps) {
                   alt={post.image.alt}
                   fill
                   sizes="(min-width: 768px) 33rem, calc(100vw - 3rem)"
-                  fetchPriority="high"
+                  priority
                   className="object-cover shadow-none!"
                 />
               </div>

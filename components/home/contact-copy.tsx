@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-
-const HOVER_POINTER_MEDIA_QUERY = "(hover: hover) and (pointer: fine)"
+import { useHoverCapability } from "@/hooks/use-hover-capability"
 
 function copyTextToClipboard(text: string) {
   if (navigator.clipboard?.writeText) {
@@ -32,23 +31,8 @@ function copyTextToClipboard(text: string) {
 
 export function ContactCopy({ email }: { email: string }) {
   const [copied, setCopied] = React.useState(false)
-  const [supportsHover, setSupportsHover] = React.useState(false)
+  const supportsHover = useHoverCapability()
   const timeoutRef = React.useRef<number | null>(null)
-
-  React.useEffect(() => {
-    const mediaQuery = window.matchMedia(HOVER_POINTER_MEDIA_QUERY)
-
-    function updateHoverSupport(event?: MediaQueryListEvent) {
-      setSupportsHover(event ? event.matches : mediaQuery.matches)
-    }
-
-    updateHoverSupport()
-    mediaQuery.addEventListener("change", updateHoverSupport)
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateHoverSupport)
-    }
-  }, [])
 
   React.useEffect(() => {
     return () => {

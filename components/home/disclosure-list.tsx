@@ -3,14 +3,11 @@
 import Image from "next/image"
 import * as React from "react"
 import { Accordion } from "@base-ui/react/accordion"
+import dynamic from "next/dynamic"
 
-import {
-  PreviewCard,
-  PreviewCardContent,
-  PreviewCardTrigger,
-} from "@/components/ui/preview-card"
 import { DisclosureChevron } from "@/components/ui/disclosure-chevron"
 import { TextLink } from "@/components/home/text-link"
+import { useHoverCapability } from "@/hooks/use-hover-capability"
 import type { Experience, Project } from "@/lib/site-content"
 
 type DisclosureListProps =
@@ -29,6 +26,12 @@ const DISCLOSURE_TRIGGER_CLASS =
 const DISCLOSURE_PANEL_CLASS = "motion-disclosure-panel"
 const DISCLOSURE_CONTENT_CLASS =
   "motion-disclosure-content max-w-[33rem] space-y-3 pb-4 text-[0.96rem] leading-8 text-muted-foreground"
+
+const ProjectHoverPreview = dynamic(() =>
+  import("@/components/home/project-hover-preview").then(
+    (mod) => mod.ProjectHoverPreview
+  )
+)
 
 export function DisclosureList(props: DisclosureListProps) {
   if (props.type === "projects") {
@@ -50,23 +53,8 @@ export function DisclosureList(props: DisclosureListProps) {
 
 function ProjectDisclosureList({ items }: { items: Project[] }) {
   const [value, setValue] = React.useState<string[]>([])
-  const [supportsHoverPreview, setSupportsHoverPreview] = React.useState(false)
+  const supportsHoverPreview = useHoverCapability()
   const showPersistentImage = true
-
-  React.useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)")
-
-    function updatePreviewSupport(event?: MediaQueryListEvent) {
-      setSupportsHoverPreview(event ? event.matches : mediaQuery.matches)
-    }
-
-    updatePreviewSupport()
-    mediaQuery.addEventListener("change", updatePreviewSupport)
-
-    return () => {
-      mediaQuery.removeEventListener("change", updatePreviewSupport)
-    }
-  }, [])
 
   return (
     <Accordion.Root
@@ -100,15 +88,10 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
 
                 {showPersistentImage ? (
                   <div className="mb-1 w-full max-w-[18rem] translate-x-[1.125rem] justify-self-center overflow-hidden rounded-[1.1rem] sm:mb-0 sm:max-w-none sm:translate-x-0 sm:justify-self-auto">
-                    {supportsHoverPreview ? (
-                      <ProjectPreviewCard item={item}>
-                        <span className="block">
-                          <ProjectImage item={item} />
-                        </span>
-                      </ProjectPreviewCard>
-                    ) : (
-                      <ProjectImage item={item} />
-                    )}
+                    <ProjectImageWithOptionalPreview
+                      item={item}
+                      supportsHoverPreview={supportsHoverPreview}
+                    />
                   </div>
                 ) : null}
               </div>
@@ -130,33 +113,25 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
   )
 }
 
-function ProjectPreviewCard({
-  children,
+function ProjectImageWithOptionalPreview({
   item,
+  supportsHoverPreview,
 }: {
-  children: React.ReactElement
   item: Project
+  supportsHoverPreview: boolean
 }) {
+  const image = <ProjectImage item={item} />
+
+  if (!supportsHoverPreview) {
+    return image
+  }
+
   return (
-    <PreviewCard>
-      <PreviewCardTrigger>{children}</PreviewCardTrigger>
-      <PreviewCardContent
-        side="bottom"
-        align="center"
-        sideOffset={-10}
-        className="w-[min(32rem,80vw)]"
-      >
-        <div className="relative aspect-[4/3] w-full overflow-hidden">
-          <Image
-            src={item.image.src}
-            alt={item.image.alt}
-            fill
-            sizes="(min-width: 640px) 32rem, 80vw"
-            className="object-cover shadow-none!"
-          />
-        </div>
-      </PreviewCardContent>
-    </PreviewCard>
+    <React.Suspense fallback={image}>
+      <ProjectHoverPreview item={item}>
+        <span className="block">{image}</span>
+      </ProjectHoverPreview>
+    </React.Suspense>
   )
 }
 
@@ -167,7 +142,7 @@ function ProjectImage({ item }: { item: Project }) {
         src={item.image.src}
         alt={item.image.alt}
         fill
-        sizes="(min-width: 640px) 140px, 100vw"
+        sizes="(min-width: 640px) 8.75rem, calc(100vw - 5rem)"
         className="object-cover shadow-none!"
       />
     </div>

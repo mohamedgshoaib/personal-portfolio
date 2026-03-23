@@ -9,7 +9,6 @@ export function Avatar() {
         fill
         sizes="(min-width: 640px) 4rem, 3.5rem"
         className="object-cover dark:hidden"
-        fetchPriority="high"
       />
       <Image
         src="/assets/avatar/avatar-dark.png"
@@ -17,7 +16,6 @@ export function Avatar() {
         fill
         sizes="(min-width: 640px) 4rem, 3.5rem"
         className="hidden object-cover dark:block"
-        fetchPriority="high"
       />
     </div>
   )
