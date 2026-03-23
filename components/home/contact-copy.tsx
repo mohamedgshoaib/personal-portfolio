@@ -2,6 +2,8 @@
 
 import * as React from "react"
 
+const HOVER_POINTER_MEDIA_QUERY = "(hover: hover) and (pointer: fine)"
+
 function copyTextToClipboard(text: string) {
   if (navigator.clipboard?.writeText) {
     return navigator.clipboard.writeText(text)
@@ -29,8 +31,24 @@ function copyTextToClipboard(text: string) {
 }
 
 export function ContactCopy({ email }: { email: string }) {
-  const [state, setState] = React.useState<"idle" | "hover" | "copied">("idle")
+  const [copied, setCopied] = React.useState(false)
+  const [supportsHover, setSupportsHover] = React.useState(false)
   const timeoutRef = React.useRef<number | null>(null)
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia(HOVER_POINTER_MEDIA_QUERY)
+
+    function updateHoverSupport(event?: MediaQueryListEvent) {
+      setSupportsHover(event ? event.matches : mediaQuery.matches)
+    }
+
+    updateHoverSupport()
+    mediaQuery.addEventListener("change", updateHoverSupport)
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateHoverSupport)
+    }
+  }, [])
 
   React.useEffect(() => {
     return () => {
@@ -40,27 +58,15 @@ export function ContactCopy({ email }: { email: string }) {
     }
   }, [])
 
-  function setHoverState() {
-    if (state !== "copied") {
-      setState("hover")
-    }
-  }
-
-  function setIdleState() {
-    if (state !== "copied") {
-      setState("idle")
-    }
-  }
-
   function resetToIdle() {
-    setState("idle")
+    setCopied(false)
     timeoutRef.current = null
   }
 
   async function handleCopy() {
     try {
       await copyTextToClipboard(email)
-      setState("copied")
+      setCopied(true)
 
       if (timeoutRef.current) {
         window.clearTimeout(timeoutRef.current)
@@ -72,53 +78,46 @@ export function ContactCopy({ email }: { email: string }) {
     }
   }
 
+  const helperLabel = copied
+    ? "Copied"
+    : supportsHover
+      ? "Want to get in touch? Click to copy."
+      : "Want to get in touch? Tap to copy."
+
   return (
     <div className="flex flex-col items-center gap-4 text-center">
       <div className="relative flex h-5 w-full items-center justify-center overflow-hidden text-sm text-muted-foreground">
         <span
           className={
-            state === "idle"
-              ? "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100"
-              : "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0"
+            copied
+              ? "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0 motion-fade"
+              : "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100 motion-fade"
           }
         >
-          Want to get in touch?
+          {supportsHover
+            ? "Want to get in touch? Click to copy."
+            : "Want to get in touch? Tap to copy."}
         </span>
         <span
           className={
-            state === "hover"
-              ? "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100"
-              : "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0"
-          }
-        >
-          Click to copy
-        </span>
-        <span
-          className={
-            state === "copied"
-              ? "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100"
-              : "motion-fade absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0"
+            copied
+              ? "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-100 motion-fade"
+              : "absolute inset-0 flex items-center justify-center whitespace-nowrap opacity-0 motion-fade"
           }
         >
           Copied
         </span>
-        <span className="invisible whitespace-nowrap">
-          Want to get in touch?
-        </span>
+        <span className="invisible whitespace-nowrap">{helperLabel}</span>
       </div>
       <span className="sr-only" aria-live="polite" role="status">
-        {state === "copied" ? "Email copied to clipboard." : ""}
+        {copied ? "Email copied to clipboard." : ""}
       </span>
 
       <button
         type="button"
         onClick={handleCopy}
-        onPointerEnter={setHoverState}
-        onPointerLeave={setIdleState}
-        onFocus={setHoverState}
-        onBlur={setIdleState}
         aria-label="Copy email address"
-        className="motion-surface-interaction inline-flex min-h-11 flex-col items-center justify-center rounded-[1.15rem] bg-muted px-6 py-3 text-lg text-foreground hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none"
+        className="inline-flex min-h-11 flex-col items-center justify-center rounded-[1.15rem] bg-muted px-6 py-3 text-lg text-foreground motion-surface-interaction hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none"
       >
         <span>{email}</span>
       </button>
