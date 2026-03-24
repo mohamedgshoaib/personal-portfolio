@@ -1,6 +1,11 @@
 import { DisclosureList } from "@/components/home/disclosure-list"
 import { JsonLd } from "@/components/seo/json-ld"
-import { projects, siteProfile } from "@/lib/content/site-content"
+import {
+  clientProjects,
+  personalProjects,
+  projects,
+  siteProfile,
+} from "@/lib/content/site-content"
 import { createProjectsPageSchema } from "@/lib/metadata/schema"
 import { createPageMetadata } from "@/lib/metadata/site-metadata"
 
@@ -20,8 +25,8 @@ export default function ProjectsPage() {
           <p className="text-sm font-medium text-foreground">Projects</p>
           <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
             <p>
-              A selection of frontend work across product websites, internal
-              tooling, and interface-heavy builds.
+              A selection of frontend work across client products and personal
+              systems.
             </p>
             <p>
               The common thread is care: clear planning, strong visual
@@ -31,8 +36,16 @@ export default function ProjectsPage() {
           </div>
         </header>
 
-        <section className="space-y-5">
-          <DisclosureList type="projects" items={projects} />
+        <section className="space-y-10">
+          <div className="space-y-5">
+            <p className="text-sm font-medium text-foreground">Personal</p>
+            <DisclosureList type="projects" items={personalProjects} />
+          </div>
+
+          <div className="space-y-5">
+            <p className="text-sm font-medium text-foreground">Client work</p>
+            <DisclosureList type="projects" items={clientProjects} />
+          </div>
         </section>
       </div>
 
