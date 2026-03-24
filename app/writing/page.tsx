@@ -1,6 +1,8 @@
 import { TextLink } from "@/components/home/text-link"
+import { JsonLd } from "@/components/seo/json-ld"
 import { posts } from "@/lib/content/writing"
 import { siteProfile } from "@/lib/content/site-content"
+import { createWritingPageSchema } from "@/lib/metadata/schema"
 import { createPageMetadata } from "@/lib/metadata/site-metadata"
 
 export const metadata = createPageMetadata({
@@ -13,6 +15,7 @@ export const metadata = createPageMetadata({
 export default function WritingPage() {
   return (
     <main className="mx-auto flex min-h-svh w-full max-w-[42rem] flex-col px-6 pt-10 pb-16 sm:px-8 sm:pt-14">
+      <JsonLd data={createWritingPageSchema(posts)} />
       <div className="space-y-12 sm:space-y-16">
         <header className="space-y-5">
           <p className="text-sm font-medium text-foreground">Writing</p>

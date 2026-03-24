@@ -23,7 +23,7 @@ type WritingPostMetadata = {
   }
 }
 
-type WritingPost = WritingPostMetadata & {
+export type WritingPost = WritingPostMetadata & {
   Component: ComponentType
   markdown: string
   slug: string

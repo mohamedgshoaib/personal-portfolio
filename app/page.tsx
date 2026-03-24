@@ -1,25 +1,31 @@
-import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import type { Metadata } from "next"
+import type { ReactNode } from "react"
 
-import { Avatar } from "@/components/home/avatar";
-import { ContactCopy } from "@/components/home/contact-copy";
-import { DisclosureList } from "@/components/home/disclosure-list";
-import { TextLink } from "@/components/home/text-link";
+import { Avatar } from "@/components/home/avatar"
+import { ContactCopy } from "@/components/home/contact-copy"
+import { DisclosureList } from "@/components/home/disclosure-list"
+import { TextLink } from "@/components/home/text-link"
+import { JsonLd } from "@/components/seo/json-ld"
 import {
   siteDescription,
   siteName,
   siteXHandle,
-} from "@/lib/metadata/site-metadata";
+} from "@/lib/metadata/site-metadata"
+import {
+  createHomepageSchema,
+  createPersonSchema,
+  createWebsiteSchema,
+} from "@/lib/metadata/schema"
 import {
   featuredProjects,
   homeContent,
   siteProfile,
   socialLinks,
-} from "@/lib/content/site-content";
-import { posts } from "@/lib/content/writing";
+} from "@/lib/content/site-content"
+import { posts } from "@/lib/content/writing"
 
-const latestPost = posts[0] ?? null;
-const emailLink = socialLinks.find((link) => link.label === "Email");
+const latestPost = posts[0] ?? null
+const emailLink = socialLinks.find((link) => link.label === "Email")
 
 export const metadata: Metadata = {
   description: siteDescription,
@@ -40,16 +46,16 @@ export const metadata: Metadata = {
     description: siteDescription,
     creator: siteXHandle,
   },
-};
+}
 
 function HomeSection({
   id,
   label,
   children,
 }: {
-  id?: string;
-  label: string;
-  children: ReactNode;
+  id?: string
+  label: string
+  children: ReactNode
 }) {
   return (
     <section id={id} className="scroll-mt-24 space-y-5">
@@ -58,12 +64,15 @@ function HomeSection({
       </p>
       {children}
     </section>
-  );
+  )
 }
 
 export default function Page() {
   return (
     <main className="mx-auto flex min-h-svh w-full max-w-[42rem] flex-col px-6 pt-10 pb-16 sm:px-8 sm:pt-14">
+      <JsonLd data={createWebsiteSchema()} />
+      <JsonLd data={createPersonSchema()} />
+      <JsonLd data={createHomepageSchema()} />
       <div className="space-y-12 sm:space-y-16">
         <header className="flex items-center gap-4">
           <Avatar />
@@ -154,5 +163,5 @@ export default function Page() {
         </div>
       </footer>
     </main>
-  );
+  )
 }

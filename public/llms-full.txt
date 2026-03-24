@@ -49,7 +49,7 @@ Preferred framing:
 
 ### Dana Doors
 
-A bilingual product catalog for a manufacturing business, designed to make a broad catalog easier to browse in both English and Arabic.
+A bilingual showroom website for doors, aluminum windows, handrails, kitchens, and related product lines, designed to make a broad catalog easier to browse in both English and Arabic.
 
 Focus areas:
 - RTL support
@@ -60,7 +60,7 @@ Focus areas:
 
 ### Mo's Experiences
 
-A multilingual travel platform with booking flows, CMS-backed content, and frontend architecture that supports both marketing and operational use.
+A multilingual travel agency website with curated packages, inquiry flows, and dashboard-managed content for destinations and commercial updates.
 
 Focus areas:
 - multilingual routing
@@ -80,7 +80,7 @@ Focus areas:
 
 ### Devloop
 
-A bilingual company website with localized routing, full RTL support, and strong technical foundations for performance and search.
+A bilingual agency website with localized routing, full RTL support, and strong technical foundations for performance and search.
 
 Focus areas:
 - localization

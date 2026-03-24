@@ -4,8 +4,10 @@ import { notFound } from "next/navigation"
 
 import { CopyMarkdownButton } from "@/app/writing/_components/copy-markdown-button"
 import { PostHeaderLinks } from "@/app/writing/_components/post-header-links"
+import { JsonLd } from "@/components/seo/json-ld"
 import { getPostBySlug, posts } from "@/lib/content/writing"
 import { siteProfile } from "@/lib/content/site-content"
+import { createBlogPostingSchema } from "@/lib/metadata/schema"
 import { createArticleMetadata } from "@/lib/metadata/site-metadata"
 
 type PageProps = {
@@ -50,6 +52,7 @@ export default async function WritingPostPage({ params }: PageProps) {
 
   return (
     <main className="mx-auto flex min-h-svh w-full max-w-[42rem] flex-col px-6 pt-10 pb-16 sm:px-8 sm:pt-14">
+      <JsonLd data={createBlogPostingSchema(post)} />
       <div className="space-y-12 sm:space-y-16">
         <header className="space-y-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
