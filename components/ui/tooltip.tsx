@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils"
 
 function TooltipProvider({
   children,
-  delay = 550,
+  delay = 180,
   closeDelay = 0,
-  timeout = 400,
+  timeout = 250,
 }: React.ComponentProps<typeof BaseTooltip.Provider>) {
   return (
     <BaseTooltip.Provider
