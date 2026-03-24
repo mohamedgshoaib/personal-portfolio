@@ -1,61 +1,68 @@
 # Project Context
 
-> This file is the persistent working-memory document for this repository. Read it before making changes when you need fast project context, implementation history, or reminders about standards already established in the codebase.
+> This file is the persistent working-memory document for this repository. Read it when you need the current architecture, implementation history, and the standards already established in the codebase.
 
 ## Project Purpose
 
 This repository is Mohamed Gamal's personal portfolio and writing site.
 
-The intended product includes:
+The site is intended to present:
 
-- a portfolio homepage
-- project showcase content
-- work experience and personal profile content
-- blog content authored in MDX
-- contact-related UI and supporting data
+- a concise personal identity
+- selected frontend projects
+- a writing archive
+- direct contact paths
+- a durable personal system rather than a one-page portfolio performance
 
 ## Current Reality
 
-The repository is no longer a starter-level shell. It now has a real first implementation pass, a functioning content system, and a clearer shared interaction language, but it is still early in content breadth and overall site depth.
+The repository is no longer a starter and no longer just a design direction document. It now has a real implementation, a functioning content system, and a clear visual language.
 
 What exists today:
 
-- App Router application under `app/`
-- root layout, global theme tokens, and shared motion utilities
-- a real first-pass homepage in `app/page.tsx`
-- a projects index in `app/projects/page.tsx`
-- a writing index and MDX-backed post route under `app/writing/`
+- Next.js 16 App Router application under `app/`
+- real homepage in `app/page.tsx`
+- projects archive in `app/projects/page.tsx`
+- writing index and MDX-backed post route in `app/writing/`
+- route-specific Open Graph image generation
+- generated sitemap, robots, and manifest routes
+- JSON-LD schema on key routes
+- `llms.txt` and `llms-full.txt`
 - a site-wide floating dock with theme and contact controls
-- shared UI, homepage, and writing components under `components/`
-- local portfolio content in `lib/site-content.ts`
-- MDX writing registry in `lib/writing.ts`
-- authored writing content under `content/writing/`
-- utility and sound files under `lib/`
-- sound playback hook under `hooks/use-sound.ts`
+- shared homepage and UI primitives in `components/`
+- route-local writing UI in `app/writing/_components/`
+- authored content in `lib/content/`
+- metadata and schema helpers in `lib/metadata/`
+- audio helpers and sound assets in `lib/audio/`
 - static assets under `public/`
-- internal planning and reference docs under `spec/`
+- internal planning and references under `spec/`
 
-Important: the intended product scope is larger than the current implemented UI. When changing the app, preserve the portfolio/blog direction from `AGENTS.md`, but do not hallucinate features that are not yet in the tree.
+Important:
+
+- the product direction is now clearer than the amount of content on the site
+- future work should preserve the existing portfolio + writing direction
+- do not hallucinate old planned features that are no longer in the tree
 
 ## Source Of Truth
 
-When you need authoritative guidance, use these files in this order:
+When you need authoritative guidance, use these in order:
 
 1. `AGENTS.md`
 2. `spec/context.md`
-3. `spec/skills.md`
-4. `spec/styling.md`
-5. `spec/references/*.md`
-6. actual code in `app/`, `components/`, `hooks/`, and `lib/`
+3. `spec/plan.md`
+4. `spec/skills.md`
+5. `spec/styling.md`
+6. `spec/references/*.md`
+7. actual code
 
 ## Core Standards
 
-These standards are already established and should be preserved:
+Already established and should be preserved:
 
-- framework: Next.js App Router
+- framework: Next.js 16 App Router
 - language: TypeScript with strict mode
 - styling: Tailwind CSS v4
-- component approach: shadcn/ui-style composition
+- primitives: Base UI
 - package manager: pnpm
 - linting: Oxlint
 - formatting: Oxfmt
@@ -65,24 +72,84 @@ Coding standards:
 
 - prefer explicit, type-safe TypeScript
 - use descriptive names
-- keep functions small and focused
-- add comments only when logic is genuinely non-obvious
+- keep functions and components focused
+- add comments only when behavior is genuinely non-obvious
 - avoid emojis in code, comments, and commit messages
-- use CSS variables and Tailwind tokens instead of scattered one-off styling
+- use CSS variables and shared tokens instead of one-off styling
 
-Design standards already established:
+## Design Direction Memory
 
-- avoid generic portfolio tropes like giant marketing heroes, stacked cards everywhere, badge walls, and clunky sectioning
-- prefer editorial calm, strong spacing, and narrow reading widths over loud visual treatment
-- let structure, typography, and curation create quality before adding decorative UI
-- keep motion purposeful and localized; do not make the shell itself noisy
-- preserve light/dark mode support and app-wide token discipline
-- bias the homepage toward Emil + Dimi more than Samet when tradeoffs appear
-- avoid shadows and obvious product-UI surfaces on the homepage unless clearly earned
+The intended experience is:
+
+- calm
+- narrow
+- editorial
+- text-led
+- design-engineer flavored
+- minimal without feeling empty
+
+The project should continue to synthesize the references rather than copy any one site.
+
+Current weighting:
+
+- Emil for calm and editorial rhythm
+- Dimi for reusable shell and design-engineering system thinking
+- Samet for selective warmth, proof, and clarity
+- Shu for structural discipline and archive thinking
+
+Practical translation:
+
+- compact identity instead of a large hero
+- curated content instead of volume
+- proof over self-branding
+- low visual chrome
+- motion that stays quiet and localized
+- pages that feel like one coherent personal system
+
+## Architecture Memory
+
+### Current file organization
+
+Shared architecture is now grouped by concern:
+
+- `lib/content/`
+  - `site-content.ts`
+  - `writing.ts`
+- `lib/metadata/`
+  - `site-metadata.ts`
+  - `brand-image.tsx`
+  - `schema.ts`
+- `lib/audio/`
+  - `sound-engine.ts`
+  - `sound-types.ts`
+  - embedded sound assets
+
+This grouping was introduced intentionally to separate authored content, metadata/discovery logic, and audio behavior.
+
+### Writing route colocation
+
+Writing-only UI was moved into:
+
+- `app/writing/_components/`
+
+This is the current preferred pattern for route-specific writing helpers. Shared components should stay outside `app/`, but writing-private pieces can live with the route.
+
+### Content model
+
+Current local content model:
+
+- profile, homepage copy, projects, and social links live in `lib/content/site-content.ts`
+- writing registry lives in `lib/content/writing.ts`
+- writing source files live in `content/writing/*.mdx`
+
+Important current state:
+
+- the homepage now uses featured projects only
+- the projects page is the full archive
+- the experience section has been removed from the content model and UI
+- the old stack list was replaced by authored `Approach` copy
 
 ## Tooling Decisions Already Made
-
-These are completed decisions and should not be accidentally reverted:
 
 ### Oxc toolchain
 
@@ -90,40 +157,33 @@ The project has already been migrated from ESLint + Prettier to Oxc:
 
 - `oxlint` is the lint runner
 - `oxfmt` is the formatter
-- root config files are:
-  - `.oxlintrc.json`
-  - `.oxfmtrc.json`
 
-Package scripts already wired:
+Scripts already wired:
 
 - `pnpm run lint`
 - `pnpm run lint:fix`
-- `pnpm run fmt`
-- `pnpm run fmt:check`
+- `pnpm run format`
+- `pnpm run format:check`
 - `pnpm run typecheck`
 
-Git hooks and CI already wired:
+Git hooks:
 
 - `lint-staged` + `simple-git-hooks` are configured in `package.json`
 - pre-commit runs `pnpm exec lint-staged`
-- `.github/workflows/oxc.yml` runs lint and format checks
-- `.vscode/` recommends and configures the Oxc extension
 
 Do not reintroduce ESLint or Prettier unless explicitly requested.
 
 ### Font system
 
-App-wide fonts are already configured in `app/layout.tsx` using `next/font/google`:
+Fonts are now configured in `app/layout.tsx` with `next/font/local`:
 
-- `Google_Sans` maps to `--font-sans`
-- `Google_Sans_Code` maps to `--font-mono`
+- local Google Sans variable font as `--font-sans`
+- local Google Sans Code variable font as `--font-mono`
 
-Global font behavior in `app/globals.css`:
+Global font behavior:
 
-- sans font is the default app font
-- mono font is reserved for `code`, `pre`, `kbd`, and `samp`
-
-Do not switch back to `Inter`, `Geist`, or raw web-font loading unless explicitly requested.
+- sans is the default app font
+- mono is reserved for code-like elements
 
 ### Theme and interaction sounds
 
@@ -131,363 +191,145 @@ Theme behavior is handled in `components/theme-provider.tsx`.
 
 Current sound behavior:
 
-- global click sound uses `useSound(clickSoftSound)`
-- clickable elements are detected centrally via a delegated document click listener
-- theme toggling via the `d` hotkey uses:
-  - `switchOnSound` when changing from dark to light
-  - `switchOffSound` when changing from light to dark
+- global click sound is delegated centrally
+- theme switching uses dedicated on/off sounds
+- audio decode/play helpers live in `lib/audio/sound-engine.ts`
+- sound assets live in `lib/audio/`
 
-Important implementation detail:
+The dock also includes a visible theme toggle in addition to the `d` shortcut.
 
-- the installed sound files live in `lib/`, not `sounds/`
-- current sound modules:
-  - `lib/click-soft.ts`
-  - `lib/switch-on.ts`
-  - `lib/switch-off.ts`
+### Metadata and discovery
 
-There is now a visible light/dark toggle inside the floating dock, in addition to the `d` keyboard shortcut inside `ThemeHotkey`.
+The site now has a stronger metadata/discovery layer than earlier project notes reflect.
 
-### Skills documentation
+Implemented:
 
-The installed `.agents` skills are already indexed in:
+- root metadata in `app/layout.tsx`
+- page/article metadata helpers in `lib/metadata/site-metadata.ts`
+- generated OG image routes
+- generated `manifest.ts`, `robots.ts`, and `sitemap.ts`
+- JSON-LD schema helpers in `lib/metadata/schema.ts`
+- `public/llms.txt`
+- `public/llms-full.txt`
 
-- `spec/skills.md`
+### Styling baseline
 
-Current note:
+The visual foundation has already moved away from starter defaults.
 
-- `spec/skills.md` is intended to stay as a concise filesystem-backed index of the currently installed project-local skills under `.agents/skills/`
+Established styling decisions:
 
-When a task fits an installed skill, load the relevant skill instead of guessing.
-
-### Base styling direction
-
-The global CSS baseline has already been pushed away from starter defaults.
-
-Established styling decisions in `app/globals.css` and `components/ui/button.tsx`:
-
-- the Coss UI semantic color palette is now applied directly to the app theme tokens
-- token system was refined toward softer surfaces and cleaner borders
-- base typography was improved with antialiasing, balanced headings, prettier paragraph wrapping, and mono-only code styling
-- buttons were tightened to feel more tactile and intentional
-- `transition-all` was removed from the shared button in favor of explicit transition properties
-
-This means the repo already has a better visual foundation than a stock starter, even though the actual portfolio pages are not built yet.
-
-Do not regress the CSS language back toward generic starter styling.
+- custom token system in `app/globals.css`
+- off-white light canvas
+- balanced headings and pretty body wrapping
+- shared motion utilities for disclosure, overlay, layout, and fades
+- restrained monochrome link/action styling
+- a blurred, compact floating dock shell
 
 Important nuance:
 
-- the project intentionally keeps some additions beyond the raw Coss snippet, such as chart tokens, extended radius tokens, custom surface shadows, and the existing typography polish
-- `font-heading` currently aliases the sans font instead of using a separate heading font
-- Base UI isolation is currently handled at the `body` level via global CSS instead of a dedicated inner wrapper div
+- `body` now carries `text-wrap: pretty`
+- headings still explicitly use `text-wrap: balance`
+- the project intentionally keeps a light editorial feel instead of a loud product UI feel
 
-These are acceptable project-specific adaptations, not accidental drift.
+## Current Route Map
 
-## Design Direction Memory
+High-value files:
 
-The target portfolio direction is now much clearer than when this file was first written.
-
-Current desired outcome:
-
-- clean and minimal
-- not clichéd
-- not card-heavy by default
-- calm, narrow, editorial, and deliberate
-- design-engineer flavored rather than agency-marketing flavored
-- able to support both portfolio work and technical writing
-
-Important: the goal is not to copy any single reference. The likely future design should synthesize the references below into one original direction for Mohamed.
-
-### Core conclusion from the reference study
-
-The strongest portfolio references do not feel like "portfolio websites". They feel like personal systems.
-
-That means:
-
-- not a landing page
-- not a card gallery
-- not a self-branding performance
-- not a stack of loud sections
-
-Instead, the target should feel like:
-
-- a calm, durable personal place
-- an authored system for work, writing, and experiments
-- a site where curation is stronger than volume
-- a design-engineering portfolio with taste and restraint
-
-Minimalism in this project should be understood as editorial restraint, not visual emptiness.
-
-### Shared design language across the references
-
-The four references differ in flavor, but they share a strong common system.
-
-Common patterns:
-
-- compact identity instead of a giant hero
-- narrow reading widths
-- generous whitespace
-- modest, quiet typography
-- text-led hierarchy
-- low visual chrome
-- calm navigation
-- curated lists and indexes
-- proof over claims
-- consistent shell across page types
-- soft utility surfaces when needed
-- restrained palette with sparing color use
-
-Practical translation:
-
-The portfolio should be a narrow, calm, text-led system where structure, curation, and proof carry the design. Richer UI should appear only where it earns its place.
-
-### Roles of the references in the synthesis
-
-When designing future pages, think of the references as complementary inputs:
-
-- Emil Kowalski: editorial calm and curated rhythm
-- Shu Ding: archival structure and severe restraint
-- Samet Ozkale: warm product clarity and trust-building proof
-- Dimi: design-engineering platform feel, demos, and reusable shell
-
-The likely direction for Mohamed is not any one of these alone. It is a synthesis:
-
-- Emil's calm
-- Shu's structure
-- Samet's clarity
-- Dimi's system thinking
-
-## Reference Library
-
-The design reference set lives in `spec/references/`.
-
-Current reference files:
-
-- `spec/references/emilkowalski.md`
-- `spec/references/shudin.md`
-- `spec/references/samet.md`
-- `spec/references/dimi.md`
-
-Each file captures visual observations and translation notes for this project.
-
-High-level roles of each reference:
-
-1. Emil Kowalski
-   - editorial calm
-   - narrow reading column
-   - curated list-based structure
-   - excellent model for portfolio + long-form article rhythm
-
-2. Shu Ding
-   - archival structure
-   - left-rail identity
-   - austere restraint
-   - strong model for text-led writing and project indexing
-
-3. Samet Ozkale
-   - warm product minimalism
-   - more commercially legible
-   - strong use of screenshots, proof, trust, and timelines without cliché
-
-4. Dimi
-   - design-engineering platform minimalism
-   - strongest reference for lab content, demos, code presentation, and a reusable site shell
-
-Use these reference files before making major layout or styling decisions. They now represent part of the project's memory, not just temporary inspiration.
-
-## Current File Map
-
-High-value files to check before making changes:
-
-- `app/layout.tsx`: root fonts, root HTML setup, theme provider mount
-- `app/globals.css`: tokens, dark mode variables, base typography rules
-- `app/page.tsx`: current homepage implementation
-- `app/projects/page.tsx`: projects index route used by the dock and project archive
-- `components/floating-dock.tsx`: site-wide floating dock navigation and theme toggle
-- `app/writing/page.tsx`: writing index page
-- `app/writing/[slug]/page.tsx`: post route, metadata, and article rendering
-- `components/theme-provider.tsx`: theme hotkey and all current interaction sound behavior
-- `components/home/*`: homepage-specific UI primitives
-- `components/writing/*`: writing-page header and copy utilities
-- `components/ui/button.tsx`: shared button primitive
-- `components/ui/button-styles.ts`: server-safe shared button variant definitions
-- `components/ui/disclosure-chevron.tsx`: shared disclosure icon primitive
-- `components/ui/popover.tsx`: Base UI popover primitive used by the dock contact panel
-- `components/ui/tooltip.tsx`: Base UI tooltip primitive adapted for compact utility UI
-- `components/ui/kbd.tsx`: keyboard hint primitive used inside tooltips and utility surfaces
-- `hooks/use-sound.ts`: Web Audio hook used by Soundcn assets
-- `lib/sound-engine.ts`: audio context and decode/play helpers
-- `lib/site-content.ts`: current typed portfolio content source
-- `lib/writing.ts`: MDX writing registry and markdown export generation
-- `content/writing/*.mdx`: authored writing source files
-- `mdx-components.tsx`: shared MDX component mapping
-- `README.md`: short project overview for humans
-- `AGENTS.md`: project intent and coding guidance
-- `spec/skills.md`: installed skill catalog
-- `spec/styling.md`: styling-specific notes
-- `spec/references/*.md`: design reference library and translation notes
+- `app/layout.tsx`
+- `app/globals.css`
+- `app/page.tsx`
+- `app/projects/page.tsx`
+- `app/writing/page.tsx`
+- `app/writing/[slug]/page.tsx`
+- `app/opengraph-image.tsx`
+- `app/projects/opengraph-image.tsx`
+- `app/writing/opengraph-image.tsx`
+- `app/writing/[slug]/opengraph-image.tsx`
+- `app/manifest.ts`
+- `app/robots.ts`
+- `app/sitemap.ts`
+- `components/floating-dock.tsx`
+- `components/theme-provider.tsx`
+- `components/home/*`
+- `app/writing/_components/*`
+- `lib/content/*`
+- `lib/metadata/*`
+- `lib/audio/*`
 
 ## What Has Been Developed So Far
 
-This section is here to prevent loss of context over time.
+This section exists to prevent loss of project memory over time.
 
-Completed work in this repo:
+Completed work:
 
-1. Oxc migration
-   - ESLint and Prettier were replaced with Oxlint and Oxfmt.
-   - Scripts, config, editor setup, CI, and pre-commit integration were added.
+1. Tooling migration
+   - ESLint + Prettier were replaced with Oxlint and Oxfmt.
 
-2. README cleanup
-   - `README.md` was reduced to a short, human-facing overview instead of duplicating internal agent guidance.
+2. Real portfolio implementation
+   - the starter homepage was replaced with a real editorial portfolio homepage
+   - a projects archive route was added
+   - a writing index and writing post route were built
 
-3. Fonts
-   - App font stack changed to `Google Sans` + `Google Sans Code`.
-   - Code-like elements use the mono font only.
+3. Shared shell
+   - the floating dock was added as a reusable site-wide shell element
+   - theme toggle and contact popover were integrated into that shell
 
-4. Interaction audio
-   - A global click sound system was added using Soundcn assets.
-   - Theme switching sounds were implemented for dark/light transitions.
+4. Writing system
+   - writing moved to an MDX-backed system
+   - posts are authored as MDX modules with native metadata exports
+   - route-local writing helpers were later colocated under `app/writing/_components/`
 
-5. Agent docs
-   - `spec/skills.md` was created as the installed skill index.
-   - `spec/context.md` was rewritten as a true project-memory document.
+5. Content direction
+   - homepage sections were simplified
+   - the experience section was removed
+   - the stack list was replaced with authored `Approach` copy
+   - the homepage now shows featured projects only
 
-6. Styling foundation
-   - the base token and typography system was upgraded away from generic starter defaults
-   - the shared button primitive was refined to feel more intentional and tactile
+6. Metadata and SEO
+   - root/page/article metadata helpers were added
+   - route-specific OG images were added
+   - sitemap, robots, and manifest routes were added
+   - structured data was later added for homepage, projects, writing, and writing posts
 
-7. Design reference library
-   - detailed reference notes were added for Emil Kowalski, Shu Ding, Samet Ozkale, and Dimi
-   - these notes capture what to borrow, what not to copy, and how each reference should influence Mohamed's portfolio
+7. LLM/discovery support
+   - `llms.txt` and `llms-full.txt` were added and aligned with the project’s personal-brand positioning
 
-8. Visual direction clarification
-   - the intended visual direction is now substantially clearer than the current UI
-   - the first real implementation pass is now in place, but the full product scope is still not finished
+8. Architecture cleanup
+   - dead code and unused files were removed
+   - `lib` was reorganized into `content`, `metadata`, and `audio`
 
-9. First implementation pass
-   - the generic starter homepage was replaced with a real portfolio homepage
-   - a typed content source was added in `lib/site-content.ts`
-   - the homepage now presents Mohamed's identity, selected work, experience, writing, stack, and contact details
-   - a writing index and the first blog post route were added under `app/writing/`
-   - `app/layout.tsx` now includes basic site metadata
+## Current Content State
 
-10. Homepage refinement toward Emil + Dimi
+Current authored content:
 
-- the homepage was pulled away from a warmer, more product-like first pass
-- cards, badge-like treatments, screenshot-heavy sections, and obvious shadows were removed from the homepage shell
-- section structure was simplified into calmer text-led blocks with minimal rules and tighter hierarchy
-- projects and experience now use quiet disclosure patterns to keep the page compact as more entries are added
-- disclosure affordances now use a small edge-aligned SVG chevron instead of casual `+ / -` text
-- the disclosure behavior is meant to feel like progressive text reveal, not a dashboard accordion
-- the current section order is:
-  - About
-  - Projects
-  - Experience
-  - Stack
-  - Writing
-  - Contact
-- section rules were later removed again so the shell stays closer to Emil's spacing-led separation than to Dimi's homepage separators
+- four shipped projects
+- four published writing posts
+- homepage profile/about/approach content
+- no experience section
 
-11. Floating dock shell
+Current projects:
 
-- a shared floating dock now lives in the root layout as a site-wide navigation and theme-control surface
-- the dock uses Hugeicons, Base UI tooltips, Base UI popovers, the `kbd` primitive, and the existing theme sound behavior
-- the dock currently links to:
-  - Home
-  - Projects
-  - Writings
-- `Projects` is now a real route at `app/projects/page.tsx`, not only a homepage hash target
-- the contact icon now opens a compact popover panel above the dock instead of jumping to the footer
-- the contact control now uses Base UI detached tooltip/popover triggers with a stable trigger id in controlled mode so click-to-open and click-again-to-close both work reliably
-- tooltip timing and motion follow the Emil design-engineering guidance: delayed first hover, instant subsequent hovers, short transitions, and trigger-origin-aware animation
-- the tooltip surface is now solid and arrowless after review, with the theme tooltip showing `Light mode` or `Dark mode` plus `Kbd(D)` and the contact tooltip suppressed while its popover is open
-- the dock is intentionally small, blurred, and restrained so it reads as a compact utility object rather than app chrome
-- the dock now uses a Dimi-inspired layered backdrop-blur field so content can visually blur underneath it instead of being pushed away by page spacing
-- the contact popover currently exposes direct actions for `Email me`, `GitHub`, `LinkedIn`, and `X`
-- the dock now uses a single measured active surface that animates between Home, Projects, Writings, and Contact rather than relying on per-item backgrounds or hard-coded spacing math
-- the heavier multi-layer backdrop blur is now gated off on small screens, leaving the simpler dock surface blur in place for mobile performance
-- the dock shell now uses the same `bg-background/60` + `backdrop-blur-xl` surface treatment as the contact popover so both utility layers feel like one system
-- the dock navigation shell and contact popover shell now share extracted class tokens inside `components/floating-dock.tsx`, and the popover contact actions were reworked away from heavier mini-panel buttons so the popover reads more like a dock extension than a separate control cluster
-- the contact popover was later tightened again so its shell is slightly smaller than the dock while keeping the same material language, and its actions now use always-on quiet backgrounds because they behave like contact chips rather than navigation tabs
-- those contact chips now rely on stronger background/text hover contrast and border-driven depth instead of hover shadow so they stay readable without leaving the styling system
-- mobile sizing was tightened so the dock and contact popover do not introduce horizontal scroll
+- Dana Doors
+- Mo's Experiences
+- Reway
+- Devloop
 
-12. Writing surface refinement
+Current writing:
 
-- the writing index was pulled away from the earlier card and cover-image treatment
-- the writing list is now a quiet text-led archive closer to Emil's editorial rhythm and Dimi's system consistency
-- blog post pages now use the same narrow shell and calmer spacing as the homepage instead of a louder article template
-- article pages now rely on restrained metadata, simple prose rhythm, and lighter code surfaces rather than hero imagery
-- MDX prose now supports ordered and unordered lists through the shared writing presentation
-- post pages now include a compact header utility row with `Home`, `Back to writings`, and a copy action instead of a single `Writing` back link
-- the copy action now uses a text-only shared action style with `Copy article` and `Article copied` states, and it copies a markdown-formatted version of the post composed from MDX metadata plus the authored body
-- writing posts now support a lead image below the description; the first article uses `public/assets/writings/01-hello-world.webp`
-
-13. Shared text-link state and interaction cleanup
-
-- text-led links across the homepage, writing index, writing post pages, and project disclosure content now use a shared monochrome link treatment
-- the shared link state keeps links muted at rest and slightly clearer on hover/focus, without introducing bright accent color
-- this shared behavior now lives in the global styling layer and the `components/home/text-link.tsx` primitive instead of being repeated per component
-- internal route links still use `next/link`, while external and `mailto:` links in the shared text-link primitive now render as plain anchors
-- the shared text-link and text-action utilities now preserve the global press-feedback transition instead of overriding it, so text-led actions still get the same click response as the rest of the interface
-- `text-link` now renders as a transformable inline-block utility, which ensures inline text links get the same press feedback as footer links, dock actions, and other interactive controls
-- external `http` and `https` URLs passed through `TextLink` now open in a new tab with safe `rel` defaults, which covers project links and social/profile links that should not replace the current page
-- hover lift was removed from the dock and the contact copy CTA so the project keeps shared press feedback without upward hover motion on those controls
-
-14. Mobile project disclosure image alignment
-
-- the persistent project preview image inside the homepage disclosure list needed a mobile-only visual centering adjustment
-- the current solution is implemented in `components/home/disclosure-list.tsx` at the wrapper level, without changing the underlying image sizing logic
-- this was adjusted manually in the repo after an earlier attempted fix was reverted
-
-15. Writing system moved to MDX
-
-- the temporary typed post-content model in `lib/site-content.ts` has now been replaced for writing by a real MDX-backed content flow
-- Next.js MDX integration is now configured through `@next/mdx` in `next.config.mjs`
-- `@mdx-js/loader` is installed because the Next.js MDX integration expects it at runtime
-- writing content now lives under `content/writing/*.mdx`
-- MDX component mapping now lives in `mdx-components.tsx`
-- the writing registry now lives in `lib/writing.ts`, which provides post metadata and the rendered MDX component for routes and indexes
-- the first post, `hello-world-what-this-blog-is-about`, has been migrated from the typed content model into MDX
-- the homepage writing preview, writing index, and writing post route now all read from the MDX-backed writing registry instead of the old typed post array
-- post metadata is now authored as a native `export const metadata = { ... }` inside each MDX file rather than being transformed from frontmatter at build time
-
-16. Motion cleanup for disclosure interactions
-
-- accordion disclosure motion is now rooted in shared global motion tokens and utilities in `app/globals.css` instead of repeated per-instance class strings
-- a shared `DisclosureChevron` primitive now lives in `components/ui/disclosure-chevron.tsx` and replaces duplicated inline chevron SVG behavior
-- homepage project and experience disclosures now consume extracted shared trigger/panel motion classes for more consistent open/close rhythm
-- shared overlay motion utilities now drive tooltip, popover, and preview-card enter/exit behavior so overlay timing/easing are no longer repeated per component
-- floating dock interactive icon color transitions now use shared root motion utility classes for cleaner motion consistency
-- the motion utility set now also includes shared layout-frame, surface-interaction, fade, and fade+blur patterns so repeated transition declarations are minimized at component level
-- floating dock active-frame motion, contact actions, contact copy feedback, and writing copy feedback now all consume those shared motion utilities
-- shared button variants in `components/ui/button-styles.ts` now consume the root motion-surface utility so interaction timing and easing stay consistent across primitives
-- disclosure motion now separates responsibilities: the panel handles height collapse while the inner content handles the softer opacity/blur exit, which keeps the close path lighter and more interruptible
-- overlay utilities were later tightened again so exits are shorter than enters, and height animations no longer use `will-change`, keeping the motion layer closer to the interface-performance guidance in the installed skills
-
-17. Content growth and asset adjustments
-
-- the local projects content now includes four shipped entries:
-  - Devloop
-  - Reway
-  - Mo's Experiences
-  - Dana Doors
-- the homepage and projects index now reflect that broader project set through the shared disclosure system
-- the avatar now uses theme-aware local PNG assets instead of WebP for better color accuracy:
-  - `public/assets/avatar/avatar-light.png`
-  - `public/assets/avatar/avatar-dark.png`
-- the footer now uses `Email me` copy, matching the contact popover language
+- Hello World: What This Blog Is About
+- Search Visibility in 2026: Beyond Meta Tags
+- AI Discovery in 2026: The llms.txt Standard
+- Privacy-Friendly Analytics That Actually Work (Even With Adblockers)
 
 ## Important Constraints And Reminders
 
-- Do not assume blog/content modules already exist just because `AGENTS.md` describes them.
-- Do not remove the current Oxc setup.
-- Do not replace the centralized click-sound approach with per-component duplication unless there is a strong reason.
-- Keep sound imports pointed at `lib/*` unless the user explicitly reorganizes them.
-- Preserve the portfolio/blog direction even though the broader site scope is still unfinished.
-- Prefer extending the current architecture rather than introducing a parallel pattern for the same concern.
-- Use the reference notes to guide design choices, but do not copy any referenced site literally.
-- Remember that the project is now in a "clear direction, partial implementation" state: the vision is still richer than the shipped UI.
+- do not assume the old flat `lib/site-content.ts` or `lib/writing.ts` paths still exist
+- do not reintroduce the experience section unless explicitly requested
+- do not turn the homepage into the full project archive
+- do not replace the local content model with a CMS without clear need
+- do not regress metadata, schema, sitemap, robots, or OG coverage
+- keep external links and authored summaries factually accurate
+- use the reference notes to guide design choices, but do not copy any referenced site literally
 
 ## Recommended Workflow For Future Changes
 
@@ -495,49 +337,21 @@ When returning to this repo later:
 
 1. Read `AGENTS.md`
 2. Read `spec/context.md`
-3. Check `app/layout.tsx`, `app/globals.css`, and `components/theme-provider.tsx`
-4. Check `package.json` to confirm scripts and tooling assumptions
-5. Read `spec/references/*.md` before major visual work
-6. Read `spec/skills.md` and load any matching `.agents` skill before implementing work
+3. Read `spec/plan.md`
+4. Check `app/layout.tsx`, `app/globals.css`, and `components/theme-provider.tsx`
+5. Check `lib/content/`, `lib/metadata/`, and `app/writing/_components/`
+6. Read `spec/references/*.md` before major visual work
+7. Read `spec/skills.md` and load any matching skill before implementing
 
 ## Open State
 
-Known current gaps between project intent and implementation:
+Known current gaps between product quality and product breadth:
 
-- only the first implementation pass of the homepage exists
-- the reference-informed visual direction is now partially implemented, but not yet carried through a full site-wide system
-- the homepage should continue moving toward the quieter Emil + Dimi synthesis, not back toward a product marketing layout
-- the dock is now part of the reusable site shell, but its blur/offset/details should still be judged against the Dimi reference during future polish
-- the broader content model is still lightweight and local rather than a full CMS
-- writing now uses MDX, but projects and experience are still represented through the local typed content layer
-- four shipped projects are now represented in the local content setup
-- only one experience entry and one published writing post are currently represented
-- broader project, experience, and long-form content surfaces are not yet fully built out
+- the system is strong, but the content archive is still relatively small
+- the writing archive should keep growing
+- projects may later justify deeper detail pages, but they do not yet require them
+- the visual direction is established, but still needs continued consistency as new content is added
 
-Current immediate likely next milestone:
+Current likely next milestone:
 
-- continue expanding the homepage/content system with more real experience entries and writing posts
-- deepen the page polish and layout rhythm based on the reference synthesis
-- expand the new MDX-backed writing system with more real posts and any supporting authoring utilities it needs
-
-Current writing-direction decision:
-
-- MDX is now the intended direction for the writing system
-- the old typed post-content model should be treated as a temporary bridge that has now been superseded for writing
-
-MDX implementation guidance now established from the official MDX docs:
-
-- for this Next.js project, prefer the framework integration route with `@next/mdx`
-- do not plan around `providerImportSource` or `@mdx-js/react` for component injection in Next.js; use the Next-style `mdx-components.tsx` pattern instead
-- treat each MDX file as a module with a default export for content and optional named exports for metadata or other authored values
-- keep the initial setup lightweight and plugin-driven: add remark/rehype plugins only when they solve a clear need
-- the current implementation keeps the loader setup minimal and only uses `remark-gfm`; metadata is authored through native MDX exports instead of frontmatter transformation
-- remember key MDX syntax constraints when authoring content:
-  - HTML syntax is replaced by JSX syntax
-  - autolink literals do not work like plain markdown and should use explicit link syntax
-  - indented code blocks do not work in MDX
-  - raw `<` and `{` often need escaping when meant as plain text
-  - invalid `import` or `export` lines will hard-fail parsing because they are treated as JavaScript
-- layout and component mapping should preserve the current quiet writing presentation rather than introducing a louder docs-like shell by default
-
-Treat those as future build areas, not already-completed features.
+- expand content depth while preserving the current calm, technical, editorial identity

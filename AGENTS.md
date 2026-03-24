@@ -1,29 +1,33 @@
 # AI Agent Guidelines For Mohamed Gamal's Portfolio
 
-This file is the short entrypoint for agents working in this repository. Use it for orientation, then read the richer project memory in `spec/context.md` before making meaningful changes.
+This file is the short entrypoint for agents working in this repository. Read it first, then use `spec/context.md` for the fuller project memory.
 
 ## Current Project State
 
-This repository is no longer a generic starter. It is an in-progress personal portfolio and writing site with a real first implementation pass already shipped.
+This repository is a real personal portfolio and writing site, not a starter.
 
 What exists today:
 
-- Next.js App Router application under `app/`
+- Next.js 16 App Router application under `app/`
 - a real homepage in `app/page.tsx`
-- a projects index in `app/projects/page.tsx`
+- a projects archive in `app/projects/page.tsx`
 - a writing index and MDX-backed post route under `app/writing/`
+- route-specific Open Graph image routes
+- generated sitemap, robots, and manifest routes
+- JSON-LD schema for the homepage, projects, writing index, and writing posts
 - a site-wide floating dock with theme and contact controls
-- shared UI and homepage components under `components/`
-- typed local portfolio content in `lib/site-content.ts`
-- MDX writing content under `content/writing/` with registry logic in `lib/writing.ts`
-- theme switching and interaction sounds
+- shared UI in `components/`
+- local content in `lib/content/`
+- metadata and schema helpers in `lib/metadata/`
+- audio helpers and sound assets in `lib/audio/`
+- MDX writing content under `content/writing/`
 - internal project docs under `spec/`
 
 Important:
 
-- the product direction is clearer than the amount of implemented content
-- do not treat planned features as already built
-- preserve the current portfolio + writing direction rather than reintroducing starter patterns
+- the product direction is clear and already implemented in a first strong pass
+- do not reintroduce starter patterns, generic marketing sections, or portfolio clichés
+- preserve the portfolio + writing identity of the site
 
 ## Source Of Truth
 
@@ -85,20 +89,40 @@ The current reference synthesis is:
 
 ## Content And Architecture Notes
 
-- the current content layer is lightweight and local, not a full CMS
-- `lib/site-content.ts` is still the main typed content source for profile, projects, experience, and links
-- writing now uses an MDX-backed flow with content under `content/writing/` and registry logic in `lib/writing.ts`
-- post metadata is currently authored through native MDX exports rather than frontmatter transformation
-- the local content currently includes four shipped project entries, one experience entry, and one published writing post
-- the avatar uses theme-aware local PNG assets under `public/assets/avatar/`
+- the current content layer is lightweight and local, not a CMS
+- profile, projects, social links, and homepage-authored copy live in `lib/content/site-content.ts`
+- writing registry logic lives in `lib/content/writing.ts`
+- writing posts live in `content/writing/*.mdx`
+- post metadata is authored through native MDX exports, not frontmatter transformation
+- the homepage is curated and intentionally shows featured projects, not the full archive
+- the projects page is the full archive
+- the site currently includes four shipped project entries and four published writing posts
+- the experience section has been removed from the UI and content model
+- the avatar uses theme-aware PNG assets under `public/assets/avatar/`
+- writing-only UI is colocated under `app/writing/_components/`
 
 Do not assume older planned files like `user.ts`, `projects.ts`, or `experiences.ts` already exist unless they are actually in the tree.
 
-MDX direction notes:
+## Metadata, SEO, And Discovery
 
-- the project already uses the Next.js integration path with `@next/mdx`
-- in Next.js, keep component mapping in `mdx-components.tsx` rather than planning around `providerImportSource`
-- keep the MDX setup minimal and add remark/rehype plugins only when they clearly support the writing needs of this project
+The project already uses Next-native metadata conventions and generated metadata routes.
+
+Important files:
+
+- `app/layout.tsx`
+- `app/manifest.ts`
+- `app/robots.ts`
+- `app/sitemap.ts`
+- `lib/metadata/site-metadata.ts`
+- `lib/metadata/brand-image.tsx`
+- `lib/metadata/schema.ts`
+
+Current SEO/discovery behavior:
+
+- canonical metadata is set per route
+- route-level Open Graph images are generated for home, projects, writing, and writing posts
+- JSON-LD schema is included for homepage, projects, writing index, and writing posts
+- `public/llms.txt` and `public/llms-full.txt` are part of the shipped site
 
 ## Base UI And Styling Notes
 
@@ -123,8 +147,10 @@ When a task clearly matches a skill, read that skill's `SKILL.md` before impleme
 
 - updating portfolio content
 - refining homepage and writing surfaces
+- adding or editing MDX writing posts
 - extending reusable UI primitives
 - polishing layout, typography, and interaction details
+- maintaining metadata, sitemap, schema, and OG output
 - keeping docs and internal references accurate as the project evolves
 
 ## Documentation Strategy
@@ -133,6 +159,7 @@ Keep documentation layered:
 
 - `AGENTS.md` for short orientation
 - `spec/context.md` for richer project memory and implementation history
+- `spec/plan.md` for the active near-term roadmap
 - `spec/skills.md` for the live skill index
 
-Do not duplicate long explanations across all three files unless there is a clear reason.
+Do not duplicate long explanations across all four files unless there is a clear reason.

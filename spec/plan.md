@@ -1,480 +1,139 @@
-# Build Plan
+# Project Plan
 
-> This file is the active build brief for the next implementation phase. It captures the user's provided content, the agreed design direction, the required skill/context inputs, and the practical build plan for the portfolio rebuild.
+> This file is the active roadmap for the current state of the portfolio. It is no longer the original rebuild brief. It should describe what the site is now, what remains to be improved, and what direction future work should preserve.
 
-## Goal
+## Current Position
 
-Rebuild the current starter homepage into a clean, minimal portfolio for Mohamed Gamal that feels:
+The portfolio has moved past the starter phase and past the first rebuild phase.
+
+The current site already includes:
+
+- a real homepage
+- a full projects archive
+- an MDX-backed writing section
+- a reusable floating dock
+- generated metadata, OG images, sitemap, robots, and manifest
+- JSON-LD schema on key routes
+- LLM-facing reference files
+
+The work now is not "build the portfolio from scratch." The work now is refinement, expansion, and careful continuation of the same system.
+
+## Product Direction
+
+The site should continue to feel:
 
 - calm
-- modern
-- highly curated
-- design-engineer aware
-- original to Mohamed
+- editorial
+- narrow
+- text-led
+- design-engineer flavored
+- personal rather than corporate
 
-The result should synthesize the reference set rather than copy any one site.
+It should not drift toward:
 
-Current weighting in the shipped implementation is closer to:
+- marketing-site hero layouts
+- agency case-study framing
+- card-heavy portfolio UI
+- generic personal-brand copy
 
-- Emil for restraint and editorial rhythm
-- Dimi for shell and system thinking
-- Samet for selective warmth, clarity, and proof
-- Shu as a structural reference rather than a direct visual target
+## Current Architecture
 
-## What The User Provided
+Current architecture is intentionally lightweight:
 
-### Identity
+- routes and route-local files in `app/`
+- shared UI in `components/`
+- shared hooks in `hooks/`
+- authored content in `lib/content/`
+- metadata, schema, and OG helpers in `lib/metadata/`
+- audio helpers and sound assets in `lib/audio/`
+- MDX content in `content/writing/`
 
-- Name: Mohamed Gamal
-- Title: Frontend Developer
-- Location: Cairo, Egypt
+This structure is in a good place. Future changes should extend it, not replace it.
 
-### Bio direction
+## What Is Already Strong
 
-Source material provided by the user:
+The project already has a solid foundation in these areas:
 
-- focused on fast, SEO-driven web applications
-- full RTL support experience
-- values maintainability, clean architecture, and performance under real traffic
-- works with modern frameworks
-- wants interfaces that feel simple to users and carefully engineered underneath
-- adapts quickly
-- prefers modern tooling
-- likes problems that force learning
+- homepage structure and curation
+- projects archive pattern
+- MDX writing flow
+- metadata and OG generation
+- sitemap, robots, and manifest
+- schema markup
+- dock/theme/contact shell
+- typography and motion baseline
 
-Writing guidance:
+## Near-Term Priorities
 
-- homepage copy should be professional, restrained, and high-signal
-- use a concise intro and/or a slightly longer intro based on what best serves the page
+### 1. Content depth
 
-### Avatar
+The biggest remaining gap is content depth, not system quality.
 
-The user already added theme-aware profile images under:
+Priority content work:
 
-- `public/assets/avatar`
+- add more writing posts
+- continue refining project descriptions as the portfolio evolves
+- keep the homepage curated while the archive grows
 
-The current implementation uses PNG assets:
+### 2. Writing maturity
 
-- `avatar-light.png`
-- `avatar-dark.png`
+The writing system exists and is clean, but the archive is still small.
 
-### Project content currently provided
+Priority writing work:
 
-#### Reway
+- publish more posts
+- keep post metadata strong
+- preserve the quiet article presentation
+- add route-local writing utilities only when the section actually needs them
 
-- Status: shipped
-- Link: [reway.page](https://www.reway.page/)
-- Screenshot: `public/assets/projects/reway/reway.webp`
+### 3. Site-wide polish
 
-Core substance:
+The visual direction is mostly established, but it still needs ongoing consistency work.
 
-- centralized bookmarking workspace
-- intelligent link extraction
-- real-time sync
-- Chrome extension for instant capture
-- keyboard-first navigation and flexible view modes
-- reduced-motion support and optimistic updates
+Priority polish work:
 
-Architecture notes provided by the user:
+- protect the current typography hierarchy
+- keep interaction feedback subtle and reliable across devices
+- preserve the quieter Emil + Dimi synthesis
+- keep new UI in the same editorial language as the homepage and writing surfaces
 
-- Next.js 16 App Router (Turbopack)
-- React 19
-- Tailwind CSS
-- shadcn/ui
-- Supabase
-- Chrome MV3 extension
-- optimistic UI patterns
+### 4. SEO and discovery maintenance
 
-#### Mo's Experiences
+SEO is now in a strong technical place and should be maintained deliberately.
 
-- Status: shipped
-- Link: [mosexperiences.com](http://mosexperiences.com/)
-- Screenshot: `public/assets/projects/mosexperiences/mosexperiences.webp`
+Ongoing priorities:
 
-Core substance:
+- keep metadata accurate when content changes
+- keep sitemap and robots aligned with actual routes
+- keep schema accurate
+- keep `llms.txt` and `llms-full.txt` aligned with the real site
 
-- production-ready travel platform
-- destinations, packages, and VIP tours
-- multi-channel booking and contact flows
-- admin dashboard and analytics coverage
-- SEO and Core Web Vitals awareness
+## Future Enhancements Worth Considering
 
-Architecture notes provided by the user:
+These are real possibilities, but not immediate requirements:
 
-- Next.js 15.5.5 App Router
-- TypeScript
-- Tailwind CSS 4
-- shadcn/ui
-- Supabase
-- TanStack Query
-- Resend
-- next-themes
+- richer writing archive growth
+- project detail pages if the portfolio later needs deeper case-study surfaces
+- additional route-local components under `app/projects/` if that section grows
+- selective internal linking between writing and projects
 
-#### Dana Doors
+These should be treated as future opportunities, not assumed deliverables.
 
-- Status: shipped
-- Link: [danadoors.net](https://danadoors.net/)
-- Screenshot: `public/assets/projects/danadoors/danadoors.webp`
+## Non-Negotiable Rules
 
-Core substance:
+- do not turn the homepage into a full project archive
+- do not add decorative complexity without clear payoff
+- do not replace the local content model with a CMS unless there is an explicit need
+- do not regress metadata, schema, sitemap, or OG coverage
+- do not reintroduce generic portfolio sections that dilute the current identity
 
-- bilingual EN/AR product catalog
-- full RTL support
-- Cloudinary-powered gallery browsing
-- dark and light themes
-- SEO-friendly product pages
+## Immediate Working Rule
 
-Architecture notes provided by the user:
+When making future changes, prefer:
 
-- Next.js 16 App Router
-- TypeScript
-- Tailwind CSS
-- Radix UI
-- shadcn/ui
-- Cloudinary
-- Upstash Redis
+- more real content
+- tighter wording
+- stronger curation
+- cleaner architecture
 
-#### Devloop
-
-- Status: shipped
-- Link: [devloop.software](https://www.devloop.software/)
-- Screenshot: `public/assets/projects/devloop/devloop.webp`
-
-Core substance:
-
-- official Devloop website
-- localized routing for English and Arabic
-- full RTL support
-- server-side translations for SEO
-- theme switching
-- reduced-motion-aware animation components
-- lazy-loaded / dynamically imported heavy UI
-- Resend-backed contact form
-
-Architecture notes provided by the user:
-
-- Next.js 16 App Router
-- React 19
-- Tailwind CSS 4
-- `next-intl`
-- `next-themes`
-- Motion
-- Resend
-
-### Writing content currently provided
-
-First blog post to add:
-
-- Title: `Hello World: What This Blog Is About`
-- Source text supplied in full by the user
-- Origin: copied from the user's old MDX portfolio
-- Date note present in the copy: `Last updated on December 19, 2025`
-
-### Experience currently provided
-
-#### TELUS International
-
-- Role: Search Engine Evaluator
-- Date range: `09.2019 - 05.2024`
-
-Key themes from the user:
-
-- reviewed search results using detailed guidelines
-- wrote clear evaluation notes
-- maintained quality and attention to detail remotely
-- built a strong QA mindset
-- improved written communication through structured reporting
-
-### Links
-
-- GitHub: [mohamed-g-shoaib](https://github.com/mohamed-g-shoaib)
-- X: [mo0hamed_gamal](https://x.com/mo0hamed_gamal)
-- LinkedIn: [mohamed-g-shoaib](https://www.linkedin.com/in/mohamed-g-shoaib/)
-- Email: `mohamed.g.shoaib@gmail.com`
-
-### Desired opportunities
-
-The portfolio should help attract:
-
-- jobs
-- open source
-- freelance
-
-### Required homepage content areas
-
-The user wants all of these represented in some form:
-
-- about
-- projects
-- writing
-- experience
-- contact
-- stack
-
-The user does not want:
-
-- testimonials
-- services section
-
-### Stack list to include
-
-Keep this minimal, not a badge wall:
-
-- JavaScript
-- TypeScript
-- React
-- Next.js
-- Tailwind CSS
-- shadcn/ui
-
-## Design Direction
-
-The page should feel like a blend of the references, weighted toward:
-
-1. Dimi
-2. Samet
-3. Emil
-4. Shu
-
-Translation for this project:
-
-- compact identity block, not a giant hero
-- narrow, readable content width
-- clean and quiet typography
-- strong spacing rhythm
-- text-led hierarchy
-- no clunky section stacks
-- no generic portfolio cards everywhere
-- no wall of badges
-- screenshots used carefully and sparingly
-- richer UI only where it earns its place
-
-Desired emotional quality:
-
-- calm
-- credible
-- engineered
-- modern
-- lightly warm
-
-## Shared System We Are Building Toward
-
-The references and user preferences point to the same system:
-
-- a personal system, not a portfolio template
-- curation over volume
-- proof over self-description
-- structure over decoration
-- motion localized to meaningful areas
-- writing and projects treated as part of one body of work
-
-One-line internal rule:
-
-Build a narrow, calm, text-led portfolio system where structure, curation, and proof carry the design.
-
-## Required Skills For This Build
-
-The user explicitly requested loading these skills:
-
-- `emil-design-eng`
-- `make-interfaces-feel-better`
-- `next-best-practices`
-- `tailwind-design-system`
-- `userinterface-wiki`
-- `vercel-composition-patterns`
-- `vercel-react-best-practices`
-
-How they should influence implementation:
-
-- `emil-design-eng`: taste, restraint, animation purpose, tactile feel
-- `make-interfaces-feel-better`: typography polish, shadows, radius, hit areas, motion details
-- `next-best-practices`: App Router structure, metadata, image/font usage, RSC/client boundaries
-- `tailwind-design-system`: token discipline, component API consistency, Tailwind v4 patterns
-- `userinterface-wiki`: timing, spacing, UX laws, visual design and interaction standards
-- `vercel-composition-patterns`: avoid boolean prop sprawl and prefer composition for reusable UI
-- `vercel-react-best-practices`: keep the implementation lean, avoid unnecessary bundle and render cost
-
-## Base UI Constraints
-
-The project is based on Base UI primitives and the user explicitly asked that the Base UI handbook be understood before building.
-
-Relevant handbook takeaways from `spec/base-ui/`:
-
-- Base UI is unstyled and styling should live in our own Tailwind/className system
-- state styling should rely on data attributes and documented CSS variables where appropriate
-- composition should prefer Base UI's `render` model when wrapping/extending primitives
-- when building custom renderable primitives, `useRender` and `mergeProps` are the intended patterns
-- TypeScript should follow the exported namespace types such as `Component.Props`, `Component.State`, and `useRender.ComponentProps`
-- transitions are preferred over CSS animations for interruptible state changes
-- Motion-based animation with Base UI requires correct controlled state, `keepMounted` where needed, and awareness of unmount timing
-
-Practical implication:
-
-Do not build the site like a plain static marketing page if a part should really be a reusable primitive or a Base UI-composed component.
-
-## Current Theme/Foundation State
-
-Already established in the repo:
-
-- Oxc replaces ESLint + Prettier
-- Google Sans and Google Sans Code are installed and active
-- Soundcn sounds are wired for click/theme interactions
-- Coss-inspired styling philosophy is active
-- Coss semantic color palette is now applied directly in `app/globals.css`
-- light mode uses a custom off-white canvas token instead of pure white
-
-This means the visual foundation exists and the first real implementation pass is already in place, but the site still needs broader content depth and ongoing polish.
-
-## Planned Homepage Information Architecture
-
-Initial intended homepage flow:
-
-1. Identity / intro
-   - name
-   - role
-   - compact intro
-   - quiet location/context
-   - primary contact / profile links
-
-2. Selected project(s)
-   - start with Devloop
-   - screenshot plus concise explanation
-   - emphasize proof and engineering decisions
-
-3. Experience
-   - concise timeline-style or compact role listing
-   - begin with TELUS International
-
-4. Writing
-   - small list of posts
-   - begin with `Hello World: What This Blog Is About`
-
-5. Stack
-   - minimal inline or grouped presentation
-   - not a badge wall
-
-6. Contact / footer
-   - email
-   - GitHub
-   - X
-   - LinkedIn
-
-Potential optional section:
-
-- `Now` or current-focus block, if it helps the homepage feel more alive without adding noise
-
-## Planned Content Strategy
-
-### Copy style
-
-Use copy that is:
-
-- concise
-- precise
-- professional
-- not over-marketed
-- not generic "creative developer" language
-
-Avoid:
-
-- inflated self-branding
-- broad claims without evidence
-- filler section intros
-- overly dramatic mission statements
-
-### Project writing style
-
-Projects should be written as:
-
-- real work
-- real constraints
-- real decisions
-- real outcomes
-
-Not as:
-
-- agency case studies
-- buzzword-heavy marketing blurbs
-
-## Missing Inputs Still Needed Later
-
-The user has provided enough to start, but not enough to fully populate the whole portfolio yet.
-
-Missing or still sparse:
-
-- more experience entries
-- more writing/posts if the homepage should feel fuller
-- any preference on whether the avatar should be prominent or subtle
-
-These are not blockers for starting the first implementation pass.
-
-## Build Plan
-
-### Phase 1. Replace the starter homepage
-
-- remove the generic starter layout in `app/page.tsx`
-- build a real homepage around Mohamed's identity and Devloop
-- keep the page narrow, calm, and text-led
-
-### Phase 2. Establish reusable homepage primitives
-
-- create any small reusable sections/components needed for:
-  - intro
-  - project entry
-  - writing list
-  - experience row
-  - contact/footer
-
-These should follow composition-friendly patterns and avoid boolean mode sprawl.
-
-### Phase 3. Add content-backed project and writing data
-
-- introduce a lightweight content/data structure if needed
-- add Devloop content and the first blog post in a maintainable way
-- avoid overengineering the data layer before the real content justifies it
-
-### Phase 3.5. Move writing to MDX
-
-Status: completed
-
-- replace the temporary typed post-content model with an MDX-backed writing flow
-- preserve the current quiet writing index and article presentation while changing the content source
-- keep the MDX setup lightweight and aligned with App Router patterns
-- support maintainable long-form content authoring with native MDX metadata exports
-- treat this as the chosen direction for writing, not an open question
-- use the Next.js integration path with `@next/mdx`
-- use `mdx-components.tsx` for component mapping instead of planning around `providerImportSource`
-- begin with a minimal plugin surface and only add remark/rehype plugins that serve real content needs
-- preserve room for named exports from MDX files where useful for metadata or derived content
-
-### Phase 4. Refine motion and interaction quality
-
-- keep motion minimal and purposeful
-- use fast, quiet transitions
-- avoid animating the whole shell
-- preserve reduced-motion awareness
-
-### Phase 5. Verify and polish
-
-- run `oxlint`
-- run `tsc --noEmit`
-- run `oxfmt --check`
-- run `react-doctor` after React-facing changes
-
-## Non-Negotiable Implementation Rules
-
-- do not build a giant hero
-- do not fall back to generic portfolio cards and badge walls
-- do not add testimonials or services
-- do not sacrifice responsiveness or performance for decoration
-- do not ignore Base UI composition/styling patterns
-- do not violate the existing theme token system
-- do not copy any single reference literally
-
-## Immediate Next Step
-
-Continue expanding the real content set and polishing the shared system, with particular focus on:
-
-- adding more experience and writing entries
-- preserving shared interaction primitives instead of per-component drift
-- continuing the quieter Emil + Dimi synthesis across unfinished surfaces
+before adding new surface area.
