@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-import { createAbsoluteUrl, siteUrl } from "@/lib/site-metadata"
+import { createAbsoluteUrl, siteUrl } from "@/lib/metadata/site-metadata"
 
 export default function robots(): MetadataRoute.Robots {
   return {

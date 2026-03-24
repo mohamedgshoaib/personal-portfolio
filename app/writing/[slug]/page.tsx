@@ -2,11 +2,11 @@ import Image from "next/image"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { CopyMarkdownButton } from "@/components/writing/copy-markdown-button"
-import { PostHeaderLinks } from "@/components/writing/post-header-links"
-import { createArticleMetadata } from "@/lib/site-metadata"
-import { siteProfile } from "@/lib/site-content"
-import { getPostBySlug, posts } from "@/lib/writing"
+import { CopyMarkdownButton } from "@/app/writing/_components/copy-markdown-button"
+import { PostHeaderLinks } from "@/app/writing/_components/post-header-links"
+import { getPostBySlug, posts } from "@/lib/content/writing"
+import { siteProfile } from "@/lib/content/site-content"
+import { createArticleMetadata } from "@/lib/metadata/site-metadata"
 
 type PageProps = {
   params: Promise<{

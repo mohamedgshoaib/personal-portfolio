@@ -26,10 +26,10 @@ import {
   TooltipTrigger,
   createTooltipHandle,
 } from "@/components/ui/tooltip"
-import { playSound } from "@/lib/sound-engine"
-import { socialLinks } from "@/lib/site-content"
-import { switchOffSound } from "@/lib/switch-off"
-import { switchOnSound } from "@/lib/switch-on"
+import { playSound } from "@/lib/audio/sound-engine"
+import { socialLinks } from "@/lib/content/site-content"
+import { switchOffSound } from "@/lib/audio/switch-off"
+import { switchOnSound } from "@/lib/audio/switch-on"
 import { cn } from "@/lib/utils"
 
 type DockKey = "home" | "projects" | "writing" | "contact"

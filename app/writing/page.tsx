@@ -1,7 +1,7 @@
 import { TextLink } from "@/components/home/text-link"
-import { createPageMetadata } from "@/lib/site-metadata"
-import { siteProfile } from "@/lib/site-content"
-import { posts } from "@/lib/writing"
+import { posts } from "@/lib/content/writing"
+import { siteProfile } from "@/lib/content/site-content"
+import { createPageMetadata } from "@/lib/metadata/site-metadata"
 
 export const metadata = createPageMetadata({
   title: "Writing",

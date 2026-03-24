@@ -7,7 +7,7 @@ import {
   PreviewCardContent,
   PreviewCardTrigger,
 } from "@/components/ui/preview-card"
-import type { Project } from "@/lib/site-content"
+import type { Project } from "@/lib/content/site-content"
 
 export function ProjectHoverPreview({
   children,

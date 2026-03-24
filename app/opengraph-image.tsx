@@ -1,5 +1,9 @@
-import { createOgImage, ogImageSize, pngContentType } from "@/lib/brand-image"
-import { siteProfile } from "@/lib/site-content"
+import {
+  createOgImage,
+  ogImageSize,
+  pngContentType,
+} from "@/lib/metadata/brand-image"
+import { siteProfile } from "@/lib/content/site-content"
 
 export const alt = `${siteProfile.name} portfolio`
 export const size = ogImageSize

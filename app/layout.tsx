@@ -10,7 +10,7 @@ import {
   siteName,
   siteUrl,
   siteXHandle,
-} from "@/lib/site-metadata"
+} from "@/lib/metadata/site-metadata"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {

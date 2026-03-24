@@ -3,10 +3,10 @@
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
 import { useSound } from "@/hooks/use-sound"
-import { clickSoftSound } from "@/lib/click-soft"
-import { playSound } from "@/lib/sound-engine"
-import { switchOffSound } from "@/lib/switch-off"
-import { switchOnSound } from "@/lib/switch-on"
+import { clickSoftSound } from "@/lib/audio/click-soft"
+import { playSound } from "@/lib/audio/sound-engine"
+import { switchOffSound } from "@/lib/audio/switch-off"
+import { switchOnSound } from "@/lib/audio/switch-on"
 
 const CLICKABLE_SELECTOR = [
   "a[href]",

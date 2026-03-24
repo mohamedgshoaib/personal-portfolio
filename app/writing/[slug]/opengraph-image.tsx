@@ -1,5 +1,9 @@
-import { createOgImage, ogImageSize, pngContentType } from "@/lib/brand-image"
-import { getPostBySlug } from "@/lib/writing"
+import {
+  createOgImage,
+  ogImageSize,
+  pngContentType,
+} from "@/lib/metadata/brand-image"
+import { getPostBySlug } from "@/lib/content/writing"
 
 type ImageProps = {
   params: Promise<{

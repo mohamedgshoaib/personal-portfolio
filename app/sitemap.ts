@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 
-import { createAbsoluteUrl } from "@/lib/site-metadata"
-import { posts } from "@/lib/writing"
+import { createAbsoluteUrl } from "@/lib/metadata/site-metadata"
+import { posts } from "@/lib/content/writing"
 
 const buildTimestamp = new Date()
 

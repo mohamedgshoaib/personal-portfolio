@@ -1,4 +1,8 @@
-import { createOgImage, ogImageSize, pngContentType } from "@/lib/brand-image"
+import {
+  createOgImage,
+  ogImageSize,
+  pngContentType,
+} from "@/lib/metadata/brand-image"
 
 export const alt = "Writing by Mohamed Gamal"
 export const size = ogImageSize

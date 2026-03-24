@@ -1,6 +1,6 @@
 import { DisclosureList } from "@/components/home/disclosure-list"
-import { createPageMetadata } from "@/lib/site-metadata"
-import { projects, siteProfile } from "@/lib/site-content"
+import { projects, siteProfile } from "@/lib/content/site-content"
+import { createPageMetadata } from "@/lib/metadata/site-metadata"
 
 export const metadata = createPageMetadata({
   title: "Projects",

@@ -8,7 +8,7 @@ import dynamic from "next/dynamic"
 import { DisclosureChevron } from "@/components/ui/disclosure-chevron"
 import { TextLink } from "@/components/home/text-link"
 import { useHoverCapability } from "@/hooks/use-hover-capability"
-import type { Project } from "@/lib/site-content"
+import type { Project } from "@/lib/content/site-content"
 
 type DisclosureListProps = {
   type: "projects"
