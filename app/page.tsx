@@ -7,6 +7,7 @@ import { DisclosureList } from "@/components/home/disclosure-list"
 import { TextLink } from "@/components/home/text-link"
 import { JsonLd } from "@/components/seo/json-ld"
 import {
+  createVersionedSocialImageUrl,
   siteDescription,
   siteName,
   siteXHandle,
@@ -36,6 +37,7 @@ export const metadata: Metadata = {
     title: siteName,
     description: siteDescription,
     url: "/",
+    images: [createVersionedSocialImageUrl("/opengraph-image")],
     siteName,
     locale: "en_US",
     type: "website",
@@ -44,6 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
+    images: [createVersionedSocialImageUrl("/twitter-image")],
     creator: siteXHandle,
   },
 }

@@ -4,6 +4,7 @@ import { siteProfile } from "@/lib/content/site-content"
 
 const DEFAULT_SITE_URL = "http://localhost:3000"
 const SITE_HANDLE = "@mo0hamed_gamal"
+const SOCIAL_IMAGE_VERSION = "2"
 
 function normalizeSiteUrl(value: string) {
   if (value.startsWith("http://") || value.startsWith("https://")) {
@@ -45,6 +46,24 @@ export function createAbsoluteUrl(path = "/") {
   return new URL(path, siteUrl)
 }
 
+export function createVersionedSocialImageUrl(path: string) {
+  const url = createAbsoluteUrl(path)
+  url.searchParams.set("v", SOCIAL_IMAGE_VERSION)
+
+  return url
+}
+
+function createRouteSocialImagePath(
+  routePath: string,
+  imageRoute: "opengraph-image" | "twitter-image"
+) {
+  if (routePath === "/") {
+    return `/${imageRoute}`
+  }
+
+  return `${routePath}/${imageRoute}`
+}
+
 type CreatePageMetadataOptions = {
   title: string
   description: string
@@ -66,6 +85,11 @@ export function createPageMetadata({
       title,
       description,
       url: createAbsoluteUrl(path),
+      images: [
+        createVersionedSocialImageUrl(
+          createRouteSocialImagePath(path, "opengraph-image")
+        ),
+      ],
       siteName,
       locale: "en_US",
       type: "website",
@@ -74,6 +98,11 @@ export function createPageMetadata({
       card: "summary_large_image",
       title,
       description,
+      images: [
+        createVersionedSocialImageUrl(
+          createRouteSocialImagePath(path, "twitter-image")
+        ),
+      ],
       creator: siteXHandle,
     },
   }
@@ -102,6 +131,11 @@ export function createArticleMetadata({
       title,
       description,
       url: createAbsoluteUrl(path),
+      images: [
+        createVersionedSocialImageUrl(
+          createRouteSocialImagePath(path, "opengraph-image")
+        ),
+      ],
       siteName,
       locale: "en_US",
       type: "article",
@@ -112,6 +146,11 @@ export function createArticleMetadata({
       card: "summary_large_image",
       title,
       description,
+      images: [
+        createVersionedSocialImageUrl(
+          createRouteSocialImagePath(path, "twitter-image")
+        ),
+      ],
       creator: siteXHandle,
     },
   }
