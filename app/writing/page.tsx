@@ -6,7 +6,7 @@ import { posts } from "@/lib/writing"
 export const metadata = createPageMetadata({
   title: "Writing",
   description:
-    "Notes on React, Next.js, frontend architecture, accessibility, and building for the web.",
+    "Writing on frontend engineering, interface decisions, modern web architecture, and the details that make products hold together.",
   path: "/writing",
 })
 
@@ -18,13 +18,13 @@ export default function WritingPage() {
           <p className="text-sm font-medium text-foreground">Writing</p>
           <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
             <p>
-              Notes on React, Next.js, frontend architecture, accessibility,
-              performance, and the small decisions that make interfaces feel
-              clearer.
+              Notes on frontend engineering, interface design, architecture,
+              performance, and the decisions that usually sit behind the final
+              surface.
             </p>
             <p>
-              A place to write things down, explain what I&apos;m learning, and
-              keep a public record of what is actually working.
+              A place to make the thinking visible: what worked, what changed,
+              and what was worth doing carefully.
             </p>
           </div>
         </header>

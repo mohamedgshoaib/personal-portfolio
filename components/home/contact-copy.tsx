@@ -101,7 +101,7 @@ export function ContactCopy({ email }: { email: string }) {
         type="button"
         onClick={handleCopy}
         aria-label="Copy email address"
-        className="inline-flex min-h-11 flex-col items-center justify-center rounded-[1.15rem] bg-muted px-6 py-3 text-lg text-foreground motion-surface-interaction hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none"
+        className="inline-flex min-h-9 items-center justify-center rounded-xl bg-muted px-4 py-2 text-[0.96rem] text-foreground motion-surface-interaction hover:bg-secondary focus-visible:bg-secondary focus-visible:outline-none"
       >
         <span>{email}</span>
       </button>

@@ -4,6 +4,12 @@ import type { ComponentType } from "react"
 
 import helloWorldPostModule from "@/content/writing/hello-world-what-this-blog-is-about.mdx"
 import { metadata as helloWorldPostMetadata } from "@/content/writing/hello-world-what-this-blog-is-about.mdx"
+import aiDiscoveryPostModule from "@/content/writing/ai-discovery-in-2026-the-llms-txt-standard.mdx"
+import { metadata as aiDiscoveryPostMetadata } from "@/content/writing/ai-discovery-in-2026-the-llms-txt-standard.mdx"
+import privacyFriendlyAnalyticsPostModule from "@/content/writing/privacy-friendly-analytics-that-actually-work-even-with-adblockers.mdx"
+import { metadata as privacyFriendlyAnalyticsPostMetadata } from "@/content/writing/privacy-friendly-analytics-that-actually-work-even-with-adblockers.mdx"
+import searchVisibilityPostModule from "@/content/writing/search-visibility-in-2026-beyond-meta-tags.mdx"
+import { metadata as searchVisibilityPostMetadata } from "@/content/writing/search-visibility-in-2026-beyond-meta-tags.mdx"
 
 type WritingPostMetadata = {
   title: string
@@ -92,6 +98,34 @@ function createMarkdownSource(
 
 const postModules = [
   {
+    slug: "privacy-friendly-analytics-that-actually-work-even-with-adblockers",
+    Component: privacyFriendlyAnalyticsPostModule,
+    metadata: privacyFriendlyAnalyticsPostMetadata as WritingPostMetadata,
+    markdown: createMarkdownSource(
+      path.join(
+        process.cwd(),
+        "content",
+        "writing",
+        "privacy-friendly-analytics-that-actually-work-even-with-adblockers.mdx"
+      ),
+      privacyFriendlyAnalyticsPostMetadata as WritingPostMetadata
+    ),
+  },
+  {
+    slug: "ai-discovery-in-2026-the-llms-txt-standard",
+    Component: aiDiscoveryPostModule,
+    metadata: aiDiscoveryPostMetadata as WritingPostMetadata,
+    markdown: createMarkdownSource(
+      path.join(
+        process.cwd(),
+        "content",
+        "writing",
+        "ai-discovery-in-2026-the-llms-txt-standard.mdx"
+      ),
+      aiDiscoveryPostMetadata as WritingPostMetadata
+    ),
+  },
+  {
     slug: "hello-world-what-this-blog-is-about",
     Component: helloWorldPostModule,
     metadata: helloWorldPostMetadata as WritingPostMetadata,
@@ -103,6 +137,20 @@ const postModules = [
         "hello-world-what-this-blog-is-about.mdx"
       ),
       helloWorldPostMetadata as WritingPostMetadata
+    ),
+  },
+  {
+    slug: "search-visibility-in-2026-beyond-meta-tags",
+    Component: searchVisibilityPostModule,
+    metadata: searchVisibilityPostMetadata as WritingPostMetadata,
+    markdown: createMarkdownSource(
+      path.join(
+        process.cwd(),
+        "content",
+        "writing",
+        "search-visibility-in-2026-beyond-meta-tags.mdx"
+      ),
+      searchVisibilityPostMetadata as WritingPostMetadata
     ),
   },
 ]

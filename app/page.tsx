@@ -7,7 +7,6 @@ import { DisclosureList } from "@/components/home/disclosure-list"
 import { TextLink } from "@/components/home/text-link"
 import { siteDescription, siteName, siteXHandle } from "@/lib/site-metadata"
 import {
-  experiences,
   featuredProjects,
   siteProfile,
   socialLinks,
@@ -78,7 +77,6 @@ export default function Page() {
           <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
             <p>{siteProfile.intro}</p>
             <p>{siteProfile.bio}</p>
-            <p>Open to {siteProfile.opportunities.join(", ").toLowerCase()}.</p>
             <p>
               Reach me on{" "}
               <TextLink href="https://x.com/mo0hamed_gamal">X</TextLink> or
@@ -96,10 +94,6 @@ export default function Page() {
             <DisclosureList type="projects" items={featuredProjects} />
             <TextLink href="/projects">View all projects</TextLink>
           </div>
-        </HomeSection>
-
-        <HomeSection id="experience" label="Experience">
-          <DisclosureList type="experience" items={experiences} />
         </HomeSection>
 
         <HomeSection id="stack" label="Stack">

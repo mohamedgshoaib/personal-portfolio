@@ -9,7 +9,7 @@ export default async function Image() {
     eyebrow: "Writing",
     title: "Notes on building for the web.",
     description:
-      "Writing on React, Next.js, frontend architecture, accessibility, performance, and the small decisions that make interfaces feel clearer.",
-    footer: "Essays, notes, and implementation details",
+      "Writing on frontend engineering, interface decisions, architecture, and the implementation details that shape the final product.",
+    footer: "Engineering, design, and process",
   })
 }

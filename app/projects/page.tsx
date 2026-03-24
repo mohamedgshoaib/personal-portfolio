@@ -5,7 +5,7 @@ import { projects, siteProfile } from "@/lib/site-content"
 export const metadata = createPageMetadata({
   title: "Projects",
   description:
-    "Selected frontend projects focused on performance, SEO, RTL support, and maintainable implementation.",
+    "Selected frontend work across product sites, internal systems, and interfaces shaped by structure, design quality, and implementation discipline.",
   path: "/projects",
 })
 
@@ -17,14 +17,13 @@ export default function ProjectsPage() {
           <p className="text-sm font-medium text-foreground">Projects</p>
           <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
             <p>
-              Selected work focused on fast frontend systems, SEO-aware
-              architecture, RTL support, and interfaces that stay maintainable
-              as products grow.
+              A selection of frontend work across product websites, internal
+              tooling, and interface-heavy builds.
             </p>
             <p>
-              I care about implementation details as much as the final surface,
-              so each project reflects both product thinking and engineering
-              discipline.
+              The common thread is care: clear planning, strong visual
+              hierarchy, and implementation that stays stable as the product
+              grows.
             </p>
           </div>
         </header>

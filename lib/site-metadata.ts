@@ -26,16 +26,17 @@ function resolveSiteUrl() {
 export const siteUrl = resolveSiteUrl()
 export const siteName = siteProfile.name
 export const siteDescription =
-  "Frontend Developer building fast, SEO-driven web applications with full RTL support, clean architecture, and durable frontend systems."
+  "Frontend developer working with React and Next.js, with a focus on clean design, strong planning, and careful implementation."
 export const siteKeywords = [
   "Mohamed Gamal",
   "Frontend Developer",
+  "Frontend Engineer",
   "Next.js",
   "React",
   "TypeScript",
+  "Web interfaces",
+  "Design systems",
   "Performance",
-  "SEO",
-  "RTL",
   "Web development",
 ] as const
 export const siteXHandle = SITE_HANDLE

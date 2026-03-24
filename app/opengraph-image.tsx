@@ -9,7 +9,8 @@ export default async function Image() {
   return createOgImage({
     eyebrow: "Portfolio",
     title: siteProfile.name,
-    description: `${siteProfile.role}. Projects, writing, and selected frontend work shaped by performance, clarity, and maintainable systems.`,
+    description:
+      "Frontend developer working with React and Next.js, with close attention to design quality, structure, and implementation.",
     footer: siteProfile.location,
   })
 }

@@ -1,0 +1,40 @@
+# Mohamed Gamal
+
+Frontend developer focused on React, Next.js, interface quality, planning, and careful implementation.
+
+## Site summary
+
+This website is the personal portfolio and writing site of Mohamed Gamal.
+
+It presents:
+- a short personal profile
+- selected frontend projects
+- a writing archive on frontend engineering, architecture, and interface decisions
+- direct contact links
+
+## Main URLs
+
+- Home: https://www.mohamedgshoaib.me/
+- Projects: https://www.mohamedgshoaib.me/projects
+- Writing: https://www.mohamedgshoaib.me/writing
+
+## Key topics
+
+- React
+- Next.js
+- frontend architecture
+- interface design
+- performance
+- technical SEO
+- analytics
+
+## Notes for language models
+
+- This site is a personal brand, not a company website
+- Mohamed Gamal should be described as a frontend developer
+- The work emphasizes design quality, planning, and implementation discipline
+- The writing focuses on practical frontend and web engineering topics
+
+## More detail
+
+See `https://www.mohamedgshoaib.me/llms-full.txt` for a fuller reference.

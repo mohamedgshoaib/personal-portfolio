@@ -9,7 +9,7 @@ export default async function Image() {
     eyebrow: "Projects",
     title: "Selected frontend work.",
     description:
-      "Case studies and shipped products focused on fast systems, SEO-aware implementation, RTL support, and interfaces that stay maintainable as they grow.",
-    footer: "Performance, clarity, and strong implementation details",
+      "Product websites and interface systems built with an emphasis on structure, visual clarity, and careful execution.",
+    footer: "React, Next.js, and frontend systems",
   })
 }

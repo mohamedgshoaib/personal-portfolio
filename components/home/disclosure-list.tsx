@@ -8,17 +8,12 @@ import dynamic from "next/dynamic"
 import { DisclosureChevron } from "@/components/ui/disclosure-chevron"
 import { TextLink } from "@/components/home/text-link"
 import { useHoverCapability } from "@/hooks/use-hover-capability"
-import type { Experience, Project } from "@/lib/site-content"
+import type { Project } from "@/lib/site-content"
 
-type DisclosureListProps =
-  | {
-      type: "projects"
-      items: Project[]
-    }
-  | {
-      type: "experience"
-      items: Experience[]
-    }
+type DisclosureListProps = {
+  type: "projects"
+  items: Project[]
+}
 
 const DISCLOSURE_TRIGGER_CLASS =
   "flex w-full items-start justify-between gap-6 py-3 text-left motion-interactive-color outline-none focus-visible:text-foreground data-[panel-open]:text-foreground"
@@ -34,18 +29,9 @@ const ProjectHoverPreview = dynamic(() =>
 )
 
 export function DisclosureList(props: DisclosureListProps) {
-  if (props.type === "projects") {
-    return (
-      <ProjectDisclosureList
-        key={props.items.map((item) => item.slug).join("|")}
-        items={props.items}
-      />
-    )
-  }
-
   return (
-    <ExperienceDisclosureList
-      key={props.items.map((item) => `${item.company}-${item.role}`).join("|")}
+    <ProjectDisclosureList
+      key={props.items.map((item) => item.slug).join("|")}
       items={props.items}
     />
   )
@@ -146,54 +132,5 @@ function ProjectImage({ item }: { item: Project }) {
         className="object-cover shadow-none!"
       />
     </div>
-  )
-}
-
-function ExperienceDisclosureList({ items }: { items: Experience[] }) {
-  const [value, setValue] = React.useState<string[]>([])
-
-  return (
-    <Accordion.Root
-      className="w-full space-y-2"
-      hiddenUntilFound
-      value={value}
-      onValueChange={setValue}
-    >
-      {items.map((item, index) => {
-        const value = `${item.company}-${item.role}`
-
-        return (
-          <Accordion.Item
-            key={value}
-            value={value}
-            className={index === 0 ? "group" : "group pt-1"}
-          >
-            <Accordion.Header>
-              <Accordion.Trigger className={DISCLOSURE_TRIGGER_CLASS}>
-                <div className="max-w-[33rem] min-w-0 space-y-1">
-                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                    <span className="font-heading text-[1.03rem] font-medium tracking-[-0.01em] text-foreground sm:text-[1.06rem]">
-                      {item.role}
-                    </span>
-                    <span className="text-sm text-muted-foreground">
-                      {item.company}
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    {item.periodLabel}
-                  </p>
-                </div>
-                <DisclosureChevron />
-              </Accordion.Trigger>
-            </Accordion.Header>
-            <Accordion.Panel className={DISCLOSURE_PANEL_CLASS}>
-              <div className={DISCLOSURE_CONTENT_CLASS}>
-                <p>{item.summary}</p>
-              </div>
-            </Accordion.Panel>
-          </Accordion.Item>
-        )
-      })}
-    </Accordion.Root>
   )
 }

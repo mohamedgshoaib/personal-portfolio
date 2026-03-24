@@ -21,21 +21,13 @@ export type Project = {
   }
 }
 
-export type Experience = {
-  company: string
-  role: string
-  periodLabel: string
-  summary: string
-}
-
 export const siteProfile = {
   name: "Mohamed Gamal",
   role: "Frontend Developer",
   location: "Cairo, Egypt",
   intro:
-    "I build fast, SEO-driven web applications with full RTL support and a strong bias toward clarity, performance, and long-term maintainability.",
-  bio: "I care about clean architecture, thoughtful interfaces, and performance that holds up under real traffic. I work best with modern tooling, adapt quickly to project needs, and gravitate toward problems that force me to learn something new.",
-  opportunities: ["Jobs", "Freelance", "Open source"],
+    "I build frontend systems with React and Next.js, with close attention to structure, interface quality, and execution.",
+  bio: "My work sits at the intersection of engineering and design: strong planning, clean visual decisions, and implementation that stays careful all the way through. I care about products that feel considered, not improvised.",
 } as const
 
 export const socialLinks: SocialLink[] = [
@@ -73,9 +65,9 @@ export const projects: Project[] = [
     status: "shipped",
     href: "https://danadoors.net/",
     summary:
-      "A bilingual product catalog for aluminum doors, windows, handrails, kitchens, and related offerings.",
+      "A bilingual showroom website built to present doors, aluminum windows, handrails, kitchens, and related product lines in both English and Arabic.",
     details:
-      "Built as a modern EN/AR showcase experience with full RTL localization and image-first product browsing. The site pairs Cloudinary-powered galleries with responsive layouts, dark/light themes, and a search-friendly SEO setup including metadata, sitemap coverage, and structured data so catalog pages stay discoverable.",
+      "Designed as a clean product-browsing experience for a showroom business, with full RTL support, structured navigation, and image-led discovery across multiple categories. The build focuses on clarity, search visibility, and a catalog structure that can scale as inventory and content grow.",
     architecture: [
       "Next.js 16 App Router",
       "TypeScript",
@@ -97,9 +89,9 @@ export const projects: Project[] = [
     status: "shipped",
     href: "http://mosexperiences.com/",
     summary:
-      "A production-ready travel platform with destinations, packages, VIP tours, and multi-channel booking flows.",
+      "A travel agency website with multilingual content, curated packages, VIP experiences, and a dashboard-managed content system.",
     details:
-      "Built to give a tourism business one managed system for discovery, inquiries, and booking operations across languages. The platform includes en/fr routing, searchable content, favorites, multiple contact and booking flows with email and WhatsApp integration, plus an admin dashboard for CRUD content management and analytics coverage for engagement, Core Web Vitals, and SEO health.",
+      "Built as a managed frontend system for a travel agency rather than a static brochure. The site supports multilingual routing, curated travel content, inquiry flows, and dashboard-controlled updates for destinations, packages, and other commercial content. The emphasis was on giving the business a reliable publishing and communication layer without overcomplicating the public experience.",
     architecture: [
       "Next.js 15.5.5 App Router",
       "TypeScript",
@@ -123,9 +115,9 @@ export const projects: Project[] = [
     status: "shipped",
     href: "https://www.reway.page/",
     summary:
-      "A bookmarking workspace with intelligent link extraction, real-time sync, and a Chrome extension for instant capture.",
+      "A bookmarking workspace that turns saved links into a cleaner, searchable system across devices, with a Chrome extension as part of the capture flow.",
     details:
-      "Built to replace browser-siloed bookmark flows with one searchable workspace across devices. Reway supports smart paste-to-bookmark metadata enrichment, grouped organization, keyboard-first navigation, flexible view modes, reduced-motion support, and optimistic updates to keep interactions fast and responsive.",
+      "Built around speed and usability: quick capture, structured organization, and an interface that stays responsive while content syncs in real time. A Chrome extension is a core part of the product, making it possible to save links directly from the browser into the workspace without breaking the flow. The product leans on careful interaction design as much as the underlying data model.",
     architecture: [
       "Next.js 16 App Router (Turbopack)",
       "React 19",
@@ -146,9 +138,9 @@ export const projects: Project[] = [
     status: "shipped",
     href: "https://www.devloop.software/",
     summary:
-      "A bilingual public website for Devloop with localized routing, server-rendered SEO, and full English/Arabic RTL support.",
+      "A bilingual agency website with localized routing, full RTL support, and a careful technical foundation for search and performance.",
     details:
-      "Built to stay lean on first load while still supporting theming, reduced-motion-aware interactions, and a working contact flow. The implementation prioritizes clear information architecture, strong SEO fundamentals, and loading strategies that keep heavier UI off the critical path.",
+      "Built for an agency that delivers digital systems, whether full stack products or more focused web work. The site is intentionally lean, with clear structure, bilingual routing, full RTL support, and strong SEO fundamentals. The frontend keeps heavier behavior away from the critical path while still supporting theming and polished interactions.",
     architecture: [
       "Next.js 16 App Router",
       "React 19",
@@ -166,13 +158,3 @@ export const projects: Project[] = [
 ]
 
 export const featuredProjects = projects.slice(0, 3)
-
-export const experiences: Experience[] = [
-  {
-    company: "TELUS International",
-    role: "Search Engine Evaluator",
-    periodLabel: "Sep 2019 - May 2024",
-    summary:
-      "Worked with detailed evaluation guidelines, structured review notes, and remote QA processes that strengthened my attention to detail, consistency, and written communication.",
-  },
-]
