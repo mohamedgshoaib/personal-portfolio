@@ -56,6 +56,29 @@ export const socialLinks: SocialLink[] = [
 
 export const projects: Project[] = [
   {
+    name: "Devloop",
+    slug: "devloop",
+    status: "shipped",
+    href: "https://www.devloop.software/",
+    summary:
+      "A bilingual agency website with localized routing, full RTL support, and a careful technical foundation for search and performance.",
+    details:
+      "Built for an agency that delivers digital systems, whether full stack products or more focused web work. The site is intentionally lean, with clear structure, bilingual routing, full RTL support, and strong SEO fundamentals. The frontend keeps heavier behavior away from the critical path while still supporting theming and polished interactions.",
+    architecture: [
+      "Next.js 16 App Router",
+      "React 19",
+      "Tailwind CSS 4",
+      "next-intl",
+      "next-themes",
+      "Motion",
+      "Resend",
+    ],
+    image: {
+      src: "/assets/projects/devloop/devloop.webp",
+      alt: "Homepage preview for the Devloop bilingual marketing website.",
+    },
+  },
+  {
     name: "Dana Doors",
     slug: "dana-doors",
     status: "shipped",
@@ -127,29 +150,6 @@ export const projects: Project[] = [
     image: {
       src: "/assets/projects/reway/reway.webp",
       alt: "Workspace preview for the Reway bookmarking platform.",
-    },
-  },
-  {
-    name: "Devloop",
-    slug: "devloop",
-    status: "shipped",
-    href: "https://www.devloop.software/",
-    summary:
-      "A bilingual agency website with localized routing, full RTL support, and a careful technical foundation for search and performance.",
-    details:
-      "Built for an agency that delivers digital systems, whether full stack products or more focused web work. The site is intentionally lean, with clear structure, bilingual routing, full RTL support, and strong SEO fundamentals. The frontend keeps heavier behavior away from the critical path while still supporting theming and polished interactions.",
-    architecture: [
-      "Next.js 16 App Router",
-      "React 19",
-      "Tailwind CSS 4",
-      "next-intl",
-      "next-themes",
-      "Motion",
-      "Resend",
-    ],
-    image: {
-      src: "/assets/projects/devloop/devloop.webp",
-      alt: "Homepage preview for the Devloop bilingual marketing website.",
     },
   },
   {
