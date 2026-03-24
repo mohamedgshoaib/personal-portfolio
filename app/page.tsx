@@ -1,21 +1,25 @@
-import type { Metadata } from "next"
-import type { ReactNode } from "react"
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
-import { Avatar } from "@/components/home/avatar"
-import { ContactCopy } from "@/components/home/contact-copy"
-import { DisclosureList } from "@/components/home/disclosure-list"
-import { TextLink } from "@/components/home/text-link"
-import { siteDescription, siteName, siteXHandle } from "@/lib/site-metadata"
+import { Avatar } from "@/components/home/avatar";
+import { ContactCopy } from "@/components/home/contact-copy";
+import { DisclosureList } from "@/components/home/disclosure-list";
+import { TextLink } from "@/components/home/text-link";
+import {
+  siteDescription,
+  siteName,
+  siteXHandle,
+} from "@/lib/metadata/site-metadata";
 import {
   featuredProjects,
+  homeContent,
   siteProfile,
   socialLinks,
-  technologies,
-} from "@/lib/site-content"
-import { posts } from "@/lib/writing"
+} from "@/lib/content/site-content";
+import { posts } from "@/lib/content/writing";
 
-const latestPost = posts[0] ?? null
-const emailLink = socialLinks.find((link) => link.label === "Email")
+const latestPost = posts[0] ?? null;
+const emailLink = socialLinks.find((link) => link.label === "Email");
 
 export const metadata: Metadata = {
   description: siteDescription,
@@ -36,16 +40,16 @@ export const metadata: Metadata = {
     description: siteDescription,
     creator: siteXHandle,
   },
-}
+};
 
 function HomeSection({
   id,
   label,
   children,
 }: {
-  id?: string
-  label: string
-  children: ReactNode
+  id?: string;
+  label: string;
+  children: ReactNode;
 }) {
   return (
     <section id={id} className="scroll-mt-24 space-y-5">
@@ -54,7 +58,7 @@ function HomeSection({
       </p>
       {children}
     </section>
-  )
+  );
 }
 
 export default function Page() {
@@ -79,13 +83,18 @@ export default function Page() {
             <p>{siteProfile.bio}</p>
             <p>
               Reach me on{" "}
-              <TextLink href="https://x.com/mo0hamed_gamal">X</TextLink> or
-              check out my{" "}
+              <TextLink href="https://x.com/mo0hamed_gamal">X</TextLink>,
+              connect on{" "}
+              <TextLink href="https://www.linkedin.com/in/mohamed-g-shoaib/">
+                LinkedIn
+              </TextLink>
+              , or check out my{" "}
               <TextLink href="https://github.com/mohamed-g-shoaib">
                 GitHub
               </TextLink>
               .
             </p>
+            <p>Based in {siteProfile.location}.</p>
           </div>
         </HomeSection>
 
@@ -96,10 +105,12 @@ export default function Page() {
           </div>
         </HomeSection>
 
-        <HomeSection id="stack" label="Stack">
-          <p className="max-w-[33rem] text-[0.96rem] leading-8 text-muted-foreground">
-            {technologies.map((item) => item.name).join(", ")}.
-          </p>
+        <HomeSection id="approach" label="Approach">
+          <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
+            {homeContent.approach.map((paragraph: string) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
         </HomeSection>
 
         <HomeSection id="writing" label="Writing">
@@ -143,5 +154,5 @@ export default function Page() {
         </div>
       </footer>
     </main>
-  )
+  );
 }

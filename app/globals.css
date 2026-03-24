@@ -221,6 +221,7 @@
   body {
     @apply relative isolate min-h-svh bg-background text-foreground;
     padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
+    text-wrap: pretty;
   }
   h1,
   h2,
@@ -230,9 +231,6 @@
   h6 {
     font-family: var(--font-heading), var(--font-sans), sans-serif;
     text-wrap: balance;
-  }
-  p {
-    text-wrap: pretty;
   }
   html {
     scroll-padding-bottom: calc(env(safe-area-inset-bottom) + 2rem);
