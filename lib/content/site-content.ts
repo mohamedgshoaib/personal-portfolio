@@ -6,7 +6,7 @@ type SocialLink = {
 export type Project = {
   name: string
   slug: string
-  status: "shipped" | "in-progress" | "archived"
+  status: "shipped" | "in-progress" | "refactoring" | "archived"
   href: string
   summary: string
   details: string
