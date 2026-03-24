@@ -6,6 +6,7 @@ type SocialLink = {
 export type Project = {
   name: string
   slug: string
+  kind: "client" | "personal"
   status: "shipped" | "in-progress" | "refactoring" | "archived"
   href?: string
   repoHref?: string
@@ -58,6 +59,7 @@ export const projects: Project[] = [
   {
     name: "Devloop",
     slug: "devloop",
+    kind: "client",
     status: "shipped",
     href: "https://www.devloop.software/",
     summary:
@@ -81,6 +83,7 @@ export const projects: Project[] = [
   {
     name: "Dana Doors",
     slug: "dana-doors",
+    kind: "client",
     status: "shipped",
     href: "https://danadoors.net/",
     summary:
@@ -103,8 +106,34 @@ export const projects: Project[] = [
     },
   },
   {
+    name: "Reway",
+    slug: "reway",
+    kind: "personal",
+    status: "shipped",
+    href: "https://www.reway.page/",
+    repoHref: "https://github.com/mohamed-g-shoaib/reway",
+    summary:
+      "A bookmarking workspace that turns saved links into a cleaner, searchable system across devices, with a Chrome extension as part of the capture flow.",
+    details:
+      "Built around speed and usability: quick capture, structured organization, and an interface that stays responsive while content syncs in real time. A Chrome extension is a core part of the product, making it possible to save links directly from the browser into the workspace without breaking the flow. The product leans on careful interaction design as much as the underlying data model.",
+    architecture: [
+      "Next.js 16 App Router (Turbopack)",
+      "React 19",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Supabase (PostgreSQL, Auth, Realtime)",
+      "Chrome Extension (Manifest V3)",
+      "Optimistic UI patterns",
+    ],
+    image: {
+      src: "/assets/projects/reway/reway.webp",
+      alt: "Workspace preview for the Reway bookmarking platform.",
+    },
+  },
+  {
     name: "Mo's Experiences",
     slug: "mos-experiences",
+    kind: "client",
     status: "shipped",
     href: "http://mosexperiences.com/",
     summary:
@@ -129,32 +158,9 @@ export const projects: Project[] = [
     },
   },
   {
-    name: "Reway",
-    slug: "reway",
-    status: "shipped",
-    href: "https://www.reway.page/",
-    repoHref: "https://github.com/mohamed-g-shoaib/reway",
-    summary:
-      "A bookmarking workspace that turns saved links into a cleaner, searchable system across devices, with a Chrome extension as part of the capture flow.",
-    details:
-      "Built around speed and usability: quick capture, structured organization, and an interface that stays responsive while content syncs in real time. A Chrome extension is a core part of the product, making it possible to save links directly from the browser into the workspace without breaking the flow. The product leans on careful interaction design as much as the underlying data model.",
-    architecture: [
-      "Next.js 16 App Router (Turbopack)",
-      "React 19",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "Supabase (PostgreSQL, Auth, Realtime)",
-      "Chrome Extension (Manifest V3)",
-      "Optimistic UI patterns",
-    ],
-    image: {
-      src: "/assets/projects/reway/reway.webp",
-      alt: "Workspace preview for the Reway bookmarking platform.",
-    },
-  },
-  {
     name: "Rootly",
     slug: "rootly",
+    kind: "personal",
     status: "shipped",
     href: "https://rootlynotes.vercel.app/",
     repoHref: "https://github.com/mohamed-g-shoaib/rootly",
@@ -179,5 +185,13 @@ export const projects: Project[] = [
     },
   },
 ]
+
+export const clientProjects = projects.filter(
+  (project) => project.kind === "client"
+)
+
+export const personalProjects = projects.filter(
+  (project) => project.kind === "personal"
+)
 
 export const featuredProjects = projects.slice(0, 3)
