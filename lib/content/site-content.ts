@@ -8,6 +8,7 @@ export type Project = {
   slug: string
   status: "shipped" | "in-progress" | "refactoring" | "archived"
   href: string
+  repoHref?: string
   summary: string
   details: string
   architecture: string[]
@@ -109,6 +110,7 @@ export const projects: Project[] = [
     slug: "reway",
     status: "shipped",
     href: "https://www.reway.page/",
+    repoHref: "https://github.com/mohamed-g-shoaib/reway",
     summary:
       "A bookmarking workspace that turns saved links into a cleaner, searchable system across devices, with a Chrome extension as part of the capture flow.",
     details:

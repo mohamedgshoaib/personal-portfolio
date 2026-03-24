@@ -103,9 +103,12 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
               <div className={DISCLOSURE_CONTENT_CLASS}>
                 <p>{item.details}</p>
                 <p>{item.architecture.join(", ")}.</p>
-                <p>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                   <TextLink href={item.href}>Visit project</TextLink>
-                </p>
+                  {item.repoHref ? (
+                    <TextLink href={item.repoHref}>View repository</TextLink>
+                  ) : null}
+                </div>
               </div>
             </Accordion.Panel>
           </Accordion.Item>
