@@ -1,0 +1,45 @@
+export const metadata = {
+  title: "AI Discovery in 2026: The llms.txt Standard",
+  description:
+    "How to make a website easier for language models and AI discovery systems to read, summarize, and route correctly.",
+  summary:
+    "A short introduction to llms.txt, why AI-facing summaries matter, and how to structure LLM-readable files for modern discovery.",
+  publishedAt: "2025-12-29",
+  publishedLabel: "December 29, 2025",
+  image: {
+    src: "/assets/writings/03-ai-discovery.webp",
+    alt: "Cover image for the AI Discovery in 2026 article.",
+  },
+}
+
+The web is no longer consumed only by people. Language models, search assistants, and AI agents now read websites directly, and they do it under very different constraints.
+
+## What is llms.txt?
+
+`llms.txt` is a plain text or Markdown file placed at the root of a site. Its job is simple: provide a clean summary of what the site is, what matters on it, and where deeper information lives.
+
+## Why Does It Matter?
+
+Normal webpages contain navigation, layout chrome, scripts, and all kinds of interface overhead. Humans can ignore most of it. Models cannot do that as reliably. A clean summary helps by:
+
+1. **Improve Accuracy**: The AI doesn't have to "guess" your site's purpose.
+2. **Reduce Token Cost**: Clean text is cheaper and faster for models to process.
+3. **Enhance Discovery**: AI-driven search engines can represent your work more accurately to users.
+
+## The Standard: llms.txt vs. llms-full.txt
+
+The most useful pattern is a two-tier structure:
+
+- **llms.txt**: A brief summary with links to key sections. It's the elevator pitch.
+- **llms-full.txt**: A comprehensive document containing the actual content of your site: projects, bio details, and descriptions. This is the reference manual.
+
+## Where to Place It?
+
+Both files should live at the root of the domain. In a Next.js project, the practical place is `public/`:
+
+- `/public/llms.txt`
+- `/public/llms-full.txt`
+
+## Conclusion
+
+`llms.txt` is not a magic ranking lever. It is a clarity layer. When the site explains itself well, AI systems have less room to misunderstand it.

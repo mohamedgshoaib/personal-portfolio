@@ -1,0 +1,165 @@
+export const metadata = {
+  title: "Privacy-Friendly Analytics That Actually Work (Even With Adblockers)",
+  description:
+    "How to proxy Umami through Next.js rewrites so analytics remain privacy-friendly while recovering blocked traffic signals.",
+  summary:
+    "A practical guide to using Next.js rewrites for first-party Umami analytics, with better signal quality and no move back to invasive tracking.",
+  publishedAt: "2026-01-08",
+  publishedLabel: "January 8, 2026",
+  image: {
+    src: "/assets/writings/04-umami-analytics.webp",
+    alt: "Cover image for the privacy-friendly analytics article.",
+  },
+}
+
+If you run a website in 2026, there is a good chance your analytics are incomplete.
+
+Not because the dashboard is wrong, but because a meaningful share of traffic never reaches it. Privacy tools block third-party analytics aggressively, including tools that are comparatively respectful.
+
+That creates an awkward situation: developers move away from invasive analytics, then lose visibility anyway because the requests still look like tracking to the browser.
+
+The fix is not to become more invasive. It is to make the implementation cleaner.
+
+## The Problem: Third-Party Domains Are Dead
+
+Traditional analytics work like this:
+
+1. Load a script from `analytics-provider.com`
+2. Send data to `analytics-provider.com/api/collect`
+3. Hope the user's browser allows it
+
+Adblockers maintain massive blocklists of known tracking domains. When they see a request to `umami.is`, `plausible.io`, or `google-analytics.com`, they kill it instantly.
+
+Even privacy-respecting tools get caught in the crossfire.
+
+## The Solution: First-Party Proxying
+
+Instead of loading analytics from a third-party domain, proxy it through your own domain so requests remain first-party from the browser's perspective.
+
+The trick: **Next.js rewrites**.
+
+### Step 1: Configure Server-Side Rewrites
+
+In `next.config.ts`:
+
+```ts
+async rewrites() {
+  return [
+    {
+      source: "/metrics/lib.js",
+      destination: "https://cloud.umami.is/script.js",
+    },
+    {
+      source: "/metrics/api/send",
+      destination: "https://cloud.umami.is/api/send",
+    },
+  ]
+}
+```
+
+What this does:
+
+- Browser requests `/metrics/lib.js`, Next.js fetches it from Umami's CDN server-side
+- Tracking data sent to `/metrics/api/send` gets forwarded to Umami's API
+- The browser never touches `umami.is` directly
+
+That shifts the implementation model without changing the privacy posture.
+
+### Step 2: Load the Script from Your Domain
+
+In `app/layout.tsx`:
+
+```tsx
+<Script
+  src="/metrics/lib.js"
+  data-website-id="your-umami-website-id"
+  data-host-url="/metrics"
+  strategy="lazyOnload"
+/>
+```
+
+Key details:
+
+- `src="/metrics/lib.js"` loads from your domain, not Umami's
+- `data-host-url="/metrics"` tells the script to send data to `/metrics/api/send`
+- `strategy="lazyOnload"` defers loading until after the page is interactive
+
+It is also better for performance.
+
+### Step 3: Deploy and Test
+
+1. Open your site with an adblocker enabled
+2. Check DevTools, Network tab
+3. You should see:
+   - `metrics/lib.js` loads with a `200` status
+   - `metrics/api/send` receives POST requests
+   - no requests to `umami.is`, because everything is proxied
+
+If those conditions are true, the setup is behaving the way it should.
+
+## Why This Works (And Why It's Not Evil)
+
+Adblockers use domain-based filtering. They can't block `/metrics/lib.js` on your domain because:
+
+1. It's not on any blocklist
+2. It's a same-origin request, with no third-party warning
+3. They'd have to block your entire site to stop it
+
+**But isn't this sneaky?**
+
+Umami does not rely on the same invasive model as legacy analytics platforms. No cookie wall, no ad network profile, no cross-site identity stitching.
+
+The point is not to reconstruct individual users. It is to recover a truer picture of page views, routes, and general content performance.
+
+That distinction matters. Privacy-friendly analytics and invasive surveillance are not the same implementation problem.
+
+## The Performance Bonus
+
+There is also a practical performance upside.
+
+When you load a script from a third-party domain, the browser has to:
+
+1. Do a DNS lookup for the external domain
+2. Establish a new connection
+3. Negotiate TLS
+4. Download the script
+
+With first-party proxying:
+
+1. Same domain, so no DNS lookup
+2. Existing connection with HTTP/2 multiplexing
+3. Already-established TLS session
+
+The request path becomes simpler, and the script can load with less connection overhead.
+
+## Other Frameworks?
+
+This technique works anywhere you can configure server-side rewrites:
+
+- **Vercel**: Use `vercel.json` rewrites
+- **Netlify**: Use `_redirects` or `netlify.toml`
+- **Cloudflare Workers**: Intercept and proxy requests
+- **Nginx/Apache**: Configure reverse proxy rules
+
+The concept is the same: make third-party analytics look like first-party requests.
+
+## The Reality
+
+Privacy and measurement do not need to cancel each other out.
+
+Users want stronger privacy guarantees. Product teams still need signal. The better answer is to improve the implementation, not to revert to older tracking habits.
+
+First-party proxying gives you a cleaner middle ground: enough signal to make decisions, without abandoning the privacy standard you chose in the first place.
+
+When large portions of traffic disappear, product decisions get noisier. Better data does not solve judgment, but it does remove blind spots.
+
+## Try It Yourself
+
+If you're using Next.js and want to add Umami:
+
+1. Sign up at [umami.is](https://umami.is) - the free tier is generous
+2. Add the rewrites to `next.config.ts`
+3. Add the script tag to your layout
+4. Deploy and watch your real traffic numbers come in
+
+That is the real goal: analytics that stay useful without turning into something users need to defend themselves against.
