@@ -116,7 +116,10 @@ export function createProjectsPageSchema(projects: Project[]) {
         position: index + 1,
         name: project.name,
         description: project.summary,
-        url: project.href,
+        url:
+          project.href ??
+          project.repoHref ??
+          createAbsoluteUrl("/projects").toString(),
         creator: {
           "@id": createAbsoluteUrl("/#person").toString(),
         },

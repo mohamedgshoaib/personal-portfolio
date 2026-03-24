@@ -88,6 +88,16 @@ Focus areas:
 - lean frontend delivery
 - SEO fundamentals
 
+### Rootly
+
+A developer-focused learning notebook for self-taught developers, built around structured note capture, course organization, review sessions, and study analytics.
+
+Focus areas:
+- Q&A note workflows
+- learning progress
+- spaced repetition
+- cloud-first architecture
+
 ## Writing archive
 
 ### What This Writing Is For

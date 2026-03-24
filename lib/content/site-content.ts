@@ -7,7 +7,7 @@ export type Project = {
   name: string
   slug: string
   status: "shipped" | "in-progress" | "refactoring" | "archived"
-  href: string
+  href?: string
   repoHref?: string
   summary: string
   details: string
@@ -150,6 +150,32 @@ export const projects: Project[] = [
     image: {
       src: "/assets/projects/devloop/devloop.webp",
       alt: "Homepage preview for the Devloop bilingual marketing website.",
+    },
+  },
+  {
+    name: "Rootly",
+    slug: "rootly",
+    status: "shipped",
+    href: "https://rootlynotes.vercel.app/",
+    repoHref: "https://github.com/mohamed-g-shoaib/rootly",
+    summary:
+      "A developer-focused learning notebook built around structured notes, course organization, review sessions, and study analytics.",
+    details:
+      "Built as the next iteration of Rootly for self-taught developers who learn through courses, tutorials, and documentation. The product centers on Q&A notes, freeform notes, course progress, daily study tracking, and spaced-repetition review in one cloud-first system designed around how developers actually study.",
+    architecture: [
+      "Next.js 16 App Router (Turbopack)",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "coss ui + Base UI",
+      "Hugeicons",
+      "Supabase (Auth, PostgreSQL, RLS)",
+      "Recharts",
+      "Motion",
+      "Oxlint + Oxfmt",
+    ],
+    image: {
+      src: "/assets/projects/rootly/rootly.webp",
+      alt: "Dashboard preview for the Rootly developer learning notebook.",
     },
   },
 ]
