@@ -212,6 +212,11 @@ Implemented:
 - `public/llms.txt`
 - `public/llms-full.txt`
 
+Important historical note:
+
+- temporary `?v=2` query params were once added to social image URLs to force X to recrawl a stale homepage card
+- after X finally picked up the new dynamic social images for the plain homepage URL, those query params were removed and the metadata returned to plain route URLs
+
 ### Styling baseline
 
 The visual foundation has already moved away from starter defaults.

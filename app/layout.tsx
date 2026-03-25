@@ -5,7 +5,7 @@ import "./globals.css"
 import { FloatingDock } from "@/components/floating-dock"
 import { ThemeProvider } from "@/components/theme-provider"
 import {
-  createVersionedSocialImageUrl,
+  createAbsoluteUrl,
   siteDescription,
   siteKeywords,
   siteName,
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: siteName,
     description: siteDescription,
     url: "/",
-    images: [createVersionedSocialImageUrl("/opengraph-image")],
+    images: [createAbsoluteUrl("/opengraph-image")],
     siteName,
     locale: "en_US",
     type: "website",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
-    images: [createVersionedSocialImageUrl("/twitter-image")],
+    images: [createAbsoluteUrl("/twitter-image")],
     creator: siteXHandle,
   },
 }
