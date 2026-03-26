@@ -1,6 +1,10 @@
 # Mohamed Gamal Portfolio
 
-A personal portfolio and writing site built with Next.js, React, TypeScript, Tailwind CSS v4, and Base UI.
+![Portfolio Preview](public/interface.png)
+
+A personal portfolio and writing site built with minimal design, editorial restraint, and immersive audio interactions.
+
+Built with Next.js 16, React 19, TypeScript, Tailwind CSS v4, and Base UI.
 
 This project is not a generic portfolio starter. It is a real editorial portfolio for Mohamed Gamal, focused on frontend engineering, clean design, careful implementation, and writing about the modern web.
 
