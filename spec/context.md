@@ -145,6 +145,7 @@ Current local content model:
 Important current state:
 
 - the homepage now uses featured projects only
+- the homepage currently features Devloop, Dana Doors, Mo's Experiences, and Rootly
 - the projects page is the full archive
 - the experience section has been removed from the content model and UI
 - the old stack list was replaced by authored `Approach` copy
@@ -229,6 +230,7 @@ Established styling decisions:
 - shared motion utilities for disclosure, overlay, layout, and fades
 - restrained monochrome link/action styling
 - a blurred, compact floating dock shell
+- project stack text in disclosure panels is intentionally compact (single-line summary)
 
 Important nuance:
 
@@ -307,7 +309,7 @@ Completed work:
 
 Current authored content:
 
-- four shipped projects
+- six shipped projects
 - four published writing posts
 - homepage profile/about/approach content
 - no experience section
@@ -315,8 +317,10 @@ Current authored content:
 Current projects:
 
 - Dana Doors
+- Markymap
 - Mo's Experiences
 - Reway
+- Rootly
 - Devloop
 
 Current writing:
