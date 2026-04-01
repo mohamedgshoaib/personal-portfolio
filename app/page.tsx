@@ -112,6 +112,7 @@ export default function Page() {
 
         <HomeSection id="projects" label="Projects">
           <div className="space-y-5">
+            <p className="text-xs text-muted-foreground">Click to expand</p>
             <DisclosureList type="projects" items={featuredProjects} />
             <TextLink href="/projects">View all projects</TextLink>
           </div>

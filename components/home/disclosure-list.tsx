@@ -16,6 +16,7 @@ type DisclosureListProps = {
 }
 
 const DEFAULT_PROJECT_STATUS = "shipped"
+const MAX_VISIBLE_STACK_ITEMS = 4
 
 const DISCLOSURE_TRIGGER_CLASS =
   "flex w-full items-start justify-between gap-6 py-3 text-left motion-interactive-color outline-none focus-visible:text-foreground data-[panel-open]:text-foreground"
@@ -47,6 +48,19 @@ function getProjectStatusLabel(status: Project["status"]) {
   return status.replace("-", " ")
 }
 
+function formatCompactStack(architecture: Project["architecture"]) {
+  if (architecture.length <= MAX_VISIBLE_STACK_ITEMS) {
+    return architecture.join(" · ")
+  }
+
+  const visibleStack = architecture
+    .slice(0, MAX_VISIBLE_STACK_ITEMS)
+    .join(" · ")
+  const hiddenCount = architecture.length - MAX_VISIBLE_STACK_ITEMS
+
+  return `${visibleStack} +${hiddenCount} more`
+}
+
 function ProjectDisclosureList({ items }: { items: Project[] }) {
   const [value, setValue] = React.useState<string[]>([])
   const supportsHoverPreview = useHoverCapability()
@@ -61,6 +75,8 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
     >
       {items.map((item, index) => {
         const statusLabel = getProjectStatusLabel(item.status)
+        const fullStack = item.architecture.join(", ")
+        const compactStack = formatCompactStack(item.architecture)
 
         return (
           <Accordion.Item
@@ -102,7 +118,9 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
             <Accordion.Panel className={DISCLOSURE_PANEL_CLASS}>
               <div className={DISCLOSURE_CONTENT_CLASS}>
                 <p>{item.details}</p>
-                <p>{item.architecture.join(", ")}.</p>
+                <p className="truncate text-sm leading-6" title={fullStack}>
+                  Stack: {compactStack}
+                </p>
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                   {item.href ? (
                     <TextLink href={item.href}>Visit project</TextLink>
