@@ -30,9 +30,8 @@ export const siteProfile = {
 
 export const homeContent = {
   approach: [
-    "I work mostly with React and Next.js. I use React with Vite for focused client-side products, and Next.js when the product needs a stronger foundation for routing, content, SEO, or backend work.",
+    "I work mostly with React and Next.js. I use React with Vite for focused client-side products, and Next.js when the product needs a stronger foundation for routing, content, SEO, or backend work, usually with Supabase and Postgres.",
     "For UI, I usually reach for shadcn/ui or coss ui. I prefer Base UI when I want control over the primitives, and Radix UI when the ecosystem fit is better.",
-    "On the backend, I often use Supabase for auth, Postgres, and product infrastructure that should move fast without losing structure.",
   ],
 } as const
 
@@ -184,6 +183,34 @@ export const projects: Project[] = [
       alt: "Dashboard preview for the Rootly developer learning notebook.",
     },
   },
+  {
+    name: "Markymap",
+    slug: "markymap",
+    kind: "personal",
+    status: "shipped",
+    href: "https://markymap.vercel.app/",
+    repoHref: "https://github.com/mohamed-g-shoaib/markymap",
+    summary:
+      "A high-performance Markdown-to-mindmap application with live rendering, autosave, and interactive map controls in a clean split interface.",
+    details:
+      "Built for frictionless visual note-taking and brainstorming without heavyweight desktop tools. The product pairs a live Markdown editor with real-time SVG mindmap rendering, then layers in practical workflow features: local autosave, import/export for .md files, keyboard-friendly theme toggling, zoom and pan interactions, and responsive behavior that stays smooth across devices.",
+    architecture: [
+      "Next.js 16 App Router",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "coss ui + Base UI",
+      "Markmap (markmap-lib + markmap-view)",
+      "Hugeicons",
+      "Web Audio API",
+      "Local storage persistence",
+      "Oxlint + Oxfmt",
+    ],
+    image: {
+      src: "/assets/projects/markymap/markymap.webp",
+      alt: "Editor and live mindmap preview for the Markymap Markdown mindmapping app.",
+    },
+  },
 ]
 
 export const clientProjects = projects.filter(
@@ -194,4 +221,13 @@ export const personalProjects = projects.filter(
   (project) => project.kind === "personal"
 )
 
-export const featuredProjects = projects.slice(0, 3)
+const featuredProjectSlugs = [
+  "devloop",
+  "dana-doors",
+  "mos-experiences",
+  "rootly",
+] as const
+
+export const featuredProjects = featuredProjectSlugs
+  .map((slug) => projects.find((project) => project.slug === slug))
+  .filter((project): project is Project => project !== undefined)
