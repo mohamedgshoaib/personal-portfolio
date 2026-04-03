@@ -1,7 +1,6 @@
 import { TextLink } from "@/components/home/text-link"
 import { JsonLd } from "@/components/seo/json-ld"
 import { posts } from "@/lib/content/writing"
-import { siteProfile } from "@/lib/content/site-content"
 import { createWritingPageSchema } from "@/lib/metadata/schema"
 import { createPageMetadata } from "@/lib/metadata/site-metadata"
 
@@ -50,12 +49,6 @@ export default function WritingPage() {
           ))}
         </section>
       </div>
-
-      <footer className="mt-auto pt-16 text-sm text-muted-foreground">
-        <p>
-          Writing by {siteProfile.name}. Based in {siteProfile.location}.
-        </p>
-      </footer>
     </main>
   )
 }

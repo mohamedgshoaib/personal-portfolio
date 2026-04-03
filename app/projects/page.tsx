@@ -4,7 +4,6 @@ import {
   clientProjects,
   personalProjects,
   projects,
-  siteProfile,
 } from "@/lib/content/site-content"
 import { createProjectsPageSchema } from "@/lib/metadata/schema"
 import { createPageMetadata } from "@/lib/metadata/site-metadata"
@@ -48,12 +47,6 @@ export default function ProjectsPage() {
           </div>
         </section>
       </div>
-
-      <footer className="mt-auto pt-16 text-sm text-muted-foreground">
-        <p>
-          Work by {siteProfile.name}. Based in {siteProfile.location}.
-        </p>
-      </footer>
     </main>
   )
 }
