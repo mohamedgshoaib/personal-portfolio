@@ -164,18 +164,21 @@ export const projects: Project[] = [
     href: "https://rootlynotes.vercel.app/",
     repoHref: "https://github.com/mohamed-g-shoaib/rootly",
     summary:
-      "A developer-focused learning notebook built around structured notes, course organization, review sessions, and study analytics.",
+      "A cloud-first learning notebook for self-taught developers with structured notes, course tracking, daily study logs, and active-recall review.",
     details:
-      "Built as the next iteration of Rootly for self-taught developers who learn through courses, tutorials, and documentation. The product centers on Q&A notes, freeform notes, course progress, daily study tracking, and spaced-repetition review in one cloud-first system designed around how developers actually study.",
+      "Built as the active Rootly v2 application with a performance-focused dashboard architecture and extension-powered capture workflows. The product combines Q&A and freeform notes, topic-aware course tracking, daily study logs, and review sessions, then layers in query-backed instant navigation, cache-tagged server reads/mutations, extension-to-dashboard live updates, and a lightweight Web Audio interaction system for a faster, more responsive study experience.",
     architecture: [
-      "Next.js 16 App Router (Turbopack)",
+      "Next.js 16 App Router (Turbopack, Cache Components)",
+      "React 19",
       "TypeScript",
       "Tailwind CSS 4",
       "coss ui + Base UI",
       "Hugeicons",
       "Supabase (Auth, PostgreSQL, RLS)",
+      "TanStack Query",
       "Recharts",
       "Motion",
+      "Browser extension side panel + authenticated bridge APIs",
       "Oxlint + Oxfmt",
     ],
     image: {

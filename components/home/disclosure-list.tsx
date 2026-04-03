@@ -6,6 +6,11 @@ import { Accordion } from "@base-ui/react/accordion"
 import dynamic from "next/dynamic"
 
 import { DisclosureChevron } from "@/components/ui/disclosure-chevron"
+import {
+  PreviewCard,
+  PreviewCardContent,
+  PreviewCardTrigger,
+} from "@/components/ui/preview-card"
 import { TextLink } from "@/components/home/text-link"
 import { useHoverCapability } from "@/hooks/use-hover-capability"
 import type { Project } from "@/lib/content/site-content"
@@ -50,15 +55,21 @@ function getProjectStatusLabel(status: Project["status"]) {
 
 function formatCompactStack(architecture: Project["architecture"]) {
   if (architecture.length <= MAX_VISIBLE_STACK_ITEMS) {
-    return architecture.join(" · ")
+    return {
+      visible: architecture.join(" · "),
+      hidden: [] as string[],
+    }
   }
 
   const visibleStack = architecture
     .slice(0, MAX_VISIBLE_STACK_ITEMS)
     .join(" · ")
-  const hiddenCount = architecture.length - MAX_VISIBLE_STACK_ITEMS
+  const hiddenStack = architecture.slice(MAX_VISIBLE_STACK_ITEMS)
 
-  return `${visibleStack} +${hiddenCount} more`
+  return {
+    visible: visibleStack,
+    hidden: hiddenStack,
+  }
 }
 
 function ProjectDisclosureList({ items }: { items: Project[] }) {
@@ -77,6 +88,7 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
         const statusLabel = getProjectStatusLabel(item.status)
         const fullStack = item.architecture.join(", ")
         const compactStack = formatCompactStack(item.architecture)
+        const hiddenCount = compactStack.hidden.length
 
         return (
           <Accordion.Item
@@ -118,8 +130,17 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
             <Accordion.Panel className={DISCLOSURE_PANEL_CLASS}>
               <div className={DISCLOSURE_CONTENT_CLASS}>
                 <p>{item.details}</p>
-                <p className="truncate text-sm leading-6" title={fullStack}>
-                  Stack: {compactStack}
+                <p className="truncate text-sm leading-6">
+                  Stack: {compactStack.visible}
+                  {hiddenCount > 0 ? (
+                    <>
+                      {" "}
+                      <StackMorePreview
+                        hiddenStack={compactStack.hidden}
+                        hiddenCount={hiddenCount}
+                      />
+                    </>
+                  ) : null}
                 </p>
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                   {item.href ? (
@@ -135,6 +156,34 @@ function ProjectDisclosureList({ items }: { items: Project[] }) {
         )
       })}
     </Accordion.Root>
+  )
+}
+
+function StackMorePreview({
+  hiddenStack,
+  hiddenCount,
+}: {
+  hiddenStack: string[]
+  hiddenCount: number
+}) {
+  return (
+    <PreviewCard>
+      <PreviewCardTrigger>
+        <button
+          type="button"
+          className="inline-flex items-center rounded-sm text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none"
+          aria-label={`Show ${hiddenCount} more stack items: ${hiddenStack.join(", ")}`}
+        >
+          +{hiddenCount} more
+        </button>
+      </PreviewCardTrigger>
+      <PreviewCardContent side="top" sideOffset={10}>
+        <div className="max-w-[20rem] rounded-xl border border-border/70 bg-background px-3 py-2 text-sm leading-6 text-foreground shadow-xl">
+          <p className="font-medium text-foreground">Additional stack</p>
+          <p className="text-muted-foreground">{hiddenStack.join(" · ")}</p>
+        </div>
+      </PreviewCardContent>
+    </PreviewCard>
   )
 }
 
