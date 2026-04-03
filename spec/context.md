@@ -232,6 +232,12 @@ Established styling decisions:
 - a blurred, compact floating dock shell
 - project stack text in disclosure panels is intentionally compact (single-line summary)
 
+Recent addition:
+
+- route-level page transitions are now handled by `app/template.tsx` (App Router template remount on navigation)
+- the previous client shell approach with mount-state `useEffect` was removed
+- the transition style is subtle (fade + slight lift + mild blur) and respects reduced motion
+
 Important nuance:
 
 - `body` now carries `text-wrap: pretty`

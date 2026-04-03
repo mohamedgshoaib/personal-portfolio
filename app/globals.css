@@ -514,6 +514,34 @@
   }
 }
 
+@utility motion-route-enter {
+  animation-duration: 260ms;
+  animation-fill-mode: both;
+  animation-name: route-enter;
+  animation-timing-function: var(--ease-out);
+  will-change: opacity, transform, filter;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 1ms;
+    animation-name: none;
+    will-change: auto;
+  }
+}
+
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 @utility motion-fade-blur {
   transition-duration: var(--motion-duration-medium);
   transition-property: opacity, filter;
