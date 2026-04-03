@@ -28,7 +28,7 @@ What exists today:
 - generated sitemap, robots, and manifest routes
 - JSON-LD schema on key routes
 - `llms.txt` and `llms-full.txt`
-- a site-wide floating dock with theme and contact controls
+- a site-wide floating dock with contact, sound mute, and theme controls
 - shared homepage and UI primitives in `components/`
 - route-local writing UI in `app/writing/_components/`
 - authored content in `lib/content/`
@@ -194,6 +194,9 @@ Current sound behavior:
 
 - global click sound is delegated centrally
 - theme switching uses dedicated on/off sounds
+- dock and hotkey interaction sounds respect a shared global mute state
+- the dock includes a mute toggle before the theme toggle (`VolumeHighIcon` / `VolumeOffIcon`)
+- mute preference is persisted in `localStorage` (`portfolio-audio-muted`)
 - audio decode/play helpers live in `lib/audio/sound-engine.ts`
 - sound assets live in `lib/audio/`
 

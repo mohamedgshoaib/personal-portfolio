@@ -8,6 +8,8 @@ import { playSound } from "@/lib/audio/sound-engine"
 import { switchOffSound } from "@/lib/audio/switch-off"
 import { switchOnSound } from "@/lib/audio/switch-on"
 
+const AUDIO_MUTED_STORAGE_KEY = "portfolio-audio-muted"
+
 const CLICKABLE_SELECTOR = [
   "a[href]",
   "button",
@@ -25,22 +27,58 @@ const CLICKABLE_SELECTOR = [
   "[role='tab']",
 ].join(", ")
 
+type AudioPreferencesContextValue = {
+  muted: boolean
+  setMuted: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const AudioPreferencesContext =
+  React.createContext<AudioPreferencesContextValue | null>(null)
+
+function useAudioPreferences() {
+  const context = React.useContext(AudioPreferencesContext)
+
+  if (!context) {
+    throw new Error("useAudioPreferences must be used within ThemeProvider")
+  }
+
+  return context
+}
+
 function ThemeProvider({
   children,
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
+  const [muted, setMuted] = React.useState(false)
+
+  React.useEffect(() => {
+    const stored = window.localStorage.getItem(AUDIO_MUTED_STORAGE_KEY)
+
+    if (stored === "true") {
+      setMuted(true)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    window.localStorage.setItem(AUDIO_MUTED_STORAGE_KEY, String(muted))
+  }, [muted])
+
+  const value = React.useMemo(() => ({ muted, setMuted }), [muted])
+
   return (
-    <NextThemesProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-      {...props}
-    >
-      <ClickSound />
-      <ThemeHotkey />
-      {children}
-    </NextThemesProvider>
+    <AudioPreferencesContext.Provider value={value}>
+      <NextThemesProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+        {...props}
+      >
+        <ClickSound />
+        <ThemeHotkey />
+        {children}
+      </NextThemesProvider>
+    </AudioPreferencesContext.Provider>
   )
 }
 
@@ -79,7 +117,11 @@ function getClickableTarget(target: EventTarget | null) {
 }
 
 function ClickSound() {
-  const [playClickSound] = useSound(clickSoftSound, { interrupt: true })
+  const { muted } = useAudioPreferences()
+  const [playClickSound] = useSound(clickSoftSound, {
+    interrupt: true,
+    soundEnabled: !muted,
+  })
 
   const onClick = React.useEffectEvent((event: MouseEvent) => {
     if (!getClickableTarget(event.target)) {
@@ -102,15 +144,20 @@ function ClickSound() {
 
 function ThemeHotkey() {
   const { resolvedTheme, setTheme } = useTheme()
+  const { muted } = useAudioPreferences()
 
   const toggleTheme = React.useEffectEvent(() => {
     if (resolvedTheme === "dark") {
-      void playSound(switchOnSound.dataUri)
+      if (!muted) {
+        void playSound(switchOnSound.dataUri)
+      }
       setTheme("light")
       return
     }
 
-    void playSound(switchOffSound.dataUri)
+    if (!muted) {
+      void playSound(switchOffSound.dataUri)
+    }
     setTheme("dark")
   })
 
@@ -145,4 +192,4 @@ function ThemeHotkey() {
   return null
 }
 
-export { ThemeProvider }
+export { ThemeProvider, useAudioPreferences }

@@ -8,6 +8,8 @@ import {
   Home01Icon,
   MailAtSign01Icon,
   SourceCodeSquareIcon,
+  VolumeHighIcon,
+  VolumeOffIcon,
 } from "@hugeicons/core-free-icons"
 import { usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
@@ -26,6 +28,7 @@ import {
   TooltipTrigger,
   createTooltipHandle,
 } from "@/components/ui/tooltip"
+import { useAudioPreferences } from "@/components/theme-provider"
 import { playSound } from "@/lib/audio/sound-engine"
 import { socialLinks } from "@/lib/content/site-content"
 import { switchOffSound } from "@/lib/audio/switch-off"
@@ -59,6 +62,7 @@ const DOCK_CONTACT_ACTION_CLASS =
 export function FloatingDock() {
   const pathname = usePathname()
   const { resolvedTheme, setTheme } = useTheme()
+  const { muted, setMuted } = useAudioPreferences()
   const [contactOpen, setContactOpen] = React.useState(false)
   const [pendingActiveKey, setPendingActiveKey] = React.useState<Exclude<
     DockKey,
@@ -178,6 +182,11 @@ export function FloatingDock() {
   }, [activeKey, updateActiveFrame])
 
   function handleThemeToggle() {
+    if (muted) {
+      setTheme(resolvedTheme === "dark" ? "light" : "dark")
+      return
+    }
+
     if (resolvedTheme === "dark") {
       void playSound(switchOnSound.dataUri)
       setTheme("light")
@@ -186,6 +195,10 @@ export function FloatingDock() {
 
     void playSound(switchOffSound.dataUri)
     setTheme("dark")
+  }
+
+  function handleMuteToggle() {
+    setMuted((previous) => !previous)
   }
 
   return (
@@ -259,6 +272,26 @@ export function FloatingDock() {
                   }}
                 />
               </div>
+
+              <DockTooltip label={muted ? "Enable sounds" : "Mute sounds"}>
+                <button
+                  type="button"
+                  aria-label={
+                    muted
+                      ? "Enable interaction sounds"
+                      : "Mute interaction sounds"
+                  }
+                  data-click-sound="off"
+                  onClick={handleMuteToggle}
+                  className="flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground motion-interactive-color outline-none hover:text-foreground focus-visible:text-foreground"
+                >
+                  {muted ? (
+                    <DockIcon icon={VolumeOffIcon} />
+                  ) : (
+                    <DockIcon icon={VolumeHighIcon} />
+                  )}
+                </button>
+              </DockTooltip>
 
               <DockTooltip
                 label={resolvedTheme === "dark" ? "Light mode" : "Dark mode"}
