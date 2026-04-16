@@ -78,6 +78,17 @@ Focus areas:
 - quick capture
 - product usability
 
+### Forge
+
+A TypeScript CLI for generating clean React starters with framework shells, theme support, optional RTL routing, metadata, fallback pages, starter docs, and code-quality tooling already wired.
+
+Focus areas:
+- starter generation
+- framework overlays
+- RTL-ready app structure
+- tooling and metadata defaults
+- editable React foundations
+
 ### Devloop
 
 A bilingual agency website with localized routing, full RTL support, and strong technical foundations for performance and search.
@@ -97,6 +108,17 @@ Focus areas:
 - learning progress
 - spaced repetition
 - cloud-first architecture
+
+### Markymap
+
+A Markdown-to-mindmap application with live rendering, autosave, import and export, and interactive map controls in a clean split interface.
+
+Focus areas:
+- visual note-taking
+- live Markdown rendering
+- local persistence
+- zoom and pan interactions
+- responsive editor layout
 
 ## Writing archive
 

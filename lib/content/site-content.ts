@@ -130,6 +130,34 @@ export const projects: Project[] = [
     },
   },
   {
+    name: "Forge",
+    slug: "forge",
+    kind: "personal",
+    status: "shipped",
+    href: "https://use-forge.vercel.app/",
+    repoHref: "https://github.com/mohamed-g-shoaib/forge",
+    summary:
+      "A TypeScript CLI for generating clean React starters with framework shells, theme support, optional RTL routing, metadata, fallback pages, and code-quality tooling already wired.",
+    details:
+      "Built to turn the repeated setup work behind new React apps into a small, editable starter generator. Forge starts from a shadcn scaffold, then applies framework overlays and feature packs for app shell structure, themes, optional English and Arabic routing, sound hooks, metadata, fallback pages, starter docs, and lint or format tooling. The project includes a Vercel-hosted marketing site and is moving through its first public release pass.",
+    architecture: [
+      "TypeScript CLI",
+      "shadcn scaffold adapter",
+      "Next.js, Vite, and TanStack Start presets",
+      "Base UI and Radix UI options",
+      "LTR and RTL routing modes",
+      "Theme and sound hook feature packs",
+      "Metadata, error, and not-found overlays",
+      "Biome, ESLint + Prettier, and Oxlint + Oxfmt options",
+      "Generated regression fixtures",
+      "Vercel marketing site",
+    ],
+    image: {
+      src: "/assets/projects/forge/forge.webp",
+      alt: "Marketing site preview for the Forge React starter generator.",
+    },
+  },
+  {
     name: "Mo's Experiences",
     slug: "mos-experiences",
     kind: "client",

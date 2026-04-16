@@ -319,6 +319,7 @@ Completed work:
 Current authored content:
 
 - six shipped projects
+- one in-progress personal project
 - four published writing posts
 - homepage profile/about/approach content
 - no experience section
@@ -326,6 +327,7 @@ Current authored content:
 Current projects:
 
 - Dana Doors
+- Forge
 - Markymap
 - Mo's Experiences
 - Reway
