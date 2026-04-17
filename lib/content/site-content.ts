@@ -62,7 +62,7 @@ export const projects: Project[] = [
     status: "shipped",
     href: "https://www.devloop.software/",
     summary:
-      "A bilingual agency website with localized routing, full RTL support, and a careful technical foundation for search and performance.",
+      "A bilingual agency site with RTL routing, lean UI, and strong search foundations.",
     details:
       "Built for an agency that delivers digital systems, whether full stack products or more focused web work. The site is intentionally lean, with clear structure, bilingual routing, full RTL support, and strong SEO fundamentals. The frontend keeps heavier behavior away from the critical path while still supporting theming and polished interactions.",
     architecture: [
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     status: "shipped",
     href: "https://danadoors.net/",
     summary:
-      "A bilingual showroom website built to present doors, aluminum windows, handrails, kitchens, and related product lines in both English and Arabic.",
+      "A bilingual showroom site for browsing doors, windows, kitchens, and handrails.",
     details:
       "Designed as a clean product-browsing experience for a showroom business, with full RTL support, structured navigation, and image-led discovery across multiple categories. The build focuses on clarity, search visibility, and a catalog structure that can scale as inventory and content grow.",
     architecture: [
@@ -112,7 +112,7 @@ export const projects: Project[] = [
     href: "https://www.reway.page/",
     repoHref: "https://github.com/mohamed-g-shoaib/reway",
     summary:
-      "A bookmarking workspace that turns saved links into a cleaner, searchable system across devices, with a Chrome extension as part of the capture flow.",
+      "A bookmarking workspace for fast capture, clean organization, and saved-link search.",
     details:
       "Built around speed and usability: quick capture, structured organization, and an interface that stays responsive while content syncs in real time. A Chrome extension is a core part of the product, making it possible to save links directly from the browser into the workspace without breaking the flow. The product leans on careful interaction design as much as the underlying data model.",
     architecture: [
@@ -137,7 +137,7 @@ export const projects: Project[] = [
     href: "https://use-forge.vercel.app/",
     repoHref: "https://github.com/mohamed-g-shoaib/forge",
     summary:
-      "A TypeScript CLI for generating clean React starters with framework shells, theme support, optional RTL routing, metadata, fallback pages, and code-quality tooling already wired.",
+      "A TypeScript CLI for clean React starters with themes, RTL, metadata, and tooling.",
     details:
       "Built to turn the repeated setup work behind new React apps into a small, editable starter generator. Forge starts from a shadcn scaffold, then applies framework overlays and feature packs for app shell structure, themes, optional English and Arabic routing, sound hooks, metadata, fallback pages, starter docs, and lint or format tooling. The project includes a Vercel-hosted marketing site and is moving through its first public release pass.",
     architecture: [
@@ -164,7 +164,7 @@ export const projects: Project[] = [
     status: "shipped",
     href: "http://mosexperiences.com/",
     summary:
-      "A travel agency website with multilingual content, curated packages, VIP experiences, and a dashboard-managed content system.",
+      "A multilingual travel site with curated packages, VIP paths, and managed content.",
     details:
       "Built as a managed frontend system for a travel agency rather than a static brochure. The site supports multilingual routing, curated travel content, inquiry flows, and dashboard-controlled updates for destinations, packages, and other commercial content. The emphasis was on giving the business a reliable publishing and communication layer without overcomplicating the public experience.",
     architecture: [
@@ -192,7 +192,7 @@ export const projects: Project[] = [
     href: "https://rootlynotes.vercel.app/",
     repoHref: "https://github.com/mohamed-g-shoaib/rootly",
     summary:
-      "A cloud-first learning notebook for self-taught developers with structured notes, course tracking, daily study logs, and active-recall review.",
+      "A developer learning notebook for notes, course tracking, logs, and recall review.",
     details:
       "Built as the active Rootly v2 application with a performance-focused dashboard architecture and extension-powered capture workflows. The product combines Q&A and freeform notes, topic-aware course tracking, daily study logs, and review sessions, then layers in query-backed instant navigation, cache-tagged server reads/mutations, extension-to-dashboard live updates, and a lightweight Web Audio interaction system for a faster, more responsive study experience.",
     architecture: [
@@ -222,7 +222,7 @@ export const projects: Project[] = [
     href: "https://markymap.vercel.app/",
     repoHref: "https://github.com/mohamed-g-shoaib/markymap",
     summary:
-      "A high-performance Markdown-to-mindmap application with live rendering, autosave, and interactive map controls in a clean split interface.",
+      "A Markdown-to-mindmap app with live rendering, autosave, import, and map controls.",
     details:
       "Built for frictionless visual note-taking and brainstorming without heavyweight desktop tools. The product pairs a live Markdown editor with real-time SVG mindmap rendering, then layers in practical workflow features: local autosave, import/export for .md files, keyboard-friendly theme toggling, zoom and pan interactions, and responsive behavior that stays smooth across devices.",
     architecture: [

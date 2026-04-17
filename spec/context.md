@@ -232,14 +232,23 @@ Established styling decisions:
 - balanced headings and pretty body wrapping
 - shared motion utilities for disclosure, overlay, layout, and fades
 - restrained monochrome link/action styling
-- a blurred, compact floating dock shell
-- project stack text in disclosure panels is intentionally compact (single-line summary)
+- a compact floating dock shell using the shared floating surface treatment
+- projects are presented as editorial rows with always-visible 4:3 previews
+- the homepage shows three curated projects and links to the archive with a dynamic remaining-project count
+- full project descriptions and stack details live in a Base UI bottom sheet rather than inline accordions
+- project previews avoid extra colored image backplates; the image asset itself carries the visual frame
+- project sheet stack details use a quiet inline wrap with separators instead of badges, dense columns, or tall vertical lists
+- shared `surface-floating` utility in `app/globals.css` defines the distinct `bg-card` surface, quiet edge, and no-shadow treatment used by the dock, dock popover, and project sheet
+- shared text hierarchy utilities in `app/globals.css` define section labels and item titles so page headings, project rows, and writing rows stay visually consistent
 
 Recent addition:
 
 - route-level page transitions are now handled by `app/template.tsx` (App Router template remount on navigation)
 - the previous client shell approach with mount-state `useEffect` was removed
 - the transition style is subtle (fade + slight lift + mild blur) and respects reduced motion
+- project detail sheets now use a restrained bottom-up motion with a light backdrop and reduced-motion support
+- section labels and project titles were rebalanced so section headings are not visually weaker than the items they introduce
+- project row images were slightly reduced and centered on mobile; sheet images are also centered and constrained
 
 Important nuance:
 
@@ -314,12 +323,17 @@ Completed work:
    - dead code and unused files were removed
    - `lib` was reorganized into `content`, `metadata`, and `audio`
 
+9. Project archive presentation
+   - project accordions were replaced with text-led rows that keep the project image, name, summary, status, and actions visible
+   - long descriptions and full stack lists moved into an accessible Base UI bottom sheet
+   - old accordion hover-preview and chevron helpers were removed after the interaction model changed
+   - the sheet floats slightly above the bottom edge with full rounded corners and the shared `surface-floating` treatment; it keeps project identity in a slim evenly padded header, external project links on the left side of a slim evenly padded footer, one separate close action on the right side with an extended hit area, and a smaller full-image preview in the content area
+
 ## Current Content State
 
 Current authored content:
 
-- six shipped projects
-- one in-progress personal project
+- seven shipped projects
 - four published writing posts
 - homepage profile/about/approach content
 - no experience section

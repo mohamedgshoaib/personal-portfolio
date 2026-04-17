@@ -2,17 +2,10 @@
 
 import Image from "next/image"
 import * as React from "react"
-import { Accordion } from "@base-ui/react/accordion"
-import dynamic from "next/dynamic"
+import { Drawer } from "@base-ui/react/drawer"
 
-import { DisclosureChevron } from "@/components/ui/disclosure-chevron"
-import {
-  PreviewCard,
-  PreviewCardContent,
-  PreviewCardTrigger,
-} from "@/components/ui/preview-card"
 import { TextLink } from "@/components/home/text-link"
-import { useHoverCapability } from "@/hooks/use-hover-capability"
+import { cn } from "@/lib/utils"
 import type { Project } from "@/lib/content/site-content"
 
 type DisclosureListProps = {
@@ -21,24 +14,10 @@ type DisclosureListProps = {
 }
 
 const DEFAULT_PROJECT_STATUS = "shipped"
-const MAX_VISIBLE_STACK_ITEMS = 4
-
-const DISCLOSURE_TRIGGER_CLASS =
-  "flex w-full items-start justify-between gap-6 py-3 text-left motion-interactive-color outline-none focus-visible:text-foreground data-[panel-open]:text-foreground"
-
-const DISCLOSURE_PANEL_CLASS = "motion-disclosure-panel"
-const DISCLOSURE_CONTENT_CLASS =
-  "motion-disclosure-content max-w-[33rem] space-y-3 pb-4 text-[0.96rem] leading-8 text-muted-foreground"
-
-const ProjectHoverPreview = dynamic(() =>
-  import("@/components/home/project-hover-preview").then(
-    (mod) => mod.ProjectHoverPreview
-  )
-)
 
 export function DisclosureList(props: DisclosureListProps) {
   return (
-    <ProjectDisclosureList
+    <ProjectRows
       key={props.items.map((item) => item.slug).join("|")}
       items={props.items}
     />
@@ -53,171 +32,200 @@ function getProjectStatusLabel(status: Project["status"]) {
   return status.replace("-", " ")
 }
 
-function formatCompactStack(architecture: Project["architecture"]) {
-  if (architecture.length <= MAX_VISIBLE_STACK_ITEMS) {
-    return {
-      visible: architecture.join(" · "),
-      hidden: [] as string[],
-    }
+function ProjectRows({ items }: { items: Project[] }) {
+  const [open, setOpen] = React.useState(false)
+  const [selectedProject, setSelectedProject] = React.useState<Project | null>(
+    null
+  )
+
+  function openProjectDetails(project: Project) {
+    setSelectedProject(project)
+    setOpen(true)
   }
-
-  const visibleStack = architecture
-    .slice(0, MAX_VISIBLE_STACK_ITEMS)
-    .join(" · ")
-  const hiddenStack = architecture.slice(MAX_VISIBLE_STACK_ITEMS)
-
-  return {
-    visible: visibleStack,
-    hidden: hiddenStack,
-  }
-}
-
-function ProjectDisclosureList({ items }: { items: Project[] }) {
-  const [value, setValue] = React.useState<string[]>([])
-  const supportsHoverPreview = useHoverCapability()
-  const showPersistentImage = true
 
   return (
-    <Accordion.Root
-      className="w-full space-y-2"
-      hiddenUntilFound
-      value={value}
-      onValueChange={setValue}
+    <Drawer.Root
+      open={open}
+      onOpenChange={setOpen}
+      onOpenChangeComplete={(nextOpen) => {
+        if (!nextOpen) {
+          setSelectedProject(null)
+        }
+      }}
     >
-      {items.map((item, index) => {
-        const statusLabel = getProjectStatusLabel(item.status)
-        const fullStack = item.architecture.join(", ")
-        const compactStack = formatCompactStack(item.architecture)
-        const hiddenCount = compactStack.hidden.length
-
-        return (
-          <Accordion.Item
+      <div className="w-full divide-y divide-border/70">
+        {items.map((item) => (
+          <ProjectRow
             key={item.slug}
-            value={item.slug}
-            className={index === 0 ? "group" : "group pt-1"}
-          >
-            <Accordion.Header>
-              <Accordion.Trigger className={DISCLOSURE_TRIGGER_CLASS}>
-                <div className="grid min-w-0 flex-1 gap-4 sm:grid-cols-[minmax(0,1fr)_8.75rem] sm:items-start">
-                  <div className="min-w-0 space-y-1">
-                    <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                      <span className="font-heading text-[1.03rem] font-medium tracking-[-0.01em] text-foreground decoration-border underline-offset-4 group-hover:underline sm:text-[1.06rem]">
-                        {item.name}
-                      </span>
-                      {statusLabel ? (
-                        <span className="text-sm text-muted-foreground">
-                          {statusLabel}
-                        </span>
-                      ) : null}
-                    </div>
-                    <p className="text-[0.96rem] leading-8 text-muted-foreground">
-                      {item.summary}
-                    </p>
-                  </div>
-
-                  {showPersistentImage ? (
-                    <div className="mb-1 w-full max-w-[18rem] translate-x-[1.125rem] justify-self-center overflow-hidden rounded-[1.1rem] sm:mb-0 sm:max-w-none sm:translate-x-0 sm:justify-self-auto">
-                      <ProjectImageWithOptionalPreview
-                        item={item}
-                        supportsHoverPreview={supportsHoverPreview}
-                      />
-                    </div>
-                  ) : null}
-                </div>
-                <DisclosureChevron />
-              </Accordion.Trigger>
-            </Accordion.Header>
-            <Accordion.Panel className={DISCLOSURE_PANEL_CLASS}>
-              <div className={DISCLOSURE_CONTENT_CLASS}>
-                <p>{item.details}</p>
-                <p className="truncate text-sm leading-6">
-                  Stack: {compactStack.visible}
-                  {hiddenCount > 0 ? (
-                    <>
-                      {" "}
-                      <StackMorePreview
-                        hiddenStack={compactStack.hidden}
-                        hiddenCount={hiddenCount}
-                      />
-                    </>
-                  ) : null}
-                </p>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                  {item.href ? (
-                    <TextLink href={item.href}>Visit project</TextLink>
-                  ) : null}
-                  {item.repoHref ? (
-                    <TextLink href={item.repoHref}>View repository</TextLink>
-                  ) : null}
-                </div>
-              </div>
-            </Accordion.Panel>
-          </Accordion.Item>
-        )
-      })}
-    </Accordion.Root>
+            item={item}
+            onOpenDetails={openProjectDetails}
+          />
+        ))}
+      </div>
+      <ProjectDetailsSheet project={selectedProject} />
+    </Drawer.Root>
   )
 }
 
-function StackMorePreview({
-  hiddenStack,
-  hiddenCount,
-}: {
-  hiddenStack: string[]
-  hiddenCount: number
-}) {
-  return (
-    <PreviewCard>
-      <PreviewCardTrigger>
-        <button
-          type="button"
-          className="inline-flex items-center rounded-sm text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none"
-          aria-label={`Show ${hiddenCount} more stack items: ${hiddenStack.join(", ")}`}
-        >
-          +{hiddenCount} more
-        </button>
-      </PreviewCardTrigger>
-      <PreviewCardContent side="top" sideOffset={10}>
-        <div className="max-w-[20rem] rounded-xl border border-border/70 bg-background px-3 py-2 text-sm leading-6 text-foreground shadow-xl">
-          <p className="font-medium text-foreground">Additional stack</p>
-          <p className="text-muted-foreground">{hiddenStack.join(" · ")}</p>
-        </div>
-      </PreviewCardContent>
-    </PreviewCard>
-  )
-}
-
-function ProjectImageWithOptionalPreview({
+function ProjectRow({
   item,
-  supportsHoverPreview,
+  onOpenDetails,
 }: {
   item: Project
-  supportsHoverPreview: boolean
+  onOpenDetails: (project: Project) => void
 }) {
-  const image = <ProjectImage item={item} />
-
-  if (!supportsHoverPreview) {
-    return image
-  }
+  const statusLabel = getProjectStatusLabel(item.status)
 
   return (
-    <React.Suspense fallback={image}>
-      <ProjectHoverPreview item={item}>
-        <span className="block">{image}</span>
-      </ProjectHoverPreview>
-    </React.Suspense>
+    <article className="grid gap-5 py-5 first:pt-0 last:pb-0 sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-6">
+      <ProjectImage
+        item={item}
+        className="mx-auto max-w-[20rem] sm:mx-0 sm:max-w-none"
+      />
+
+      <div className="min-w-0 space-y-3 self-center">
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+          <h3 className="text-item-title">{item.name}</h3>
+          {statusLabel ? (
+            <span className="text-sm text-muted-foreground">{statusLabel}</span>
+          ) : null}
+        </div>
+
+        <p className="text-[0.96rem] leading-8 text-muted-foreground">
+          {item.summary}
+        </p>
+
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[0.96rem]">
+          <button
+            type="button"
+            className="text-link text-left"
+            onClick={() => onOpenDetails(item)}
+            aria-label={`View details for ${item.name}`}
+          >
+            Details
+          </button>
+          {item.href ? (
+            <TextLink href={item.href}>Visit project</TextLink>
+          ) : null}
+          {item.repoHref ? (
+            <TextLink href={item.repoHref}>View repository</TextLink>
+          ) : null}
+        </div>
+      </div>
+    </article>
   )
 }
 
-function ProjectImage({ item }: { item: Project }) {
+function ProjectDetailsSheet({ project }: { project: Project | null }) {
+  if (!project) {
+    return null
+  }
+
+  const statusLabel = getProjectStatusLabel(project.status)
+
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden">
+    <Drawer.Portal>
+      <Drawer.Backdrop className="fixed inset-0 z-40 bg-background/45 motion-sheet-backdrop backdrop-blur-[2px]" />
+      <Drawer.Viewport className="fixed inset-0 z-50 flex items-end justify-center px-3 pt-10 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:px-6 sm:pb-6">
+        <Drawer.Popup className="flex max-h-[min(82svh,46rem)] w-full max-w-[48rem] motion-bottom-sheet flex-col overflow-hidden rounded-2xl surface-floating">
+          <header className="shrink-0 border-b border-border/70 p-3 sm:p-4">
+            <div className="min-w-0 space-y-1.5">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <Drawer.Title className="text-section-label">
+                  {project.name}
+                </Drawer.Title>
+                {statusLabel ? (
+                  <span className="text-sm text-muted-foreground">
+                    {statusLabel}
+                  </span>
+                ) : null}
+              </div>
+              <Drawer.Description className="max-w-[34rem] text-[0.92rem] leading-6 text-muted-foreground">
+                {project.summary}
+              </Drawer.Description>
+            </div>
+          </header>
+
+          <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6 sm:py-6">
+            <div className="space-y-6">
+              <ProjectImage
+                item={project}
+                className="mx-auto max-w-[34rem]"
+                priority
+                sizes="(min-width: 768px) 34rem, calc(100vw - 2.5rem)"
+              />
+
+              <div className="max-w-[38rem] space-y-6 text-[0.96rem] leading-8 text-muted-foreground">
+                <p>{project.details}</p>
+
+                <section className="space-y-3" aria-labelledby="project-stack">
+                  <h4
+                    id="project-stack"
+                    className="text-sm font-medium text-foreground"
+                  >
+                    Stack
+                  </h4>
+                  <ul className="flex max-w-[36rem] flex-wrap gap-x-2 gap-y-1 text-sm leading-6">
+                    {project.architecture.map((item) => (
+                      <li
+                        key={item}
+                        className="text-muted-foreground after:ml-2 after:text-border after:content-['/'] last:after:content-none"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              </div>
+            </div>
+          </div>
+
+          <footer className="shrink-0 border-t border-border/70 p-3 sm:p-4">
+            <div className="flex items-center justify-between gap-6 text-[0.96rem]">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                {project.href ? (
+                  <TextLink href={project.href}>Visit project</TextLink>
+                ) : null}
+                {project.repoHref ? (
+                  <TextLink href={project.repoHref}>View repository</TextLink>
+                ) : null}
+              </div>
+              <Drawer.Close className="relative text-link inline-flex items-center rounded-md text-left after:absolute after:inset-x-0 after:-inset-y-2 after:content-['']">
+                Close
+              </Drawer.Close>
+            </div>
+          </footer>
+        </Drawer.Popup>
+      </Drawer.Viewport>
+    </Drawer.Portal>
+  )
+}
+
+function ProjectImage({
+  item,
+  className,
+  priority = false,
+  sizes = "(min-width: 640px) 13rem, min(20rem, calc(100vw - 3rem))",
+}: {
+  item: Project
+  className?: string
+  priority?: boolean
+  sizes?: string
+}) {
+  return (
+    <div
+      className={cn(
+        "relative aspect-[4/3] w-full overflow-hidden rounded-lg",
+        className
+      )}
+    >
       <Image
         src={item.image.src}
         alt={item.image.alt}
         fill
-        sizes="(min-width: 640px) 8.75rem, calc(100vw - 5rem)"
-        className="object-cover shadow-none!"
+        priority={priority}
+        sizes={sizes}
+        className="object-contain shadow-none!"
       />
     </div>
   )

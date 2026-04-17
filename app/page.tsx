@@ -20,11 +20,15 @@ import {
 import {
   featuredProjects,
   homeContent,
+  projects,
   siteProfile,
   socialLinks,
 } from "@/lib/content/site-content"
 import { posts } from "@/lib/content/writing"
 
+const HOME_PROJECT_COUNT = 3
+const visibleProjects = featuredProjects.slice(0, HOME_PROJECT_COUNT)
+const hiddenProjectCount = Math.max(projects.length - visibleProjects.length, 0)
 const latestPost = posts[0] ?? null
 const emailLink = socialLinks.find((link) => link.label === "Email")
 
@@ -62,9 +66,7 @@ function HomeSection({
 }) {
   return (
     <section id={id} className="scroll-mt-24 space-y-5">
-      <p className="text-sm font-medium tracking-[-0.01em] text-foreground">
-        {label}
-      </p>
+      <p className="text-section-label">{label}</p>
       {children}
     </section>
   )
@@ -80,7 +82,7 @@ export default function Page() {
         <header className="flex items-center gap-4">
           <Avatar />
           <div className="translate-y-px space-y-0.5">
-            <p className="font-heading text-[1.06rem] font-medium tracking-[-0.012em] text-foreground sm:text-[1.12rem]">
+            <p className="font-heading text-[1.08rem] font-medium text-foreground">
               {siteProfile.name}
             </p>
             <p className="text-[0.96rem] text-muted-foreground">
@@ -104,17 +106,21 @@ export default function Page() {
               <TextLink href="https://github.com/mohamed-g-shoaib">
                 GitHub
               </TextLink>
-              .
+              . Based in {siteProfile.location}.
             </p>
-            <p>Based in {siteProfile.location}.</p>
           </div>
         </HomeSection>
 
         <HomeSection id="projects" label="Projects">
           <div className="space-y-5">
-            <p className="text-xs text-muted-foreground">Click to expand</p>
-            <DisclosureList type="projects" items={featuredProjects} />
-            <TextLink href="/projects">View all projects</TextLink>
+            <DisclosureList type="projects" items={visibleProjects} />
+            <TextLink href="/projects">
+              {hiddenProjectCount > 0
+                ? `View ${hiddenProjectCount} more ${
+                    hiddenProjectCount === 1 ? "project" : "projects"
+                  }`
+                : "View projects"}
+            </TextLink>
           </div>
         </HomeSection>
 
@@ -130,12 +136,11 @@ export default function Page() {
           <div className="max-w-[33rem] space-y-5">
             {latestPost ? (
               <article className="space-y-1.5">
-                <TextLink
-                  href={`/writing/${latestPost.slug}`}
-                  className="font-heading text-[1.03rem] font-medium tracking-[-0.01em]"
-                >
-                  {latestPost.title}
-                </TextLink>
+                <p className="text-[0.96rem] leading-8">
+                  <TextLink href={`/writing/${latestPost.slug}`}>
+                    {latestPost.title}
+                  </TextLink>
+                </p>
                 <p className="text-[0.96rem] leading-8 text-muted-foreground">
                   {latestPost.summary}
                 </p>

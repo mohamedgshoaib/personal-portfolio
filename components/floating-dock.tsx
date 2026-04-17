@@ -4,10 +4,10 @@ import Link from "next/link"
 import * as React from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  BloggerIcon,
+  Notebook02Icon,
   Home01Icon,
-  MailAtSign01Icon,
-  SourceCodeSquareIcon,
+  MessageMultipleIcon,
+  CodeFolderIcon,
   VolumeHighIcon,
   VolumeOffIcon,
 } from "@hugeicons/core-free-icons"
@@ -51,10 +51,10 @@ type ActiveFrame = {
 }
 
 const DOCK_SURFACE_CLASS =
-  "max-w-[calc(100vw-2rem)] rounded-2xl border border-border/70 bg-background/60 p-1.5 backdrop-blur-xl"
+  "max-w-[calc(100vw-2rem)] surface-floating rounded-2xl p-1.5 backdrop-blur-xl"
 
 const DOCK_POPOVER_SURFACE_CLASS =
-  "max-w-[calc(100vw-2rem)] rounded-2xl border border-border/70 bg-background/60 p-1.5 backdrop-blur-xl"
+  "max-w-[calc(100vw-2rem)] surface-floating rounded-2xl p-1.5 backdrop-blur-xl"
 
 const DOCK_CONTACT_ACTION_CLASS =
   "motion-surface-interaction relative z-10 inline-flex h-8 min-w-0 items-center rounded-xl border border-border/60 bg-muted px-2.5 py-1.5 font-sans text-[0.84rem] leading-none text-muted-foreground hover:border-border/90 hover:bg-card hover:text-foreground focus-visible:border-border/90 focus-visible:bg-card focus-visible:text-foreground focus-visible:outline-none sm:h-9 sm:px-3 sm:text-[0.875rem]"
@@ -84,13 +84,13 @@ export function FloatingDock() {
     {
       key: "projects",
       href: "/projects",
-      icon: <DockIcon icon={SourceCodeSquareIcon} />,
+      icon: <DockIcon icon={CodeFolderIcon} />,
       label: "Projects",
     },
     {
       key: "writing",
       href: "/writing",
-      icon: <DockIcon icon={BloggerIcon} />,
+      icon: <DockIcon icon={Notebook02Icon} />,
       label: "Writings",
     },
   ]
@@ -371,7 +371,7 @@ function DockContactPopover({
               isActive && "text-foreground"
             )}
           >
-            <DockIcon icon={MailAtSign01Icon} />
+            <DockIcon icon={MessageMultipleIcon} />
           </button>
         </TooltipTrigger>
       </PopoverTrigger>

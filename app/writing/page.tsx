@@ -17,7 +17,7 @@ export default function WritingPage() {
       <JsonLd data={createWritingPageSchema(posts)} />
       <div className="space-y-12 sm:space-y-16">
         <header className="space-y-5">
-          <p className="text-sm font-medium text-foreground">Writing</p>
+          <p className="text-section-label">Writing</p>
           <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
             <p>
               Notes on frontend engineering, interface design, architecture,
@@ -37,10 +37,8 @@ export default function WritingPage() {
               <p className="text-sm text-muted-foreground">
                 {post.publishedLabel}
               </p>
-              <h2 className="font-heading text-lg font-medium text-foreground">
-                <TextLink href={`/writing/${post.slug}`} className="text-base">
-                  {post.title}
-                </TextLink>
+              <h2 className="text-[0.96rem] leading-8">
+                <TextLink href={`/writing/${post.slug}`}>{post.title}</TextLink>
               </h2>
               <p className="text-[0.96rem] leading-8 text-muted-foreground">
                 {post.summary}

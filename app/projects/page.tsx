@@ -21,7 +21,7 @@ export default function ProjectsPage() {
       <JsonLd data={createProjectsPageSchema(projects)} />
       <div className="space-y-12 sm:space-y-16">
         <header className="space-y-5">
-          <p className="text-sm font-medium text-foreground">Projects</p>
+          <p className="text-section-label">Projects</p>
           <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
             <p>
               A selection of frontend work across client products and personal
@@ -37,12 +37,12 @@ export default function ProjectsPage() {
 
         <section className="space-y-10">
           <div className="space-y-5">
-            <p className="text-sm font-medium text-foreground">Personal</p>
+            <p className="text-section-label">Personal</p>
             <DisclosureList type="projects" items={personalProjects} />
           </div>
 
           <div className="space-y-5">
-            <p className="text-sm font-medium text-foreground">Client work</p>
+            <p className="text-section-label">Client work</p>
             <DisclosureList type="projects" items={clientProjects} />
           </div>
         </section>

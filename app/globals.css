@@ -212,6 +212,9 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-color: color-mix(in srgb, var(--foreground) 26%, transparent)
+      color-mix(in srgb, var(--foreground) 6%, transparent);
+    scrollbar-width: thin;
   }
   html {
     @apply bg-background font-sans text-foreground antialiased;
@@ -271,12 +274,6 @@
       0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent),
       var(--surface-shadow-sm);
   }
-  html {
-    scrollbar-color: color-mix(in srgb, var(--foreground) 26%, transparent)
-      color-mix(in srgb, var(--foreground) 6%, transparent);
-    scrollbar-width: thin;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     a[href],
     button:not(:disabled),
@@ -366,65 +363,25 @@
   }
 }
 
+@utility text-section-label {
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+@utility text-item-title {
+  color: var(--foreground);
+  font-family: var(--font-heading), var(--font-sans), sans-serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
 @utility motion-interactive-color {
   transition-duration: var(--motion-duration-fast);
   transition-property: color;
   transition-timing-function: var(--ease-out);
-
-  @media (prefers-reduced-motion: reduce) {
-    transition-duration: 0ms;
-  }
-}
-
-@utility motion-disclosure-panel {
-  overflow: clip;
-  transition-duration: var(--motion-duration-medium);
-  transition-property: height;
-  transition-timing-function: var(--ease-out);
-
-  &[data-ending-style] {
-    transition-duration: 120ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition-duration: 0ms;
-  }
-}
-
-.motion-disclosure-panel > .motion-disclosure-content {
-  transition-duration: var(--motion-duration-fast);
-  transition-property: opacity, transform, filter;
-  transition-timing-function: var(--ease-out);
-  will-change: opacity, transform, filter;
-}
-
-.motion-disclosure-panel[data-starting-style] > .motion-disclosure-content {
-  opacity: 0;
-  transform: translateY(var(--motion-disclosure-shift));
-  filter: blur(2px);
-}
-
-.motion-disclosure-panel[data-ending-style] > .motion-disclosure-content {
-  opacity: 0;
-  transform: translateY(-4px);
-  filter: blur(2px);
-  transition-duration: 120ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .motion-disclosure-panel > .motion-disclosure-content {
-    transition-duration: 0ms;
-  }
-}
-
-@utility motion-disclosure-chevron {
-  transition-duration: var(--motion-duration-fast);
-  transition-property: color, transform;
-  transition-timing-function: var(--ease-out);
-  transform: translateZ(0);
-  transform-origin: center;
 
   @media (prefers-reduced-motion: reduce) {
     transition-duration: 0ms;
@@ -483,6 +440,60 @@
   }
 }
 
+@utility motion-sheet-backdrop {
+  transition-duration: var(--motion-duration-medium);
+  transition-property: opacity, backdrop-filter;
+  transition-timing-function: var(--ease-out);
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+
+  &[data-ending-style] {
+    transition-duration: 120ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0ms;
+    backdrop-filter: none;
+  }
+}
+
+@utility motion-bottom-sheet {
+  transition-duration: var(--motion-duration-layout);
+  transition-property: transform, opacity, filter;
+  transition-timing-function: var(--ease-out);
+  will-change: transform, opacity, filter;
+
+  &[data-starting-style] {
+    opacity: 0;
+    transform: translateY(1rem);
+    filter: blur(2px);
+  }
+
+  &[data-ending-style] {
+    opacity: 0;
+    transform: translateY(0.625rem);
+    filter: blur(2px);
+    transition-duration: 140ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0ms;
+    will-change: auto;
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      transform: none;
+      filter: none;
+    }
+  }
+}
+
 @utility motion-layout-frame {
   transition-duration: var(--motion-duration-layout);
   transition-property: transform, width, height;
@@ -502,6 +513,12 @@
   @media (prefers-reduced-motion: reduce) {
     transition-duration: 0ms;
   }
+}
+
+@utility surface-floating {
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  background-color: var(--card);
+  box-shadow: none;
 }
 
 @utility motion-fade {
