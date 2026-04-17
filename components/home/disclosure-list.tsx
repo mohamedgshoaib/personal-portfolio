@@ -137,7 +137,7 @@ function ProjectDetailsSheet({ project }: { project: Project | null }) {
                   </span>
                 ) : null}
               </div>
-              <Drawer.Description className="max-w-[34rem] text-[0.92rem] leading-6 text-muted-foreground">
+              <Drawer.Description className="text-[0.92rem] leading-6 text-muted-foreground">
                 {project.summary}
               </Drawer.Description>
             </div>
