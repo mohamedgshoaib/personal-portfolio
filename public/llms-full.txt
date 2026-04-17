@@ -9,6 +9,8 @@ His work is centered on React and Next.js, with strong attention to:
 - performance
 - careful implementation
 
+The site's primary font is Cal Sans UI, and it uses a minimal, editorial design language with shared motion utilities and audio interactions.
+
 This site is a personal portfolio and writing archive.
 
 ## Identity

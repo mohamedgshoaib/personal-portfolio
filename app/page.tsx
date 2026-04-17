@@ -26,9 +26,10 @@ import {
 } from "@/lib/content/site-content"
 import { posts } from "@/lib/content/writing"
 
-const HOME_PROJECT_COUNT = 3
-const visibleProjects = featuredProjects.slice(0, HOME_PROJECT_COUNT)
-const hiddenProjectCount = Math.max(projects.length - visibleProjects.length, 0)
+const hiddenProjectCount = Math.max(
+  projects.length - featuredProjects.length,
+  0
+)
 const latestPost = posts[0] ?? null
 const emailLink = socialLinks.find((link) => link.label === "Email")
 
@@ -113,7 +114,7 @@ export default function Page() {
 
         <HomeSection id="projects" label="Projects">
           <div className="space-y-5">
-            <DisclosureList type="projects" items={visibleProjects} />
+            <DisclosureList type="projects" items={featuredProjects} />
             <TextLink href="/projects">
               {hiddenProjectCount > 0
                 ? `View ${hiddenProjectCount} more ${
@@ -160,15 +161,12 @@ export default function Page() {
       </div>
 
       <footer className="mt-auto pt-16 text-sm text-muted-foreground">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <p>Based in {siteProfile.location}</p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 sm:justify-end">
-            {socialLinks.map((link) => (
-              <TextLink key={link.label} href={link.href}>
-                {link.label === "Email" ? "Email me" : link.label}
-              </TextLink>
-            ))}
-          </div>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          {socialLinks.map((link) => (
+            <TextLink key={link.label} href={link.href}>
+              {link.label === "Email" ? "Email me" : link.label}
+            </TextLink>
+          ))}
         </div>
       </footer>
     </main>

@@ -18,22 +18,22 @@ The web is no longer consumed only by people. Language models, search assistants
 
 `llms.txt` is a plain text or Markdown file placed at the root of a site. Its job is simple: provide a clean summary of what the site is, what matters on it, and where deeper information lives.
 
-## Why Does It Matter?
+## Why it matters
 
-Normal webpages contain navigation, layout chrome, scripts, and all kinds of interface overhead. Humans can ignore most of it. Models cannot do that as reliably. A clean summary helps by:
+Normal webpages contain navigation, layout chrome, scripts, and all kinds of interface overhead. Humans can ignore most of it, but machines can't. A clean summary helps by:
 
-1. **Improve Accuracy**: The AI doesn't have to "guess" your site's purpose.
-2. **Reduce Token Cost**: Clean text is cheaper and faster for models to process.
-3. **Enhance Discovery**: AI-driven search engines can represent your work more accurately to users.
+- **Accuracy**: The AI doesn't have to "guess" your site's purpose.
+- **Token Efficiency**: Clean text is cheaper and faster for models to process.
+- **Discovery**: AI-driven search engines can represent your work more accurately to users.
 
 ## The Standard: llms.txt vs. llms-full.txt
 
 The most useful pattern is a two-tier structure:
 
-- **llms.txt**: A brief summary with links to key sections. It's the elevator pitch.
+- **llms.txt**: A brief summary with links to key sections. The elevator pitch.
 - **llms-full.txt**: A comprehensive document containing the actual content of your site: projects, bio details, and descriptions. This is the reference manual.
 
-## Where to Place It?
+## Where to place it?
 
 Both files should live at the root of the domain. In a Next.js project, the practical place is `public/`:
 
@@ -42,4 +42,4 @@ Both files should live at the root of the domain. In a Next.js project, the prac
 
 ## Conclusion
 
-`llms.txt` is not a magic ranking lever. It is a clarity layer. When the site explains itself well, AI systems have less room to misunderstand it.
+`llms.txt` is not a magic ranking lever. It's a clarity layer. When the site explains itself well, AI systems have less room to misunderstand it.

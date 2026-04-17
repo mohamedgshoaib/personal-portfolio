@@ -145,8 +145,9 @@ Current local content model:
 Important current state:
 
 - the homepage now uses featured projects only
-- the homepage currently features Devloop, Dana Doors, Mo's Experiences, and Rootly
+- the homepage currently features Devloop, Dana Doors, and Mo's Experiences
 - the projects page is the full archive
+- the total number of projects in the archive is 7 (as of April 2026)
 - the experience section has been removed from the content model and UI
 - the old stack list was replaced by authored `Approach` copy
 
@@ -176,15 +177,16 @@ Do not reintroduce ESLint or Prettier unless explicitly requested.
 
 ### Font system
 
-Fonts are now configured in `app/layout.tsx` with `next/font/local`:
+Fonts are configured in `app/layout.tsx`:
 
-- local Google Sans variable font as `--font-sans`
-- local Google Sans Code variable font as `--font-mono`
+- `@calcom/cal-sans-ui` provides the default `--font-sans` / `--font-heading` variable through its Next font export
+- `--font-mono` intentionally maps to the same Cal Sans UI variable to avoid a second font payload
+- the old 4.7 MB Google Sans variable TTF was removed from `public/fonts/` after the Cal Sans UI switch
 
 Global font behavior:
 
 - sans is the default app font
-- mono is reserved for code-like elements
+- code-like elements use the same Cal Sans UI family with tabular numbers, not a separate monospace font
 
 ### Theme and interaction sounds
 
@@ -193,9 +195,10 @@ Theme behavior is handled in `components/theme-provider.tsx`.
 Current sound behavior:
 
 - global click sound is delegated centrally
-- theme switching uses dedicated on/off sounds
+- click and theme-switching sounds are dynamically imported at interaction time so audio data is not part of the initial client path
 - dock and hotkey interaction sounds respect a shared global mute state
 - the dock includes a mute toggle before the theme toggle (`VolumeHighIcon` / `VolumeOffIcon`)
+- dock active navigation state is derived from `usePathname`; route changes from links outside the dock update the active item without optimistic local state
 - mute preference is persisted in `localStorage` (`portfolio-audio-muted`)
 - audio decode/play helpers live in `lib/audio/sound-engine.ts`
 - sound assets live in `lib/audio/`
@@ -232,20 +235,22 @@ Established styling decisions:
 - balanced headings and pretty body wrapping
 - shared motion utilities for disclosure, overlay, layout, and fades
 - restrained monochrome link/action styling
-- a compact floating dock shell using the shared floating surface treatment
+- inline text links stay visually stable on press; tactile scale feedback is reserved for controls
+- a compact floating dock shell using the shared floating surface treatment and one lightweight backdrop blur layer
 - projects are presented as editorial rows with always-visible 4:3 previews
 - the homepage shows three curated projects and links to the archive with a dynamic remaining-project count
 - full project descriptions and stack details live in a Base UI bottom sheet rather than inline accordions
 - project previews avoid extra colored image backplates; the image asset itself carries the visual frame
-- project sheet stack details use a quiet inline wrap with separators instead of badges, dense columns, or tall vertical lists
-- shared `surface-floating` utility in `app/globals.css` defines the distinct `bg-card` surface, quiet edge, and no-shadow treatment used by the dock, dock popover, and project sheet
+- project sheet stack details use a quiet inline wrap with dot separators instead of badges, dense columns, or tall vertical lists
+- shared `surface-floating` utility in `app/globals.css` defines the distinct `bg-card` surface, quiet edge, and no-shadow treatment used by the project sheet
+- shared `surface-floating-glass` utility keeps the dock and dock popover lighter and blurred while preserving the same quiet edge language
 - shared text hierarchy utilities in `app/globals.css` define section labels and item titles so page headings, project rows, and writing rows stay visually consistent
 
 Recent addition:
 
 - route-level page transitions are now handled by `app/template.tsx` (App Router template remount on navigation)
 - the previous client shell approach with mount-state `useEffect` was removed
-- the transition style is subtle (fade + slight lift + mild blur) and respects reduced motion
+- the transition style is subtle and cheap (fade + slight lift, no blur/filter) and respects reduced motion
 - project detail sheets now use a restrained bottom-up motion with a light backdrop and reduced-motion support
 - section labels and project titles were rebalanced so section headings are not visually weaker than the items they introduce
 - project row images were slightly reduced and centered on mobile; sheet images are also centered and constrained
@@ -327,7 +332,8 @@ Completed work:
    - project accordions were replaced with text-led rows that keep the project image, name, summary, status, and actions visible
    - long descriptions and full stack lists moved into an accessible Base UI bottom sheet
    - old accordion hover-preview and chevron helpers were removed after the interaction model changed
-   - the sheet floats slightly above the bottom edge with full rounded corners and the shared `surface-floating` treatment; it keeps project identity in a slim evenly padded header, external project links on the left side of a slim evenly padded footer, one separate close action on the right side with an extended hit area, and a smaller full-image preview in the content area
+   - project rows expose `Details` and the crucial `Visit project` action; repository links stay inside the sheet footer
+   - the sheet floats slightly above the bottom edge with full rounded corners and the shared `surface-floating` treatment; it keeps project identity in a slim evenly padded header, external project links on the left side of a single-row slim footer, one separate close action on the right side with an extended hit area, and a smaller full-image preview in the content area
 
 ## Current Content State
 

@@ -29,10 +29,7 @@ import {
   createTooltipHandle,
 } from "@/components/ui/tooltip"
 import { useAudioPreferences } from "@/components/theme-provider"
-import { playSound } from "@/lib/audio/sound-engine"
 import { socialLinks } from "@/lib/content/site-content"
-import { switchOffSound } from "@/lib/audio/switch-off"
-import { switchOnSound } from "@/lib/audio/switch-on"
 import { cn } from "@/lib/utils"
 
 type DockKey = "home" | "projects" | "writing" | "contact"
@@ -50,11 +47,24 @@ type ActiveFrame = {
   width: number
 }
 
+async function playThemeToggleSound(nextTheme: "light" | "dark") {
+  const { playSound } = await import("@/lib/audio/sound-engine")
+
+  if (nextTheme === "light") {
+    const { switchOnSound } = await import("@/lib/audio/switch-on")
+    await playSound(switchOnSound.dataUri)
+    return
+  }
+
+  const { switchOffSound } = await import("@/lib/audio/switch-off")
+  await playSound(switchOffSound.dataUri)
+}
+
 const DOCK_SURFACE_CLASS =
-  "max-w-[calc(100vw-2rem)] surface-floating rounded-2xl p-1.5 backdrop-blur-xl"
+  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-2xl p-1.5 backdrop-blur-xl"
 
 const DOCK_POPOVER_SURFACE_CLASS =
-  "max-w-[calc(100vw-2rem)] surface-floating rounded-2xl p-1.5 backdrop-blur-xl"
+  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-2xl p-1.5 backdrop-blur-xl"
 
 const DOCK_CONTACT_ACTION_CLASS =
   "motion-surface-interaction relative z-10 inline-flex h-8 min-w-0 items-center rounded-xl border border-border/60 bg-muted px-2.5 py-1.5 font-sans text-[0.84rem] leading-none text-muted-foreground hover:border-border/90 hover:bg-card hover:text-foreground focus-visible:border-border/90 focus-visible:bg-card focus-visible:text-foreground focus-visible:outline-none sm:h-9 sm:px-3 sm:text-[0.875rem]"
@@ -64,10 +74,6 @@ export function FloatingDock() {
   const { resolvedTheme, setTheme } = useTheme()
   const { muted, setMuted } = useAudioPreferences()
   const [contactOpen, setContactOpen] = React.useState(false)
-  const [pendingActiveKey, setPendingActiveKey] = React.useState<Exclude<
-    DockKey,
-    "contact"
-  > | null>(null)
   const clusterRef = React.useRef<HTMLDivElement | null>(null)
   const itemRefs = React.useRef<Partial<Record<DockKey, HTMLElement | null>>>(
     {}
@@ -105,9 +111,7 @@ export function FloatingDock() {
         ? "home"
         : null
 
-  const activeKey: DockKey | null = contactOpen
-    ? "contact"
-    : (pendingActiveKey ?? baseActiveKey)
+  const activeKey: DockKey | null = contactOpen ? "contact" : baseActiveKey
 
   const updateActiveFrame = React.useCallback((key: DockKey | null) => {
     if (!key) {
@@ -147,10 +151,6 @@ export function FloatingDock() {
   }, [activeKey, updateActiveFrame])
 
   React.useEffect(() => {
-    setPendingActiveKey(null)
-  }, [pathname])
-
-  React.useEffect(() => {
     const cluster = clusterRef.current
 
     if (!cluster) {
@@ -182,19 +182,15 @@ export function FloatingDock() {
   }, [activeKey, updateActiveFrame])
 
   function handleThemeToggle() {
+    const nextTheme = resolvedTheme === "dark" ? "light" : "dark"
+
     if (muted) {
-      setTheme(resolvedTheme === "dark" ? "light" : "dark")
+      setTheme(nextTheme)
       return
     }
 
-    if (resolvedTheme === "dark") {
-      void playSound(switchOnSound.dataUri)
-      setTheme("light")
-      return
-    }
-
-    void playSound(switchOffSound.dataUri)
-    setTheme("dark")
+    void playThemeToggleSound(nextTheme)
+    setTheme(nextTheme)
   }
 
   function handleMuteToggle() {
@@ -204,16 +200,7 @@ export function FloatingDock() {
   return (
     <TooltipProvider>
       <div className="fixed bottom-0 left-1/2 z-50 flex w-full -translate-x-1/2 justify-center px-4 pb-2.5 sm:pb-5">
-        <div className="pointer-events-none absolute bottom-0 left-1/2 hidden h-[calc(100%+0.75rem)] w-[min(42rem,calc(100vw-2rem))] -translate-x-1/2 sm:block">
-          <div className="absolute inset-0 z-[1] backdrop-blur-[0.5px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_0%,_rgba(0,0,0,1)_12.5%,_rgba(0,0,0,1)_25%,_rgba(0,0,0,0)_37.5%)]" />
-          <div className="absolute inset-0 z-[2] backdrop-blur-[1px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_12.5%,_rgba(0,0,0,1)_25%,_rgba(0,0,0,1)_37.5%,_rgba(0,0,0,0)_50%)]" />
-          <div className="absolute inset-0 z-[3] backdrop-blur-[2px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_25%,_rgba(0,0,0,1)_37.5%,_rgba(0,0,0,1)_50%,_rgba(0,0,0,0)_62.5%)]" />
-          <div className="absolute inset-0 z-[4] backdrop-blur-[3px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_37.5%,_rgba(0,0,0,1)_50%,_rgba(0,0,0,1)_62.5%,_rgba(0,0,0,0)_75%)]" />
-          <div className="absolute inset-0 z-[5] backdrop-blur-[4px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_50%,_rgba(0,0,0,1)_62.5%,_rgba(0,0,0,1)_75%,_rgba(0,0,0,0)_87.5%)]" />
-          <div className="absolute inset-0 z-[6] backdrop-blur-[5px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_62.5%,_rgba(0,0,0,1)_75%,_rgba(0,0,0,1)_87.5%,_rgba(0,0,0,0)_100%)]" />
-          <div className="absolute inset-0 z-[7] backdrop-blur-[6px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_75%,_rgba(0,0,0,1)_87.5%,_rgba(0,0,0,1)_100%)]" />
-          <div className="absolute inset-0 z-[8] backdrop-blur-[12px] [mask:linear-gradient(to_bottom,_rgba(0,0,0,0)_87.5%,_rgba(0,0,0,1)_100%)]" />
-        </div>
+        <div className="pointer-events-none absolute bottom-0 left-1/2 hidden h-[calc(100%+0.75rem)] w-[min(42rem,calc(100vw-2rem))] -translate-x-1/2 bg-background/20 backdrop-blur-sm [mask:linear-gradient(to_bottom,_transparent,_black_45%,_black)] sm:block" />
         <div className="relative inline-flex max-w-[calc(100vw-2rem)]">
           <nav
             aria-label="Quick navigation"
@@ -246,11 +233,7 @@ export function FloatingDock() {
                       ref={(element) => {
                         itemRefs.current[item.key] = element
                       }}
-                      onPointerDownCapture={() => {
-                        setPendingActiveKey(item.key)
-                      }}
                       onClick={() => {
-                        setPendingActiveKey(item.key)
                         setContactOpen(false)
                       }}
                       className={cn(

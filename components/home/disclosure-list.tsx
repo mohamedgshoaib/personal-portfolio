@@ -107,9 +107,6 @@ function ProjectRow({
           {item.href ? (
             <TextLink href={item.href}>Visit project</TextLink>
           ) : null}
-          {item.repoHref ? (
-            <TextLink href={item.repoHref}>View repository</TextLink>
-          ) : null}
         </div>
       </div>
     </article>
@@ -151,7 +148,6 @@ function ProjectDetailsSheet({ project }: { project: Project | null }) {
               <ProjectImage
                 item={project}
                 className="mx-auto max-w-[34rem]"
-                priority
                 sizes="(min-width: 768px) 34rem, calc(100vw - 2.5rem)"
               />
 
@@ -169,7 +165,7 @@ function ProjectDetailsSheet({ project }: { project: Project | null }) {
                     {project.architecture.map((item) => (
                       <li
                         key={item}
-                        className="text-muted-foreground after:ml-2 after:text-border after:content-['/'] last:after:content-none"
+                        className="text-muted-foreground after:ml-2 after:text-border after:content-['•'] last:after:content-none"
                       >
                         {item}
                       </li>
@@ -181,16 +177,20 @@ function ProjectDetailsSheet({ project }: { project: Project | null }) {
           </div>
 
           <footer className="shrink-0 border-t border-border/70 p-3 sm:p-4">
-            <div className="flex items-center justify-between gap-6 text-[0.96rem]">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <div className="flex items-center justify-between gap-4 text-[0.92rem] sm:gap-6 sm:text-[0.96rem]">
+              <div className="flex min-w-0 flex-nowrap items-center gap-x-3 sm:gap-x-4">
                 {project.href ? (
-                  <TextLink href={project.href}>Visit project</TextLink>
+                  <TextLink className="shrink-0" href={project.href}>
+                    Visit project
+                  </TextLink>
                 ) : null}
                 {project.repoHref ? (
-                  <TextLink href={project.repoHref}>View repository</TextLink>
+                  <TextLink className="shrink-0" href={project.repoHref}>
+                    Repository
+                  </TextLink>
                 ) : null}
               </div>
-              <Drawer.Close className="relative text-link inline-flex items-center rounded-md text-left after:absolute after:inset-x-0 after:-inset-y-2 after:content-['']">
+              <Drawer.Close className="relative text-link inline-flex shrink-0 items-center rounded-md text-left after:absolute after:inset-x-0 after:-inset-y-2 after:content-['']">
                 Close
               </Drawer.Close>
             </div>

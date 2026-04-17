@@ -1,8 +1,8 @@
 # Mohamed Gamal Portfolio
 
-![Portfolio Preview](public/interface.png)
+![Portfolio Preview](public/interface.webp)
 
-A personal portfolio and writing site built with minimal design, editorial restraint, and immersive audio interactions.
+A personal portfolio and writing site built with minimal design, editorial restraint, and audio interactions.
 
 Built with Next.js 16, React 19, TypeScript, Tailwind CSS v4, and Base UI.
 

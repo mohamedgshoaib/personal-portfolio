@@ -1,5 +1,5 @@
-import localFont from "next/font/local"
 import type { Metadata } from "next"
+import { CalSansUI } from "@calcom/cal-sans-ui/ui"
 
 import "./globals.css"
 import { FloatingDock } from "@/components/floating-dock"
@@ -12,7 +12,6 @@ import {
   siteUrl,
   siteXHandle,
 } from "@/lib/metadata/site-metadata"
-import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -45,18 +44,6 @@ export const metadata: Metadata = {
   },
 }
 
-const sans = localFont({
-  src: "../public/fonts/google-sans-variable.ttf",
-  display: "swap",
-  variable: "--font-sans",
-})
-
-const mono = localFont({
-  src: "../public/fonts/google-sans-code-variable.ttf",
-  display: "swap",
-  variable: "--font-mono",
-})
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -66,7 +53,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", mono.variable, "font-sans", sans.variable)}
+      className={`antialiased ${CalSansUI.variable}`}
     >
       <body suppressHydrationWarning>
         <ThemeProvider>

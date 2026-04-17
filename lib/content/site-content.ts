@@ -256,7 +256,6 @@ const featuredProjectSlugs = [
   "devloop",
   "dana-doors",
   "mos-experiences",
-  "rootly",
 ] as const
 
 export const featuredProjects = featuredProjectSlugs

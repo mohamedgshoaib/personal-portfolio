@@ -2,11 +2,6 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
-import { useSound } from "@/hooks/use-sound"
-import { clickSoftSound } from "@/lib/audio/click-soft"
-import { playSound } from "@/lib/audio/sound-engine"
-import { switchOffSound } from "@/lib/audio/switch-off"
-import { switchOnSound } from "@/lib/audio/switch-on"
 
 const AUDIO_MUTED_STORAGE_KEY = "portfolio-audio-muted"
 
@@ -26,6 +21,28 @@ const CLICKABLE_SELECTOR = [
   "[role='switch']",
   "[role='tab']",
 ].join(", ")
+
+async function playClickSound() {
+  const [{ playSound }, { clickSoftSound }] = await Promise.all([
+    import("@/lib/audio/sound-engine"),
+    import("@/lib/audio/click-soft"),
+  ])
+
+  await playSound(clickSoftSound.dataUri)
+}
+
+async function playThemeToggleSound(nextTheme: "light" | "dark") {
+  const { playSound } = await import("@/lib/audio/sound-engine")
+
+  if (nextTheme === "light") {
+    const { switchOnSound } = await import("@/lib/audio/switch-on")
+    await playSound(switchOnSound.dataUri)
+    return
+  }
+
+  const { switchOffSound } = await import("@/lib/audio/switch-off")
+  await playSound(switchOffSound.dataUri)
+}
 
 type AudioPreferencesContextValue = {
   muted: boolean
@@ -118,17 +135,13 @@ function getClickableTarget(target: EventTarget | null) {
 
 function ClickSound() {
   const { muted } = useAudioPreferences()
-  const [playClickSound] = useSound(clickSoftSound, {
-    interrupt: true,
-    soundEnabled: !muted,
-  })
 
   const onClick = React.useEffectEvent((event: MouseEvent) => {
-    if (!getClickableTarget(event.target)) {
+    if (muted || !getClickableTarget(event.target)) {
       return
     }
 
-    playClickSound()
+    void playClickSound()
   })
 
   React.useEffect(() => {
@@ -147,18 +160,13 @@ function ThemeHotkey() {
   const { muted } = useAudioPreferences()
 
   const toggleTheme = React.useEffectEvent(() => {
-    if (resolvedTheme === "dark") {
-      if (!muted) {
-        void playSound(switchOnSound.dataUri)
-      }
-      setTheme("light")
-      return
-    }
+    const nextTheme = resolvedTheme === "dark" ? "light" : "dark"
 
     if (!muted) {
-      void playSound(switchOffSound.dataUri)
+      void playThemeToggleSound(nextTheme)
     }
-    setTheme("dark")
+
+    setTheme(nextTheme)
   })
 
   React.useEffect(() => {

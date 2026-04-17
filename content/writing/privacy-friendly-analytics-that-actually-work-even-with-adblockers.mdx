@@ -12,13 +12,13 @@ export const metadata = {
   },
 }
 
-If you run a website in 2026, there is a good chance your analytics are incomplete.
+If you run a website in 2026, there's a good chance your analytics are incomplete.
 
-Not because the dashboard is wrong, but because a meaningful share of traffic never reaches it. Privacy tools block third-party analytics aggressively, including tools that are comparatively respectful.
+Not because the dashboard is wrong, but because a huge share of traffic never reaches it. Privacy tools block third-party analytics aggressively—even the tools that are comparatively respectful.
 
-That creates an awkward situation: developers move away from invasive analytics, then lose visibility anyway because the requests still look like tracking to the browser.
+That creates an awkward situation: developers move away from invasive analytics, then lose visibility anyway because the browser still reads those requests as tracking.
 
-The fix is not to become more invasive. It is to make the implementation cleaner.
+The fix isn't to become more invasive; it's to make the implementation cleaner.
 
 ## The Problem: Third-Party Domains Are Dead
 
@@ -30,7 +30,7 @@ Traditional analytics work like this:
 
 Adblockers maintain massive blocklists of known tracking domains. When they see a request to `umami.is`, `plausible.io`, or `google-analytics.com`, they kill it instantly.
 
-Even privacy-respecting tools get caught in the crossfire.
+Even privacy-respecting tools get caught in the middle.
 
 ## The Solution: First-Party Proxying
 
@@ -65,7 +65,7 @@ What this does:
 
 That shifts the implementation model without changing the privacy posture.
 
-### Step 2: Load the Script from Your Domain
+### Step 2: Load the script from your domain
 
 In `app/layout.tsx`:
 
@@ -84,20 +84,20 @@ Key details:
 - `data-host-url="/metrics"` tells the script to send data to `/metrics/api/send`
 - `strategy="lazyOnload"` defers loading until after the page is interactive
 
-It is also better for performance.
+It's also better for performance.
 
-### Step 3: Deploy and Test
+### Step 3: Deploy and test
 
 1. Open your site with an adblocker enabled
-2. Check DevTools, Network tab
+2. Check the Network tab in DevTools
 3. You should see:
    - `metrics/lib.js` loads with a `200` status
    - `metrics/api/send` receives POST requests
-   - no requests to `umami.is`, because everything is proxied
+   - No requests to `umami.is`, because everything is proxied
 
 If those conditions are true, the setup is behaving the way it should.
 
-## Why This Works (And Why It's Not Evil)
+## Why this works (and why it's not evil)
 
 Adblockers use domain-based filtering. They can't block `/metrics/lib.js` on your domain because:
 
@@ -107,20 +107,20 @@ Adblockers use domain-based filtering. They can't block `/metrics/lib.js` on you
 
 **But isn't this sneaky?**
 
-Umami does not rely on the same invasive model as legacy analytics platforms. No cookie wall, no ad network profile, no cross-site identity stitching.
+Umami doesn't rely on the same invasive model as legacy analytics platforms. No cookie wall, no ad network profile, no cross-site identity stitching.
 
-The point is not to reconstruct individual users. It is to recover a truer picture of page views, routes, and general content performance.
+The point isn't to reconstruct individual users. It's to recover a truer picture of page views, routes, and general content performance.
 
 That distinction matters. Privacy-friendly analytics and invasive surveillance are not the same implementation problem.
 
-## The Performance Bonus
+## The performance bonus
 
-There is also a practical performance upside.
+There's also a practical performance upside.
 
 When you load a script from a third-party domain, the browser has to:
 
 1. Do a DNS lookup for the external domain
-2. Establish a new connection
+2. Establish a new core connection
 3. Negotiate TLS
 4. Download the script
 
@@ -143,23 +143,23 @@ This technique works anywhere you can configure server-side rewrites:
 
 The concept is the same: make third-party analytics look like first-party requests.
 
-## The Reality
+## The reality
 
-Privacy and measurement do not need to cancel each other out.
+Privacy and measurement shouldn't have to cancel each other out.
 
 Users want stronger privacy guarantees. Product teams still need signal. The better answer is to improve the implementation, not to revert to older tracking habits.
 
 First-party proxying gives you a cleaner middle ground: enough signal to make decisions, without abandoning the privacy standard you chose in the first place.
 
-When large portions of traffic disappear, product decisions get noisier. Better data does not solve judgment, but it does remove blind spots.
+When large portions of traffic disappear, product decisions get noisier. Better data doesn't solve judgment, but it removes the blind spots.
 
-## Try It Yourself
+## Try it yourself
 
 If you're using Next.js and want to add Umami:
 
-1. Sign up at [umami.is](https://umami.is) - the free tier is generous
+1. Sign up at [umami.is](https://umami.is) — the free tier is generous
 2. Add the rewrites to `next.config.ts`
 3. Add the script tag to your layout
 4. Deploy and watch your real traffic numbers come in
 
-That is the real goal: analytics that stay useful without turning into something users need to defend themselves against.
+That's the real goal: analytics that stay useful without turning into something users need to defend themselves against.
