@@ -412,19 +412,17 @@
 
 @utility motion-overlay-lift-blur {
   transition-duration: var(--motion-duration-medium);
-  transition-property: transform, opacity, filter;
+  transition-property: transform, opacity;
   transition-timing-function: var(--ease-out);
 
   &[data-starting-style] {
     opacity: 0;
     transform: translateY(var(--motion-disclosure-shift));
-    filter: blur(2px);
   }
 
   &[data-ending-style] {
     opacity: 0;
     transform: translateY(-2px);
-    filter: blur(2px);
     transition-duration: 120ms;
     transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
   }
@@ -435,20 +433,18 @@
     &[data-starting-style],
     &[data-ending-style] {
       transform: none;
-      filter: none;
     }
   }
 }
 
 @utility motion-sheet-backdrop {
   transition-duration: var(--motion-duration-medium);
-  transition-property: opacity, backdrop-filter;
+  transition-property: opacity;
   transition-timing-function: var(--ease-out);
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    backdrop-filter: blur(0);
   }
 
   &[data-ending-style] {
@@ -458,26 +454,23 @@
 
   @media (prefers-reduced-motion: reduce) {
     transition-duration: 0ms;
-    backdrop-filter: none;
   }
 }
 
 @utility motion-bottom-sheet {
   transition-duration: var(--motion-duration-layout);
-  transition-property: transform, opacity, filter;
+  transition-property: transform, opacity;
   transition-timing-function: var(--ease-out);
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 
   &[data-starting-style] {
     opacity: 0;
     transform: translateY(1rem);
-    filter: blur(2px);
   }
 
   &[data-ending-style] {
     opacity: 0;
     transform: translateY(0.625rem);
-    filter: blur(2px);
     transition-duration: 140ms;
     transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
   }
@@ -489,7 +482,6 @@
     &[data-starting-style],
     &[data-ending-style] {
       transform: none;
-      filter: none;
     }
   }
 }
@@ -518,13 +510,13 @@
 @utility surface-floating {
   border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
   background-color: var(--card);
-  box-shadow: none;
+  box-shadow: var(--surface-shadow-md);
 }
 
 @utility surface-floating-glass {
   border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
-  background-color: color-mix(in srgb, var(--background) 60%, transparent);
-  box-shadow: none;
+  background-color: color-mix(in srgb, var(--background) 78%, transparent);
+  box-shadow: var(--surface-shadow-sm);
 }
 
 @utility motion-fade {

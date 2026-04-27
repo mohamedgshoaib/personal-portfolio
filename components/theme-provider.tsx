@@ -31,6 +31,26 @@ async function playClickSound() {
   await playSound(clickSoftSound.dataUri)
 }
 
+async function warmInteractionSounds() {
+  const [
+    { preloadSound },
+    { clickSoftSound },
+    { switchOnSound },
+    { switchOffSound },
+  ] = await Promise.all([
+    import("@/lib/audio/sound-engine"),
+    import("@/lib/audio/click-soft"),
+    import("@/lib/audio/switch-on"),
+    import("@/lib/audio/switch-off"),
+  ])
+
+  await Promise.all([
+    preloadSound(clickSoftSound.dataUri),
+    preloadSound(switchOnSound.dataUri),
+    preloadSound(switchOffSound.dataUri),
+  ])
+}
+
 async function playThemeToggleSound(nextTheme: "light" | "dark") {
   const { playSound } = await import("@/lib/audio/sound-engine")
 
@@ -135,6 +155,42 @@ function getClickableTarget(target: EventTarget | null) {
 
 function ClickSound() {
   const { muted } = useAudioPreferences()
+
+  React.useEffect(() => {
+    if (muted) {
+      return
+    }
+
+    let cancelled = false
+    let idleId: number | null = null
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+
+    function warm() {
+      if (cancelled) {
+        return
+      }
+
+      void warmInteractionSounds()
+    }
+
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(warm, { timeout: 1200 })
+    } else {
+      timeoutId = globalThis.setTimeout(warm, 240)
+    }
+
+    return () => {
+      cancelled = true
+
+      if (idleId !== null && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId)
+      }
+
+      if (timeoutId !== null) {
+        globalThis.clearTimeout(timeoutId)
+      }
+    }
+  }, [muted])
 
   const onClick = React.useEffectEvent((event: MouseEvent) => {
     if (muted || !getClickableTarget(event.target)) {

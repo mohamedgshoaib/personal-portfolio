@@ -61,10 +61,10 @@ async function playThemeToggleSound(nextTheme: "light" | "dark") {
 }
 
 const DOCK_SURFACE_CLASS =
-  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-2xl p-1.5 backdrop-blur-xl"
+  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-2xl p-1.5 backdrop-blur-lg"
 
 const DOCK_POPOVER_SURFACE_CLASS =
-  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-2xl p-1.5 backdrop-blur-xl"
+  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-2xl p-1.5 backdrop-blur-lg"
 
 const DOCK_CONTACT_ACTION_CLASS =
   "motion-surface-interaction relative z-10 inline-flex h-8 min-w-0 items-center rounded-xl border border-border/60 bg-muted px-2.5 py-1.5 font-sans text-[0.84rem] leading-none text-muted-foreground hover:border-border/90 hover:bg-card hover:text-foreground focus-visible:border-border/90 focus-visible:bg-card focus-visible:text-foreground focus-visible:outline-none sm:h-9 sm:px-3 sm:text-[0.875rem]"
@@ -200,7 +200,7 @@ export function FloatingDock() {
   return (
     <TooltipProvider>
       <div className="fixed bottom-0 left-1/2 z-50 flex w-full -translate-x-1/2 justify-center px-4 pb-2.5 sm:pb-5">
-        <div className="pointer-events-none absolute bottom-0 left-1/2 hidden h-[calc(100%+0.75rem)] w-[min(42rem,calc(100vw-2rem))] -translate-x-1/2 bg-background/20 backdrop-blur-sm [mask:linear-gradient(to_bottom,_transparent,_black_45%,_black)] sm:block" />
+        <div className="pointer-events-none absolute bottom-0 left-1/2 hidden h-[calc(100%+0.75rem)] w-[min(42rem,calc(100vw-2rem))] -translate-x-1/2 bg-gradient-to-b from-transparent via-background/16 to-background/58 [mask:linear-gradient(to_bottom,_transparent,_black_45%,_black)] sm:block" />
         <div className="relative inline-flex max-w-[calc(100vw-2rem)]">
           <nav
             aria-label="Quick navigation"

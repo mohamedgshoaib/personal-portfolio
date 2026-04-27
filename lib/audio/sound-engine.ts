@@ -2,7 +2,7 @@ let audioContext: AudioContext | null = null
 const bufferCache = new Map<string, AudioBuffer>()
 const bufferPromiseCache = new Map<string, Promise<AudioBuffer>>()
 
-export function getAudioContext(): AudioContext {
+function getAudioContext(): AudioContext {
   if (!audioContext) {
     audioContext = new AudioContext()
   }
@@ -35,6 +35,10 @@ export async function decodeAudioData(dataUri: string): Promise<AudioBuffer> {
   bufferPromiseCache.set(dataUri, loadPromise)
 
   return loadPromise
+}
+
+export async function preloadSound(dataUri: string): Promise<void> {
+  await decodeAudioData(dataUri)
 }
 
 interface PlaySoundOptions {
