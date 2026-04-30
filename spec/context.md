@@ -332,7 +332,7 @@ Completed work:
    - project accordions were replaced with text-led rows that keep the project image, name, summary, status, and actions visible
    - long descriptions and full stack lists moved into an accessible Base UI bottom sheet
    - old accordion hover-preview and chevron helpers were removed after the interaction model changed
-   - project rows expose `Details` and the crucial `Visit project` action; repository links stay inside the sheet footer
+   - project rows expose `Details` and the crucial `Visit website` action; repository links stay inside the sheet footer
    - the sheet floats slightly above the bottom edge with full rounded corners and the shared `surface-floating` treatment; it keeps project identity in a slim evenly padded header, external project links on the left side of a single-row slim footer, one separate close action on the right side with an extended hit area, and a smaller full-image preview in the content area
 
 ## Current Content State

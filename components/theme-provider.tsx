@@ -23,29 +23,29 @@ const CLICKABLE_SELECTOR = [
 ].join(", ")
 
 async function playClickSound() {
-  const [{ playSound }, { clickSoftSound }] = await Promise.all([
+  const [{ playSound }, { click005Sound }] = await Promise.all([
     import("@/lib/audio/sound-engine"),
-    import("@/lib/audio/click-soft"),
+    import("@/lib/audio/click-005"),
   ])
 
-  await playSound(clickSoftSound.dataUri)
+  await playSound(click005Sound.dataUri)
 }
 
 async function warmInteractionSounds() {
   const [
     { preloadSound },
-    { clickSoftSound },
+    { click005Sound },
     { switchOnSound },
     { switchOffSound },
   ] = await Promise.all([
     import("@/lib/audio/sound-engine"),
-    import("@/lib/audio/click-soft"),
+    import("@/lib/audio/click-005"),
     import("@/lib/audio/switch-on"),
     import("@/lib/audio/switch-off"),
   ])
 
   await Promise.all([
-    preloadSound(clickSoftSound.dataUri),
+    preloadSound(click005Sound.dataUri),
     preloadSound(switchOnSound.dataUri),
     preloadSound(switchOffSound.dataUri),
   ])

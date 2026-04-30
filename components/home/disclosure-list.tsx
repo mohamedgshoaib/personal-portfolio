@@ -105,7 +105,7 @@ function ProjectRow({
             Details
           </button>
           {item.href ? (
-            <TextLink href={item.href}>Visit project</TextLink>
+            <TextLink href={item.href}>Visit website</TextLink>
           ) : null}
         </div>
       </div>
@@ -181,7 +181,7 @@ function ProjectDetailsSheet({ project }: { project: Project | null }) {
               <div className="flex min-w-0 flex-nowrap items-center gap-x-3 sm:gap-x-4">
                 {project.href ? (
                   <TextLink className="shrink-0" href={project.href}>
-                    Visit project
+                    Visit website
                   </TextLink>
                 ) : null}
                 {project.repoHref ? (
