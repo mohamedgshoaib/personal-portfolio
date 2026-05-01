@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { NavLink } from "@/components/home/nav-link"
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
@@ -121,13 +121,13 @@ export default function Page() {
         <HomeSection id="projects" label="Projects">
           <div className="space-y-5">
             <DisclosureList type="projects" items={featuredProjects} />
-            <Link href="/projects" className="text-button">
+            <NavLink href="/projects">
               {hiddenProjectCount > 0
                 ? `View ${hiddenProjectCount} more ${
                     hiddenProjectCount === 1 ? "project" : "projects"
                   }`
                 : "View projects"}
-            </Link>
+            </NavLink>
           </div>
         </HomeSection>
 
@@ -157,9 +157,7 @@ export default function Page() {
                 No writing published yet.
               </p>
             )}
-            <Link href="/writing" className="text-button">
-              View all writing
-            </Link>
+            <NavLink href="/writing">View all writings</NavLink>
           </div>
         </HomeSection>
 
