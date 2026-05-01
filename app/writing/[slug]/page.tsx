@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { CopyMarkdownButton } from "@/app/writing/_components/copy-markdown-button"
 import { PostHeaderLinks } from "@/app/writing/_components/post-header-links"
 import { JsonLd } from "@/components/seo/json-ld"
+import { TextLink } from "@/components/home/text-link"
 import { getPostBySlug, posts } from "@/lib/content/writing"
 import { siteProfile } from "@/lib/content/site-content"
 import { createBlogPostingSchema } from "@/lib/metadata/schema"
@@ -91,26 +92,16 @@ export default async function WritingPostPage({ params }: PageProps) {
         </article>
       </div>
 
-      <footer className="mt-auto pt-16 text-sm text-muted-foreground">
+      <footer className="mt-16 border-t border-border/50 pt-8 text-sm text-muted-foreground">
         <p className="max-w-[33rem]">
           Written by {siteProfile.name}. You can also find me on{" "}
-          <a
-            href="https://github.com/mohamed-g-shoaib"
-            className="text-link"
-            rel="noreferrer noopener"
-            target="_blank"
-          >
+          <TextLink href="https://github.com/mohamed-g-shoaib" hideIcon>
             GitHub
-          </a>{" "}
+          </TextLink>{" "}
           and{" "}
-          <a
-            href="https://x.com/mo0hamed_gamal"
-            className="text-link"
-            rel="noreferrer noopener"
-            target="_blank"
-          >
+          <TextLink href="https://x.com/mo0hamed_gamal" hideIcon>
             X
-          </a>
+          </TextLink>
           .
         </p>
       </footer>

@@ -61,13 +61,13 @@ async function playThemeToggleSound(nextTheme: "light" | "dark") {
 }
 
 const DOCK_SURFACE_CLASS =
-  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-2xl p-1.5 backdrop-blur-lg"
+  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-[var(--radius-surface)] p-1.5 backdrop-blur-lg"
 
 const DOCK_POPOVER_SURFACE_CLASS =
-  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-2xl p-1.5 backdrop-blur-lg"
+  "max-w-[calc(100vw-2rem)] surface-floating-glass rounded-[var(--radius-surface)] p-1.5 backdrop-blur-lg"
 
 const DOCK_CONTACT_ACTION_CLASS =
-  "motion-surface-interaction relative z-10 inline-flex h-8 min-w-0 items-center rounded-xl border border-border/60 bg-muted px-2.5 py-1.5 font-sans text-[0.84rem] leading-none text-muted-foreground hover:border-border/90 hover:bg-card hover:text-foreground focus-visible:border-border/90 focus-visible:bg-card focus-visible:text-foreground focus-visible:outline-none sm:h-9 sm:px-3 sm:text-[0.875rem]"
+  "text-button motion-surface-interaction relative z-10 inline-flex h-8 min-w-0 items-center px-2.5 py-1.5 font-sans text-[0.84rem] leading-none sm:h-9 sm:px-3 sm:text-[0.875rem]"
 
 export function FloatingDock() {
   const pathname = usePathname()
@@ -217,7 +217,7 @@ export function FloatingDock() {
                 {activeFrame ? (
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute top-0 left-0 z-0 rounded-xl bg-muted motion-layout-frame"
+                    className="pointer-events-none absolute top-0 left-0 z-0 rounded-[var(--radius-control)] bg-muted motion-layout-frame"
                     style={{
                       height: `${activeFrame.height}px`,
                       transform: `translateX(${activeFrame.left}px)`,
@@ -237,7 +237,7 @@ export function FloatingDock() {
                         setContactOpen(false)
                       }}
                       className={cn(
-                        "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground motion-interactive-color outline-none hover:text-foreground focus-visible:text-foreground",
+                        "relative z-10 flex size-9 items-center justify-center rounded-[var(--radius-control)] bg-transparent text-muted-foreground motion-interactive-color outline-none hover:text-foreground focus-visible:text-foreground",
                         activeKey === item.key && "text-foreground"
                       )}
                     >
@@ -266,7 +266,7 @@ export function FloatingDock() {
                   }
                   data-click-sound="off"
                   onClick={handleMuteToggle}
-                  className="flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground motion-interactive-color outline-none hover:text-foreground focus-visible:text-foreground"
+                  className="flex size-9 items-center justify-center rounded-[var(--radius-control)] bg-transparent text-muted-foreground motion-interactive-color outline-none hover:text-foreground focus-visible:text-foreground"
                 >
                   {muted ? (
                     <DockIcon icon={VolumeOffIcon} />
@@ -285,9 +285,9 @@ export function FloatingDock() {
                   aria-label="Toggle theme"
                   data-click-sound="off"
                   onClick={handleThemeToggle}
-                  className="flex size-9 items-center justify-center rounded-xl bg-transparent text-foreground outline-none"
+                  className="flex size-9 items-center justify-center rounded-[var(--radius-control)] bg-transparent text-foreground outline-none"
                 >
-                  <span className="size-[22px] rounded-md bg-foreground motion-surface-interaction dark:bg-[#F3F4F6]" />
+                  <span className="size-[22px] rounded-[calc(var(--radius-control)*0.6)] bg-foreground motion-surface-interaction dark:bg-[#F3F4F6]" />
                 </button>
               </DockTooltip>
             </div>
@@ -350,7 +350,7 @@ function DockContactPopover({
             type="button"
             aria-label="Open contact options"
             className={cn(
-              "relative z-10 flex size-9 items-center justify-center rounded-xl bg-transparent text-muted-foreground motion-interactive-color outline-none hover:text-foreground focus-visible:text-foreground",
+              "relative z-10 flex size-9 items-center justify-center rounded-[var(--radius-control)] bg-transparent text-muted-foreground motion-interactive-color outline-none hover:text-foreground focus-visible:text-foreground",
               isActive && "text-foreground"
             )}
           >

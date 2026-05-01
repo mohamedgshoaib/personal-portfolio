@@ -1,3 +1,4 @@
+import Link from "next/link"
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
@@ -98,13 +99,18 @@ export default function Page() {
             <p>{siteProfile.bio}</p>
             <p>
               Reach me on{" "}
-              <TextLink href="https://x.com/mo0hamed_gamal">X</TextLink>,
-              connect on{" "}
-              <TextLink href="https://www.linkedin.com/in/mohamed-g-shoaib/">
+              <TextLink href="https://x.com/mo0hamed_gamal" hideIcon>
+                X
+              </TextLink>
+              , connect on{" "}
+              <TextLink
+                href="https://www.linkedin.com/in/mohamed-g-shoaib/"
+                hideIcon
+              >
                 LinkedIn
               </TextLink>
               , or check out my{" "}
-              <TextLink href="https://github.com/mohamed-g-shoaib">
+              <TextLink href="https://github.com/mohamed-g-shoaib" hideIcon>
                 GitHub
               </TextLink>
               . Based in {siteProfile.location}.
@@ -115,13 +121,13 @@ export default function Page() {
         <HomeSection id="projects" label="Projects">
           <div className="space-y-5">
             <DisclosureList type="projects" items={featuredProjects} />
-            <TextLink href="/projects">
+            <Link href="/projects" className="text-button">
               {hiddenProjectCount > 0
                 ? `View ${hiddenProjectCount} more ${
                     hiddenProjectCount === 1 ? "project" : "projects"
                   }`
                 : "View projects"}
-            </TextLink>
+            </Link>
           </div>
         </HomeSection>
 
@@ -151,7 +157,9 @@ export default function Page() {
                 No writing published yet.
               </p>
             )}
-            <TextLink href="/writing">View all writing</TextLink>
+            <Link href="/writing" className="text-button">
+              View all writing
+            </Link>
           </div>
         </HomeSection>
 
@@ -163,7 +171,7 @@ export default function Page() {
       <footer className="mt-auto pt-16 text-sm text-muted-foreground">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           {socialLinks.map((link) => (
-            <TextLink key={link.label} href={link.href}>
+            <TextLink key={link.label} href={link.href} hideIcon>
               {link.label === "Email" ? "Email me" : link.label}
             </TextLink>
           ))}

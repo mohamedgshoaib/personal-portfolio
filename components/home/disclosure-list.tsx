@@ -4,9 +4,73 @@ import Image from "next/image"
 import * as React from "react"
 import { Drawer } from "@base-ui/react/drawer"
 
-import { TextLink } from "@/components/home/text-link"
 import { cn } from "@/lib/utils"
 import type { Project } from "@/lib/content/site-content"
+import {
+  ArrowUpRightIcon,
+  type ArrowUpRightIconHandle,
+} from "@/components/ui/arrow-up-right"
+import { GithubIcon, type GithubIconHandle } from "@/components/ui/github"
+
+function ExternalLinkButton({
+  href,
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<"a">) {
+  const iconRef = React.useRef<ArrowUpRightIconHandle>(null)
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      className="text-button shrink-0"
+      onMouseEnter={(e) => {
+        iconRef.current?.startAnimation()
+        props.onMouseEnter?.(e)
+      }}
+      onMouseLeave={(e) => {
+        iconRef.current?.stopAnimation()
+        props.onMouseLeave?.(e)
+      }}
+      {...props}
+    >
+      {children}
+      <span className="external-icon">
+        <ArrowUpRightIcon ref={iconRef} size={14} />
+      </span>
+    </a>
+  )
+}
+
+function GithubLinkButton({
+  href,
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<"a">) {
+  const iconRef = React.useRef<GithubIconHandle>(null)
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      className="text-button shrink-0"
+      onMouseEnter={(e) => {
+        iconRef.current?.startAnimation()
+        props.onMouseEnter?.(e)
+      }}
+      onMouseLeave={(e) => {
+        iconRef.current?.stopAnimation()
+        props.onMouseLeave?.(e)
+      }}
+      {...props}
+    >
+      <span className="icon">
+        <GithubIcon ref={iconRef} size={14} />
+      </span>
+      {children}
+    </a>
+  )
+}
 
 type DisclosureListProps = {
   type: "projects"
@@ -95,17 +159,19 @@ function ProjectRow({
           {item.summary}
         </p>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[0.96rem]">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.96rem]">
           <button
             type="button"
-            className="text-link text-left"
+            className="text-button text-left"
             onClick={() => onOpenDetails(item)}
             aria-label={`View details for ${item.name}`}
           >
             Details
           </button>
           {item.href ? (
-            <TextLink href={item.href}>Visit website</TextLink>
+            <ExternalLinkButton href={item.href}>
+              Visit website
+            </ExternalLinkButton>
           ) : null}
         </div>
       </div>
@@ -124,7 +190,7 @@ function ProjectDetailsSheet({ project }: { project: Project | null }) {
     <Drawer.Portal>
       <Drawer.Backdrop className="fixed inset-0 z-40 bg-background/45 motion-sheet-backdrop backdrop-blur-[2px]" />
       <Drawer.Viewport className="fixed inset-0 z-50 flex items-end justify-center px-3 pt-10 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:px-6 sm:pb-6">
-        <Drawer.Popup className="flex max-h-[min(82svh,46rem)] w-full max-w-[48rem] motion-bottom-sheet flex-col overflow-hidden rounded-2xl surface-floating">
+        <Drawer.Popup className="flex max-h-[min(82svh,46rem)] w-full max-w-[48rem] motion-bottom-sheet flex-col overflow-hidden rounded-[var(--radius-surface)] surface-floating">
           <header className="shrink-0 border-b border-border/70 p-3 sm:p-4">
             <div className="min-w-0 space-y-1.5">
               <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -180,17 +246,17 @@ function ProjectDetailsSheet({ project }: { project: Project | null }) {
             <div className="flex items-center justify-between gap-4 text-[0.92rem] sm:gap-6 sm:text-[0.96rem]">
               <div className="flex min-w-0 flex-nowrap items-center gap-x-3 sm:gap-x-4">
                 {project.href ? (
-                  <TextLink className="shrink-0" href={project.href}>
+                  <ExternalLinkButton href={project.href}>
                     Visit website
-                  </TextLink>
+                  </ExternalLinkButton>
                 ) : null}
                 {project.repoHref ? (
-                  <TextLink className="shrink-0" href={project.repoHref}>
+                  <GithubLinkButton href={project.repoHref}>
                     Repository
-                  </TextLink>
+                  </GithubLinkButton>
                 ) : null}
               </div>
-              <Drawer.Close className="relative text-link inline-flex shrink-0 items-center rounded-md text-left after:absolute after:inset-x-0 after:-inset-y-2 after:content-['']">
+              <Drawer.Close className="relative text-button inline-flex shrink-0 items-center text-left after:absolute after:inset-x-0 after:-inset-y-2 after:content-['']">
                 Close
               </Drawer.Close>
             </div>

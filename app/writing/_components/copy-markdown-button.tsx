@@ -2,6 +2,9 @@
 
 import * as React from "react"
 
+import { CopyIcon, type CopyIconHandle } from "@/components/ui/copy"
+import { CheckIcon, type CheckIconHandle } from "@/components/ui/check"
+
 function copyTextToClipboard(text: string) {
   if (navigator.clipboard?.writeText) {
     return navigator.clipboard.writeText(text)
@@ -32,6 +35,9 @@ export function CopyMarkdownButton({ markdown }: { markdown: string }) {
   const [copied, setCopied] = React.useState(false)
   const timeoutRef = React.useRef<number | null>(null)
 
+  const copyIconRef = React.useRef<CopyIconHandle>(null)
+  const checkIconRef = React.useRef<CheckIconHandle>(null)
+
   React.useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -44,6 +50,7 @@ export function CopyMarkdownButton({ markdown }: { markdown: string }) {
     try {
       await copyTextToClipboard(markdown)
       setCopied(true)
+      checkIconRef.current?.startAnimation()
 
       if (timeoutRef.current) {
         window.clearTimeout(timeoutRef.current)
@@ -63,34 +70,35 @@ export function CopyMarkdownButton({ markdown }: { markdown: string }) {
       <button
         type="button"
         onClick={handleCopy}
+        onMouseEnter={() => {
+          if (copied) {
+            checkIconRef.current?.startAnimation()
+          } else {
+            copyIconRef.current?.startAnimation()
+          }
+        }}
+        onMouseLeave={() => {
+          copyIconRef.current?.stopAnimation()
+          checkIconRef.current?.stopAnimation()
+        }}
         aria-label={copied ? "Article copied" : "Copy article"}
-        className="inline-flex min-h-8 shrink-0 items-center text-sm whitespace-nowrap text-action outline-none"
+        className="text-button shrink-0 text-sm outline-none"
       >
-        <span className="relative inline-flex h-5 items-center overflow-hidden whitespace-nowrap">
-          <span className="invisible inline-flex items-center whitespace-nowrap">
+        {copied ? (
+          <>
+            <span className="icon">
+              <CheckIcon ref={checkIconRef} size={14} />
+            </span>
             Article copied
-          </span>
-          <span
-            aria-hidden="true"
-            className={
-              copied
-                ? "absolute inset-0 inline-flex items-center whitespace-nowrap opacity-0 blur-[2px] motion-fade-blur"
-                : "blur-0 absolute inset-0 inline-flex items-center whitespace-nowrap opacity-100 motion-fade-blur"
-            }
-          >
-            <span>Copy article</span>
-          </span>
-          <span
-            aria-hidden="true"
-            className={
-              copied
-                ? "blur-0 absolute inset-0 inline-flex items-center whitespace-nowrap opacity-100 motion-fade-blur"
-                : "absolute inset-0 inline-flex items-center whitespace-nowrap opacity-0 blur-[2px] motion-fade-blur"
-            }
-          >
-            <span>Article copied</span>
-          </span>
-        </span>
+          </>
+        ) : (
+          <>
+            <span className="icon">
+              <CopyIcon ref={copyIconRef} size={14} />
+            </span>
+            Copy article
+          </>
+        )}
       </button>
       <span className="sr-only" aria-live="polite" role="status">
         {copied ? "Article copied to clipboard." : ""}

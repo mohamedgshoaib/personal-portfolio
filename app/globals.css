@@ -63,6 +63,8 @@
 
 :root {
   --radius: 0.625rem;
+  --radius-control: 0.75rem;
+  --radius-surface: 1.125rem;
   --color-canvas: oklch(0.994 0.001 106.424);
   --background: var(--color-canvas);
   --foreground: var(--color-neutral-800);
@@ -113,33 +115,41 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --surface-shadow-sm:
-    0 1px 0 0 color-mix(in srgb, var(--color-black) 6%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--color-black) 6%, transparent),
     0 10px 24px -18px color-mix(in srgb, var(--color-black) 22%, transparent);
   --surface-shadow-md:
-    0 1px 0 0 color-mix(in srgb, var(--color-black) 7%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--color-black) 7%, transparent),
     0 20px 40px -26px color-mix(in srgb, var(--color-black) 24%, transparent);
   --motion-duration-fast: 140ms;
   --motion-duration-medium: 180ms;
   --motion-duration-layout: 220ms;
   --motion-disclosure-shift: 2px;
-  --link-foreground: var(--muted-foreground);
-  --link-foreground-hover: color-mix(
+  --link-foreground: color-mix(
     in srgb,
-    var(--foreground) 38%,
+    var(--foreground) 8%,
     var(--muted-foreground)
   );
-  --link-decoration: color-mix(in srgb, var(--foreground) 14%, transparent);
+  --link-foreground-hover: var(--foreground);
+  --link-decoration: color-mix(in srgb, var(--foreground) 18%, transparent);
   --link-decoration-hover: color-mix(
     in srgb,
-    var(--foreground) 24%,
+    var(--foreground) 35%,
     transparent
   );
-  --action-foreground: var(--muted-foreground);
-  --action-foreground-hover: color-mix(
-    in srgb,
-    var(--foreground) 38%,
-    var(--muted-foreground)
-  );
+
+  --button-bg: color-mix(in srgb, var(--foreground) 2%, transparent);
+  --button-bg-hover: color-mix(in srgb, var(--foreground) 3%, transparent);
+  --button-bg-active: color-mix(in srgb, var(--foreground) 4%, transparent);
+
+  --button-shadow-sm:
+    inset 0 0 0 1px color-mix(in srgb, var(--color-black) 4%, transparent),
+    inset 0 0.5px 0 0 color-mix(in srgb, var(--color-white) 50%, transparent),
+    0 1px 1px -1px color-mix(in srgb, var(--color-black) 3%, transparent);
+
+  --button-shadow-md:
+    inset 0 0 0 1px color-mix(in srgb, var(--color-black) 6%, transparent),
+    inset 0 0.5px 0 0 color-mix(in srgb, var(--color-white) 60%, transparent),
+    0 1px 3px -1px color-mix(in srgb, var(--color-black) 5%, transparent);
 }
 
 .dark {
@@ -163,6 +173,20 @@
     var(--color-neutral-500) 90%,
     var(--color-white)
   );
+
+  --button-bg: color-mix(in srgb, var(--color-white) 2%, transparent);
+  --button-bg-hover: color-mix(in srgb, var(--color-white) 3%, transparent);
+  --button-bg-active: color-mix(in srgb, var(--color-white) 4%, transparent);
+
+  --button-shadow-sm:
+    inset 0 0 0 1px color-mix(in srgb, var(--color-white) 5%, transparent),
+    inset 0 0.5px 0 0 color-mix(in srgb, var(--color-white) 6%, transparent),
+    0 1px 1px -1px color-mix(in srgb, var(--color-black) 12%, transparent);
+
+  --button-shadow-md:
+    inset 0 0 0 1px color-mix(in srgb, var(--color-white) 7%, transparent),
+    inset 0 0.5px 0 0 color-mix(in srgb, var(--color-white) 9%, transparent),
+    0 1px 3px -1px color-mix(in srgb, var(--color-black) 16%, transparent);
   --accent: --alpha(var(--color-white) / 4%);
   --accent-foreground: var(--color-neutral-100);
   --destructive: color-mix(
@@ -202,10 +226,10 @@
   --sidebar-border: --alpha(var(--color-white) / 5%);
   --sidebar-ring: var(--color-neutral-400);
   --surface-shadow-sm:
-    0 1px 0 0 color-mix(in srgb, var(--color-white) 5%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--color-white) 5%, transparent),
     0 16px 32px -20px color-mix(in srgb, var(--color-black) 52%, transparent);
   --surface-shadow-md:
-    0 1px 0 0 color-mix(in srgb, var(--color-white) 6%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--color-white) 6%, transparent),
     0 24px 48px -28px color-mix(in srgb, var(--color-black) 58%, transparent);
 }
 
@@ -320,9 +344,7 @@
 }
 
 @utility text-link {
-  display: inline-block;
-  max-width: 100%;
-  vertical-align: baseline;
+  display: inline;
   color: var(--link-foreground);
   text-decoration-line: underline;
   text-decoration-color: var(--link-decoration);
@@ -331,10 +353,22 @@
   transition-property: color, text-decoration-color;
   transition-timing-function: var(--ease-out);
 
+  & .external-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.15em;
+    transform: translateY(-0.05em);
+    transition: transform 150ms var(--ease-out);
+  }
+
   &:focus-visible {
     color: var(--link-foreground-hover);
     text-decoration-color: var(--link-decoration-hover);
     outline: none;
+
+    & .external-icon {
+      transform: translate(1px, -1px) translateY(-0.05em);
+    }
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -342,24 +376,66 @@
       color: var(--link-foreground-hover);
       text-decoration-color: var(--link-decoration-hover);
     }
+
+    &:hover .external-icon {
+      transform: translate(1px, -1px) translateY(-0.05em);
+    }
   }
 }
 
-@utility text-action {
-  color: var(--action-foreground);
-  transition-duration: 150ms;
-  transition-property: color, transform, scale;
+@utility text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-control);
+
+  background-color: var(--button-bg);
+  color: color-mix(in srgb, var(--foreground) 85%, transparent);
+  font-size: inherit;
+  font-weight: 400;
+  white-space: nowrap;
+
+  box-shadow: var(--button-shadow-sm);
+
+  transition-duration: 200ms;
+  transition-property: background-color, color, box-shadow, transform;
   transition-timing-function: var(--ease-out);
 
+  & .external-icon,
+  & .icon {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
   &:focus-visible {
-    color: var(--action-foreground-hover);
     outline: none;
+    box-shadow:
+      0 0 0 2px color-mix(in srgb, var(--ring) 40%, transparent),
+      var(--button-shadow-sm);
   }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      color: var(--action-foreground-hover);
+      background-color: var(--button-bg-hover);
+      color: var(--foreground);
+      box-shadow: var(--button-shadow-md);
     }
+  }
+
+  &:active {
+    background-color: var(--button-bg-active);
+    box-shadow: var(--button-shadow-sm);
+    transform: translateY(1px);
+  }
+
+  /* Optical alignment: reduce padding on icon side by ~2px */
+  &:has(> .icon:first-child) {
+    padding-left: 0.525rem;
+  }
+
+  &:has(> .external-icon:last-child) {
+    padding-right: 0.525rem;
   }
 }
 
@@ -508,14 +584,12 @@
 }
 
 @utility surface-floating {
-  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
   background-color: var(--card);
   box-shadow: var(--surface-shadow-md);
 }
 
 @utility surface-floating-glass {
-  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
-  background-color: color-mix(in srgb, var(--background) 78%, transparent);
+  background-color: color-mix(in srgb, var(--background) 55%, transparent);
   box-shadow: var(--surface-shadow-sm);
 }
 
