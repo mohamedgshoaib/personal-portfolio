@@ -1,0 +1,164 @@
+.root {
+  isolation: isolate;
+}
+
+body {
+  position: relative;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  border: 1px solid hsl(240 6% 20%);
+  border-radius: .5rem;
+  padding: 0 .875rem;
+  background: white;
+  color: hsl(240 10% 5%);
+  font-size: .875rem;
+  cursor: default;
+}
+
+.button:hover,
+.button[data-popup-open],
+.button[data-pressed] {
+  background: hsl(240 5% 96%);
+}
+
+.button:focus-visible,
+.input:focus-visible,
+.item[data-highlighted],
+.tab:focus-visible {
+  outline: 2px solid hsl(240 90% 50%);
+  outline-offset: 2px;
+}
+
+.button.subtle {
+  border-color: hsl(240 5% 84%);
+}
+
+.button.danger,
+.danger-text {
+  color: hsl(0 70% 45%);
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / .45);
+}
+
+.dialog-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(92vw, 28rem);
+  transform: translate(-50%, -50%);
+  border-radius: .75rem;
+  background: white;
+  padding: 1.25rem;
+  box-shadow: 0 24px 80px rgb(0 0 0 / .25);
+}
+
+.dialog-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 650;
+}
+
+.dialog-description {
+  margin: .5rem 0 1rem;
+  color: hsl(240 4% 40%);
+}
+
+.popup {
+  min-width: 12rem;
+  border: 1px solid hsl(240 5% 84%);
+  border-radius: .5rem;
+  background: white;
+  padding: .25rem;
+  box-shadow: 0 16px 40px rgb(0 0 0 / .16);
+  transform-origin: var(--transform-origin);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  min-height: 2rem;
+  border-radius: .375rem;
+  padding: 0 .75rem;
+  font-size: .875rem;
+  cursor: default;
+}
+
+.item[data-highlighted] {
+  background: hsl(240 5% 92%);
+}
+
+.item[data-disabled] {
+  opacity: .5;
+}
+
+.separator {
+  height: 1px;
+  margin: .25rem;
+  background: hsl(240 5% 84%);
+}
+
+.form,
+.stack {
+  display: grid;
+  gap: .5rem;
+}
+
+.form {
+  max-width: 24rem;
+}
+
+.field-label {
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+.input {
+  min-height: 2.25rem;
+  border: 1px solid hsl(240 5% 75%);
+  border-radius: .5rem;
+  padding: 0 .75rem;
+}
+
+.error {
+  color: hsl(0 70% 45%);
+  font-size: .8125rem;
+}
+
+.row {
+  display: flex;
+  gap: .5rem;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+.tab-list {
+  display: flex;
+  gap: .25rem;
+  border-bottom: 1px solid hsl(240 5% 84%);
+}
+
+.tab {
+  border: 0;
+  border-radius: .375rem .375rem 0 0;
+  background: transparent;
+  padding: .625rem .875rem;
+}
+
+.tab[data-selected] {
+  background: hsl(240 5% 92%);
+}
+
+.tab-panel {
+  padding: 1rem 0;
+}

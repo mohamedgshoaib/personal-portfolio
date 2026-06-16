@@ -1,0 +1,71 @@
+---
+title: "AI Discovery in 2026: llms.txt and llms-full.txt"
+slug: ai-discovery-in-2026-llms-txt-and-llms-full-txt
+description: What llms.txt and llms-full.txt actually help with, what they do not, and how they fit into modern website discovery.
+excerpt: A practical look at AI-readable site summaries, without overstating what the format can do.
+publishedAt: "2026-06-16"
+updatedAt: "2026-06-16"
+category: Essay
+status: published
+featured: false
+order: 2
+readingTime: "5 min read"
+---
+
+![Cover image for the AI Discovery writing post.](/assets/writing/llms.webp)
+
+More websites are being read by automated systems before a human ever clicks through. Some of those systems are search crawlers. Some are internal retrieval layers. Some are LLM-powered assistants trying to summarize what a site is about. That shift creates a simple question: how do you give machine readers the important parts of your site without making them parse an entire interface first?
+
+One useful answer is `llms.txt`.
+
+## What llms.txt Actually Is
+
+`llms.txt` is an emerging convention, not a settled web standard. The proposal is to publish a small Markdown document at the root of a site that explains what the site is about and where the most important content lives.
+
+The main value is not magic indexing. It is clarity.
+
+Instead of forcing a machine reader to infer your site's purpose from navigation, layout chrome, and scattered metadata, you give it a compact summary written on purpose.
+
+## Why It Helps
+
+Normal pages are built for people, which means they contain a lot of useful visual structure that is noisy in plain text: nav bars, repeated calls to action, footer links, decorative copy, and layout wrappers. A small text-first summary helps by:
+
+1. reducing ambiguity about what the site is for
+2. pointing tools toward the highest-value routes first
+3. lowering the amount of irrelevant text that has to be processed before the useful content appears
+
+That does not guarantee better citations or better ranking in every AI product. It just improves the quality of the input you expose.
+
+## Why llms-full.txt Exists
+
+A short summary is helpful, but sometimes it is not enough. That is where `llms-full.txt` becomes useful.
+
+The split is simple:
+
+- `llms.txt` is the map
+- `llms-full.txt` is the fuller reference
+
+The small file should tell a reader what the site contains and where to go next. The larger file can include richer route summaries, project descriptions, authored content, and other context that would be too heavy for the short version.
+
+## How I Think About It In Practice
+
+The mistake is treating `llms.txt` like a silver bullet or pretending the ecosystem is more settled than it is.
+
+The better posture is:
+
+1. keep the file short
+2. describe the site honestly
+3. link to the most important content
+4. maintain a fuller companion document if your site has meaningful depth
+
+That turns the file into a durable interface layer for machine readers instead of another SEO superstition.
+
+## The Useful Analogy
+
+`robots.txt` tells crawlers what they may access. `llms.txt` is closer to telling machine readers what matters once they get there.
+
+One is access control guidance; the other is content guidance. The difference matters.
+
+## Closing Thought
+
+The practical case for `llms.txt` is not that the web now belongs to AI. It is that websites increasingly benefit from having one clean, intentional description of themselves that does not depend on rendered UI. Even if the convention keeps evolving, that part is already useful.

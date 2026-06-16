@@ -1,141 +1,99 @@
 import type { Metadata } from "next"
 
-import { siteProfile } from "@/lib/content/site-content"
+import type { DiscoveryRoute } from "@/lib/content/content-types"
+import {
+  getDiscoveryRouteByHref,
+  getProjectDiscoveryRouteBySlug,
+  getWritingDiscoveryRouteBySlug,
+} from "@/lib/content/content-discovery"
+import { siteConfig } from "@/lib/metadata/site-config"
+import { getCanonicalUrl } from "@/lib/metadata/url"
 
-const DEFAULT_SITE_URL = "http://localhost:3000"
-const SITE_HANDLE = "@mo0hamed_gamal"
+type RouteMetadataInput = Pick<
+  DiscoveryRoute,
+  "description" | "href" | "kind" | "title"
+>
 
-function normalizeSiteUrl(value: string) {
-  if (value.startsWith("http://") || value.startsWith("https://")) {
-    return value
-  }
-
-  return `https://${value}`
+function formatRouteTitle(route: RouteMetadataInput): string {
+  return route.kind === "home"
+    ? route.title
+    : `${route.title} | ${siteConfig.name}`
 }
 
-function resolveSiteUrl() {
-  const candidate =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    process.env.SITE_URL ??
-    process.env.VERCEL_PROJECT_PRODUCTION_URL ??
-    process.env.VERCEL_URL
-
-  return new URL(normalizeSiteUrl(candidate ?? DEFAULT_SITE_URL))
+function getOpenGraphType(route: RouteMetadataInput): "article" | "website" {
+  return route.kind === "writingDetail" ? "article" : "website"
 }
 
-export const siteUrl = resolveSiteUrl()
-export const siteName = siteProfile.name
-export const siteDescription =
-  "Frontend developer working with React and Next.js, with a focus on clean design, strong planning, and careful implementation."
-export const siteKeywords = [
-  "Mohamed Gamal",
-  "Frontend Developer",
-  "Frontend Engineer",
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Web interfaces",
-  "Design systems",
-  "Performance",
-  "Web development",
-] as const
-export const siteXHandle = SITE_HANDLE
+function createRouteMetadata(route: RouteMetadataInput): Metadata {
+  const title = formatRouteTitle(route)
+  const canonicalUrl = getCanonicalUrl(route.href)
 
-export function createAbsoluteUrl(path = "/") {
-  return new URL(path, siteUrl)
-}
-
-function createRouteSocialImagePath(
-  routePath: string,
-  imageRoute: "opengraph-image" | "twitter-image"
-) {
-  if (routePath === "/") {
-    return `/${imageRoute}`
-  }
-
-  return `${routePath}/${imageRoute}`
-}
-
-type CreatePageMetadataOptions = {
-  title: string
-  description: string
-  path: string
-}
-
-export function createPageMetadata({
-  title,
-  description,
-  path,
-}: CreatePageMetadataOptions): Metadata {
   return {
+    metadataBase: new URL(siteConfig.siteUrl),
     title,
-    description,
+    description: route.description,
     alternates: {
-      canonical: path,
+      canonical: canonicalUrl,
     },
+    applicationName: siteConfig.name,
+    authors: [{ name: siteConfig.author, url: siteConfig.siteUrl }],
+    creator: siteConfig.author,
+    publisher: siteConfig.author,
     openGraph: {
       title,
-      description,
-      url: createAbsoluteUrl(path),
-      images: [
-        createAbsoluteUrl(createRouteSocialImagePath(path, "opengraph-image")),
-      ],
-      siteName,
-      locale: "en_US",
-      type: "website",
+      description: route.description,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: title }],
+      locale: siteConfig.locale,
+      siteName: siteConfig.name,
+      type: getOpenGraphType(route),
+      url: canonicalUrl,
     },
     twitter: {
       card: "summary_large_image",
       title,
-      description,
-      images: [
-        createAbsoluteUrl(createRouteSocialImagePath(path, "twitter-image")),
-      ],
-      creator: siteXHandle,
+      description: route.description,
+      creator: siteConfig.twitterHandle,
+      images: ["/opengraph-image"],
     },
   }
 }
 
-type CreateArticleMetadataOptions = {
-  title: string
-  description: string
-  path: string
-  publishedTime?: string
+export function getRouteMetadata(href: string): Metadata {
+  const route = getDiscoveryRouteByHref(href)
+
+  if (!route) {
+    return {}
+  }
+
+  return createRouteMetadata(route)
 }
 
-export function createArticleMetadata({
-  title,
-  description,
-  path,
-  publishedTime,
-}: CreateArticleMetadataOptions): Metadata {
+export function getProjectRouteMetadata(slug: string): Metadata {
+  const route = getProjectDiscoveryRouteBySlug(slug)
+
+  if (!route) {
+    return {}
+  }
+
+  const base = createRouteMetadata(route)
   return {
-    title,
-    description,
-    alternates: {
-      canonical: path,
-    },
-    openGraph: {
-      title,
-      description,
-      url: createAbsoluteUrl(path),
-      images: [
-        createAbsoluteUrl(createRouteSocialImagePath(path, "opengraph-image")),
-      ],
-      siteName,
-      locale: "en_US",
-      type: "article",
-      authors: [siteName],
-      publishedTime,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [
-        createAbsoluteUrl(createRouteSocialImagePath(path, "twitter-image")),
-      ],
-      creator: siteXHandle,
-    },
+    ...base,
+    openGraph: { ...base.openGraph, images: [{ url: "/projects/opengraph-image", width: 1200, height: 630, alt: base.openGraph?.title as string }] },
+    twitter: { ...base.twitter, images: ["/projects/opengraph-image"] },
+  }
+}
+
+export function getWritingRouteMetadata(slug: string): Metadata {
+  const route = getWritingDiscoveryRouteBySlug(slug)
+
+  if (!route) {
+    return {}
+  }
+
+  const base = createRouteMetadata(route)
+  return {
+    ...base,
+    openGraph: { ...base.openGraph, images: [{ url: "/writing/opengraph-image", width: 1200, height: 630, alt: base.openGraph?.title as string }] },
+    twitter: { ...base.twitter, images: ["/writing/opengraph-image"] },
   }
 }

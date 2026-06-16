@@ -1,16 +1,31 @@
+import type * as React from "react"
 import { cn } from "@/lib/utils"
 
-function Kbd({ className, ...props }: React.ComponentProps<"kbd">) {
+export function Kbd({
+  className,
+  ...props
+}: React.ComponentProps<"kbd">): React.ReactElement {
   return (
     <kbd
-      data-slot="kbd"
       className={cn(
-        "pointer-events-none inline-flex h-5 min-w-5 items-center justify-center rounded-sm border border-border/80 bg-muted/80 px-1 font-sans text-[10px] font-semibold text-foreground select-none [&_svg:not([class*='size-'])]:size-3",
+        "pointer-events-none inline-flex h-5 min-w-5 items-center justify-center gap-1 rounded-[.25rem] bg-muted px-1 font-mono text-xs font-medium text-muted-foreground select-none [&_svg:not([class*='size-'])]:size-3",
         className
       )}
+      data-slot="kbd"
       {...props}
     />
   )
 }
 
-export { Kbd }
+function KbdGroup({
+  className,
+  ...props
+}: React.ComponentProps<"kbd">): React.ReactElement {
+  return (
+    <kbd
+      className={cn("inline-flex items-center gap-1", className)}
+      data-slot="kbd-group"
+      {...props}
+    />
+  )
+}

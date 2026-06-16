@@ -1,180 +1,201 @@
-import { NavLink } from "@/components/home/nav-link"
 import type { Metadata } from "next"
-import type { ReactNode } from "react"
 
-import { Avatar } from "@/components/home/avatar"
-import { ContactCopy } from "@/components/home/contact-copy"
-import { DisclosureList } from "@/components/home/disclosure-list"
-import { TextLink } from "@/components/home/text-link"
-import { JsonLd } from "@/components/seo/json-ld"
+import { ContactSection } from "@/components/contact/contact-section"
+import { HomepageDock } from "@/components/dock/homepage-dock"
+import { HomepageFooter } from "@/components/homepage/homepage-footer"
+import { HomepageSceneReveal } from "@/components/homepage/homepage-scene"
 import {
-  createAbsoluteUrl,
-  siteDescription,
-  siteName,
-  siteXHandle,
-} from "@/lib/metadata/site-metadata"
+  HomeSection,
+  PageContent,
+  PageShell,
+  SectionHeader,
+} from "@/components/homepage/homepage-layout"
+import { SocialLinks } from "@/components/action-link/social-links"
+import { ProjectList } from "@/components/editorial-entity/project-list"
+import { StructuredData } from "@/components/metadata/structured-data"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import { textStyles } from "@/lib/design/text-styles"
+import { WritingList } from "@/components/editorial-entity/writing-list"
+import { homepageContent } from "@/lib/content/content-discovery"
+import { getRouteMetadata } from "@/lib/metadata/site-metadata"
 import {
-  createHomepageSchema,
-  createPersonSchema,
-  createWebsiteSchema,
-} from "@/lib/metadata/schema"
-import {
-  featuredProjects,
-  homeContent,
-  projects,
-  siteProfile,
-  socialLinks,
-} from "@/lib/content/site-content"
-import { posts } from "@/lib/content/writing"
+  createPersonJsonLd,
+  createWebsiteJsonLd,
+} from "@/lib/metadata/structured-data"
+import { navigationIntentKeys } from "@/lib/navigation/navigation-intent"
 
-const hiddenProjectCount = Math.max(
-  projects.length - featuredProjects.length,
-  0
-)
-const latestPost = posts[0] ?? null
-const emailLink = socialLinks.find((link) => link.label === "Email")
+export const metadata: Metadata = getRouteMetadata("/")
 
-export const metadata: Metadata = {
-  description: siteDescription,
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: siteName,
-    description: siteDescription,
-    url: "/",
-    images: [createAbsoluteUrl("/opengraph-image")],
-    siteName,
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteName,
-    description: siteDescription,
-    images: [createAbsoluteUrl("/twitter-image")],
-    creator: siteXHandle,
-  },
-}
+const homepageSceneDelay = {
+  aboutHeader: 72,
+  aboutParagraph: 112,
+  aboutSocials: 188,
+  contactLabel: 0,
+  contactSurface: 64,
+  footerSignature: 0,
+  footerSocials: 64,
+  hero: 0,
+  projectRows: 278,
+  projectsHeader: 220,
+  writingHeader: 430,
+  writingRows: 494,
+  myApproachHeader: 352,
+  myApproach: 392,
+} as const
 
-function HomeSection({
-  id,
-  label,
-  children,
-}: {
-  id?: string
-  label: string
-  children: ReactNode
-}) {
+export default function Page(): React.ReactElement {
+  const { identity, about, approach, projects, writing, socialLinks } =
+    homepageContent
+
   return (
-    <section id={id} className="scroll-mt-24 space-y-5">
-      <p className="text-section-label">{label}</p>
-      {children}
-    </section>
-  )
-}
+    <PageShell>
+      <StructuredData data={[createPersonJsonLd(), createWebsiteJsonLd()]} />
+      <PageContent>
+          <HomepageSceneReveal delayMs={homepageSceneDelay.hero} kind="body">
+            <header className="flex items-center gap-5 pt-4 sm:pt-8">
+              <Avatar className="size-14 rounded-lg sm:size-16">
+                <AvatarImage
+                  alt="Mohamed Gamal"
+                  className="object-contain"
+                  fetchPriority="high"
+                  sizes="64px"
+                  src="/assets/avatar/avatar.webp"
+                  width={64}
+                  height={64}
+                />
+              </Avatar>
+              <hgroup className="min-w-0">
+                <h1 className={textStyles.pageTitle}>{identity.name}</h1>
+                <p className={`mt-1 ${textStyles.entityDescription}`}>
+                  {identity.title}
+                </p>
+              </hgroup>
+            </header>
+          </HomepageSceneReveal>
 
-export default function Page() {
-  return (
-    <main className="mx-auto flex min-h-svh w-full max-w-[42rem] flex-col px-6 pt-10 pb-16 sm:px-8 sm:pt-14">
-      <JsonLd data={createWebsiteSchema()} />
-      <JsonLd data={createPersonSchema()} />
-      <JsonLd data={createHomepageSchema()} />
-      <div className="space-y-12 sm:space-y-16">
-        <header className="flex items-center gap-4">
-          <Avatar />
-          <div className="translate-y-px space-y-0.5">
-            <p className="font-heading text-[1.08rem] font-medium text-foreground">
-              {siteProfile.name}
-            </p>
-            <p className="text-[0.96rem] text-muted-foreground">
-              {siteProfile.role}
-            </p>
-          </div>
-        </header>
-
-        <HomeSection id="about" label="About">
-          <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
-            <p>{siteProfile.intro}</p>
-            <p>{siteProfile.bio}</p>
-            <p>
-              Reach me on{" "}
-              <TextLink href="https://x.com/mo0hamed_gamal" hideIcon>
-                X
-              </TextLink>
-              , connect on{" "}
-              <TextLink
-                href="https://www.linkedin.com/in/mohamed-g-shoaib/"
-                hideIcon
+          <HomeSection
+            header={
+              <HomepageSceneReveal
+                delayMs={homepageSceneDelay.aboutHeader}
+                kind="header"
               >
-                LinkedIn
-              </TextLink>
-              , or check out my{" "}
-              <TextLink href="https://github.com/mohamed-g-shoaib" hideIcon>
-                GitHub
-              </TextLink>
-              . Based in {siteProfile.location}.
-            </p>
-          </div>
-        </HomeSection>
+                <SectionHeader actionLabel="View All" title="About" />
+              </HomepageSceneReveal>
+            }
+            id="about"
+          >
+            <HomepageSceneReveal
+              delayMs={homepageSceneDelay.aboutParagraph}
+              kind="body"
+            >
+              <div className="space-y-3">
+                {about.split("\n\n").map((para) => (
+                  <p className={textStyles.pageDescription} key={para}>{para}</p>
+                ))}
+              </div>
+            </HomepageSceneReveal>
+            <HomepageSceneReveal
+              delayMs={homepageSceneDelay.aboutSocials}
+              kind="utility"
+            >
+              <SocialLinks links={socialLinks} />
+            </HomepageSceneReveal>
+          </HomeSection>
 
-        <HomeSection id="projects" label="Projects">
-          <div className="space-y-5">
-            <DisclosureList type="projects" items={featuredProjects} />
-            <NavLink href="/projects">
-              {hiddenProjectCount > 0
-                ? `View ${hiddenProjectCount} more ${
-                    hiddenProjectCount === 1 ? "project" : "projects"
-                  }`
-                : "View projects"}
-            </NavLink>
-          </div>
-        </HomeSection>
+          <HomeSection
+            header={
+              <HomepageSceneReveal
+                delayMs={homepageSceneDelay.projectsHeader}
+                kind="header"
+              >
+                <SectionHeader
+                  actionHref="/projects"
+                  actionIntent={{
+                    key: navigationIntentKeys.projectsArchiveBackHref,
+                    type: "set",
+                    value: "/",
+                  }}
+                  actionLabel="View All"
+                  title="Projects"
+                />
+              </HomepageSceneReveal>
+            }
+            id="projects"
+            rhythm="list"
+          >
+            <ProjectList
+              projects={projects}
+              sceneDelayMs={homepageSceneDelay.projectRows}
+              source="home"
+            />
+          </HomeSection>
 
-        <HomeSection id="approach" label="Approach">
-          <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
-            {homeContent.approach.map((paragraph: string) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </HomeSection>
+          <HomeSection
+            header={
+              <HomepageSceneReveal
+                delayMs={homepageSceneDelay.myApproachHeader}
+                kind="header"
+              >
+                <SectionHeader actionLabel="View All" title="My Approach" />
+              </HomepageSceneReveal>
+            }
+          >
+            <HomepageSceneReveal
+              delayMs={homepageSceneDelay.myApproach}
+              kind="body"
+            >
+              <div className="space-y-3">
+                {approach.split("\n\n").map((para) => (
+                  <p className={textStyles.pageDescription} key={para}>{para}</p>
+                ))}
+              </div>
+            </HomepageSceneReveal>
+          </HomeSection>
 
-        <HomeSection id="writing" label="Writing">
-          <div className="max-w-[33rem] space-y-5">
-            {latestPost ? (
-              <article className="space-y-1.5">
-                <p className="text-[0.96rem] leading-8">
-                  <TextLink href={`/writing/${latestPost.slug}`}>
-                    {latestPost.title}
-                  </TextLink>
-                </p>
-                <p className="text-[0.96rem] leading-8 text-muted-foreground">
-                  {latestPost.summary}
-                </p>
-              </article>
-            ) : (
-              <p className="text-[0.96rem] leading-8 text-muted-foreground">
-                No writing published yet.
-              </p>
-            )}
-            <NavLink href="/writing">View all writings</NavLink>
-          </div>
-        </HomeSection>
+          <HomeSection
+            header={
+              <HomepageSceneReveal
+                delayMs={homepageSceneDelay.writingHeader}
+                kind="header"
+              >
+                <SectionHeader
+                  actionHref="/writing"
+                  actionIntent={{
+                    key: navigationIntentKeys.writingArchiveBackHref,
+                    type: "set",
+                    value: "/",
+                  }}
+                  actionLabel="View All"
+                  title="Writing"
+                />
+              </HomepageSceneReveal>
+            }
+            id="writing"
+            rhythm="list"
+          >
+            <WritingList
+              posts={writing}
+              sceneDelayMs={homepageSceneDelay.writingRows}
+              source="home"
+            />
+          </HomeSection>
 
-        <section id="contact" className="scroll-mt-24 space-y-6 pt-4">
-          {emailLink ? <ContactCopy email={emailLink.href.slice(7)} /> : null}
-        </section>
-      </div>
-
-      <footer className="mt-auto pt-16 text-sm text-muted-foreground">
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          {socialLinks.map((link) => (
-            <TextLink key={link.label} href={link.href} hideIcon>
-              {link.label === "Email" ? "Email me" : link.label}
-            </TextLink>
-          ))}
-        </div>
-      </footer>
-    </main>
+          <ContactSection
+            email={identity.email}
+            sceneDelays={{
+              label: homepageSceneDelay.contactLabel,
+              surface: homepageSceneDelay.contactSurface,
+            }}
+          />
+        </PageContent>
+        <HomepageDock />
+        <HomepageFooter
+          revealDelays={{
+            signature: homepageSceneDelay.footerSignature,
+            socials: homepageSceneDelay.footerSocials,
+          }}
+          socialLinks={socialLinks}
+        />
+    </PageShell>
   )
 }

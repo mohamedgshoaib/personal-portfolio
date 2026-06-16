@@ -1,33 +1,52 @@
-import { DisclosureList } from "@/components/home/disclosure-list"
-import { JsonLd } from "@/components/seo/json-ld"
+import type { Metadata } from "next"
+import { Suspense } from "react"
+
+import { HomepageDock } from "@/components/dock/homepage-dock"
+import { HomepageFooter } from "@/components/homepage/homepage-footer"
 import {
-  clientProjects,
-  personalProjects,
-  projects,
-} from "@/lib/content/site-content"
-import { createProjectsPageSchema } from "@/lib/metadata/schema"
-import { createPageMetadata } from "@/lib/metadata/site-metadata"
+  HomeSection,
+  PageContent,
+  PageShell,
+} from "@/components/homepage/homepage-layout"
+import { ProjectList } from "@/components/editorial-entity/project-list"
+import { StoredBackLink } from "@/components/navigation/stored-back-link"
+import { StructuredData } from "@/components/metadata/structured-data"
+import { textStyles } from "@/lib/design/text-styles"
+import {
+  getDiscoveryRouteByHref,
+  homepageContent,
+} from "@/lib/content/content-discovery"
+import { projects } from "@/lib/content/projects"
+import { getRouteMetadata } from "@/lib/metadata/site-metadata"
+import { createCollectionPageJsonLd } from "@/lib/metadata/structured-data"
+import { navigationIntentKeys } from "@/lib/navigation/navigation-intent"
 
-export const metadata = createPageMetadata({
-  title: "Projects",
-  description:
-    "Selected frontend work across product sites, internal systems, and interfaces shaped by structure, design quality, and implementation discipline.",
-  path: "/projects",
-})
+export const metadata: Metadata = getRouteMetadata("/projects")
 
-export default function ProjectsPage() {
+export default function ProjectsPage(): React.ReactElement {
+  const { socialLinks } = homepageContent
+  const route = getDiscoveryRouteByHref("/projects")
+
   return (
-    <main className="mx-auto flex min-h-svh w-full max-w-[42rem] flex-col px-6 pt-10 pb-16 sm:px-8 sm:pt-14">
-      <JsonLd data={createProjectsPageSchema(projects)} />
-      <div className="space-y-12 sm:space-y-16">
-        <header className="space-y-5">
-          <p className="text-section-label">Projects</p>
-          <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
-            <p>
+    <PageShell>
+      {route ? (
+        <StructuredData data={createCollectionPageJsonLd(route)} />
+      ) : null}
+      <PageContent>
+        <header className="space-y-3 pt-4 sm:pt-8">
+          <Suspense fallback={null}>
+            <StoredBackLink
+              intentKey={navigationIntentKeys.projectsArchiveBackHref}
+              showWithoutStoredHref={false}
+            />
+          </Suspense>
+          <h1 className={textStyles.archiveTitle}>Projects</h1>
+          <div className="space-y-3">
+            <p className={textStyles.pageDescription}>
               A selection of frontend work across client products and personal
               systems.
             </p>
-            <p>
+            <p className={textStyles.pageDescription}>
               The common thread is care: clear planning, strong visual
               hierarchy, and implementation that stays stable as the product
               grows.
@@ -35,18 +54,12 @@ export default function ProjectsPage() {
           </div>
         </header>
 
-        <section className="space-y-10">
-          <div className="space-y-5">
-            <p className="text-section-label">Personal</p>
-            <DisclosureList type="projects" items={personalProjects} />
-          </div>
-
-          <div className="space-y-5">
-            <p className="text-section-label">Client work</p>
-            <DisclosureList type="projects" items={clientProjects} />
-          </div>
-        </section>
-      </div>
-    </main>
+        <HomeSection rhythm="list">
+          <ProjectList projects={projects} />
+        </HomeSection>
+      </PageContent>
+      <HomepageDock />
+      <HomepageFooter socialLinks={socialLinks} />
+    </PageShell>
   )
 }

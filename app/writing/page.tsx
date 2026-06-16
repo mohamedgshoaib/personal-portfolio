@@ -1,52 +1,66 @@
-import { TextLink } from "@/components/home/text-link"
-import { JsonLd } from "@/components/seo/json-ld"
-import { posts } from "@/lib/content/writing"
-import { createWritingPageSchema } from "@/lib/metadata/schema"
-import { createPageMetadata } from "@/lib/metadata/site-metadata"
+import type { Metadata } from "next"
+import { Suspense } from "react"
 
-export const metadata = createPageMetadata({
-  title: "Writing",
-  description:
-    "Writing on frontend engineering, interface decisions, modern web architecture, and the details that make products hold together.",
-  path: "/writing",
-})
+import { HomepageDock } from "@/components/dock/homepage-dock"
+import { HomepageFooter } from "@/components/homepage/homepage-footer"
+import {
+  HomeSection,
+  PageContent,
+  PageShell,
+} from "@/components/homepage/homepage-layout"
+import { StoredBackLink } from "@/components/navigation/stored-back-link"
+import { StructuredData } from "@/components/metadata/structured-data"
+import { textStyles } from "@/lib/design/text-styles"
+import { WritingList } from "@/components/editorial-entity/writing-list"
+import { getWritingSummaries } from "@/lib/content/writing-pages"
+import {
+  getDiscoveryRouteByHref,
+  homepageContent,
+} from "@/lib/content/content-discovery"
+import { getRouteMetadata } from "@/lib/metadata/site-metadata"
+import { createCollectionPageJsonLd } from "@/lib/metadata/structured-data"
+import { navigationIntentKeys } from "@/lib/navigation/navigation-intent"
 
-export default function WritingPage() {
+export const metadata: Metadata = getRouteMetadata("/writing")
+
+export default function WritingPage(): React.ReactElement {
+  const { socialLinks } = homepageContent
+  const writing = getWritingSummaries()
+  const route = getDiscoveryRouteByHref("/writing")
+
   return (
-    <main className="mx-auto flex min-h-svh w-full max-w-[42rem] flex-col px-6 pt-10 pb-16 sm:px-8 sm:pt-14">
-      <JsonLd data={createWritingPageSchema(posts)} />
-      <div className="space-y-12 sm:space-y-16">
-        <header className="space-y-5">
-          <p className="text-section-label">Writing</p>
-          <div className="max-w-[33rem] space-y-4 text-[0.96rem] leading-8 text-muted-foreground">
-            <p>
+    <PageShell>
+      {route ? (
+        <StructuredData data={createCollectionPageJsonLd(route)} />
+      ) : null}
+      <PageContent>
+        <header className="space-y-3 pt-4 sm:pt-8">
+          <Suspense fallback={null}>
+            <StoredBackLink
+              intentKey={navigationIntentKeys.writingArchiveBackHref}
+              showWithoutStoredHref={false}
+            />
+          </Suspense>
+          <h1 className={textStyles.archiveTitle}>Writing</h1>
+          <div className="space-y-3">
+            <p className={textStyles.pageDescription}>
               Notes on frontend engineering, interface design, architecture,
               performance, and the decisions that usually sit behind the final
               surface.
             </p>
-            <p>
+            <p className={textStyles.pageDescription}>
               A place to make the thinking visible: what worked, what changed,
               and what was worth doing carefully.
             </p>
           </div>
         </header>
 
-        <section className="space-y-6">
-          {posts.map((post) => (
-            <article key={post.slug} className="max-w-[33rem] space-y-1.5">
-              <p className="text-sm text-muted-foreground">
-                {post.publishedLabel}
-              </p>
-              <h2 className="text-[0.96rem] leading-8">
-                <TextLink href={`/writing/${post.slug}`}>{post.title}</TextLink>
-              </h2>
-              <p className="text-[0.96rem] leading-8 text-muted-foreground">
-                {post.summary}
-              </p>
-            </article>
-          ))}
-        </section>
-      </div>
-    </main>
+        <HomeSection rhythm="list">
+          <WritingList posts={writing} />
+        </HomeSection>
+      </PageContent>
+      <HomepageDock />
+      <HomepageFooter socialLinks={socialLinks} />
+    </PageShell>
   )
 }

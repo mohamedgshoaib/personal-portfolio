@@ -1,14 +1,14 @@
 import type { MetadataRoute } from "next"
 
-import { createAbsoluteUrl, siteUrl } from "@/lib/metadata/site-metadata"
+import { getCanonicalUrl } from "@/lib/metadata/url"
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/api/", "/_next/"],
     },
-    sitemap: createAbsoluteUrl("/sitemap.xml").toString(),
-    host: siteUrl.origin,
+    sitemap: getCanonicalUrl("/sitemap.xml"),
   }
 }

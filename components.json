@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "base-nova",
+  "style": "new-york",
   "rsc": true,
   "tsx": true,
   "tailwind": {
@@ -10,10 +10,8 @@
     "cssVariables": true,
     "prefix": ""
   },
-  "iconLibrary": "hugeicons",
+  "iconLibrary": "tabler",
   "rtl": false,
-  "menuColor": "default",
-  "menuAccent": "subtle",
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",
@@ -22,6 +20,6 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@soundcn": "https://soundcn.xyz/r/{name}.json"
+    "@coss": "https://coss.com/ui/r/{name}.json"
   }
 }

@@ -1,0 +1,41 @@
+---
+title: Forge
+slug: forge
+description: >-
+  A CLI tool for generating production-ready React starters with TypeScript,
+  Tailwind, i18n, theming, sound hooks, and code-quality tooling pre-configured.
+summary: React starter CLI
+liveHref: "https://use-forge.vercel.app/"
+sourceHref: "https://github.com/mohamed-g-shoaib/forge"
+order: 6
+featured: true
+status: published
+stack:
+  - TypeScript
+  - Node.js
+  - React
+  - Next.js
+  - shadcn/ui
+  - Base UI
+  - next-intl
+  - Biome
+publishedAt: "2026-06-15"
+---
+
+<ProjectMediaPlaceholder />
+
+## Problem
+
+Starting a real React project usually means repeating the same setup work around app shell wiring, theming, internationalization, fallback pages, metadata, and code-quality tooling before product work can begin.
+
+## Solution
+
+Built a CLI that scaffolds minimal starters, then applies framework-aware overlays and feature packs for pieces like theme switching, optional English and Arabic routing, framework-appropriate i18n, starter docs, sound hooks, and lint and format setup.
+
+## Architecture
+
+Forge is a single-package TypeScript CLI built around three layers: scaffold adapters, framework overlays, and feature packs. It generates starters for Next.js, Vite, and TanStack Start, supports Base UI or Radix-based surfaces through shadcn scaffolds, and currently ships with a default preset of Next.js + Base UI + LTR + pnpm + Biome.
+
+## Stack
+
+<ProjectStack />

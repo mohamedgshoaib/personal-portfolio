@@ -1,33 +1,27 @@
 import type { MetadataRoute } from "next"
 
-import { siteDescription, siteName } from "@/lib/metadata/site-metadata"
+import { siteConfig } from "@/lib/metadata/site-config"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: siteName,
-    short_name: "Mohamed",
-    description: siteDescription,
-    start_url: "/",
-    display: "browser",
-    background_color: "#f7f5f1",
-    theme_color: "#f7f5f1",
+    background_color: siteConfig.themeColor,
+    description: siteConfig.description,
+    display: "standalone",
     icons: [
       {
-        src: "/web-app-manifest-192x192.png",
         sizes: "192x192",
+        src: "/web-app-manifest-192x192.png",
         type: "image/png",
       },
       {
-        src: "/web-app-manifest-512x512.png",
         sizes: "512x512",
-        type: "image/png",
-      },
-      {
         src: "/web-app-manifest-512x512.png",
-        sizes: "512x512",
         type: "image/png",
-        purpose: "maskable",
       },
     ],
+    name: siteConfig.name,
+    short_name: siteConfig.shortName,
+    start_url: "/",
+    theme_color: siteConfig.themeColor,
   }
 }

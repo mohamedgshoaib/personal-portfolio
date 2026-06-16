@@ -1,0 +1,40 @@
+---
+title: "Hello World: What This Writing Surface Is For"
+slug: hello-world-what-this-writing-surface-is-for
+description: A short introduction to what this writing surface is for and the kinds of frontend notes that will live here.
+excerpt: A short note on why I write and what kind of work these posts will cover.
+publishedAt: "2026-06-16"
+updatedAt: "2026-06-16"
+category: Note
+status: published
+featured: false
+order: 0
+readingTime: "3 min read"
+---
+
+![Cover image for the Hello World writing post.](/assets/writing/hello.webp)
+
+This writing surface is for things that are easier to understand once they are written down: frontend patterns, interface decisions, architecture trade-offs, and the small implementation details that change how a product feels.
+
+I like writing for three reasons.
+
+1. It makes loose opinions pay rent. A pattern only becomes useful once you can explain where it works, where it breaks, and what it costs.
+2. It leaves a trail. Good decisions are easier to repeat when there is a written record of why they were made.
+3. It turns private debugging into shared context. If a problem took time to understand once, it is usually worth packaging for later.
+
+Most posts here will stay close to real work rather than theory for its own sake. That means React and Next.js patterns that hold up in production, interface craft that improves clarity instead of adding noise, and architecture decisions that make a codebase easier to extend.
+
+When code shows up, the goal is not novelty. The goal is to make the shape of the decision obvious.
+
+```tsx
+type RouteSection = {
+  href: string
+  label: string
+}
+
+export function SectionLink({ href, label }: RouteSection) {
+  return <a href={href}>{label}</a>
+}
+```
+
+This is not meant to be a content treadmill. I would rather publish fewer posts that stay useful than chase volume with things I would not trust six months later.
