@@ -25,11 +25,7 @@ This does not mean every component belongs on the server. It means the default q
 In a Next.js App Router codebase, the natural question is whether the work can happen before the component reaches the browser. That often means less state, less orchestration, and fewer failure modes.
 
 ```tsx
-export default async function UserProfile({
-  id,
-}: {
-  id: string
-}) {
+export default async function UserProfile({ id }: { id: string }) {
   const user = await db.user.findUnique({ where: { id } })
 
   if (!user) {

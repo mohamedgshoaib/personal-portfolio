@@ -31,21 +31,25 @@ Read `spec/sessions/2026-06-15-dock-blur-sound-system.md` for the full completed
 ## Established Principles to Carry Forward
 
 **Animation:**
+
 - Never split animated values between `style` (instant) and `animate` (spring) on the same Framer Motion element — everything that changes goes in `animate`.
 - Spring config throughout: `{ type: "spring", duration: 0.3, bounce: 0 }`.
 - `useMediaQuery("(prefers-reduced-motion: reduce)")` is the only safe SSR pattern for reduced motion. Never use `useReducedMotion()` from `motion/react`.
 
 **Images:**
+
 - All image surfaces: `aspect-[3/2]`, `next/image`, `sizes` matching rendered size.
 - Avatar is the only exception — Base UI `<img>`, uses `fetchPriority="high"`.
 - `priority` on first two project cards (LCP); rest lazy.
 - Per-surface image components (`ProjectMediaFrame`) are the single choke points — update once, all instances inherit.
 
 **Sound:**
+
 - `useSound()` hooks live in client components only. `SoundProvider` wraps the tree in `app/layout.tsx`.
 - Button items handle their own sound via `onClick`. `onItemClick` in `AnimatedIconLinkGroup` fires only for link items — avoids double-sound on theme toggle.
 
 **Content pipeline:**
+
 - New feature → invoke `grill-me` skill first.
 - Project images: `screenshotSrc` in MDX frontmatter, path format `/assets/projects/<slug>/<file>` (no `/public` prefix).
 - Cache-bust changed images with `rm -r .next/cache/images`.
@@ -64,14 +68,14 @@ Read `spec/sessions/2026-06-15-dock-blur-sound-system.md` for the full completed
 
 ## Key Files for Next Session
 
-| Area | File |
-|---|---|
-| Project cards | `components/editorial-entity/project-card.tsx` |
-| Project list | `components/editorial-entity/project-list.tsx` |
-| Project content | `content/projects/*.mdx` |
-| Writing list | `components/editorial-entity/writing-list.tsx` |
-| Image schema | `source.config.ts` |
-| Content types | `lib/content/content-types.ts` |
-| Audio patch | `lib/audio/minimal.ts` |
-| Sound provider | `components/app/sound-provider.tsx` |
-| TOC | `components/article/article-toc.tsx` |
+| Area            | File                                           |
+| --------------- | ---------------------------------------------- |
+| Project cards   | `components/editorial-entity/project-card.tsx` |
+| Project list    | `components/editorial-entity/project-list.tsx` |
+| Project content | `content/projects/*.mdx`                       |
+| Writing list    | `components/editorial-entity/writing-list.tsx` |
+| Image schema    | `source.config.ts`                             |
+| Content types   | `lib/content/content-types.ts`                 |
+| Audio patch     | `lib/audio/minimal.ts`                         |
+| Sound provider  | `components/app/sound-provider.tsx`            |
+| TOC             | `components/article/article-toc.tsx`           |

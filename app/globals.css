@@ -187,8 +187,16 @@
   --secondary: --alpha(var(--color-black) / 4%);
   --secondary-foreground: var(--color-neutral-800);
   --surface-active: color-mix(in oklab, var(--color-black) 6%, transparent);
-  --surface-floating: color-mix(in srgb, var(--background) 90%, var(--color-black));
-  --surface-tooltip: color-mix(in srgb, var(--background) 98%, var(--color-black));
+  --surface-floating: color-mix(
+    in srgb,
+    var(--background) 90%,
+    var(--color-black)
+  );
+  --surface-tooltip: color-mix(
+    in srgb,
+    var(--background) 98%,
+    var(--color-black)
+  );
   --surface-hover: --alpha(var(--color-black) / 4%);
   --shadow-surface-floating:
     0 0 0 1px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
@@ -260,7 +268,11 @@
     var(--background) 90%,
     var(--color-white)
   );
-  --surface-tooltip: color-mix(in srgb, var(--background) 98%, var(--color-white));
+  --surface-tooltip: color-mix(
+    in srgb,
+    var(--background) 98%,
+    var(--color-white)
+  );
   --surface-hover: --alpha(var(--color-white) / 5%);
   --shadow-surface-floating: 0 0 0 1px rgba(255, 255, 255, 0.1);
   --chart-1: var(--color-blue-700);
@@ -358,7 +370,8 @@
 @layer utilities {
   .entity-sibling-dimming.entity-sibling-dimming {
     transition-property: background-color, box-shadow;
-    transition-duration: var(--duration-surface-hover), var(--duration-surface-hover);
+    transition-duration:
+      var(--duration-surface-hover), var(--duration-surface-hover);
     transition-timing-function: var(--ease-interface), var(--ease-interface);
   }
 
@@ -366,16 +379,24 @@
     /* Slow exit — lens relaxing back to neutral */
     .entity-sibling-dimming.entity-sibling-dimming {
       transition-property: background-color, box-shadow, filter, transform;
-      transition-duration: var(--duration-surface-hover), var(--duration-surface-hover), 400ms, 500ms;
-      transition-timing-function: var(--ease-interface), var(--ease-interface), cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1);
+      transition-duration:
+        var(--duration-surface-hover), var(--duration-surface-hover), 400ms,
+        500ms;
+      transition-timing-function:
+        var(--ease-interface), var(--ease-interface),
+        cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* Fast enter — camera snapping to focus */
     .entity-sibling-dimming[data-active="true"][data-checked="false"] {
       filter: blur(6px) brightness(0.82);
       transform: scale(0.975);
-      transition-duration: var(--duration-surface-hover), var(--duration-surface-hover), 220ms, 300ms;
-      transition-timing-function: var(--ease-interface), var(--ease-interface), cubic-bezier(0.23, 1, 0.32, 1), cubic-bezier(0.23, 1, 0.32, 1);
+      transition-duration:
+        var(--duration-surface-hover), var(--duration-surface-hover), 220ms,
+        300ms;
+      transition-timing-function:
+        var(--ease-interface), var(--ease-interface),
+        cubic-bezier(0.23, 1, 0.32, 1), cubic-bezier(0.23, 1, 0.32, 1);
     }
   }
 
