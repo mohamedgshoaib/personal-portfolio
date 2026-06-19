@@ -357,13 +357,21 @@
 
 @layer utilities {
   .entity-sibling-dimming.entity-sibling-dimming {
-    transition-property: background-color, box-shadow, opacity;
-    transition-duration: var(--duration-surface-hover), var(--duration-surface-hover), var(--duration-surface-dim);
-    transition-timing-function: var(--ease-interface), var(--ease-interface), ease-in-out;
+    transition-property: background-color, box-shadow;
+    transition-duration: var(--duration-surface-hover), var(--duration-surface-hover);
+    transition-timing-function: var(--ease-interface), var(--ease-interface);
   }
 
-  .entity-sibling-dimming[data-active="true"][data-checked="false"] {
-    opacity: 0.7;
+  @media (hover: hover) and (pointer: fine) {
+    .entity-sibling-dimming.entity-sibling-dimming {
+      transition-property: background-color, box-shadow, filter;
+      transition-duration: var(--duration-surface-hover), var(--duration-surface-hover), var(--duration-surface-dim);
+      transition-timing-function: var(--ease-interface), var(--ease-interface), ease-in-out;
+    }
+
+    .entity-sibling-dimming[data-active="true"][data-checked="false"] {
+      filter: blur(2px) saturate(0.4);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
