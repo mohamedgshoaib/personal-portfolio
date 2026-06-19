@@ -13,7 +13,10 @@ import {
 import { createPageMarkdown } from "@/lib/content/page-markdown"
 import { homepageContent } from "@/lib/content/content-discovery"
 import { getProjectRouteMetadata } from "@/lib/metadata/site-metadata"
-import { createBreadcrumbJsonLd, createProjectJsonLd } from "@/lib/metadata/structured-data"
+import {
+  createBreadcrumbJsonLd,
+  createProjectJsonLd,
+} from "@/lib/metadata/structured-data"
 
 type ProjectPageProps = {
   params: Promise<{
@@ -53,14 +56,16 @@ export default async function ProjectPage({
 
   return (
     <PageShell>
-      <StructuredData data={[
+      <StructuredData
+        data={[
           createProjectJsonLd(project),
           createBreadcrumbJsonLd([
             { name: "Home", href: "/" },
             { name: "Projects", href: "/projects" },
             { name: project.title, href: `/projects/${project.slug}` },
           ]),
-        ]} />
+        ]}
+      />
       <PageContent>
         <ProjectDetailPage markdown={markdown} project={project} />
       </PageContent>

@@ -132,7 +132,7 @@ export function EmailCopyButton({
             <button
               aria-describedby="email-copy-status"
               aria-label={`Copy email address ${email}`}
-              className="min-w-64 cursor-pointer rounded-md px-5 py-3 text-center text-base font-semibold text-foreground outline-none transition-[color,scale] duration-150 ease-[var(--ease-interface)] active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background motion-reduce:active:scale-100 sm:min-w-72"
+              className="min-w-64 cursor-pointer rounded-md px-5 py-3 text-center text-base font-semibold text-foreground transition-[color,scale] duration-150 ease-[var(--ease-interface)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background active:scale-[0.96] motion-reduce:active:scale-100 sm:min-w-72"
               onBlur={() => setIsHintVisible(false)}
               onClick={copyEmail}
               onFocus={() => {

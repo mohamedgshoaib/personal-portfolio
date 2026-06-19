@@ -17,13 +17,13 @@ function CopyIcon({
   ...p
 }: { copied: boolean } & React.SVGProps<SVGSVGElement>) {
   return (
-    <AnimatePresence initial={false} mode="wait">
+    <AnimatePresence initial={false} mode="popLayout">
       <m.span
         key={copied ? "check" : "copy"}
-        animate={{ filter: "blur(0px)", opacity: 1, scale: 1 }}
+        animate={{ filter: "blur(0px)", opacity: 1, transform: "scale(1)" }}
         className="inline-flex"
-        exit={{ filter: "blur(4px)", opacity: 0, scale: 0.25 }}
-        initial={{ filter: "blur(4px)", opacity: 0, scale: 0.25 }}
+        exit={{ filter: "blur(2px)", opacity: 0, transform: "scale(0.6)" }}
+        initial={{ filter: "blur(2px)", opacity: 0, transform: "scale(0.6)" }}
         transition={iconTransition}
       >
         {copied ? (
@@ -62,7 +62,7 @@ export function ArticleCodeBlock({
       <pre
         ref={preRef}
         className={cn(
-          "overflow-x-auto rounded-lg bg-code p-4 font-mono text-sm leading-6 text-code-foreground",
+          "text-code-foreground overflow-x-auto rounded-lg bg-code p-4 font-mono text-sm leading-6",
           className
         )}
         {...props}
@@ -71,7 +71,7 @@ export function ArticleCodeBlock({
       </pre>
       <button
         aria-label={copied ? "Copied" : "Copy code"}
-        className="absolute right-1.5 top-1.5 cursor-pointer rounded-md p-1 text-code-foreground/40 transition-colors duration-150 hover:text-code-foreground"
+        className="text-code-foreground/40 hover:text-code-foreground absolute top-1.5 right-1.5 cursor-pointer rounded-md p-1 transition-colors duration-150"
         onClick={handleCopy}
         type="button"
       >

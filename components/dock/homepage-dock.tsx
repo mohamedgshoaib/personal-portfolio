@@ -29,6 +29,15 @@ const navigationItems = [
 const dockPillClassName =
   "pointer-events-auto rounded-2xl bg-surface-floating p-1 shadow-[var(--shadow-surface-floating)]"
 
+// Static — hoisted so tooltip payload reference never changes between renders,
+// preventing spurious store.set('payload') calls on every HomepageDock re-render.
+const themeTooltip = (
+  <span className="flex items-center gap-2">
+    <span>Toggle theme</span>
+    <Kbd>D</Kbd>
+  </span>
+)
+
 export function HomepageDock({
   revealDelayMs = 0,
 }: {
@@ -39,27 +48,30 @@ export function HomepageDock({
   const playToggleOn = useSound(toggleOn)
   const playToggleOff = useSound(toggleOff)
 
-  const themeItem: IconLinkButtonItem = {
-    icon: IconSquareRoundedFilled,
-    id: "theme-toggle",
-    kind: "button",
-    label: "Toggle theme",
-    onClick: () => {
-      if (resolvedTheme === "dark") {
-        playToggleOn()
-        setTheme("light")
-      } else {
-        playToggleOff()
-        setTheme("dark")
-      }
-    },
-    tooltip: (
-      <span className="flex items-center gap-2">
-        <span>Toggle theme</span>
-        <Kbd>D</Kbd>
-      </span>
-    ),
-  }
+  // Ref so the click handler always reads the current theme without being listed
+  // as a useMemo dependency — keeps themeItem stable across theme-change re-renders.
+  const resolvedThemeRef = React.useRef(resolvedTheme)
+  resolvedThemeRef.current = resolvedTheme
+
+  const themeItem = React.useMemo<IconLinkButtonItem>(
+    () => ({
+      icon: IconSquareRoundedFilled,
+      id: "theme-toggle",
+      kind: "button",
+      label: "Toggle theme",
+      onClick: () => {
+        if (resolvedThemeRef.current === "dark") {
+          playToggleOn()
+          setTheme("light")
+        } else {
+          playToggleOff()
+          setTheme("dark")
+        }
+      },
+      tooltip: themeTooltip,
+    }),
+    [setTheme, playToggleOn, playToggleOff]
+  )
 
   const pill = (
     <ActionLinkSet
@@ -82,7 +94,7 @@ export function HomepageDock({
       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 bottom-0 z-[39] h-24 hidden [@media(pointer:fine)]:block"
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-[39] hidden h-24 [@media(pointer:fine)]:block"
       >
         <div className="absolute inset-0 backdrop-blur-[0.5px] [mask:linear-gradient(to_bottom,transparent_0%,black_12.5%,black_25%,transparent_37.5%)]" />
         <div className="absolute inset-0 backdrop-blur-[1px] [mask:linear-gradient(to_bottom,transparent_12.5%,black_25%,black_37.5%,transparent_50%)]" />
@@ -107,7 +119,11 @@ export function HomepageDock({
         className="pointer-events-none fixed inset-x-0 bottom-8 z-40 flex justify-center px-6"
       >
         {revealDelayMs > 0 ? (
-          <HomepageSceneReveal delayMs={revealDelayMs} kind="utility" mode="timed">
+          <HomepageSceneReveal
+            delayMs={revealDelayMs}
+            kind="utility"
+            mode="timed"
+          >
             {pill}
           </HomepageSceneReveal>
         ) : (

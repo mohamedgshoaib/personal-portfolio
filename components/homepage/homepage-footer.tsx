@@ -19,16 +19,10 @@ export function HomepageFooter({
 }): React.ReactElement {
   return (
     <footer className="mt-20 flex flex-row items-center justify-between gap-4 pb-16 text-sm text-muted-foreground">
-      <HomepageSceneReveal
-        delayMs={revealDelays?.signature ?? 0}
-        kind="body"
-      >
+      <HomepageSceneReveal delayMs={revealDelays?.signature ?? 0} kind="body">
         <SignatureMark />
       </HomepageSceneReveal>
-      <HomepageSceneReveal
-        delayMs={revealDelays?.socials ?? 0}
-        kind="utility"
-      >
+      <HomepageSceneReveal delayMs={revealDelays?.socials ?? 0} kind="utility">
         <SocialLinks className="text-muted-foreground" links={socialLinks} />
       </HomepageSceneReveal>
     </footer>

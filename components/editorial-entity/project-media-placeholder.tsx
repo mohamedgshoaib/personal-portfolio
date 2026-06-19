@@ -23,10 +23,7 @@ export function ProjectMediaPlaceholder({
         className={cn(
           "relative aspect-[3/2] overflow-hidden rounded-lg shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]",
           !src &&
-            cn(
-              "grid place-items-center bg-muted",
-              textStyles.smallDescription
-            )
+            cn("grid place-items-center bg-muted", textStyles.smallDescription)
         )}
       >
         {src ? (
@@ -43,7 +40,9 @@ export function ProjectMediaPlaceholder({
         )}
       </div>
       {caption ? (
-        <figcaption className={textStyles.smallDescription}>{caption}</figcaption>
+        <figcaption className={textStyles.smallDescription}>
+          {caption}
+        </figcaption>
       ) : null}
     </figure>
   )

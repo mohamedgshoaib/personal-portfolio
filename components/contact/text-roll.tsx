@@ -19,30 +19,30 @@ type TextRollProps = {
 }
 
 const forwardEnter = {
-  initial: { opacity: 0, y: 27 },
-  animate: { opacity: 1, y: 0 },
+  initial: { opacity: 0, transform: "translateY(27px)" },
+  animate: { opacity: 1, transform: "translateY(0px)" },
 } as const
 
 const forwardExit = {
-  initial: { opacity: 1, y: 0 },
-  animate: { opacity: 0, y: -8 },
+  initial: { opacity: 1, transform: "translateY(0px)" },
+  animate: { opacity: 0, transform: "translateY(-8px)" },
 } as const
 
 const backwardEnter = {
-  initial: { opacity: 0, y: -27 },
-  animate: { opacity: 1, y: 0 },
+  initial: { opacity: 0, transform: "translateY(-27px)" },
+  animate: { opacity: 1, transform: "translateY(0px)" },
 } as const
 
 const backwardExit = {
-  initial: { opacity: 1, y: 0 },
-  animate: { opacity: 0, y: 8 },
+  initial: { opacity: 1, transform: "translateY(0px)" },
+  animate: { opacity: 0, transform: "translateY(8px)" },
 } as const
 
 export function TextRoll({
   className,
   direction = "forward",
   duration = 0.18,
-  getEnterDelay = (index) => index * 0.024,
+  getEnterDelay = (index) => index * 0.03,
   getExitDelay = (index) => index * 0.002,
   reserveText,
   text,
@@ -90,47 +90,17 @@ export function TextRoll({
 
   return (
     <span className={cn("relative inline-grid whitespace-pre", className)}>
-        <span aria-hidden="true" className="invisible">
-          {resolvedReserveText}
-        </span>
-        <span className="absolute inset-0 overflow-hidden" key={currentText}>
-          {hasTextChanged && (
-            <span
-              aria-hidden="true"
-              className="absolute inset-0 whitespace-pre"
-              key={`exit-${previousText}`}
-            >
-              {previousLetters.map((letter, index) => {
-                const character = letter === " " ? "\u00A0" : letter
-
-                return (
-                  <span
-                    className="relative inline-block overflow-hidden"
-                    key={`${letter}-${index}`}
-                  >
-                    <m.span
-                      animate={exitVariant.animate}
-                      className="inline-block"
-                      initial={exitVariant.initial}
-                      transition={{
-                        duration: 0.08,
-                        ease: [0.7, 0, 0.84, 0],
-                        delay: getExitDelay(index),
-                      }}
-                    >
-                      {character}
-                    </m.span>
-                  </span>
-                )
-              })}
-            </span>
-          )}
+      <span aria-hidden="true" className="invisible">
+        {resolvedReserveText}
+      </span>
+      <span className="absolute inset-0 overflow-hidden" key={currentText}>
+        {hasTextChanged && (
           <span
             aria-hidden="true"
             className="absolute inset-0 whitespace-pre"
-            key={`enter-${currentText}`}
+            key={`exit-${previousText}`}
           >
-            {letters.map((letter, index) => {
+            {previousLetters.map((letter, index) => {
               const character = letter === " " ? "\u00A0" : letter
 
               return (
@@ -139,13 +109,13 @@ export function TextRoll({
                   key={`${letter}-${index}`}
                 >
                   <m.span
-                    animate={hasTextChanged ? enterVariant.animate : { opacity: 1, y: 0 }}
-                    className="inline-block will-change-transform"
-                    initial={hasTextChanged ? enterVariant.initial : { opacity: 1, y: 0 }}
+                    animate={exitVariant.animate}
+                    className="inline-block"
+                    initial={exitVariant.initial}
                     transition={{
-                      ...transition,
-                      duration,
-                      delay: enterStartDelay + getEnterDelay(index),
+                      duration: 0.08,
+                      ease: [0.18, 1, 0.32, 1],
+                      delay: getExitDelay(index),
                     }}
                   >
                     {character}
@@ -154,8 +124,46 @@ export function TextRoll({
               )
             })}
           </span>
+        )}
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 whitespace-pre"
+          key={`enter-${currentText}`}
+        >
+          {letters.map((letter, index) => {
+            const character = letter === " " ? "\u00A0" : letter
+
+            return (
+              <span
+                className="relative inline-block overflow-hidden"
+                key={`${letter}-${index}`}
+              >
+                <m.span
+                  animate={
+                    hasTextChanged
+                      ? enterVariant.animate
+                      : { opacity: 1, transform: "translateY(0px)" }
+                  }
+                  className="inline-block will-change-transform"
+                  initial={
+                    hasTextChanged
+                      ? enterVariant.initial
+                      : { opacity: 1, transform: "translateY(0px)" }
+                  }
+                  transition={{
+                    ...transition,
+                    duration,
+                    delay: enterStartDelay + getEnterDelay(index),
+                  }}
+                >
+                  {character}
+                </m.span>
+              </span>
+            )
+          })}
         </span>
-        <span className="sr-only">{currentText}</span>
+      </span>
+      <span className="sr-only">{currentText}</span>
     </span>
   )
 }

@@ -43,10 +43,7 @@ export function NavigationIntentLink({
 
   return (
     <Link
-      className={cn(
-        textStyles.inlineMutedLink,
-        className
-      )}
+      className={cn(textStyles.inlineMutedLink, className)}
       onClick={(event) => {
         playClick()
         applyNavigationIntents(intent)

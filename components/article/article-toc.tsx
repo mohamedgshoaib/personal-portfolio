@@ -126,41 +126,44 @@ function ArticleTocItems({
       className="relative space-y-0.5 before:absolute before:top-1 before:bottom-1 before:left-[0.21875rem] before:w-px before:bg-muted-foreground/15"
       ref={listRef}
     >
-        <m.span
-          aria-hidden="true"
-          animate={{ y: railStyle.top, height: railStyle.height }}
-          className="absolute left-[0.1875rem] w-0.5 rounded-full bg-foreground"
-          initial={false}
-          style={{ top: 0 }}
-          transition={{
-            type: "spring",
-            duration: 0.3,
-            bounce: 0,
-          }}
-        />
-        {toc.map((item, index) => {
-          const active = activeIndexSet.has(index)
+      <m.span
+        aria-hidden="true"
+        animate={{
+          opacity: railStyle.height > 0 ? 1 : 0,
+          transform: `translateY(${railStyle.top}px) scaleY(${Math.max(railStyle.height, 0)})`,
+        }}
+        className="absolute left-[0.1875rem] w-0.5 origin-top rounded-full bg-foreground"
+        initial={false}
+        style={{ height: 1, top: 0 }}
+        transition={{
+          type: "spring",
+          duration: 0.3,
+          bounce: 0,
+        }}
+      />
+      {toc.map((item, index) => {
+        const active = activeIndexSet.has(index)
 
-          return (
-            <li
-              key={item.url}
-              ref={(node) => {
-                itemRefs.current[index] = node
+        return (
+          <li
+            key={item.url}
+            ref={(node) => {
+              itemRefs.current[index] = node
+            }}
+          >
+            <TOCItem
+              className={cn(textStyles.tocItem, active && "text-foreground")}
+              href={item.url}
+              style={{
+                paddingLeft: `${Math.max(item.depth - 2, 0) * 0.75}rem`,
               }}
             >
-              <TOCItem
-                className={cn(textStyles.tocItem, active && "text-foreground")}
-                href={item.url}
-                style={{
-                  paddingLeft: `${Math.max(item.depth - 2, 0) * 0.75}rem`,
-                }}
-              >
-                <span aria-hidden="true" />
-                <span className="self-center truncate">{item.title}</span>
-              </TOCItem>
-            </li>
-          )
-        })}
+              <span aria-hidden="true" />
+              <span className="self-center truncate">{item.title}</span>
+            </TOCItem>
+          </li>
+        )
+      })}
     </ol>
   )
 }

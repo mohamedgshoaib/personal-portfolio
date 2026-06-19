@@ -1,17 +1,17 @@
-'use client';
+"use client"
 
-import * as React from 'react';
-import { Select } from '@base-ui/react/select';
-import './base-ui-patterns.css';
+import * as React from "react"
+import { Select } from "@base-ui/react/select"
+import "./base-ui-patterns.css"
 
 const options = [
-  { value: 'newest', label: 'Newest first' },
-  { value: 'oldest', label: 'Oldest first' },
-  { value: 'name', label: 'Name' },
-];
+  { value: "newest", label: "Newest first" },
+  { value: "oldest", label: "Oldest first" },
+  { value: "name", label: "Name" },
+]
 
 export function SelectExample() {
-  const [value, setValue] = React.useState('newest');
+  const [value, setValue] = React.useState("newest")
 
   return (
     <Select.Root value={value} onValueChange={setValue}>
@@ -22,7 +22,11 @@ export function SelectExample() {
         <Select.Positioner sideOffset={8}>
           <Select.Popup className="popup">
             {options.map((option) => (
-              <Select.Item key={option.value} value={option.value} className="item">
+              <Select.Item
+                key={option.value}
+                value={option.value}
+                className="item"
+              >
                 <Select.ItemText>{option.label}</Select.ItemText>
               </Select.Item>
             ))}
@@ -30,5 +34,5 @@ export function SelectExample() {
         </Select.Positioner>
       </Select.Portal>
     </Select.Root>
-  );
+  )
 }

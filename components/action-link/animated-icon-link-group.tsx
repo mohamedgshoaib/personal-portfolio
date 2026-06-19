@@ -6,7 +6,10 @@ import { usePathname } from "next/navigation"
 import type * as React from "react"
 
 import { AnimatedBackground } from "@/components/editorial-entity/animated-background"
-import { buttonSize, iconSizeClass } from "@/components/action-link/icon-link-config"
+import {
+  buttonSize,
+  iconSizeClass,
+} from "@/components/action-link/icon-link-config"
 import {
   type IconLinkButtonItem,
   type IconLinkHrefItem,
@@ -28,7 +31,9 @@ import {
 import { cn } from "@/lib/utils"
 
 function isPathActive(href: string, pathname: string): boolean {
-  return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/")
+  return href === "/"
+    ? pathname === "/"
+    : pathname === href || pathname.startsWith(href + "/")
 }
 
 function getSharedClassName({
@@ -93,7 +98,9 @@ export function AnimatedIconLinkGroup({
   const [pendingActiveId, setPendingActiveId] = useState<string | null>(null)
   // Derive during render: pending is effective until activeItemId catches up.
   const effectiveDefaultValue =
-    pendingActiveId && pendingActiveId !== activeItemId ? pendingActiveId : activeItemId
+    pendingActiveId && pendingActiveId !== activeItemId
+      ? pendingActiveId
+      : activeItemId
 
   return (
     <IconLinkGroup
@@ -121,7 +128,10 @@ export function AnimatedIconLinkGroup({
 
           const itemClass = cn(
             getSharedClassName({ itemClassName, size }),
-            showActiveRoute && isInternalLink && !isActive && "text-muted-foreground",
+            showActiveRoute &&
+              isInternalLink &&
+              !isActive &&
+              "text-muted-foreground"
           )
 
           return (
@@ -158,7 +168,11 @@ export function AnimatedIconLinkGroup({
                         onItemClick?.()
                         ;(item as IconLinkHrefItem).onClick?.(e)
                       }}
-                      rel={(item as IconLinkHrefItem).target === "_blank" ? "noopener noreferrer" : undefined}
+                      rel={
+                        (item as IconLinkHrefItem).target === "_blank"
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
                       target={(item as IconLinkHrefItem).target}
                     >
                       <item.icon
@@ -174,7 +188,9 @@ export function AnimatedIconLinkGroup({
         })}
       </AnimatedBackground>
       <Tooltip handle={tooltipHandle}>
-        {({ payload }) => <TooltipPopup sideOffset={tooltipSideOffset}>{payload}</TooltipPopup>}
+        {({ payload }) => (
+          <TooltipPopup sideOffset={tooltipSideOffset}>{payload}</TooltipPopup>
+        )}
       </Tooltip>
     </IconLinkGroup>
   )

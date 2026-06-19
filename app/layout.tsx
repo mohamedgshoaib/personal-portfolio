@@ -60,7 +60,11 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", googleSans.variable, googleSansCode.variable)}
+      className={cn(
+        "antialiased",
+        googleSans.variable,
+        googleSansCode.variable
+      )}
     >
       <body>
         <SoundProvider>

@@ -31,8 +31,7 @@ type EditorialEntityListProps<TItem> = {
   surfaceInteraction?: VariantProps<typeof entitySurfaceVariants>["interaction"]
 }
 
-const siblingDimmingClassName =
-  "entity-sibling-dimming"
+const siblingDimmingClassName = "entity-sibling-dimming"
 
 export function EditorialEntityList<TItem>({
   getSceneDelayMs,
@@ -48,19 +47,23 @@ export function EditorialEntityList<TItem>({
     <AnimatedEntityBackground>
       {items.map((item, index) => {
         const id = getId(item)
-        const element = renderItem(item, {
-          "data-id": id,
-          className: entitySurfaceVariants({
-            className: cn(
-              "cursor-pointer",
-              itemClassName,
-              siblingDimming && siblingDimmingClassName
-            ),
-            inset: surfaceInset,
-            interaction: surfaceInteraction,
-          }),
-          sceneDelayMs: getSceneDelayMs?.(index),
-        }, index)
+        const element = renderItem(
+          item,
+          {
+            "data-id": id,
+            className: entitySurfaceVariants({
+              className: cn(
+                "cursor-pointer",
+                itemClassName,
+                siblingDimming && siblingDimmingClassName
+              ),
+              inset: surfaceInset,
+              interaction: surfaceInteraction,
+            }),
+            sceneDelayMs: getSceneDelayMs?.(index),
+          },
+          index
+        )
 
         return cloneElement(element, { key: id })
       })}

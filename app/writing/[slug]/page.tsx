@@ -13,7 +13,10 @@ import {
   getWritingPages,
 } from "@/lib/content/writing-pages"
 import { getWritingRouteMetadata } from "@/lib/metadata/site-metadata"
-import { createBreadcrumbJsonLd, createWritingJsonLd } from "@/lib/metadata/structured-data"
+import {
+  createBreadcrumbJsonLd,
+  createWritingJsonLd,
+} from "@/lib/metadata/structured-data"
 
 type WritingPageProps = {
   params: Promise<{
@@ -53,14 +56,16 @@ export default async function WritingPage({
 
   return (
     <PageShell>
-      <StructuredData data={[
+      <StructuredData
+        data={[
           createWritingJsonLd(post),
           createBreadcrumbJsonLd([
             { name: "Home", href: "/" },
             { name: "Writing", href: "/writing" },
             { name: post.title, href: `/writing/${post.slug}` },
           ]),
-        ]} />
+        ]}
+      />
       <PageContent>
         <WritingDetailPage markdown={markdown} post={post} />
       </PageContent>

@@ -6,6 +6,7 @@ import {
   IconCheckFilled,
   IconMailFilled,
   type Icon as TablerIcon,
+  type IconProps,
 } from "@tabler/icons-react"
 import { useSound } from "@web-kits/audio/react"
 
@@ -28,16 +29,16 @@ const iconTransition = { bounce: 0, duration: 0.3, type: "spring" } as const
 
 const EmailCopiedContext = createContext(false)
 
-function EmailIcon({ className: cls, ...props }: React.SVGProps<SVGSVGElement>) {
+function EmailIcon({ className: cls, ...props }: IconProps) {
   const emailCopied = use(EmailCopiedContext)
   return (
-    <AnimatePresence initial={false} mode="wait">
+    <AnimatePresence initial={false} mode="popLayout">
       <m.span
         key={emailCopied ? "success" : "idle"}
-        animate={{ filter: "blur(0px)", opacity: 1, scale: 1 }}
+        animate={{ filter: "blur(0px)", opacity: 1, transform: "scale(1)" }}
         className="inline-flex"
-        exit={{ filter: "blur(4px)", opacity: 0, scale: 0.25 }}
-        initial={{ filter: "blur(4px)", opacity: 0, scale: 0.25 }}
+        exit={{ filter: "blur(2px)", opacity: 0, transform: "scale(0.6)" }}
+        initial={{ filter: "blur(2px)", opacity: 0, transform: "scale(0.6)" }}
         transition={iconTransition}
       >
         {emailCopied ? (
@@ -99,13 +100,15 @@ export function ActionLinkSet({
       const email = item.href.replace("mailto:", "")
       const label = emailCopied ? "Email copied" : (item.label ?? "Copy email")
       return {
-        icon: EmailIcon as unknown as TablerIcon,
+        icon: EmailIcon,
         id: "email",
         kind: "button" as const,
         label,
         onClick: () => {
           playCopy()
-          void navigator.clipboard.writeText(email).then(() => setEmailCopied(true))
+          void navigator.clipboard
+            .writeText(email)
+            .then(() => setEmailCopied(true))
         },
         tooltip: label,
       }
@@ -143,7 +146,9 @@ export function ActionLinkSet({
         as={as}
         backgroundClassName={variant === "dock" ? "rounded-xl" : undefined}
         className={className}
-        itemClassName={variant === "dock" ? cn("rounded-xl", itemClassName) : itemClassName}
+        itemClassName={
+          variant === "dock" ? cn("rounded-xl", itemClassName) : itemClassName
+        }
         items={resolvedItems}
         onItemClick={effectiveOnItemClick}
         showActiveRoute={variant === "dock"}

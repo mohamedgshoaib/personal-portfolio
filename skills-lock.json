@@ -25,6 +25,12 @@
       "skillPath": "plugins/developer-kit-typescript/skills/nextjs-performance/SKILL.md",
       "computedHash": "e7aacb7a0f57077fd7494a5c3b633cbc6a351463142acb1101a7f85570e20ace"
     },
+    "performance": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/performance/SKILL.md",
+      "computedHash": "646931a3af896ae12a3cad3d762668cb6487fe3ab179daf8fdc974fb79acfe49"
+    },
     "seo-audit": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",

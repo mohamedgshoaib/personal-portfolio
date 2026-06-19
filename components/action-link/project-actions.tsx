@@ -21,7 +21,13 @@ export function ProjectActions({
           labelContext: projectName,
         },
         ...(sourceHref
-          ? [{ href: sourceHref, kind: "projectSource" as const, labelContext: projectName }]
+          ? [
+              {
+                href: sourceHref,
+                kind: "projectSource" as const,
+                labelContext: projectName,
+              },
+            ]
           : []),
       ]}
       variant="projectActions"

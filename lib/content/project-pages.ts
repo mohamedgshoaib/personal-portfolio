@@ -18,7 +18,7 @@ export function getProjectPages(): readonly ProjectMdxDocument[] {
 }
 
 export function getProjectPageBySlug(
-  slug: string,
+  slug: string
 ): ProjectMdxDocument | undefined {
   return projectPagesBySlug.get(slug)
 }

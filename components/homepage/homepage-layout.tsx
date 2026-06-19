@@ -91,10 +91,7 @@ export function SectionHeader({
             {actionLabel}
           </NavigationIntentLink>
         ) : (
-          <Link
-            className={textStyles.inlineMutedLink}
-            href={actionHref}
-          >
+          <Link className={textStyles.inlineMutedLink} href={actionHref}>
             {actionLabel}
           </Link>
         )

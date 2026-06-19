@@ -51,151 +51,155 @@ export default function Page(): React.ReactElement {
     <PageShell>
       <StructuredData data={[createPersonJsonLd(), createWebsiteJsonLd()]} />
       <PageContent>
-          <HomepageSceneReveal delayMs={homepageSceneDelay.hero} kind="body">
-            <header className="flex items-center gap-5 pt-4 sm:pt-8">
-              <Avatar className="size-14 rounded-lg sm:size-16">
-                <AvatarImage
-                  alt="Mohamed Gamal"
-                  className="object-contain"
-                  fetchPriority="high"
-                  sizes="64px"
-                  src="/assets/avatar/avatar.webp"
-                  width={64}
-                  height={64}
-                />
-              </Avatar>
-              <hgroup className="min-w-0">
-                <h1 className={textStyles.pageTitle}>{identity.name}</h1>
-                <p className={`mt-1 ${textStyles.entityDescription}`}>
-                  {identity.title}
+        <HomepageSceneReveal delayMs={homepageSceneDelay.hero} kind="body">
+          <header className="flex items-center gap-5 pt-4 sm:pt-8">
+            <Avatar className="size-14 rounded-lg sm:size-16">
+              <AvatarImage
+                alt="Mohamed Gamal"
+                className="object-contain"
+                fetchPriority="high"
+                sizes="64px"
+                src="/assets/avatar/avatar.webp"
+                width={64}
+                height={64}
+              />
+            </Avatar>
+            <hgroup className="min-w-0">
+              <h1 className={textStyles.pageTitle}>{identity.name}</h1>
+              <p className={`mt-1 ${textStyles.entityDescription}`}>
+                {identity.title}
+              </p>
+            </hgroup>
+          </header>
+        </HomepageSceneReveal>
+
+        <HomeSection
+          header={
+            <HomepageSceneReveal
+              delayMs={homepageSceneDelay.aboutHeader}
+              kind="header"
+            >
+              <SectionHeader actionLabel="View All" title="About" />
+            </HomepageSceneReveal>
+          }
+          id="about"
+        >
+          <HomepageSceneReveal
+            delayMs={homepageSceneDelay.aboutParagraph}
+            kind="body"
+          >
+            <div className="space-y-3">
+              {about.split("\n\n").map((para) => (
+                <p className={textStyles.pageDescription} key={para}>
+                  {para}
                 </p>
-              </hgroup>
-            </header>
+              ))}
+            </div>
           </HomepageSceneReveal>
-
-          <HomeSection
-            header={
-              <HomepageSceneReveal
-                delayMs={homepageSceneDelay.aboutHeader}
-                kind="header"
-              >
-                <SectionHeader actionLabel="View All" title="About" />
-              </HomepageSceneReveal>
-            }
-            id="about"
+          <HomepageSceneReveal
+            delayMs={homepageSceneDelay.aboutSocials}
+            kind="utility"
           >
+            <SocialLinks links={socialLinks} />
+          </HomepageSceneReveal>
+        </HomeSection>
+
+        <HomeSection
+          header={
             <HomepageSceneReveal
-              delayMs={homepageSceneDelay.aboutParagraph}
-              kind="body"
+              delayMs={homepageSceneDelay.projectsHeader}
+              kind="header"
             >
-              <div className="space-y-3">
-                {about.split("\n\n").map((para) => (
-                  <p className={textStyles.pageDescription} key={para}>{para}</p>
-                ))}
-              </div>
+              <SectionHeader
+                actionHref="/projects"
+                actionIntent={{
+                  key: navigationIntentKeys.projectsArchiveBackHref,
+                  type: "set",
+                  value: "/",
+                }}
+                actionLabel="View All"
+                title="Projects"
+              />
             </HomepageSceneReveal>
-            <HomepageSceneReveal
-              delayMs={homepageSceneDelay.aboutSocials}
-              kind="utility"
-            >
-              <SocialLinks links={socialLinks} />
-            </HomepageSceneReveal>
-          </HomeSection>
-
-          <HomeSection
-            header={
-              <HomepageSceneReveal
-                delayMs={homepageSceneDelay.projectsHeader}
-                kind="header"
-              >
-                <SectionHeader
-                  actionHref="/projects"
-                  actionIntent={{
-                    key: navigationIntentKeys.projectsArchiveBackHref,
-                    type: "set",
-                    value: "/",
-                  }}
-                  actionLabel="View All"
-                  title="Projects"
-                />
-              </HomepageSceneReveal>
-            }
-            id="projects"
-            rhythm="list"
-          >
-            <ProjectList
-              projects={projects}
-              sceneDelayMs={homepageSceneDelay.projectRows}
-              source="home"
-            />
-          </HomeSection>
-
-          <HomeSection
-            header={
-              <HomepageSceneReveal
-                delayMs={homepageSceneDelay.myApproachHeader}
-                kind="header"
-              >
-                <SectionHeader actionLabel="View All" title="My Approach" />
-              </HomepageSceneReveal>
-            }
-          >
-            <HomepageSceneReveal
-              delayMs={homepageSceneDelay.myApproach}
-              kind="body"
-            >
-              <div className="space-y-3">
-                {approach.split("\n\n").map((para) => (
-                  <p className={textStyles.pageDescription} key={para}>{para}</p>
-                ))}
-              </div>
-            </HomepageSceneReveal>
-          </HomeSection>
-
-          <HomeSection
-            header={
-              <HomepageSceneReveal
-                delayMs={homepageSceneDelay.writingHeader}
-                kind="header"
-              >
-                <SectionHeader
-                  actionHref="/writing"
-                  actionIntent={{
-                    key: navigationIntentKeys.writingArchiveBackHref,
-                    type: "set",
-                    value: "/",
-                  }}
-                  actionLabel="View All"
-                  title="Writing"
-                />
-              </HomepageSceneReveal>
-            }
-            id="writing"
-            rhythm="list"
-          >
-            <WritingList
-              posts={writing}
-              sceneDelayMs={homepageSceneDelay.writingRows}
-              source="home"
-            />
-          </HomeSection>
-
-          <ContactSection
-            email={identity.email}
-            sceneDelays={{
-              label: homepageSceneDelay.contactLabel,
-              surface: homepageSceneDelay.contactSurface,
-            }}
+          }
+          id="projects"
+          rhythm="list"
+        >
+          <ProjectList
+            projects={projects}
+            sceneDelayMs={homepageSceneDelay.projectRows}
+            source="home"
           />
-        </PageContent>
-        <HomepageDock />
-        <HomepageFooter
-          revealDelays={{
-            signature: homepageSceneDelay.footerSignature,
-            socials: homepageSceneDelay.footerSocials,
+        </HomeSection>
+
+        <HomeSection
+          header={
+            <HomepageSceneReveal
+              delayMs={homepageSceneDelay.myApproachHeader}
+              kind="header"
+            >
+              <SectionHeader actionLabel="View All" title="My Approach" />
+            </HomepageSceneReveal>
+          }
+        >
+          <HomepageSceneReveal
+            delayMs={homepageSceneDelay.myApproach}
+            kind="body"
+          >
+            <div className="space-y-3">
+              {approach.split("\n\n").map((para) => (
+                <p className={textStyles.pageDescription} key={para}>
+                  {para}
+                </p>
+              ))}
+            </div>
+          </HomepageSceneReveal>
+        </HomeSection>
+
+        <HomeSection
+          header={
+            <HomepageSceneReveal
+              delayMs={homepageSceneDelay.writingHeader}
+              kind="header"
+            >
+              <SectionHeader
+                actionHref="/writing"
+                actionIntent={{
+                  key: navigationIntentKeys.writingArchiveBackHref,
+                  type: "set",
+                  value: "/",
+                }}
+                actionLabel="View All"
+                title="Writing"
+              />
+            </HomepageSceneReveal>
+          }
+          id="writing"
+          rhythm="list"
+        >
+          <WritingList
+            posts={writing}
+            sceneDelayMs={homepageSceneDelay.writingRows}
+            source="home"
+          />
+        </HomeSection>
+
+        <ContactSection
+          email={identity.email}
+          sceneDelays={{
+            label: homepageSceneDelay.contactLabel,
+            surface: homepageSceneDelay.contactSurface,
           }}
-          socialLinks={socialLinks}
         />
+      </PageContent>
+      <HomepageDock />
+      <HomepageFooter
+        revealDelays={{
+          signature: homepageSceneDelay.footerSignature,
+          socials: homepageSceneDelay.footerSocials,
+        }}
+        socialLinks={socialLinks}
+      />
     </PageShell>
   )
 }

@@ -6,6 +6,7 @@ import {
   IconFileTextFilled,
   IconLinkFilled,
   type Icon as TablerIcon,
+  type IconProps,
 } from "@tabler/icons-react"
 import type * as React from "react"
 
@@ -59,15 +60,15 @@ function makeAnimatedSwapIcon(
   SuccessIcon: TablerIcon,
   isSuccessRef: React.MutableRefObject<boolean>
 ): TablerIcon {
-  function AnimatedSwapIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
+  function AnimatedSwapIcon({ className, ...props }: IconProps) {
     return (
-      <AnimatePresence initial={false} mode="wait">
+      <AnimatePresence initial={false} mode="popLayout">
         <m.span
           key={isSuccessRef.current ? "success" : "idle"}
-          animate={{ filter: "blur(0px)", opacity: 1, scale: 1 }}
+          animate={{ filter: "blur(0px)", opacity: 1, transform: "scale(1)" }}
           className="inline-flex"
-          exit={{ filter: "blur(4px)", opacity: 0, scale: 0.25 }}
-          initial={{ filter: "blur(4px)", opacity: 0, scale: 0.25 }}
+          exit={{ filter: "blur(2px)", opacity: 0, transform: "scale(0.6)" }}
+          initial={{ filter: "blur(2px)", opacity: 0, transform: "scale(0.6)" }}
           transition={iconTransition}
         >
           {isSuccessRef.current ? (
@@ -79,7 +80,7 @@ function makeAnimatedSwapIcon(
       </AnimatePresence>
     )
   }
-  return AnimatedSwapIcon as unknown as TablerIcon
+  return AnimatedSwapIcon
 }
 
 export function PageActions({
@@ -97,19 +98,26 @@ export function PageActions({
   // Updated synchronously during render so stable icon components read the latest value
   const copyUrlSuccessRef = useRef(false)
   const copyMarkdownSuccessRef = useRef(false)
-  copyUrlSuccessRef.current = actionState?.id === "copy-url" && actionState?.state === "success"
+  copyUrlSuccessRef.current =
+    actionState?.id === "copy-url" && actionState?.state === "success"
   copyMarkdownSuccessRef.current =
     actionState?.id === "copy-markdown" && actionState?.state === "success"
 
   // Stable component references — created once, AnimatePresence stays mounted
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const CopyUrlIcon = useMemo(
-    () => makeAnimatedSwapIcon(IconLinkFilled, IconCheckFilled, copyUrlSuccessRef),
+    () =>
+      makeAnimatedSwapIcon(IconLinkFilled, IconCheckFilled, copyUrlSuccessRef),
     []
   )
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const CopyMarkdownIcon = useMemo(
-    () => makeAnimatedSwapIcon(IconFileTextFilled, IconCheckFilled, copyMarkdownSuccessRef),
+    () =>
+      makeAnimatedSwapIcon(
+        IconFileTextFilled,
+        IconCheckFilled,
+        copyMarkdownSuccessRef
+      ),
     []
   )
 

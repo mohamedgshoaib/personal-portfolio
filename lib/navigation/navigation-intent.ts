@@ -19,9 +19,7 @@ export type NavigationIntentAction =
       value: string
     }
 
-export function applyNavigationIntent(
-  action: NavigationIntentAction
-): void {
+export function applyNavigationIntent(action: NavigationIntentAction): void {
   if (typeof window === "undefined") {
     return
   }
@@ -38,9 +36,7 @@ export function applyNavigationIntent(
   }
 }
 
-export function readNavigationIntent(
-  key: NavigationIntentKey
-): string | null {
+export function readNavigationIntent(key: NavigationIntentKey): string | null {
   if (typeof window === "undefined") {
     return null
   }

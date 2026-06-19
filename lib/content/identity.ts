@@ -1,4 +1,7 @@
-import type { ActionLinkRecord, SiteIdentity } from "@/lib/content/content-types"
+import type {
+  ActionLinkRecord,
+  SiteIdentity,
+} from "@/lib/content/content-types"
 
 export const siteIdentity = {
   name: "Mohamed Gamal",

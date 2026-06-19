@@ -88,19 +88,19 @@ export function getWritingDiscoveryRoutes(): readonly DiscoveryRoute[] {
 }
 
 export function getDiscoveryRouteByHref(
-  href: string,
+  href: string
 ): DiscoveryRoute | undefined {
   return discoveryRoutes.find((route) => route.href === href)
 }
 
 export function getProjectDiscoveryRouteBySlug(
-  slug: string,
+  slug: string
 ): DiscoveryRoute | undefined {
   return projectDetailDiscoveryRoutes.find((route) => route.slug === slug)
 }
 
 export function getWritingDiscoveryRouteBySlug(
-  slug: string,
+  slug: string
 ): DiscoveryRoute | undefined {
   return writingDetailDiscoveryRoutes.find((route) => route.slug === slug)
 }

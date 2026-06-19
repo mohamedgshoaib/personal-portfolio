@@ -47,9 +47,12 @@ export function renderLlmsFullTxt(): string {
     `Canonical: ${siteConfig.siteUrl}`,
     `Contact: ${siteIdentity.email}`,
     "",
-    renderRouteSection("Core Routes", getDiscoveryRoutes().filter((route) =>
-      ["home", "projects", "writing"].includes(route.kind)
-    )),
+    renderRouteSection(
+      "Core Routes",
+      getDiscoveryRoutes().filter((route) =>
+        ["home", "projects", "writing"].includes(route.kind)
+      )
+    ),
     "",
     renderRouteSection("Projects", getProjectDiscoveryRoutes()),
     "",

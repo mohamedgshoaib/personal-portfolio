@@ -38,7 +38,9 @@ export function ProjectCard({
     >
       <ProjectMediaFrame name={name} priority={priority} src={screenshotSrc} />
       <div className="mt-3 flex min-w-0 items-center justify-between gap-3">
-        <h3 className={cn(textStyles.entityTitle, "min-w-0 truncate")}>{name}</h3>
+        <h3 className={cn(textStyles.entityTitle, "min-w-0 truncate")}>
+          {name}
+        </h3>
         <div className="pointer-events-auto relative z-10 shrink-0">
           <ProjectActions
             liveHref={liveHref}
@@ -62,9 +64,7 @@ function ProjectMediaFrame({
   src?: string
 }): React.ReactElement {
   return (
-    <div
-      className="relative aspect-[3/2] overflow-hidden rounded-lg"
-    >
+    <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
       {src ? (
         <Image
           alt={`${name} project screenshot`}

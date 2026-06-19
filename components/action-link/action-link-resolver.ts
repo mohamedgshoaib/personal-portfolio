@@ -78,7 +78,9 @@ const actionLinkDefinitions: Record<ActionLinkKind, ActionLinkDefinition> = {
   },
 }
 
-export function resolveActionLinkItem(item: ActionLinkRecord): IconLinkHrefItem {
+export function resolveActionLinkItem(
+  item: ActionLinkRecord
+): IconLinkHrefItem {
   const definition = actionLinkDefinitions[item.kind]
   const label =
     typeof definition.label === "function"

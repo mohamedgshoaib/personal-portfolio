@@ -5,7 +5,9 @@ import type { WritingMdxDocument } from "@/lib/content/writing-pages"
 import { siteConfig } from "@/lib/metadata/site-config"
 import { getCanonicalUrl } from "@/lib/metadata/url"
 
-export type JsonLd = Record<string, unknown>
+type JsonPrimitive = string | number | boolean | null
+type JsonValue = JsonPrimitive | JsonValue[] | { [key: string]: JsonValue }
+export type JsonLd = { [key: string]: JsonValue }
 
 const personId = `${siteConfig.siteUrl}/#person`
 const websiteId = `${siteConfig.siteUrl}/#website`

@@ -42,7 +42,9 @@ function createRouteMetadata(route: RouteMetadataInput): Metadata {
     openGraph: {
       title,
       description: route.description,
-      images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: title }],
+      images: [
+        { url: "/opengraph-image.png", width: 1200, height: 630, alt: title },
+      ],
       locale: siteConfig.locale,
       siteName: siteConfig.name,
       type: getOpenGraphType(route),
@@ -78,7 +80,17 @@ export function getProjectRouteMetadata(slug: string): Metadata {
   const base = createRouteMetadata(route)
   return {
     ...base,
-    openGraph: { ...base.openGraph, images: [{ url: "/projects/opengraph-image.png", width: 1200, height: 630, alt: base.openGraph?.title as string }] },
+    openGraph: {
+      ...base.openGraph,
+      images: [
+        {
+          url: "/projects/opengraph-image.png",
+          width: 1200,
+          height: 630,
+          alt: base.openGraph?.title as string,
+        },
+      ],
+    },
     twitter: { ...base.twitter, images: ["/projects/opengraph-image.png"] },
   }
 }
@@ -93,7 +105,17 @@ export function getWritingRouteMetadata(slug: string): Metadata {
   const base = createRouteMetadata(route)
   return {
     ...base,
-    openGraph: { ...base.openGraph, images: [{ url: "/writing/opengraph-image.png", width: 1200, height: 630, alt: base.openGraph?.title as string }] },
+    openGraph: {
+      ...base.openGraph,
+      images: [
+        {
+          url: "/writing/opengraph-image.png",
+          width: 1200,
+          height: 630,
+          alt: base.openGraph?.title as string,
+        },
+      ],
+    },
     twitter: { ...base.twitter, images: ["/writing/opengraph-image.png"] },
   }
 }

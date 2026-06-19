@@ -371,4 +371,13 @@
       transition: none;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-slot="tooltip-popup"] {
+      transition: opacity 0.1s ease;
+    }
+    [data-slot="tooltip-positioner"] {
+      transition: none;
+    }
+  }
 }

@@ -43,7 +43,13 @@ export function ProjectDetailPage({
               labelContext: project.title,
             },
             ...(project.sourceHref
-              ? [{ href: project.sourceHref, kind: "projectSource" as const, labelContext: project.title }]
+              ? [
+                  {
+                    href: project.sourceHref,
+                    kind: "projectSource" as const,
+                    labelContext: project.title,
+                  },
+                ]
               : []),
           ]}
           markdown={markdown}

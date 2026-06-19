@@ -1,8 +1,8 @@
-'use client';
+"use client"
 
-import * as React from 'react';
-import { Dialog } from '@base-ui/react/dialog';
-import './base-ui-patterns.css';
+import * as React from "react"
+import { Dialog } from "@base-ui/react/dialog"
+import "./base-ui-patterns.css"
 
 export function DialogExample() {
   return (
@@ -17,7 +17,9 @@ export function DialogExample() {
           </Dialog.Description>
 
           <div className="stack">
-            <label className="field-label" htmlFor="display-name">Display name</label>
+            <label className="field-label" htmlFor="display-name">
+              Display name
+            </label>
             <input id="display-name" className="input" defaultValue="Jimmy" />
           </div>
 
@@ -28,5 +30,5 @@ export function DialogExample() {
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>
-  );
+  )
 }

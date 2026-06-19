@@ -1,10 +1,6 @@
 "use client"
 
-import {
-  AnimatePresence,
-  m,
-  type Transition,
-} from "@/lib/motion/primitives"
+import { AnimatePresence, m, type Transition } from "@/lib/motion/primitives"
 import {
   Children,
   cloneElement,
@@ -121,15 +117,30 @@ export function AnimatedBackground({
   const defaultValueRef = useRef(defaultValue)
   defaultValueRef.current = defaultValue
 
+  // Debounce the end of interaction to absorb the brief moment when the cursor
+  // passes through the tooltip portal (which has no [data-id] ancestor) while
+  // moving between adjacent items. Without this, isMovingToSiblingItem() returns
+  // false for the portal case and the background highlight incorrectly resets.
+  const interactionEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  )
+
   const handleInteractionStart = (id: string) => {
     if (blockActivationRef.current) return
+    if (interactionEndTimerRef.current !== null) {
+      clearTimeout(interactionEndTimerRef.current)
+      interactionEndTimerRef.current = null
+    }
     setHoverActiveId(id)
     onValueChange?.(id)
   }
 
   const handleInteractionEnd = () => {
-    setHoverActiveId(null)
-    onValueChange?.(defaultValue ?? null)
+    interactionEndTimerRef.current = setTimeout(() => {
+      interactionEndTimerRef.current = null
+      setHoverActiveId(null)
+      onValueChangeRef.current?.(defaultValueRef.current ?? null)
+    }, 50)
   }
 
   useEffect(() => {
@@ -138,6 +149,10 @@ export function AnimatedBackground({
     function onVisibilityChange() {
       if (document.hidden) {
         if (unblockTimer) clearTimeout(unblockTimer)
+        if (interactionEndTimerRef.current !== null) {
+          clearTimeout(interactionEndTimerRef.current)
+          interactionEndTimerRef.current = null
+        }
         setHoverActiveId(null)
         onValueChangeRef.current?.(defaultValueRef.current ?? null)
       } else {
@@ -152,25 +167,28 @@ export function AnimatedBackground({
     return () => {
       document.removeEventListener("visibilitychange", onVisibilityChange)
       if (unblockTimer) clearTimeout(unblockTimer)
+      if (interactionEndTimerRef.current !== null) {
+        clearTimeout(interactionEndTimerRef.current)
+      }
     }
   }, [])
 
   return (
     <>
       {Children.map(children, (child) => {
-          if (!isValidElement<AnimatedBackgroundChildProps>(child)) {
-            return child
-          }
+        if (!isValidElement<AnimatedBackgroundChildProps>(child)) {
+          return child
+        }
 
-          const id = child.props["data-id"]
-          const isActive = activeId === id
-          const interactionProps = !enableHover
-            ? {
-                onClick: composeEventHandler(child.props.onClick, () =>
-                  handleInteractionStart(id)
-                ),
-              }
-            : canHover
+        const id = child.props["data-id"]
+        const isActive = activeId === id
+        const interactionProps = !enableHover
+          ? {
+              onClick: composeEventHandler(child.props.onClick, () =>
+                handleInteractionStart(id)
+              ),
+            }
+          : canHover
             ? {
                 onBlur: composeEventHandler(child.props.onBlur, (event) => {
                   if (!isMovingToSiblingItem(event)) {
@@ -195,50 +213,47 @@ export function AnimatedBackground({
               }
             : {}
 
-          return cloneElement(
-            child,
-            {
-              className: cn("relative", child.props.className),
-              "data-active": activeId ? "true" : "false",
-              "data-checked": isActive ? "true" : "false",
-              key: id,
-              ...interactionProps,
-            },
-            <>
-              <AnimatePresence custom={activeId !== null} initial={false}>
-                {activeId !== null ? (
-                  <m.div
-                    aria-hidden="true"
-                    animate="animate"
-                    className="pointer-events-none absolute inset-0"
-                    custom={activeId !== null}
-                    exit="exit"
-                    initial={prefersReducedMotion ? false : "initial"}
-                    key="background-presence"
-                    transition={{
-                      duration: prefersReducedMotion ? 0 : 0.18,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    variants={backgroundPresenceVariants}
-                  >
-                    {isActive ? (
-                      <m.div
-                        className={cn(
-                          "pointer-events-none size-full",
-                          className
-                        )}
-                        layoutId={`background-${uniqueId}`}
-                        style={backgroundStyle}
-                        transition={resolvedTransition}
-                      />
-                    ) : null}
-                  </m.div>
-                ) : null}
-              </AnimatePresence>
-              {child.props.children}
-            </>
-          )
-        })}
+        return cloneElement(
+          child,
+          {
+            className: cn("relative", child.props.className),
+            "data-active": activeId ? "true" : "false",
+            "data-checked": isActive ? "true" : "false",
+            key: id,
+            ...interactionProps,
+          },
+          <>
+            <AnimatePresence custom={activeId !== null} initial={false}>
+              {activeId !== null ? (
+                <m.div
+                  aria-hidden="true"
+                  animate="animate"
+                  className="pointer-events-none absolute inset-0"
+                  custom={activeId !== null}
+                  exit="exit"
+                  initial={prefersReducedMotion ? false : "initial"}
+                  key="background-presence"
+                  transition={{
+                    duration: prefersReducedMotion ? 0 : 0.18,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  variants={backgroundPresenceVariants}
+                >
+                  {isActive ? (
+                    <m.div
+                      className={cn("pointer-events-none size-full", className)}
+                      layoutId={`background-${uniqueId}`}
+                      style={backgroundStyle}
+                      transition={resolvedTransition}
+                    />
+                  ) : null}
+                </m.div>
+              ) : null}
+            </AnimatePresence>
+            {child.props.children}
+          </>
+        )
+      })}
     </>
   )
 }

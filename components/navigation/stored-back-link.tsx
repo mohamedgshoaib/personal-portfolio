@@ -48,7 +48,11 @@ export function StoredBackLink({
   }
 
   return (
-    <Link className={textStyles.inlineMutedLink} href={href} onClick={() => playClick()}>
+    <Link
+      className={textStyles.inlineMutedLink}
+      href={href}
+      onClick={() => playClick()}
+    >
       Back
     </Link>
   )

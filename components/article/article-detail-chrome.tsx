@@ -47,7 +47,9 @@ export function ArticleDetailChrome({
           </Suspense>
 
           <div className="space-y-3">
-            {titleMeta ? <p className={textStyles.metadata}>{titleMeta}</p> : null}
+            {titleMeta ? (
+              <p className={textStyles.metadata}>{titleMeta}</p>
+            ) : null}
             <div className="flex items-start justify-between gap-4">
               <h1 className={cn(textStyles.detailTitle, "min-w-0")}>{title}</h1>
               {titleActions ? (
@@ -58,7 +60,9 @@ export function ArticleDetailChrome({
           </div>
         </header>
 
-        <div className={cn(textStyles.articleBody, bodyClassName)}>{children}</div>
+        <div className={cn(textStyles.articleBody, bodyClassName)}>
+          {children}
+        </div>
       </article>
     </>
   )
