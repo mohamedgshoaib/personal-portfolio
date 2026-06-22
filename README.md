@@ -1,6 +1,6 @@
 # Personal Portfolio
 
-![Portfolio banner](./public/portfolio.webp)
+![Portfolio banner](./public/portfolio-cover.webp)
 
 A personal portfolio and writing site for Mohamed Gamal, built as a calm, narrow, editorial surface for identity, selected work, writing, and contact.
 
