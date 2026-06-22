@@ -12,9 +12,9 @@ import {
 
 const homepageCopy = {
   about:
-    "I build frontend systems with React and Next.js, with close attention to structure, interface quality, and execution.\n\nMy work sits at the intersection of engineering and design: strong planning, clean visual decisions, and implementation that stays careful all the way through. I care about products that feel considered, not improvised.\n\nBased in Cairo, Egypt.",
+    "I build frontend systems with React and Next.js, with a focus on structure, interface quality, and careful execution.\n\nI like taking products from raw ideas to polished interfaces, keeping the design process and code quality close together.\n\nBased in Cairo, Egypt.",
   approach:
-    "I work mostly with React and Next.js. I use React with Vite for focused client-side products, and Next.js when the product needs a stronger foundation for routing, content, SEO, or backend work, usually with Supabase and Postgres.\n\nFor UI, I usually reach for shadcn/ui or coss ui. I prefer Base UI when I want control over the primitives, and Radix UI when the ecosystem fit is better.",
+    "I spend most of my time building with React and Next.js. For smaller client-side products, I’ll often use Vite. When a product needs stronger routing, content, SEO, or backend work, I usually reach for Next.js with Supabase and Postgres.\n\nOn the interface side, I work with shadcn/ui, coss UI, Base UI, and Radix. The choice depends on how much control the project needs, and how close I need to stay to the primitives.",
 }
 
 const rootDiscoveryRoutes = [

@@ -44,12 +44,12 @@ export default function ProjectsPage(): React.ReactElement {
           <div className="space-y-3">
             <p className={textStyles.pageDescription}>
               A selection of frontend work across client products and personal
-              systems.
+              projects, documenting my learning journey.
             </p>
             <p className={textStyles.pageDescription}>
-              The common thread is care: clear planning, strong visual
-              hierarchy, and implementation that stays stable as the product
-              grows.
+              Each project has its own shape, but I usually care about the same
+              things: clear planning, strong visual hierarchy, and
+              implementation that can hold up as the product grows.
             </p>
           </div>
         </header>

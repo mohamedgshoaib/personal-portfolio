@@ -45,12 +45,11 @@ export default function WritingPage(): React.ReactElement {
           <div className="space-y-3">
             <p className={textStyles.pageDescription}>
               Notes on frontend engineering, interface design, architecture,
-              performance, and the decisions that usually sit behind the final
-              surface.
+              performance, and the decisions behind the work.
             </p>
             <p className={textStyles.pageDescription}>
-              A place to make the thinking visible: what worked, what changed,
-              and what was worth doing carefully.
+              I use this space to think through what worked, what changed, and
+              what deserved more care.
             </p>
           </div>
         </header>
