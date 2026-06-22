@@ -2,8 +2,8 @@
 title: Markymap
 slug: markymap
 description: >-
-  A Markdown mindmap editor built with React. Local-first, no signup required.
-  Write in Markdown and the mindmap updates live with keyboard shortcuts.
+  Markdown mindmap editor built with React. Local-first, no signup required,
+  with live preview, keyboard shortcuts, and import/export support.
 summary: Markdown mindmap editor
 liveHref: "https://markymap.vercel.app/"
 sourceHref: "https://github.com/mohamed-g-shoaib/markymap"
@@ -28,15 +28,15 @@ publishedAt: "2026-06-15"
 
 ## Problem
 
-Brainstorming and visual note-taking tools often add too much friction: heavy interfaces, signup requirements, and poor Markdown support. Users needed a way to write quickly, see structure instantly, and keep their work without setup overhead.
+Most visual note tools make you manage the tool before you can think. I wanted Markymap to stay closer to writing: type Markdown, see the structure, and keep moving without an account or a heavy setup step.
 
 ## Solution
 
-Built a split-screen editor that renders Markdown into an interactive mindmap in real time, with local auto-save, import and export support, theme toggling, keyboard shortcuts, and expandable branches for navigating larger idea trees.
+I built a split-screen editor that turns Markdown into an interactive mindmap as you type. It includes local auto-save, import/export, theme toggling, keyboard shortcuts, and expandable branches for larger maps.
 
 ## Architecture
 
-Next.js 16 App Router + React 19 + TypeScript + Tailwind CSS 4, using Coss UI on top of Base UI for interface primitives, Markmap for SVG mindmap rendering, the Web Audio API for interaction sound design, and Oxlint/Oxfmt for fast code quality workflows.
+The app uses Next.js 16 App Router, React 19, TypeScript, and Tailwind CSS 4. Coss UI and Base UI handle the interface primitives, Markmap renders the SVG map, the Web Audio API adds small interaction sounds, and Oxlint/Oxfmt keep feedback fast while working.
 
 ## Stack
 

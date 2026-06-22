@@ -2,8 +2,8 @@
 title: Forge
 slug: forge
 description: >-
-  A CLI tool for generating production-ready React starters with TypeScript,
-  Tailwind, i18n, theming, sound hooks, and code-quality tooling pre-configured.
+  CLI tool for generating React starters with TypeScript, Tailwind, i18n,
+  theming, sound hooks, and code-quality tooling already wired.
 summary: React starter CLI
 liveHref: "https://use-forge.vercel.app/"
 sourceHref: "https://github.com/mohamed-g-shoaib/forge"
@@ -26,15 +26,15 @@ publishedAt: "2026-06-15"
 
 ## Problem
 
-Starting a real React project usually means repeating the same setup work around app shell wiring, theming, internationalization, fallback pages, metadata, and code-quality tooling before product work can begin.
+Starting a serious React project often begins with an hour of chores: routing, theming, i18n, metadata, fallback pages, linting, formatting, and the first pass at an app shell. Forge came from wanting that setup to feel less like copying yesterday's project.
 
 ## Solution
 
-Built a CLI that scaffolds minimal starters, then applies framework-aware overlays and feature packs for pieces like theme switching, optional English and Arabic routing, framework-appropriate i18n, starter docs, sound hooks, and lint and format setup.
+I built a CLI that creates a small starter first, then layers in framework-aware overlays and optional feature packs. It can add theme switching, English and Arabic routing, framework-specific i18n, starter docs, sound hooks, and lint/format setup.
 
 ## Architecture
 
-Forge is a single-package TypeScript CLI built around three layers: scaffold adapters, framework overlays, and feature packs. It generates starters for Next.js, Vite, and TanStack Start, supports Base UI or Radix-based surfaces through shadcn scaffolds, and currently ships with a default preset of Next.js + Base UI + LTR + pnpm + Biome.
+Forge is a single-package TypeScript CLI built around scaffold adapters, framework overlays, and feature packs. It can generate starters for Next.js, Vite, and TanStack Start, with Base UI or Radix-based surfaces through shadcn scaffolds. The default preset is intentionally opinionated: Next.js, Base UI, LTR, pnpm, and Biome.
 
 ## Stack
 
