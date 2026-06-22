@@ -130,7 +130,8 @@ function ArticleTocItems({
         aria-hidden="true"
         animate={{
           opacity: railStyle.height > 0 ? 1 : 0,
-          transform: `translateY(${railStyle.top}px) scaleY(${Math.max(railStyle.height, 0)})`,
+          y: railStyle.top,
+          scaleY: Math.max(railStyle.height, 0),
         }}
         className="absolute left-[0.1875rem] w-0.5 origin-top rounded-full bg-foreground"
         initial={false}
