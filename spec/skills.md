@@ -1,187 +1,172 @@
-# Agentic Skills & Behaviors Index
+# Agentic Skills Index
 
-> Index of all skills installed in `.agents/skills/`. When a skill trigger is encountered, read the matching entry here first, then load the full `SKILL.md` only if needed. Read on demand, not on init.
+This file indexes the skills installed in `.agents/skills/`. Read it only when a skill trigger appears, then open the matching `SKILL.md` if the task needs the full workflow.
 
-## Writing Format
+Keep this list alphabetical by skill directory name.
 
-When adding or updating skills, follow this structure exactly:
+## Format
 
-### [N]- [skill-directory-name]
-
-**Triggers**: [comma-separated keyword tags]
-**Pairs With**: [related skill names]
-**Top 2 Rules**: [highest impact rule]. [second most critical rule].
-
-Full context: `.agents/skills/[skill-directory-name]/SKILL.md`
-
----
+Each entry uses the skill directory as the heading, followed by triggers, pairings, the top rules, and the path to the full `SKILL.md`.
 
 ## Skills
 
-### 1- base-ui
+### animate-text
 
-**Triggers**: base-ui, @base-ui/react, component primitives, accessible primitives, unstyled components
-**Pairs With**: coss, typescript-expert
-**Top 2 Rules**: Use Base UI compound parts and accessibility contracts correctly. Preserve server/client boundaries and styling conventions.
+Triggers: text animation, typewriter, line reveal, staggered text, kinetic heading.
+Pairs with: motion-design, motion-patterns.
+Top rules: Use the catalog specs instead of inventing animation contracts. Pick only the renderer/details needed for the current stack.
+Full context: `.agents/skills/animate-text/SKILL.md`
 
+### base-ui
+
+Triggers: Base UI, `@base-ui/react`, accessible primitives, dialogs, menus, selects, tabs.
+Pairs with: coss, typescript-expert.
+Top rules: Use the correct compound parts and accessibility contracts. Preserve server/client boundaries and project styling conventions.
 Full context: `.agents/skills/base-ui/SKILL.md`
 
----
+### coss
 
-### 2- coss
-
-**Triggers**: coss, base-ui, component primitives, dialogs, forms, toasts
-**Pairs With**: coss-particles, make-interfaces-feel-better
-**Top 2 Rules**: Use coss primitives correctly before inventing custom wrappers. Preserve accessibility and shared styling conventions.
-
+Triggers: coss, component primitives, dialogs, forms, toasts, shadcn/Radix migration.
+Pairs with: coss-particles, make-interfaces-feel-better.
+Top rules: Use coss primitives before inventing wrappers. Preserve accessibility and shared Tailwind conventions.
 Full context: `.agents/skills/coss/SKILL.md`
 
----
+### coss-particles
 
-### 3- coss-particles
-
-**Triggers**: coss examples, particle examples, copy-paste UI patterns, component inspiration
-**Pairs With**: coss, emil-design-eng
-**Top 2 Rules**: Prefer existing particle patterns before building from scratch. Reuse examples that already fit coss primitives.
-
+Triggers: coss examples, particle examples, copy-paste UI patterns, component inspiration.
+Pairs with: coss, emil-design-eng.
+Top rules: Check existing particle patterns before building from scratch. Reuse only examples that fit the current component system.
 Full context: `.agents/skills/coss-particles/SKILL.md`
 
----
+### emil-design-eng
 
-### 4- emil-design-eng
-
-**Triggers**: UI polish, design engineering, feel, delight, invisible details
-**Pairs With**: make-interfaces-feel-better, motion-design
-**Top 2 Rules**: Polish is a systems concern, not decorative garnish. Use taste and restraint to make interfaces feel intentional.
-
+Triggers: design engineering, UI polish, feel, invisible details, interaction quality.
+Pairs with: make-interfaces-feel-better, motion-design.
+Top rules: Treat polish as a systems concern, not garnish. Use restraint and taste before adding more UI.
 Full context: `.agents/skills/emil-design-eng/SKILL.md`
 
----
+### fixing-motion-performance
 
-### 5- grill-me
+Triggers: janky animation, blur performance, layout thrash, compositor issue, scroll-linked motion.
+Pairs with: motion-design, make-interfaces-feel-better.
+Top rules: Prefer transform and opacity when possible. Use filters and promoted layers surgically, especially on larger surfaces.
+Full context: `.agents/skills/fixing-motion-performance/SKILL.md`
 
-**Triggers**: new feature, unclear plan, design interview, stress-test, bootstrap
-**Pairs With**: improve-codebase-architecture, typescript-expert
-**Top 2 Rules**: Ask one question at a time until the decision tree is resolved. Do not assume when the answer materially affects design.
+### grill-me
 
+Triggers: new feature, unclear plan, stress-test, design interview, decision tree.
+Pairs with: improve-codebase-architecture, typescript-expert.
+Top rules: Ask one decision-shaping question at a time. Do not code a new feature until the spec is confirmed.
 Full context: `.agents/skills/grill-me/SKILL.md`
 
----
+### handoff
 
-### 6- handoff
-
-**Triggers**: handoff, compact context, transfer work, another agent, summarize session
-**Pairs With**: wrap-up, improve-codebase-architecture
-**Top 2 Rules**: Preserve the decisions, current state, and next action clearly. Keep the handoff actionable for another agent.
-
+Triggers: handoff, compact context, transfer work, another agent, summarize session.
+Pairs with: wrap-up, improve-codebase-architecture.
+Top rules: Preserve current state, decisions, and next action. Do not duplicate stable rules already captured in `AGENTS.md` or `spec/index.md`.
 Full context: `.agents/skills/handoff/SKILL.md`
 
----
+### humanize
 
-### 7- improve-codebase-architecture
+Triggers: humanize, remove generated tone, make copy sound human, natural writing.
+Pairs with: seo-audit, wrap-up.
+Top rules: Prefer specific, plain writing over generic polish. Do not add detector-gaming claims to project docs.
+Full context: `.agents/skills/humanize/SKILL.md`
 
-**Triggers**: refactor, architecture, module boundaries, testability, AI navigability
-**Pairs With**: nextjs-patterns, typescript-expert
-**Top 2 Rules**: Deepen the codebase instead of shuffling files superficially. Prefer changes that clarify ownership and reduce coupling.
+### improve-codebase-architecture
 
+Triggers: architecture, refactor, module boundaries, testability, agent navigability.
+Pairs with: nextjs-patterns, typescript-expert.
+Top rules: Deepen the codebase instead of shuffling files. Use `CONTEXT.md` vocabulary when naming seams and module families.
 Full context: `.agents/skills/improve-codebase-architecture/SKILL.md`
 
----
+### make-interfaces-feel-better
 
-### 8- make-interfaces-feel-better
-
-**Triggers**: feels off, polish, hover states, shadows, borders, spacing, interface quality
-**Pairs With**: emil-design-eng, motion-design
-**Top 2 Rules**: Fix the small details that compound into quality. Use shared visual logic instead of one-off tweaks.
-
+Triggers: feels off, hover state, radius, shadow, spacing, typography, UI detail.
+Pairs with: emil-design-eng, motion-design.
+Top rules: Fix details where the shared system owns them. Prefer small, compounding improvements over decorative changes.
 Full context: `.agents/skills/make-interfaces-feel-better/SKILL.md`
 
----
+### motion-design
 
-### 9- motion-design
-
-**Triggers**: animation direction, timing, easing, choreography, transitions
-**Pairs With**: motion-patterns, make-interfaces-feel-better
-**Top 2 Rules**: Motion should communicate meaning, not noise. Use timing and choreography intentionally.
-
+Triggers: animation direction, easing, choreography, transitions, micro-interactions.
+Pairs with: motion-patterns, fixing-motion-performance.
+Top rules: Motion should clarify state or movement. Keep repeated interactions fast and easy to interrupt.
 Full context: `.agents/skills/motion-design/SKILL.md`
 
----
+### motion-patterns
 
-### 10- motion-patterns
-
-**Triggers**: toast animation, modal animation, stagger, page transition, layout animation
-**Pairs With**: motion-design, make-interfaces-feel-better
-**Top 2 Rules**: Use proven motion patterns instead of ad hoc effects. Keep repeated interactions fast and low-friction.
-
+Triggers: modal animation, toast animation, stagger, page transition, layout animation.
+Pairs with: motion-design, animate-text.
+Top rules: Start from proven patterns instead of ad hoc effects. Keep springs and exits subtle unless the moment deserves emphasis.
 Full context: `.agents/skills/motion-patterns/SKILL.md`
 
----
+### nextjs-patterns
 
-### 11- nextjs-patterns
-
-**Triggers**: next.js app router, server components, caching, streaming, server actions
-**Pairs With**: vercel-react-best-practices, typescript-expert
-**Top 2 Rules**: Prefer modern App Router patterns over legacy habits. Design around server-first rendering and clear data boundaries.
-
+Triggers: Next.js App Router, Server Components, streaming, caching, server actions.
+Pairs with: vercel-react-best-practices, typescript-expert.
+Top rules: Prefer modern App Router patterns. Keep data ownership and rendering boundaries explicit.
 Full context: `.agents/skills/nextjs-patterns/SKILL.md`
 
----
+### nextjs-performance
 
-### 12- react-doctor
+Triggers: Core Web Vitals, image optimization, font optimization, bundle size, Next.js performance.
+Pairs with: performance, vercel-react-best-practices.
+Top rules: Optimize loading and rendering paths before micro-tuning. Treat images, fonts, and Server Component boundaries as first-class performance surfaces.
+Full context: `.agents/skills/nextjs-performance/SKILL.md`
 
-**Triggers**: finish feature, review React code, regression check, accessibility check, cleanup
-**Pairs With**: vercel-react-best-practices, typescript-expert
-**Top 2 Rules**: Run it after meaningful React work. Treat regressions in architecture, accessibility, and quality as first-class issues.
+### performance
 
+Triggers: speed up site, performance audit, slow loading, Lighthouse, runtime performance.
+Pairs with: nextjs-performance, fixing-motion-performance.
+Top rules: Measure the bottleneck before changing architecture. Prefer targeted loading/runtime fixes over broad rewrites.
+Full context: `.agents/skills/performance/SKILL.md`
+
+### react-doctor
+
+Triggers: finish feature, React scan, regression check, accessibility check, cleanup.
+Pairs with: vercel-react-best-practices, typescript-expert.
+Top rules: Run after meaningful React changes when appropriate. Treat accessibility, correctness, and architecture regressions as real findings.
 Full context: `.agents/skills/react-doctor/SKILL.md`
 
----
+### react-useeffect
 
-### 13- react-useeffect
-
-**Triggers**: useEffect, derived state, data fetching, effect cleanup
-**Pairs With**: vercel-react-best-practices, typescript-expert
-**Top 2 Rules**: Use effects only for external synchronization. Prefer derived state and event handlers over effects when possible.
-
+Triggers: `useEffect`, derived state, data fetching, effect cleanup, synchronization.
+Pairs with: vercel-react-best-practices, typescript-expert.
+Top rules: Use effects only for external synchronization. Prefer derived values and event handlers when no external system is involved.
 Full context: `.agents/skills/react-useeffect/SKILL.md`
 
----
+### seo-audit
 
-### 14- typescript-expert
+Triggers: SEO audit, technical SEO, indexing, rankings, metadata review, organic traffic.
+Pairs with: nextjs-performance, humanize.
+Top rules: Start with an audit before guessing at SEO fixes. Keep recommendations tied to visible pages, metadata, content, and crawlability.
+Full context: `.agents/skills/seo-audit/SKILL.md`
 
-**Triggers**: type system, advanced TypeScript, JS architecture, migrations, performance
-**Pairs With**: nextjs-patterns, vercel-react-best-practices
-**Top 2 Rules**: Use type design to simplify systems, not impress them. Prefer durable, understandable types over clever noise.
+### typescript-expert
 
+Triggers: TypeScript, type design, JavaScript architecture, migrations, type errors.
+Pairs with: nextjs-patterns, vercel-react-best-practices.
+Top rules: Use types to simplify the system. Prefer understandable durable types over cleverness.
 Full context: `.agents/skills/typescript-expert/SKILL.md`
 
----
+### vercel-composition-patterns
 
-### 15- vercel-composition-patterns
-
-**Triggers**: composition, compound components, render props, context APIs, component architecture
-**Pairs With**: coss, vercel-react-best-practices
-**Top 2 Rules**: Choose component APIs that scale without boolean sprawl. Use composition to preserve flexibility and clarity.
-
+Triggers: composition, compound components, render props, context APIs, component architecture.
+Pairs with: coss, vercel-react-best-practices.
+Top rules: Choose APIs that scale without boolean sprawl. Use composition to keep reuse flexible and explicit.
 Full context: `.agents/skills/vercel-composition-patterns/SKILL.md`
 
----
+### vercel-react-best-practices
 
-### 16- vercel-react-best-practices
-
-**Triggers**: react performance, next.js performance, bundle optimization, data fetching, rendering patterns
-**Pairs With**: nextjs-patterns, react-doctor
-**Top 2 Rules**: Follow server-first React/Next.js performance guidance. Optimize architecture before micro-optimizing components.
-
+Triggers: React performance, Next.js performance, data fetching, bundle optimization, rendering patterns.
+Pairs with: nextjs-patterns, react-doctor.
+Top rules: Prefer server-first React/Next.js patterns. Optimize architecture before micro-optimizing components.
 Full context: `.agents/skills/vercel-react-best-practices/SKILL.md`
 
----
+### wrap-up
 
-### 17- wrap-up
-
-**Triggers**: session end, handoff, work log, sprint log
-**Pairs With**: react-doctor, improve-codebase-architecture
-**Top 2 Rules**: End each session with a real log in `spec/sessions/`. Verify paths and unresolved state before closing work.
-
+Triggers: session end, work log, sprint log, closing context.
+Pairs with: handoff, react-doctor.
+Top rules: Record a truthful session log in `spec/sessions/`. Name skipped checks and unresolved state clearly.
 Full context: `.agents/skills/wrap-up/SKILL.md`
