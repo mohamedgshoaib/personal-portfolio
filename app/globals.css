@@ -380,20 +380,20 @@
     .entity-sibling-dimming.entity-sibling-dimming {
       transition-property: background-color, box-shadow, filter;
       transition-duration:
-        var(--duration-surface-hover), var(--duration-surface-hover), 280ms;
+        var(--duration-surface-hover), var(--duration-surface-hover), 400ms;
       transition-timing-function:
         var(--ease-interface), var(--ease-interface),
-        cubic-bezier(0.33, 0, 0.2, 1);
+        cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Fast enter — camera snapping to focus without resizing cards */
+    /* Gradual enter — blur settling without snapping */
     .entity-sibling-dimming[data-active="true"][data-checked="false"] {
       filter: blur(4px) brightness(0.86);
       transition-duration:
-        var(--duration-surface-hover), var(--duration-surface-hover), 240ms;
+        var(--duration-surface-hover), var(--duration-surface-hover), 320ms;
       transition-timing-function:
         var(--ease-interface), var(--ease-interface),
-        cubic-bezier(0.33, 0, 0.2, 1);
+        cubic-bezier(0.23, 1, 0.32, 1);
     }
   }
 
