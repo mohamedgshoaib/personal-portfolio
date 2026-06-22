@@ -378,25 +378,22 @@
   @media (hover: hover) and (pointer: fine) {
     /* Slow exit — lens relaxing back to neutral */
     .entity-sibling-dimming.entity-sibling-dimming {
-      transition-property: background-color, box-shadow, filter, transform;
+      transition-property: background-color, box-shadow, filter;
       transition-duration:
-        var(--duration-surface-hover), var(--duration-surface-hover), 400ms,
-        500ms;
+        var(--duration-surface-hover), var(--duration-surface-hover), 280ms;
       transition-timing-function:
         var(--ease-interface), var(--ease-interface),
-        cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1);
+        cubic-bezier(0.33, 0, 0.2, 1);
     }
 
-    /* Fast enter — camera snapping to focus */
+    /* Fast enter — camera snapping to focus without resizing cards */
     .entity-sibling-dimming[data-active="true"][data-checked="false"] {
-      filter: blur(6px) brightness(0.82);
-      transform: scale(0.975);
+      filter: blur(4px) brightness(0.86);
       transition-duration:
-        var(--duration-surface-hover), var(--duration-surface-hover), 220ms,
-        300ms;
+        var(--duration-surface-hover), var(--duration-surface-hover), 240ms;
       transition-timing-function:
         var(--ease-interface), var(--ease-interface),
-        cubic-bezier(0.23, 1, 0.32, 1), cubic-bezier(0.23, 1, 0.32, 1);
+        cubic-bezier(0.33, 0, 0.2, 1);
     }
   }
 
@@ -407,7 +404,6 @@
 
     .entity-sibling-dimming[data-active="true"][data-checked="false"] {
       filter: none;
-      transform: none;
     }
   }
 
