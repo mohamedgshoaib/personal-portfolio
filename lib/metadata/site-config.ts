@@ -11,7 +11,7 @@ function normalizeSiteUrl(value: string | undefined): string {
 export const siteConfig = {
   author: "Mohamed Gamal",
   description:
-    "Frontend engineer based in Cairo, Egypt. I build React and Next.js products with close attention to interface quality, architecture, and performance.",
+    "Software engineer based in Cairo, Egypt. I build React and Next.js products with close attention to interface quality, architecture, and performance.",
   locale: "en_US",
   name: "Mohamed Gamal",
   shortName: "Mohamed",

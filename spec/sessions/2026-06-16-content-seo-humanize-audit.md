@@ -26,7 +26,7 @@
 - `homepageCopy.about`: 3-paragraph real about text (joined `\n\n`, split to `<p>` tags during render)
 - `homepageCopy.approach`: 2-paragraph real approach text (same pattern)
 - `app/page.tsx`: avatar `alt` set to "Mohamed Gamal"; H1 `<div>` wrapper changed to `<hgroup>`; `projectsHeader` delay corrected to 220ms
-- Homepage H1 and root route title include "Frontend Engineer" keyword
+- Homepage H1 and root route title include "Software Engineer" keyword
 - Root meta description rewritten: React/Next.js/Cairo keywords, ~160 chars
 - `/projects` and `/writing` meta descriptions expanded to ~160 chars with stack keywords
 - OG/Twitter image bindings added to `site-metadata.ts`: `openGraph.images` and `twitter.images` arrays; `twitter.creator` uses `siteConfig.twitterHandle` (`@mohamedgshoaib`)
