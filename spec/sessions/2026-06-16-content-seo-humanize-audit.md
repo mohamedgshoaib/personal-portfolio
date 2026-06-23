@@ -39,6 +39,7 @@
 - Writing MDX AI rhythm patterns fixed: `ai-discovery` "That distinction is important. One is... The other is..." collapsed to single sentence; em dashes removed from both writing posts
 - `react-in-2026` structural patterns fixed: "Instead of starting with..." → direct claim; "The point is not to eliminate them..." → replaced; "That kind of early shape work..." → "Early boundary work..."; anadiplosis sentence pair → "Those choices remove moving parts. Fewer moving parts means less to break and less to explain."
 - `markymap.mdx` body "whether through heavy interfaces..." rewritten to remove "whether X, Y, or Z" AI structural pattern
+- Task 15 completed: favicon and apple-touch-icon assets provided
 
 ---
 
@@ -52,6 +53,4 @@
 
 ## Blockers
 
-1. Task 15: favicon and apple-touch-icon — waiting on user to provide `app/icon.png` (32×32) and `app/apple-icon.png` (180×180)
-2. Task 16: expand project MDX pages to 400–600 words — waiting on user content per project
-3. Task 17: publish 5–8 additional writing posts — waiting on user drafts
+None

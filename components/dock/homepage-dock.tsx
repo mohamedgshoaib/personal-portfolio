@@ -94,7 +94,7 @@ export function HomepageDock({
       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 bottom-0 z-[39] hidden h-24 [@media(pointer:fine)]:block"
+        className="pointer-events-auto fixed inset-x-0 bottom-0 z-[39] hidden h-20 sm:h-[4.75rem] [@media(pointer:fine)]:block"
       >
         <div className="absolute inset-0 backdrop-blur-[0.5px] [mask:linear-gradient(to_bottom,transparent_0%,black_12.5%,black_25%,transparent_37.5%)]" />
         <div className="absolute inset-0 backdrop-blur-[1px] [mask:linear-gradient(to_bottom,transparent_12.5%,black_25%,black_37.5%,transparent_50%)]" />
@@ -109,7 +109,7 @@ export function HomepageDock({
           cost, same semantic signal as the blur zone. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 bottom-0 z-[39] h-24 bg-gradient-to-t from-background to-transparent [@media(pointer:fine)]:hidden"
+        className="pointer-events-auto fixed inset-x-0 bottom-0 z-[39] h-20 bg-gradient-to-t from-background to-transparent sm:h-[4.75rem] [@media(pointer:fine)]:hidden"
       />
       {/* The nav is the fixed anchor. HomepageSceneReveal wraps only the inner
           pill so its transform/filter never creates a containing block for the
