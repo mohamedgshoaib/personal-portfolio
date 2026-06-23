@@ -19,7 +19,7 @@ export const socialLinks = [
     kind: "linkedin",
   },
   {
-    href: "https://x.com/mo0hamed_gamal",
+    href: "https://x.com/mohamedgshoaib",
     kind: "x",
   },
   {

@@ -29,7 +29,7 @@
 - Homepage H1 and root route title include "Frontend Engineer" keyword
 - Root meta description rewritten: React/Next.js/Cairo keywords, ~160 chars
 - `/projects` and `/writing` meta descriptions expanded to ~160 chars with stack keywords
-- OG/Twitter image bindings added to `site-metadata.ts`: `openGraph.images` and `twitter.images` arrays; `twitter.creator` uses `siteConfig.twitterHandle` (`@mo0hamed_gamal`)
+- OG/Twitter image bindings added to `site-metadata.ts`: `openGraph.images` and `twitter.images` arrays; `twitter.creator` uses `siteConfig.twitterHandle` (`@mohamedgshoaib`)
 - `siteConfig.twitterHandle` added to `lib/metadata/site-config.ts`
 - `createBreadcrumbJsonLd()` added to `lib/metadata/structured-data.ts`; injected on `app/projects/[slug]/page.tsx` and `app/writing/[slug]/page.tsx`
 - Alt text fixed: avatar `alt="Mohamed Gamal"`, `ProjectMediaPlaceholder` uses `label` prop, `ProjectCard` `ProjectMediaFrame` uses `"{name} project screenshot"`

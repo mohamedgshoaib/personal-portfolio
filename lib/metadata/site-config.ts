@@ -17,5 +17,5 @@ export const siteConfig = {
   shortName: "Mohamed",
   siteUrl: normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   themeColor: "#111111",
-  twitterHandle: "@mo0hamed_gamal",
+  twitterHandle: "@mohamedgshoaib",
 } as const
