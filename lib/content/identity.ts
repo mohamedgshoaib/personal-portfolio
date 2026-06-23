@@ -11,11 +11,11 @@ export const siteIdentity = {
 
 export const socialLinks = [
   {
-    href: "https://github.com/mohamed-g-shoaib",
+    href: "https://github.com/mohamedgshoaib",
     kind: "github",
   },
   {
-    href: "https://www.linkedin.com/in/mohamed-g-shoaib/",
+    href: "https://www.linkedin.com/in/mohamedgshoaib/",
     kind: "linkedin",
   },
   {
