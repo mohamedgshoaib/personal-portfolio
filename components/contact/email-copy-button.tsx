@@ -5,7 +5,6 @@ import { useSound } from "@web-kits/audio/react"
 
 import { copy } from "@/lib/audio/minimal"
 import { AnimatedEntityBackground } from "@/components/editorial-entity/animated-entity-background"
-import { HomepageSceneReveal } from "@/components/homepage/homepage-scene"
 import { TextRoll } from "@/components/contact/text-roll"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { textStyles } from "@/lib/design/text-styles"
@@ -27,13 +26,8 @@ const SURFACE_ID = "email-copy-button"
 
 export function EmailCopyButton({
   email,
-  sceneDelays,
 }: {
   email: string
-  sceneDelays?: {
-    label: number
-    surface: number
-  }
 }): React.ReactElement {
   const copyRequestId = useRef(0)
   const [copyFeedback, setCopyFeedback] = useState<CopyFeedback>({
@@ -111,50 +105,46 @@ export function EmailCopyButton({
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <HomepageSceneReveal delayMs={sceneDelays?.label ?? 0} kind="header">
-        <TextRoll
-          className={cn(
-            textStyles.entityDescription,
-            "min-h-7 overflow-hidden text-center"
-          )}
-          direction={rollDirection}
-          duration={0.12}
-          getEnterDelay={(i) => i * 0.005}
-          reserveText={LONGEST_LABEL}
-          text={label}
-        />
-      </HomepageSceneReveal>
-      <HomepageSceneReveal delayMs={sceneDelays?.surface ?? 0} kind="surface">
-        <AnimatedEntityBackground
-          className="rounded-lg"
-          defaultValue={SURFACE_ID}
-          enableHover={false}
-        >
-          <div className="p-0.5" data-id={SURFACE_ID}>
-            <button
-              aria-describedby="email-copy-status"
-              aria-label={`Copy email address ${email}`}
-              className="min-w-64 cursor-pointer rounded-md px-5 py-3 text-center text-base font-semibold text-foreground transition-[color,scale] duration-150 ease-[var(--ease-interface)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background active:scale-[0.96] motion-reduce:active:scale-100 sm:min-w-72"
-              onBlur={() => setIsHintVisible(false)}
-              onClick={copyEmail}
-              onFocus={() => {
-                if (supportsHover && copyState === "idle") {
-                  setIsHintVisible(true)
-                }
-              }}
-              onMouseEnter={() => {
-                if (supportsHover && copyState === "idle") {
-                  setIsHintVisible(true)
-                }
-              }}
-              onMouseLeave={() => setIsHintVisible(false)}
-              type="button"
-            >
-              <span>{email}</span>
-            </button>
-          </div>
-        </AnimatedEntityBackground>
-      </HomepageSceneReveal>
+      <TextRoll
+        className={cn(
+          textStyles.entityDescription,
+          "min-h-7 overflow-hidden text-center"
+        )}
+        direction={rollDirection}
+        duration={0.12}
+        getEnterDelay={(i) => i * 0.005}
+        reserveText={LONGEST_LABEL}
+        text={label}
+      />
+      <AnimatedEntityBackground
+        className="rounded-lg"
+        defaultValue={SURFACE_ID}
+        enableHover={false}
+      >
+        <div className="p-0.5" data-id={SURFACE_ID}>
+          <button
+            aria-describedby="email-copy-status"
+            aria-label={`Copy email address ${email}`}
+            className="min-w-64 cursor-pointer rounded-md px-5 py-3 text-center text-base font-semibold text-foreground transition-[color,scale] duration-150 ease-[var(--ease-interface)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background active:scale-[0.96] motion-reduce:active:scale-100 sm:min-w-72"
+            onBlur={() => setIsHintVisible(false)}
+            onClick={copyEmail}
+            onFocus={() => {
+              if (supportsHover && copyState === "idle") {
+                setIsHintVisible(true)
+              }
+            }}
+            onMouseEnter={() => {
+              if (supportsHover && copyState === "idle") {
+                setIsHintVisible(true)
+              }
+            }}
+            onMouseLeave={() => setIsHintVisible(false)}
+            type="button"
+          >
+            <span>{email}</span>
+          </button>
+        </div>
+      </AnimatedEntityBackground>
       <output
         aria-live="polite"
         className="sr-only"

@@ -10,14 +10,12 @@ import { cn } from "@/lib/utils"
 type EditorialEntitySurfaceProps = {
   className: string
   "data-id": string
-  sceneDelayMs?: number
   style?: CSSProperties
 }
 
 type EditorialEntityElement = ReactElement<EditorialEntitySurfaceProps>
 
 type EditorialEntityListProps<TItem> = {
-  getSceneDelayMs?: (index: number) => number
   getId: (item: TItem) => string
   itemClassName?: string
   items: readonly TItem[]
@@ -34,7 +32,6 @@ type EditorialEntityListProps<TItem> = {
 const siblingDimmingClassName = "entity-sibling-dimming"
 
 export function EditorialEntityList<TItem>({
-  getSceneDelayMs,
   getId,
   itemClassName,
   items,
@@ -60,7 +57,6 @@ export function EditorialEntityList<TItem>({
               inset: surfaceInset,
               interaction: surfaceInteraction,
             }),
-            sceneDelayMs: getSceneDelayMs?.(index),
           },
           index
         )

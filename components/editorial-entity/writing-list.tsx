@@ -5,7 +5,6 @@ import type * as React from "react"
 import { EditorialEntityList } from "@/components/editorial-entity/editorial-entity-list"
 import { EntityPrimaryLink } from "@/components/editorial-entity/entity-primary-link"
 import { EntityList } from "@/components/editorial-entity/entity-list"
-import { HomepageSceneSurface } from "@/components/homepage/homepage-scene"
 import { textStyles } from "@/lib/design/text-styles"
 import type { WritingContent } from "@/lib/content/content-types"
 import { cn } from "@/lib/utils"
@@ -18,43 +17,28 @@ type WritingListRowProps = React.ComponentPropsWithoutRef<"div"> & {
   "data-id": string
   children?: React.ReactNode
   post: WritingContent
-  source: "home" | "writing"
-  sceneDelayMs?: number
   writingBackHref: string
 }
 
 export function WritingList({
   posts,
-  sceneDelayMs,
   source = "writing",
 }: {
   posts: readonly WritingContent[]
-  sceneDelayMs?: number
   source?: "home" | "writing"
 }): React.ReactElement {
   const writingBackHref = source === "home" ? "/" : "/writing"
-  const getSceneDelayMs =
-    source === "home" && sceneDelayMs !== undefined
-      ? (index: number) =>
-          sceneDelayMs + (index === 0 ? 0 : 48 + (index - 1) * 30)
-      : undefined
 
   return (
     <EntityList className="space-y-0">
       <EditorialEntityList
         getId={(post) => post.title}
-        getSceneDelayMs={getSceneDelayMs}
         items={posts}
-        renderItem={(
-          post,
-          { "data-id": dataId, className, sceneDelayMs: rowDelayMs }
-        ) => (
+        renderItem={(post, { "data-id": dataId, className }) => (
           <WritingListRow
             className={className}
             data-id={dataId}
             post={post}
-            sceneDelayMs={rowDelayMs}
-            source={source}
             writingBackHref={writingBackHref}
           />
         )}
@@ -67,13 +51,12 @@ export function WritingList({
 function WritingListRow({
   children,
   post,
-  sceneDelayMs,
-  source,
   writingBackHref,
   ...surfaceProps
 }: WritingListRowProps): React.ReactElement {
-  const content = (
-    <>
+  return (
+    <div {...surfaceProps} className={cn(surfaceProps.className, "relative")}>
+      {children}
       <EntityPrimaryLink
         ariaLabel={`Open writing post ${post.title}`}
         href={post.href}
@@ -91,26 +74,6 @@ function WritingListRow({
           {post.excerpt}
         </p>
       </div>
-    </>
-  )
-
-  if (source === "home") {
-    return (
-      <HomepageSceneSurface
-        {...surfaceProps}
-        className={cn(surfaceProps.className, "relative")}
-        delayMs={sceneDelayMs}
-      >
-        {children}
-        {content}
-      </HomepageSceneSurface>
-    )
-  }
-
-  return (
-    <div {...surfaceProps} className={cn(surfaceProps.className, "relative")}>
-      {children}
-      {content}
     </div>
   )
 }

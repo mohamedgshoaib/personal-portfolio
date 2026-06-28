@@ -5,17 +5,12 @@ import { HomeSection } from "@/components/homepage/homepage-layout"
 
 export function ContactSection({
   email,
-  sceneDelays,
 }: {
   email: string
-  sceneDelays?: {
-    label: number
-    surface: number
-  }
 }): React.ReactElement {
   return (
     <HomeSection className="pt-2 text-center" id="contact">
-      <EmailCopyButton email={email} sceneDelays={sceneDelays} />
+      <EmailCopyButton email={email} />
     </HomeSection>
   )
 }

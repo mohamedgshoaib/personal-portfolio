@@ -3,7 +3,6 @@
 import type * as React from "react"
 
 import { EntityPrimaryLink } from "@/components/editorial-entity/entity-primary-link"
-import { HomepageSceneSurface } from "@/components/homepage/homepage-scene"
 import { EditorialEntityList } from "@/components/editorial-entity/editorial-entity-list"
 import { ProjectCard } from "@/components/editorial-entity/project-card"
 import type { ProjectContent } from "@/lib/content/content-types"
@@ -19,46 +18,33 @@ type ProjectListRowProps = React.ComponentPropsWithoutRef<"div"> & {
   priority?: boolean
   project: ProjectContent
   projectBackHref: string
-  sceneDelayMs?: number
-  source: "home" | "projects"
 }
 
 export function ProjectList({
   projects,
-  sceneDelayMs,
   source = "projects",
 }: {
   projects: readonly ProjectContent[]
-  sceneDelayMs?: number
   source?: "home" | "projects"
 }): React.ReactElement {
   const projectBackHref = source === "home" ? "/" : "/projects"
-  const getSceneDelayMs =
-    source === "home" && sceneDelayMs !== undefined
-      ? (index: number) =>
-          sceneDelayMs + (index === 0 ? 0 : 48 + (index - 1) * 30)
-      : undefined
 
   return (
     <div className="grid sm:grid-cols-2 sm:gap-x-6">
       <EditorialEntityList
         getId={(project) => project.name}
-        getSceneDelayMs={getSceneDelayMs}
         itemClassName="h-full cursor-pointer"
         items={projects}
         renderItem={(
           project,
-          { "data-id": dataId, className, sceneDelayMs: rowDelayMs },
-          index
+          { "data-id": dataId, className }
         ) => (
           <ProjectListRow
             className={className}
             data-id={dataId}
-            priority={index < 2}
+            priority={false}
             project={project}
             projectBackHref={projectBackHref}
-            sceneDelayMs={rowDelayMs}
-            source={source}
           />
         )}
         siblingDimming
@@ -74,12 +60,11 @@ function ProjectListRow({
   priority,
   project,
   projectBackHref,
-  sceneDelayMs,
-  source,
   ...surfaceProps
 }: ProjectListRowProps): React.ReactElement {
-  const content = (
-    <>
+  return (
+    <div {...surfaceProps} className={cn(surfaceProps.className, "relative")}>
+      {children}
       <EntityPrimaryLink
         ariaLabel={`Open details for ${project.name}`}
         href={project.href}
@@ -101,26 +86,6 @@ function ProjectListRow({
         surfaceInteraction="none"
         summary={project.summary}
       />
-    </>
-  )
-
-  if (source === "home") {
-    return (
-      <HomepageSceneSurface
-        {...surfaceProps}
-        className={cn(surfaceProps.className, "relative")}
-        delayMs={sceneDelayMs}
-      >
-        {children}
-        {content}
-      </HomepageSceneSurface>
-    )
-  }
-
-  return (
-    <div {...surfaceProps} className={cn(surfaceProps.className, "relative")}>
-      {children}
-      {content}
     </div>
   )
 }
