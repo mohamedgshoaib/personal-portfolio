@@ -6,7 +6,6 @@ import { useTheme } from "next-themes"
 import { useSound } from "@web-kits/audio/react"
 
 import { ActionLinkSet } from "@/components/action-link/action-link-set"
-import { HomepageSceneReveal } from "@/components/homepage/homepage-scene"
 import { Kbd } from "@/components/ui/kbd"
 import type { IconLinkButtonItem } from "@/components/action-link/icon-link"
 import { click, toggleOff, toggleOn } from "@/lib/audio/minimal"
@@ -34,15 +33,11 @@ const dockPillClassName =
 const themeTooltip = (
   <span className="flex items-center gap-2">
     <span>Toggle theme</span>
-    <Kbd>D</Kbd>
+    <Kbd className="-mr-1">D</Kbd>
   </span>
 )
 
-export function HomepageDock({
-  revealDelayMs = 0,
-}: {
-  revealDelayMs?: number
-}): React.ReactElement {
+export function HomepageDock(): React.ReactElement {
   const { resolvedTheme, setTheme } = useTheme()
   const playClick = useSound(click)
   const playToggleOn = useSound(toggleOn)
@@ -111,24 +106,11 @@ export function HomepageDock({
         aria-hidden="true"
         className="pointer-events-auto fixed inset-x-0 bottom-0 z-[39] h-20 bg-gradient-to-t from-background to-transparent sm:h-[4.75rem] [@media(pointer:fine)]:hidden"
       />
-      {/* The nav is the fixed anchor. HomepageSceneReveal wraps only the inner
-          pill so its transform/filter never creates a containing block for the
-          fixed ancestor, which would break viewport positioning. */}
       <nav
         aria-label="Primary navigation"
         className="pointer-events-none fixed inset-x-0 bottom-8 z-40 flex justify-center px-6"
       >
-        {revealDelayMs > 0 ? (
-          <HomepageSceneReveal
-            delayMs={revealDelayMs}
-            kind="utility"
-            mode="timed"
-          >
-            {pill}
-          </HomepageSceneReveal>
-        ) : (
-          pill
-        )}
+        {pill}
       </nav>
     </>
   )
