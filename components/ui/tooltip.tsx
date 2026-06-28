@@ -41,7 +41,7 @@ export function TooltipPopup({
       <TooltipPrimitive.Positioner
         align={align}
         anchor={anchor}
-        className="z-50 h-(--positioner-height) w-(--positioner-width) max-w-(--available-width) transition-[top,left,right,bottom,transform] duration-[var(--duration-tooltip)] ease-[var(--ease-interface)] data-instant:transition-none"
+        className="z-50 h-(--positioner-height) w-(--positioner-width) max-w-(--available-width) transition-[transform] duration-[var(--duration-tooltip)] ease-[var(--ease-interface)] data-instant:transition-none"
         data-slot="tooltip-positioner"
         side={side}
         sideOffset={sideOffset}

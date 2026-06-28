@@ -73,12 +73,13 @@ function useSceneDelay(delayMs: number): boolean {
 function getSceneStyles(
   kind: HomepageSceneKind,
   prefersReducedMotion: boolean,
+  isPointerFine: boolean,
   isReady: boolean
 ): {
   animate: HomepageSceneStyle
   initial: HomepageSceneStyle
 } {
-  const withBlur = !prefersReducedMotion && kind !== "surface"
+  const withBlur = !prefersReducedMotion && kind !== "surface" && isPointerFine
   const hidden: HomepageSceneStyle = prefersReducedMotion
     ? { opacity: 0 }
     : {
@@ -124,11 +125,13 @@ export function useTimedHomepageSceneMotion(
   { delay: number; duration: number; ease: typeof HOMEPAGE_SCENE_EASE },
 ] {
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+  const isPointerFine = useMediaQuery("(hover: hover) and (pointer: fine)")
   const sceneReady = useSceneDelay(delayMs)
   const transition = useHomepageSceneTransition(kind)
   const { animate, initial } = getSceneStyles(
     kind,
     prefersReducedMotion,
+    isPointerFine,
     sceneReady
   )
 
@@ -146,6 +149,7 @@ export function useViewportHomepageSceneMotion(
 ] {
   const ref = useRef<HTMLDivElement | null>(null)
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+  const isPointerFine = useMediaQuery("(hover: hover) and (pointer: fine)")
   const sceneReady = useSceneDelay(delayMs)
   const isInView = useInView(ref, {
     amount: VIEWPORT_AMOUNT,
@@ -156,6 +160,7 @@ export function useViewportHomepageSceneMotion(
   const { animate, initial } = getSceneStyles(
     kind,
     prefersReducedMotion,
+    isPointerFine,
     sceneReady && isInView
   )
 

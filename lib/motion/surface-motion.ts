@@ -10,7 +10,7 @@ export const activeSurfaceStyle = {
 // separate configs (both ~365ms) while the ξ relationship was semantically
 // inverted. Unified at ξ ≈ 0.85, ~333ms settle: smooth, no perceptible bounce.
 export const surfaceBackgroundTransition = {
-  damping: 24,
-  stiffness: 200,
+  damping: 28,
+  stiffness: 300,
   type: "spring",
 } satisfies Transition

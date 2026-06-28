@@ -44,7 +44,25 @@ interface PageActionsProps {
 
 const resetDelay = 1600
 const emptyLinks: readonly ActionLinkRecord[] = []
-const iconTransition = { bounce: 0, duration: 0.3, type: "spring" } as const
+const iconEnter = {
+  filter: "blur(0px)",
+  opacity: 1,
+  transform: "scale(1)",
+  transition: { bounce: 0, duration: 0.18, type: "spring" },
+} as const
+
+const iconExit = {
+  filter: "blur(2px)",
+  opacity: 0,
+  transform: "scale(0.85)",
+  transition: { bounce: 0, duration: 0.1, type: "spring" },
+} as const
+
+const iconInitial = {
+  filter: "blur(2px)",
+  opacity: 0,
+  transform: "scale(0.85)",
+} as const
 
 async function writeToClipboard(value: string): Promise<PageActionResult> {
   await navigator.clipboard.writeText(value)
@@ -65,11 +83,10 @@ function makeAnimatedSwapIcon(
       <AnimatePresence initial={false} mode="popLayout">
         <m.span
           key={isSuccessRef.current ? "success" : "idle"}
-          animate={{ filter: "blur(0px)", opacity: 1, transform: "scale(1)" }}
+          animate={iconEnter}
           className="inline-flex"
-          exit={{ filter: "blur(2px)", opacity: 0, transform: "scale(0.6)" }}
-          initial={{ filter: "blur(2px)", opacity: 0, transform: "scale(0.6)" }}
-          transition={iconTransition}
+          exit={iconExit}
+          initial={iconInitial}
         >
           {isSuccessRef.current ? (
             <SuccessIcon className={className} {...props} />
