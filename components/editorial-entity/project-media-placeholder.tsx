@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { SkeletonImage } from "@/components/ui/skeleton-image"
 import type * as React from "react"
 
 import { textStyles } from "@/lib/design/text-styles"
@@ -27,7 +27,7 @@ export function ProjectMediaPlaceholder({
         )}
       >
         {src ? (
-          <Image
+          <SkeletonImage
             alt={label}
             className="object-cover"
             fill

@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { SkeletonImage } from "@/components/ui/skeleton-image"
 import type { VariantProps } from "class-variance-authority"
 import type * as React from "react"
 
@@ -66,9 +66,9 @@ function ProjectMediaFrame({
   return (
     <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
       {src ? (
-        <Image
+        <SkeletonImage
           alt={`${name} project screenshot`}
-          className="absolute inset-0 object-cover"
+          className="object-cover"
           fill
           priority={priority}
           sizes="(max-width: 640px) 100vw, 50vw"
