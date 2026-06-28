@@ -49,7 +49,7 @@ export function ProjectCard({
           />
         </div>
       </div>
-      <p className={`mt-1 ${textStyles.entityDescription}`}>{summary}</p>
+      <p className={textStyles.entityDescription}>{summary}</p>
     </EntitySurface>
   )
 }
