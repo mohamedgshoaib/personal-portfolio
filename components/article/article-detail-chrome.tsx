@@ -47,7 +47,7 @@ export function ArticleDetailChrome({
               />
             </Suspense>
             {titleActions ? (
-              <div className="ml-auto sm:hidden">{titleActions}</div>
+              <div className="ml-auto">{titleActions}</div>
             ) : null}
           </div>
 
@@ -55,12 +55,7 @@ export function ArticleDetailChrome({
             {titleMeta ? (
               <p className={textStyles.metadata}>{titleMeta}</p>
             ) : null}
-            <div className="flex items-start gap-4">
-              <h1 className={cn(textStyles.detailTitle, "min-w-0")}>{title}</h1>
-              {titleActions ? (
-                <div className="hidden shrink-0 pt-1 sm:block">{titleActions}</div>
-              ) : null}
-            </div>
+            <h1 className={cn(textStyles.detailTitle, "min-w-0")}>{title}</h1>
             <p className={textStyles.pageDescription}>{description}</p>
           </div>
         </header>
