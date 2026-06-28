@@ -198,7 +198,7 @@ export default function Page(): React.ReactElement {
           signature: homepageSceneDelay.footerSignature,
           socials: homepageSceneDelay.footerSocials,
         }}
-        socialLinks={socialLinks}
+        socialLinks={socialLinks.filter((l) => l.kind !== "email")}
       />
     </PageShell>
   )

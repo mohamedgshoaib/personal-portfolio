@@ -244,7 +244,7 @@ export function AnimatedBackground({
                       className={cn("pointer-events-none size-full", className)}
                       layoutId={`background-${uniqueId}`}
                       style={backgroundStyle}
-                      transition={resolvedTransition}
+                      transition={canHover ? resolvedTransition : { duration: 0 }}
                     />
                   ) : null}
                 </m.div>

@@ -39,21 +39,26 @@ export function ArticleDetailChrome({
       <ArticleToc aria-label={tocLabel} toc={toc} />
       <article className="space-y-14 pt-4 sm:pt-8">
         <header className="space-y-6">
-          <Suspense fallback={null}>
-            <StoredBackLink
-              defaultHref={backLink.defaultHref}
-              intentKey={backLink.intentKey}
-            />
-          </Suspense>
+          <div className="flex items-center gap-4">
+            <Suspense fallback={null}>
+              <StoredBackLink
+                defaultHref={backLink.defaultHref}
+                intentKey={backLink.intentKey}
+              />
+            </Suspense>
+            {titleActions ? (
+              <div className="ml-auto sm:hidden">{titleActions}</div>
+            ) : null}
+          </div>
 
           <div className="space-y-3">
             {titleMeta ? (
               <p className={textStyles.metadata}>{titleMeta}</p>
             ) : null}
-            <div className="flex items-start justify-between gap-4">
+            <div className="flex items-start gap-4">
               <h1 className={cn(textStyles.detailTitle, "min-w-0")}>{title}</h1>
               {titleActions ? (
-                <div className="shrink-0 pt-1">{titleActions}</div>
+                <div className="hidden shrink-0 pt-1 sm:block">{titleActions}</div>
               ) : null}
             </div>
             <p className={textStyles.pageDescription}>{description}</p>

@@ -11,7 +11,7 @@ export function SignatureMark({
   return (
     <svg
       aria-label="Jimmy"
-      className={cn("h-10 w-auto text-foreground", className)}
+      className={cn("h-8 w-auto text-foreground sm:h-10", className)}
       fill="currentColor"
       role="img"
       stroke="currentColor"
