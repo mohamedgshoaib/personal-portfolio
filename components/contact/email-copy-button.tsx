@@ -118,6 +118,8 @@ export function EmailCopyButton({
             "min-h-7 overflow-hidden text-center"
           )}
           direction={rollDirection}
+          duration={0.12}
+          getEnterDelay={(i) => i * 0.005}
           reserveText={LONGEST_LABEL}
           text={label}
         />

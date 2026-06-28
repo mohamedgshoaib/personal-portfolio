@@ -19,7 +19,7 @@ type TextRollProps = {
 }
 
 const forwardEnter = {
-  initial: { opacity: 0, transform: "translateY(27px)" },
+  initial: { opacity: 0, transform: "translateY(14px)" },
   animate: { opacity: 1, transform: "translateY(0px)" },
 } as const
 
@@ -29,7 +29,7 @@ const forwardExit = {
 } as const
 
 const backwardEnter = {
-  initial: { opacity: 0, transform: "translateY(-27px)" },
+  initial: { opacity: 0, transform: "translateY(-14px)" },
   animate: { opacity: 1, transform: "translateY(0px)" },
 } as const
 
@@ -144,7 +144,7 @@ export function TextRoll({
                       ? enterVariant.animate
                       : { opacity: 1, transform: "translateY(0px)" }
                   }
-                  className="inline-block will-change-transform"
+                  className="inline-block"
                   initial={
                     hasTextChanged
                       ? enterVariant.initial
