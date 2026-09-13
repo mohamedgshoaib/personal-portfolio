@@ -7,6 +7,7 @@ export const ogImageSize = { width: 1200, height: 630 } as const;
 export const ogImageContentType = "image/png";
 
 const fontFamily = "Google Sans";
+const ogImageAvatarRadius = 10;
 
 let fontsPromise: Promise<{ bold: Buffer; regular: Buffer }> | null = null;
 let iconPromise: Promise<string> | null = null;
@@ -56,7 +57,13 @@ export async function renderOgImage({ kicker, title }: OgImageContent) {
       }}
     >
       {/* eslint-disable-next-line next/no-img-element -- rendered by Satori inside ImageResponse, not the DOM; next/image is unsupported here */}
-      <img alt="" height={64} src={iconSrc} width={64} />
+      <img
+        alt=""
+        height={64}
+        src={iconSrc}
+        style={{ borderRadius: ogImageAvatarRadius }}
+        width={64}
+      />
       <div
         style={{
           display: "flex",
