@@ -165,6 +165,8 @@
   --warning-foreground: var(--color-amber-700);
   --accent: --alpha(var(--color-black) / 4%);
   --accent-foreground: var(--color-neutral-800);
+  --highlight-color: color-mix(in srgb, #f07a2e 30%, transparent);
+  --highlight-color-hover: color-mix(in srgb, #f07a2e 42%, transparent);
   --background: var(--color-warm-white);
   --border: --alpha(var(--color-black) / 8%);
   --border-tooltip: --alpha(var(--color-black) / 4%);
@@ -233,6 +235,8 @@
   --warning-foreground: var(--color-amber-400);
   --accent: --alpha(var(--color-white) / 4%);
   --accent-foreground: var(--color-neutral-100);
+  --highlight-color: color-mix(in srgb, #f07a2e 20%, transparent);
+  --highlight-color-hover: color-mix(in srgb, #f07a2e 32%, transparent);
   --background: color-mix(
     in srgb,
     var(--color-neutral-950) 95%,
@@ -303,15 +307,15 @@
 
 @layer base {
   ::selection {
-    background-color: var(--primary);
-    color: var(--primary-foreground);
+    background-color: var(--highlight-color);
+    color: inherit;
   }
 
   html {
     @apply font-sans;
     /* dock clearance: pill height (~3rem) + bottom offset (2rem) + breathing room (0.5rem) */
     --dock-clearance: 5.5rem;
-    scrollbar-color: var(--primary) var(--background);
+    scrollbar-color: var(--highlight-color) var(--background);
     scrollbar-width: thin;
     scrollbar-gutter: stable;
     scroll-padding-bottom: var(--dock-clearance);
@@ -331,13 +335,13 @@
   }
 
   body::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
+    background-color: var(--highlight-color);
     border: 2px solid var(--background);
     border-radius: 9999px;
   }
 
   body::-webkit-scrollbar-thumb:hover {
-    background-color: color-mix(in srgb, var(--primary) 88%, var(--foreground));
+    background-color: var(--highlight-color-hover);
   }
 
   h1,
