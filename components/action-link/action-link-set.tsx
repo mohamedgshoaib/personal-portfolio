@@ -169,6 +169,7 @@ export function ActionLinkSet({
         onItemClick={effectiveOnItemClick}
         showActiveRoute={variant === "dock"}
         showLabels={variant === "projectActions"}
+        showTooltips={variant !== "projectActions"}
         size={size ?? actionLinkSetSize[variant]}
         tooltipSideOffset={variant === "dock" ? 12 : 4}
       />
