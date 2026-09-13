@@ -38,14 +38,16 @@ function isPathActive(href: string, pathname: string): boolean {
 
 function getSharedClassName({
   itemClassName,
+  showLabels,
   size,
 }: {
   itemClassName?: string
+  showLabels: boolean
   size: IconLinkSize
 }): string {
   return cn(
     buttonVariants({
-      size: buttonSize[size],
+      size: showLabels ? "sm" : buttonSize[size],
       variant: "ghost",
     }),
     "transition-[color,scale] duration-150 ease-[var(--ease-interface)] hover:bg-transparent focus-visible:bg-transparent active:scale-[0.96] data-pressed:bg-transparent motion-reduce:active:scale-100",
@@ -62,6 +64,8 @@ export function AnimatedIconLinkGroup({
   items,
   onItemClick,
   showActiveRoute,
+  showLabels = false,
+  showTooltips = true,
   size = "social",
   tooltipSideOffset = 4,
 }: {
@@ -73,6 +77,8 @@ export function AnimatedIconLinkGroup({
   items: readonly IconLinkItem[]
   onItemClick?: () => void
   showActiveRoute?: boolean
+  showLabels?: boolean
+  showTooltips?: boolean
   size?: IconLinkSize
   tooltipSideOffset?: number
 }): React.ReactElement {
@@ -106,7 +112,7 @@ export function AnimatedIconLinkGroup({
     <IconLinkGroup
       aria-label={ariaLabel}
       as={as}
-      className={cn(className, "gap-0")}
+      className={cn("gap-0", className)}
     >
       <AnimatedBackground
         backgroundStyle={activeSurfaceStyle}
@@ -127,62 +133,70 @@ export function AnimatedIconLinkGroup({
             isPathActive((item as IconLinkHrefItem).href, pathname)
 
           const itemClass = cn(
-            getSharedClassName({ itemClassName, size }),
+            getSharedClassName({ itemClassName, showLabels, size }),
+            item.kind === "button" ? "cursor-default" : "cursor-pointer",
             showActiveRoute &&
               isInternalLink &&
               !isActive &&
               "text-muted-foreground"
           )
 
+          const renderedItem =
+            item.kind === "button" ? (
+              <button
+                aria-label={item.label}
+                className={itemClass}
+                onClick={(item as IconLinkButtonItem).onClick}
+                type="button"
+              >
+                <item.icon aria-hidden="true" className={iconSizeClass[size]} />
+                {showLabels && item.visibleLabel ? (
+                  <span>{item.visibleLabel}</span>
+                ) : null}
+              </button>
+            ) : (
+              <Link
+                aria-label={item.label}
+                className={itemClass}
+                href={(item as IconLinkHrefItem).href}
+                onClick={(e) => {
+                  if (isInternalLink) {
+                    setPendingActiveId(item.id ?? item.label)
+                  }
+                  onItemClick?.()
+                  ;(item as IconLinkHrefItem).onClick?.(e)
+                }}
+                rel={
+                  (item as IconLinkHrefItem).target === "_blank"
+                    ? "noopener noreferrer"
+                    : undefined
+                }
+                target={(item as IconLinkHrefItem).target}
+              >
+                <item.icon aria-hidden="true" className={iconSizeClass[size]} />
+                {showLabels && item.visibleLabel ? (
+                  <span>{item.visibleLabel}</span>
+                ) : null}
+              </Link>
+            )
+
           return (
             <div
-              className="cursor-pointer"
+              className={cn(
+                item.kind === "button" ? "cursor-default" : "cursor-pointer"
+              )}
               data-id={item.id ?? item.label}
               key={item.id ?? item.label}
             >
-              <TooltipTrigger
-                handle={tooltipHandle}
-                payload={item.tooltip ?? item.label}
-                render={
-                  item.kind === "button" ? (
-                    <button
-                      aria-label={item.label}
-                      className={itemClass}
-                      onClick={(item as IconLinkButtonItem).onClick}
-                      type="button"
-                    >
-                      <item.icon
-                        aria-hidden="true"
-                        className={iconSizeClass[size]}
-                      />
-                    </button>
-                  ) : (
-                    <Link
-                      aria-label={item.label}
-                      className={itemClass}
-                      href={(item as IconLinkHrefItem).href}
-                      onClick={(e) => {
-                        if (isInternalLink) {
-                          setPendingActiveId(item.id ?? item.label)
-                        }
-                        onItemClick?.()
-                        ;(item as IconLinkHrefItem).onClick?.(e)
-                      }}
-                      rel={
-                        (item as IconLinkHrefItem).target === "_blank"
-                          ? "noopener noreferrer"
-                          : undefined
-                      }
-                      target={(item as IconLinkHrefItem).target}
-                    >
-                      <item.icon
-                        aria-hidden="true"
-                        className={iconSizeClass[size]}
-                      />
-                    </Link>
-                  )
-                }
-              />
+              {showTooltips ? (
+                <TooltipTrigger
+                  handle={tooltipHandle}
+                  payload={item.tooltip ?? item.label}
+                  render={renderedItem}
+                />
+              ) : (
+                renderedItem
+              )}
             </div>
           )
         })}

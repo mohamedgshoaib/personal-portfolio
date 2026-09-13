@@ -7,6 +7,7 @@ type IconLinkBase = {
   icon: TablerIcon
   id?: string
   label: string
+  visibleLabel?: string
   tooltip?: React.ReactNode
 }
 

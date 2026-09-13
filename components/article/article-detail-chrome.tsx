@@ -18,6 +18,7 @@ type ArticleDetailChromeProps = {
   description: string
   title: string
   titleActions?: React.ReactNode
+  titleLinks?: React.ReactNode
   titleMeta?: React.ReactNode
   toc: readonly TOCItemType[]
   tocLabel: string
@@ -30,6 +31,7 @@ export function ArticleDetailChrome({
   description,
   title,
   titleActions,
+  titleLinks,
   titleMeta,
   toc,
   tocLabel,
@@ -57,6 +59,7 @@ export function ArticleDetailChrome({
             ) : null}
             <h1 className={cn(textStyles.detailTitle, "min-w-0")}>{title}</h1>
             <p className={textStyles.pageDescription}>{description}</p>
+            {titleLinks ? <div className="pt-1">{titleLinks}</div> : null}
           </div>
         </header>
 

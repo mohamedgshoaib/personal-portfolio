@@ -1,5 +1,6 @@
 import type * as React from "react"
 
+import { ProjectActions } from "@/components/action-link/project-actions"
 import { ArticleDetailChrome } from "@/components/article/article-detail-chrome"
 import { PageActions } from "@/components/article/page-actions"
 import { ProjectMediaPlaceholder } from "@/components/editorial-entity/project-media-placeholder"
@@ -34,25 +35,13 @@ export function ProjectDetailPage({
       bodyClassName="[&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5"
       description={project.description}
       title={project.title}
-      titleActions={
-        <PageActions
-          links={[
-            {
-              href: project.liveHref,
-              kind: "projectLive",
-              labelContext: project.title,
-            },
-            ...(project.sourceHref
-              ? [
-                  {
-                    href: project.sourceHref,
-                    kind: "projectSource" as const,
-                    labelContext: project.title,
-                  },
-                ]
-              : []),
-          ]}
-          markdown={markdown}
+      titleActions={<PageActions markdown={markdown} />}
+      titleLinks={
+        <ProjectActions
+          layout="stack"
+          liveHref={project.liveHref}
+          projectName={project.title}
+          sourceHref={project.sourceHref ?? null}
         />
       }
       toc={project.toc}

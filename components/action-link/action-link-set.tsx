@@ -1,11 +1,10 @@
 "use client"
 
-import { createContext, use, useEffect, useRef, useState } from "react"
+import { createContext, use, useEffect, useState } from "react"
 import * as React from "react"
 import {
   IconCheckFilled,
   IconMailFilled,
-  type Icon as TablerIcon,
   type IconProps,
 } from "@tabler/icons-react"
 import { useSound } from "@web-kits/audio/react"
@@ -169,6 +168,7 @@ export function ActionLinkSet({
         items={resolvedItems}
         onItemClick={effectiveOnItemClick}
         showActiveRoute={variant === "dock"}
+        showLabels={variant === "projectActions"}
         size={size ?? actionLinkSetSize[variant]}
         tooltipSideOffset={variant === "dock" ? 12 : 4}
       />

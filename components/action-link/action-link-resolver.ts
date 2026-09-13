@@ -21,6 +21,7 @@ type ActionLinkDefinition = {
   icon: TablerIcon
   label: string | ((item: ActionLinkRecord) => string)
   target?: string
+  visibleLabel?: string
 }
 
 const actionLinkDefinitions: Record<ActionLinkKind, ActionLinkDefinition> = {
@@ -56,12 +57,14 @@ const actionLinkDefinitions: Record<ActionLinkKind, ActionLinkDefinition> = {
     label: (item) =>
       item.labelContext ? `${item.labelContext} live site` : "Open website",
     target: "_blank",
+    visibleLabel: "Website",
   },
   projectSource: {
     icon: IconBrandGithubFilled,
     label: (item) =>
       item.labelContext ? `${item.labelContext} source code` : "Source code",
     target: "_blank",
+    visibleLabel: "Source code",
   },
   projects: {
     icon: IconBriefcaseFilled,
@@ -91,6 +94,9 @@ export function resolveActionLinkItem(
     href: item.href,
     icon: definition.icon,
     label: item.label ?? label,
+    ...(definition.visibleLabel
+      ? { visibleLabel: definition.visibleLabel }
+      : {}),
     ...(definition.target ? { target: definition.target } : {}),
   }
 }

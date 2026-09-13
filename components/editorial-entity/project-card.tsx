@@ -32,24 +32,20 @@ export function ProjectCard({
   return (
     <EntitySurface
       as="article"
-      className="pointer-events-none relative"
+      className="pointer-events-none relative flex h-full flex-col"
       inset={surfaceInset}
       interaction={surfaceInteraction}
     >
       <ProjectMediaFrame name={name} priority={priority} src={screenshotSrc} />
-      <div className="mt-3 flex min-w-0 items-center justify-between gap-3">
-        <h3 className={cn(textStyles.entityTitle, "min-w-0 truncate")}>
-          {name}
-        </h3>
-        <div className="pointer-events-auto relative z-10 shrink-0">
-          <ProjectActions
-            liveHref={liveHref}
-            projectName={name}
-            sourceHref={sourceHref}
-          />
-        </div>
+      <h3 className={cn(textStyles.entityTitle, "mt-3")}>{name}</h3>
+      <p className={cn(textStyles.entityDescription, "mt-1.5")}>{summary}</p>
+      <div className="pointer-events-auto relative z-10 mt-auto pt-3">
+        <ProjectActions
+          liveHref={liveHref}
+          projectName={name}
+          sourceHref={sourceHref}
+        />
       </div>
-      <p className={textStyles.entityDescription}>{summary}</p>
     </EntitySurface>
   )
 }
