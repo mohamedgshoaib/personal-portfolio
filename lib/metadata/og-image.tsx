@@ -6,7 +6,7 @@ import { ImageResponse } from "next/og";
 export const ogImageSize = { width: 1200, height: 630 } as const;
 export const ogImageContentType = "image/png";
 
-const fontFamily = "Google Sans";
+const fontFamily = "Cal Sans";
 const ogImageAvatarRadius = 10;
 
 let fontsPromise: Promise<{ bold: Buffer; regular: Buffer }> | null = null;
@@ -14,8 +14,8 @@ let iconPromise: Promise<string> | null = null;
 
 function loadFonts() {
   fontsPromise ??= Promise.all([
-    readFile(join(process.cwd(), "app/fonts/og/GoogleSans-Regular.ttf")),
-    readFile(join(process.cwd(), "app/fonts/og/GoogleSans-Bold.ttf")),
+    readFile(join(process.cwd(), "lib/metadata/og-fonts/CalSans-Regular.ttf")),
+    readFile(join(process.cwd(), "lib/metadata/og-fonts/CalSans-Bold.ttf")),
   ]).then(([regular, bold]) => ({ bold, regular }));
 
   return fontsPromise;

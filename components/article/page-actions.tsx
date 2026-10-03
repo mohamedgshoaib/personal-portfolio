@@ -226,6 +226,7 @@ export function PageActions({
     <div className={className}>
       <ActionLinkSet
         aria-label="Page actions"
+        alignment="end"
         items={actionLinkItems}
         size={size}
         variant="pageActions"

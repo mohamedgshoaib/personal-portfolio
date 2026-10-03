@@ -31,7 +31,7 @@ export function AnimatedEntityBackground({
   return (
     <AnimatedBackground
       backgroundStyle={activeSurfaceStyle}
-      className={cn("rounded-lg", className)}
+      className={cn("rounded-[inherit]", className)}
       enableHover={enableHover}
       transition={transition}
       {...props}

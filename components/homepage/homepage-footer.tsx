@@ -14,7 +14,11 @@ export function HomepageFooter({
   return (
     <footer className="mt-20 flex flex-row items-center justify-between gap-4 pb-16 text-sm text-muted-foreground">
       <SignatureMark />
-      <SocialLinks className="text-muted-foreground" links={socialLinks} />
+      <SocialLinks
+        alignment="end"
+        className="text-muted-foreground"
+        links={socialLinks}
+      />
     </footer>
   )
 }

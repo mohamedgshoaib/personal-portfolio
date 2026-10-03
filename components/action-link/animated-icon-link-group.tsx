@@ -64,6 +64,7 @@ export function AnimatedIconLinkGroup({
   items,
   onItemClick,
   showActiveRoute,
+  showBackground = true,
   showLabels = false,
   showTooltips = true,
   size = "social",
@@ -77,6 +78,7 @@ export function AnimatedIconLinkGroup({
   items: readonly IconLinkItem[]
   onItemClick?: () => void
   showActiveRoute?: boolean
+  showBackground?: boolean
   showLabels?: boolean
   showTooltips?: boolean
   size?: IconLinkSize
@@ -119,6 +121,7 @@ export function AnimatedIconLinkGroup({
         className={cn("rounded-lg", backgroundClassName)}
         defaultValue={effectiveDefaultValue}
         enableHover
+        showBackground={showBackground}
         transition={surfaceBackgroundTransition}
       >
         {items.map((item) => {

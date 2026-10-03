@@ -76,6 +76,22 @@ const actionLinkSetSize: Record<ActionLinkSetVariant, IconLinkSize> = {
   social: "social",
 }
 
+function getGroupAlignmentClassName(
+  variant: ActionLinkSetVariant,
+  alignment: "start" | "end"
+): string | undefined {
+  switch (variant) {
+    case "projectActions":
+      return alignment === "start" ? "-translate-x-2" : "translate-x-2"
+    case "social":
+      return alignment === "start" ? "-translate-x-1.5" : "translate-x-1.5"
+    case "pageActions":
+      return alignment === "start" ? "-translate-x-1.25" : "translate-x-1.25"
+    case "dock":
+      return undefined
+  }
+}
+
 export function ActionLinkSet({
   "aria-label": ariaLabel,
   as,
@@ -83,6 +99,7 @@ export function ActionLinkSet({
   itemClassName,
   items,
   onItemClick,
+  alignment = "start",
   size,
   variant = "social",
 }: {
@@ -92,6 +109,7 @@ export function ActionLinkSet({
   itemClassName?: string
   items: readonly (ActionLinkRecord | IconLinkItem)[]
   onItemClick?: () => void
+  alignment?: "start" | "end"
   size?: IconLinkSize
   variant?: ActionLinkSetVariant
 }): React.ReactElement {
@@ -161,13 +179,24 @@ export function ActionLinkSet({
         aria-label={ariaLabel}
         as={as}
         backgroundClassName={variant === "dock" ? "rounded-xl" : undefined}
-        className={className}
+        className={cn(
+          className,
+          getGroupAlignmentClassName(variant, alignment)
+        )}
         itemClassName={
-          variant === "dock" ? cn("rounded-xl", itemClassName) : itemClassName
+          variant === "dock"
+            ? cn("rounded-xl", itemClassName)
+            : variant === "projectActions"
+              ? cn(
+                  "text-muted-foreground hover:text-foreground focus-visible:text-foreground",
+                  itemClassName
+                )
+              : itemClassName
         }
         items={resolvedItems}
         onItemClick={effectiveOnItemClick}
         showActiveRoute={variant === "dock"}
+        showBackground={variant !== "projectActions"}
         showLabels={variant === "projectActions"}
         showTooltips={variant !== "projectActions"}
         size={size ?? actionLinkSetSize[variant]}

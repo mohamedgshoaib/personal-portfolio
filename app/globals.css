@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "cal-sans";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -150,6 +151,10 @@
 }
 
 :root {
+  --font-sans: "Cal Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
   --font-heading: var(--font-sans);
   --duration-surface-hover: 150ms;
   --duration-surface-dim: 200ms;
@@ -313,6 +318,7 @@
 
   html {
     @apply font-sans;
+    font-optical-sizing: auto;
     /* dock clearance: pill height (~3rem) + bottom offset (2rem) + breathing room (0.5rem) */
     --dock-clearance: 5.5rem;
     scrollbar-color: var(--highlight-color) var(--background);

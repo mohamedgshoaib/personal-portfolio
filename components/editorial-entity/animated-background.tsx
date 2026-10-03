@@ -41,6 +41,7 @@ export type AnimatedBackgroundProps = {
   className?: string
   defaultValue?: string
   enableHover?: boolean
+  showBackground?: boolean
   onValueChange?: (newActiveId: string | null) => void
   transition?: Transition
 }
@@ -96,6 +97,7 @@ export function AnimatedBackground({
   className,
   defaultValue,
   enableHover = false,
+  showBackground = true,
   onValueChange,
   transition,
 }: AnimatedBackgroundProps): React.ReactElement {
@@ -182,36 +184,38 @@ export function AnimatedBackground({
 
         const id = child.props["data-id"]
         const isActive = activeId === id
-        const interactionProps = !enableHover
-          ? {
-              onClick: composeEventHandler(child.props.onClick, () =>
-                handleInteractionStart(id)
-              ),
-            }
-          : canHover
+        const interactionProps = !showBackground
+          ? {}
+          : !enableHover
             ? {
-                onBlur: composeEventHandler(child.props.onBlur, (event) => {
-                  if (!isMovingToSiblingItem(event)) {
-                    handleInteractionEnd()
-                  }
-                }),
-                onFocus: composeEventHandler(child.props.onFocus, () =>
+                onClick: composeEventHandler(child.props.onClick, () =>
                   handleInteractionStart(id)
                 ),
-                onPointerEnter: composeEventHandler(
-                  child.props.onPointerEnter,
-                  () => handleInteractionStart(id)
-                ),
-                onPointerLeave: composeEventHandler(
-                  child.props.onPointerLeave,
-                  (event) => {
+              }
+            : canHover
+              ? {
+                  onBlur: composeEventHandler(child.props.onBlur, (event) => {
                     if (!isMovingToSiblingItem(event)) {
                       handleInteractionEnd()
                     }
-                  }
-                ),
-              }
-            : {}
+                  }),
+                  onFocus: composeEventHandler(child.props.onFocus, () =>
+                    handleInteractionStart(id)
+                  ),
+                  onPointerEnter: composeEventHandler(
+                    child.props.onPointerEnter,
+                    () => handleInteractionStart(id)
+                  ),
+                  onPointerLeave: composeEventHandler(
+                    child.props.onPointerLeave,
+                    (event) => {
+                      if (!isMovingToSiblingItem(event)) {
+                        handleInteractionEnd()
+                      }
+                    }
+                  ),
+                }
+              : {}
 
         return cloneElement(
           child,
@@ -223,33 +227,40 @@ export function AnimatedBackground({
             ...interactionProps,
           },
           <>
-            <AnimatePresence custom={activeId !== null} initial={false}>
-              {activeId !== null ? (
-                <m.div
-                  aria-hidden="true"
-                  animate="animate"
-                  className="pointer-events-none absolute inset-0"
-                  custom={activeId !== null}
-                  exit="exit"
-                  initial={prefersReducedMotion ? false : "initial"}
-                  key="background-presence"
-                  transition={{
-                    duration: prefersReducedMotion ? 0 : 0.18,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  variants={backgroundPresenceVariants}
-                >
-                  {isActive ? (
-                    <m.div
-                      className={cn("pointer-events-none size-full", className)}
-                      layoutId={`background-${uniqueId}`}
-                      style={backgroundStyle}
-                      transition={canHover ? resolvedTransition : { duration: 0 }}
-                    />
-                  ) : null}
-                </m.div>
-              ) : null}
-            </AnimatePresence>
+            {showBackground ? (
+              <AnimatePresence custom={activeId !== null} initial={false}>
+                {activeId !== null ? (
+                  <m.div
+                    aria-hidden="true"
+                    animate="animate"
+                    className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                    custom={activeId !== null}
+                    exit="exit"
+                    initial={prefersReducedMotion ? false : "initial"}
+                    key="background-presence"
+                    transition={{
+                      duration: prefersReducedMotion ? 0 : 0.18,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    variants={backgroundPresenceVariants}
+                  >
+                    {isActive ? (
+                      <m.div
+                        className={cn(
+                          "pointer-events-none size-full",
+                          className
+                        )}
+                        layoutId={`background-${uniqueId}`}
+                        style={backgroundStyle}
+                        transition={
+                          canHover ? resolvedTransition : { duration: 0 }
+                        }
+                      />
+                    ) : null}
+                  </m.div>
+                ) : null}
+              </AnimatePresence>
+            ) : null}
             {child.props.children}
           </>
         )
