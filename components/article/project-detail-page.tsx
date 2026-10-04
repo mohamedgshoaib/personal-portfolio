@@ -23,7 +23,14 @@ export function ProjectDetailPage({
   const projectDetailMDXComponents = getMDXComponents({
     ProjectMediaPlaceholder: (
       props: React.ComponentPropsWithoutRef<typeof ProjectMediaPlaceholder>
-    ) => <ProjectMediaPlaceholder src={coverSrc} {...props} />,
+    ) => (
+      <ProjectMediaPlaceholder
+        {...props}
+        label={props.label ?? `Screenshot of the ${project.title} website`}
+        loading="eager"
+        src={coverSrc}
+      />
+    ),
     ProjectStack: () => <ProjectStack stack={project.stack} />,
   })
   return (

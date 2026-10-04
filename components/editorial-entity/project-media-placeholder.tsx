@@ -8,13 +8,13 @@ export function ProjectMediaPlaceholder({
   caption,
   className,
   label = "Project screenshot placeholder",
-  priority,
+  loading,
   src,
 }: {
   caption?: string
   className?: string
   label?: string
-  priority?: boolean
+  loading?: "eager" | "lazy"
   src?: string
 }): React.ReactElement {
   return (
@@ -31,7 +31,7 @@ export function ProjectMediaPlaceholder({
             alt={label}
             className="object-cover"
             fill
-            priority={priority}
+            loading={loading}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 65ch"
             src={src}
           />

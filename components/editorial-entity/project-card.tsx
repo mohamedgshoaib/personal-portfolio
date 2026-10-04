@@ -13,9 +13,9 @@ import { cn } from "@/lib/utils"
 export type ProjectCardProps = {
   detailHref: string
   liveHref: string
+  loading?: "eager" | "lazy"
   name: string
   onDetailClick?: React.MouseEventHandler<HTMLAnchorElement>
-  priority?: boolean
   screenshotSrc?: string
   sourceHref: string | null
   surfaceInset?: VariantProps<typeof entitySurfaceVariants>["inset"]
@@ -26,9 +26,9 @@ export type ProjectCardProps = {
 export function ProjectCard({
   detailHref,
   liveHref,
+  loading,
   name,
   onDetailClick,
-  priority,
   screenshotSrc,
   sourceHref,
   surfaceInset = "card",
@@ -47,7 +47,7 @@ export function ProjectCard({
         href={detailHref}
         onClick={onDetailClick}
       >
-        <ProjectMediaFrame priority={priority} src={screenshotSrc} />
+        <ProjectMediaFrame loading={loading} src={screenshotSrc} />
         <h3
           className={cn(
             textStyles.entityTitle,
@@ -70,10 +70,10 @@ export function ProjectCard({
 }
 
 function ProjectMediaFrame({
-  priority,
+  loading,
   src,
 }: {
-  priority?: boolean
+  loading?: "eager" | "lazy"
   src?: string
 }): React.ReactElement {
   return (
@@ -83,7 +83,7 @@ function ProjectMediaFrame({
           alt=""
           className="object-cover"
           fill
-          priority={priority}
+          loading={loading}
           sizes="(max-width: 640px) 100vw, 50vw"
           src={src}
         />

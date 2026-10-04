@@ -11,6 +11,7 @@ export const articleMDXComponents = {
   a: ArticleLink,
   blockquote: ArticleBlockquote,
   code: ArticleCode,
+  ArticleImage,
   img: ArticleImage,
   kbd: Kbd,
   ol: ArticleOrderedList,

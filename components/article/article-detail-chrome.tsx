@@ -37,36 +37,33 @@ export function ArticleDetailChrome({
   tocLabel,
 }: ArticleDetailChromeProps): React.ReactElement {
   return (
-    <>
-      <ArticleToc aria-label={tocLabel} toc={toc} />
-      <article className="space-y-14 pt-4 sm:pt-8">
-        <header className="space-y-6">
-          <div className="flex items-center gap-4">
-            <Suspense fallback={null}>
-              <StoredBackLink
-                defaultHref={backLink.defaultHref}
-                intentKey={backLink.intentKey}
-              />
-            </Suspense>
-            {titleActions ? (
-              <div className="ml-auto">{titleActions}</div>
-            ) : null}
-          </div>
-
-          <div className="space-y-3">
-            {titleMeta ? (
-              <p className={textStyles.metadata}>{titleMeta}</p>
-            ) : null}
-            <h1 className={cn(textStyles.detailTitle, "min-w-0")}>{title}</h1>
-            <p className={textStyles.pageDescription}>{description}</p>
-            {titleLinks ? <div className="pt-1">{titleLinks}</div> : null}
-          </div>
-        </header>
-
-        <div className={cn(textStyles.articleBody, bodyClassName)}>
-          {children}
+    <article className="space-y-14 pt-4 sm:pt-8">
+      <header className="space-y-6">
+        <div className="flex items-center gap-4">
+          <Suspense fallback={null}>
+            <StoredBackLink
+              defaultHref={backLink.defaultHref}
+              intentKey={backLink.intentKey}
+            />
+          </Suspense>
+          {titleActions ? <div className="ml-auto">{titleActions}</div> : null}
         </div>
-      </article>
-    </>
+
+        <ArticleToc aria-label={tocLabel} toc={toc} />
+
+        <div className="space-y-3">
+          {titleMeta ? (
+            <p className={textStyles.metadata}>{titleMeta}</p>
+          ) : null}
+          <h1 className={cn(textStyles.detailTitle, "min-w-0")}>{title}</h1>
+          <p className={textStyles.pageDescription}>{description}</p>
+          {titleLinks ? <div className="pt-1">{titleLinks}</div> : null}
+        </div>
+      </header>
+
+      <div className={cn(textStyles.articleBody, bodyClassName)}>
+        {children}
+      </div>
+    </article>
   )
 }

@@ -29,13 +29,23 @@ export function ArticleToc({
 
   return (
     <AnchorProvider toc={[...visibleItems]}>
-      <nav
-        aria-label={ariaLabel}
-        className="fixed top-24 left-[calc(50%+24rem)] z-10 hidden w-44 xl:block"
-      >
-        <p className={textStyles.tocHeading}>Sections</p>
-        <ArticleTocItems toc={visibleItems} />
-      </nav>
+      <>
+        <nav
+          aria-label={ariaLabel}
+          className="fixed top-24 left-[calc(50%+24rem)] z-10 hidden w-56 xl:block"
+        >
+          <p className={textStyles.tocHeading}>Sections</p>
+          <ArticleTocItems toc={visibleItems} />
+        </nav>
+        <details className="rounded-lg border border-border px-3 py-2 xl:hidden">
+          <summary className="cursor-pointer py-1 text-sm font-medium text-foreground">
+            On this page
+          </summary>
+          <nav aria-label={ariaLabel} className="pt-2">
+            <ArticleTocItems toc={visibleItems} />
+          </nav>
+        </details>
+      </>
     </AnchorProvider>
   )
 }
@@ -159,7 +169,9 @@ function ArticleTocItems({
               }}
             >
               <span aria-hidden="true" />
-              <span className="self-center truncate">{item.title}</span>
+              <span className="min-w-0 self-center text-pretty whitespace-normal">
+                {item.title}
+              </span>
             </TOCItem>
           </li>
         )

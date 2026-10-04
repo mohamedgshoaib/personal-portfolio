@@ -7,12 +7,14 @@ import { cn } from "@/lib/utils"
 type ArticleImageProps = {
   alt?: string
   className?: string
+  loading?: "eager" | "lazy"
   src?: string
 }
 
 export function ArticleImage({
   alt = "",
   className,
+  loading,
   src,
 }: ArticleImageProps): React.ReactElement | null {
   if (!src) {
@@ -24,13 +26,14 @@ export function ArticleImage({
       className={cn(
         writingImageRatio.tailwindClass,
         "relative overflow-hidden rounded-lg outline outline-1 -outline-offset-1 outline-[rgba(0,0,0,0.10)] dark:outline-[rgba(255,255,255,0.10)]",
-        className,
+        className
       )}
     >
       <SkeletonImage
         alt={alt}
         className="object-cover"
         fill
+        loading={loading}
         sizes="(max-width: 768px) 100vw, 640px"
         src={src}
       />

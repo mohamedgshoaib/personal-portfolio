@@ -14,7 +14,7 @@ import {
 type ProjectListRowProps = React.ComponentPropsWithoutRef<"div"> & {
   "data-id": string
   children?: React.ReactNode
-  priority?: boolean
+  loading?: "eager" | "lazy"
   project: ProjectContent
   projectBackHref: string
 }
@@ -34,11 +34,11 @@ export function ProjectList({
         getId={(project) => project.name}
         itemClassName="h-full cursor-default"
         items={projects}
-        renderItem={(project, { "data-id": dataId, className }) => (
+        renderItem={(project, { "data-id": dataId, className }, index) => (
           <ProjectListRow
             className={className}
             data-id={dataId}
-            priority={false}
+            loading={index < 2 ? "eager" : undefined}
             project={project}
             projectBackHref={projectBackHref}
           />
@@ -53,7 +53,7 @@ export function ProjectList({
 
 function ProjectListRow({
   children,
-  priority,
+  loading,
   project,
   projectBackHref,
   ...surfaceProps
@@ -72,7 +72,7 @@ function ProjectListRow({
             value: projectBackHref,
           })
         }}
-        priority={priority}
+        loading={loading}
         screenshotSrc={project.screenshotSrc}
         sourceHref={project.sourceHref}
         surfaceInset="none"

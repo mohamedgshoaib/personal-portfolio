@@ -13,12 +13,27 @@ type WritingDetailPageProps = {
 }
 
 const writingDetailMDXComponents = getMDXComponents(articleMDXComponents)
+const publishedDateFormatter = new Intl.DateTimeFormat("en-US", {
+  day: "numeric",
+  month: "long",
+  timeZone: "UTC",
+  year: "numeric",
+})
+
+function formatPublishedDate(date: string): string {
+  return publishedDateFormatter.format(new Date(`${date}T00:00:00.000Z`))
+}
 
 export function WritingDetailPage({
   markdown,
   post,
 }: WritingDetailPageProps): React.ReactElement {
   const MDXContent = post.body
+  const visibleDate = post.updatedAt ?? post.publishedAt
+  const dateLabel =
+    post.updatedAt && post.updatedAt !== post.publishedAt
+      ? "Updated"
+      : "Published"
 
   return (
     <ArticleDetailChrome
@@ -29,7 +44,14 @@ export function WritingDetailPage({
       description={post.description}
       title={post.title}
       titleActions={<PageActions markdown={markdown} />}
-      titleMeta={post.readingTime}
+      titleMeta={
+        <>
+          {dateLabel}{" "}
+          <time dateTime={visibleDate}>{formatPublishedDate(visibleDate)}</time>
+          <span aria-hidden="true"> · </span>
+          {post.readingTime}
+        </>
+      }
       toc={post.toc}
       tocLabel="Writing sections"
     >
