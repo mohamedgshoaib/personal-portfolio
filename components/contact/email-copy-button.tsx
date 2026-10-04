@@ -121,11 +121,11 @@ export function EmailCopyButton({
         defaultValue={SURFACE_ID}
         enableHover={false}
       >
-        <div className="p-0.5" data-id={SURFACE_ID}>
+        <div className="w-full max-w-72 p-0.5" data-id={SURFACE_ID}>
           <button
             aria-describedby="email-copy-status"
             aria-label={`Copy email address ${email}`}
-            className="min-w-64 cursor-default rounded-md px-5 py-3 text-center text-base font-medium text-foreground transition-[color,scale] duration-150 ease-[var(--ease-interface)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background active:scale-[0.96] motion-reduce:active:scale-100 sm:min-w-72"
+            className="w-full min-w-0 cursor-default rounded-md px-1.5 py-3 text-center text-base font-medium text-foreground transition-[color,scale] duration-150 ease-[var(--ease-interface)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background active:scale-[0.96] motion-reduce:active:scale-100 sm:px-4"
             onBlur={() => setIsHintVisible(false)}
             onClick={copyEmail}
             onFocus={() => {
@@ -141,7 +141,7 @@ export function EmailCopyButton({
             onMouseLeave={() => setIsHintVisible(false)}
             type="button"
           >
-            <span>{email}</span>
+            <span className="break-words">{email}</span>
           </button>
         </div>
       </AnimatedEntityBackground>
