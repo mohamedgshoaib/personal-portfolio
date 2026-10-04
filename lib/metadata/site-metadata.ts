@@ -30,7 +30,7 @@ function createRouteMetadata(route: RouteMetadataInput): Metadata {
 
   return {
     metadataBase: new URL(siteConfig.siteUrl),
-    title,
+    title: { absolute: title },
     description: route.description,
     alternates: {
       canonical: canonicalUrl,
