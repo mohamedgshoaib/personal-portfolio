@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { SkeletonImage } from "@/components/ui/skeleton-image"
 import type { VariantProps } from "class-variance-authority"
 import type * as React from "react"
@@ -9,8 +11,10 @@ import { textStyles } from "@/lib/design/text-styles"
 import { cn } from "@/lib/utils"
 
 export type ProjectCardProps = {
+  detailHref: string
   liveHref: string
   name: string
+  onDetailClick?: React.MouseEventHandler<HTMLAnchorElement>
   priority?: boolean
   screenshotSrc?: string
   sourceHref: string | null
@@ -20,8 +24,10 @@ export type ProjectCardProps = {
 }
 
 export function ProjectCard({
+  detailHref,
   liveHref,
   name,
+  onDetailClick,
   priority,
   screenshotSrc,
   sourceHref,
@@ -36,8 +42,21 @@ export function ProjectCard({
       inset={surfaceInset}
       interaction={surfaceInteraction}
     >
-      <ProjectMediaFrame name={name} priority={priority} src={screenshotSrc} />
-      <h3 className={cn(textStyles.entityTitle, "mt-3")}>{name}</h3>
+      <Link
+        className="group/project-detail pointer-events-auto block touch-manipulation rounded-lg focus-visible:outline-offset-2"
+        href={detailHref}
+        onClick={onDetailClick}
+      >
+        <ProjectMediaFrame priority={priority} src={screenshotSrc} />
+        <h3
+          className={cn(
+            textStyles.entityTitle,
+            "mt-3 group-hover/project-detail:underline group-hover/project-detail:underline-offset-4 group-focus-visible/project-detail:underline no-hover:underline"
+          )}
+        >
+          {name}
+        </h3>
+      </Link>
       <p className={cn(textStyles.entityDescription, "mt-1.5")}>{summary}</p>
       <div className="pointer-events-auto relative z-10 mt-auto pt-3">
         <ProjectActions
@@ -51,11 +70,9 @@ export function ProjectCard({
 }
 
 function ProjectMediaFrame({
-  name,
   priority,
   src,
 }: {
-  name: string
   priority?: boolean
   src?: string
 }): React.ReactElement {
@@ -63,7 +80,7 @@ function ProjectMediaFrame({
     <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
       {src ? (
         <SkeletonImage
-          alt={`${name} project screenshot`}
+          alt=""
           className="object-cover"
           fill
           priority={priority}

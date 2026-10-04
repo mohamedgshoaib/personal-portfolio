@@ -188,7 +188,7 @@ export function ActionLinkSet({
             ? cn("rounded-xl", itemClassName)
             : variant === "projectActions"
               ? cn(
-                  "text-muted-foreground hover:text-foreground focus-visible:text-foreground",
+                  "text-muted-foreground hover:text-foreground focus-visible:text-foreground no-hover:text-foreground",
                   itemClassName
                 )
               : itemClassName

@@ -2,7 +2,6 @@
 
 import type * as React from "react"
 
-import { EntityPrimaryLink } from "@/components/editorial-entity/entity-primary-link"
 import { EditorialEntityList } from "@/components/editorial-entity/editorial-entity-list"
 import { ProjectCard } from "@/components/editorial-entity/project-card"
 import type { ProjectContent } from "@/lib/content/content-types"
@@ -33,12 +32,9 @@ export function ProjectList({
     <div className="grid sm:grid-cols-2 sm:gap-x-6">
       <EditorialEntityList
         getId={(project) => project.name}
-        itemClassName="h-full cursor-pointer"
+        itemClassName="h-full cursor-default"
         items={projects}
-        renderItem={(
-          project,
-          { "data-id": dataId, className }
-        ) => (
+        renderItem={(project, { "data-id": dataId, className }) => (
           <ProjectListRow
             className={className}
             data-id={dataId}
@@ -65,20 +61,17 @@ function ProjectListRow({
   return (
     <div {...surfaceProps} className={cn(surfaceProps.className, "relative")}>
       {children}
-      <EntityPrimaryLink
-        ariaLabel={`Open details for ${project.name}`}
-        href={project.href}
-        onClick={() => {
+      <ProjectCard
+        detailHref={project.href}
+        liveHref={project.liveHref}
+        name={project.name}
+        onDetailClick={() => {
           applyNavigationIntent({
             key: navigationIntentKeys.projectDetailBackHref,
             type: "set",
             value: projectBackHref,
           })
         }}
-      />
-      <ProjectCard
-        liveHref={project.liveHref}
-        name={project.name}
         priority={priority}
         screenshotSrc={project.screenshotSrc}
         sourceHref={project.sourceHref}
