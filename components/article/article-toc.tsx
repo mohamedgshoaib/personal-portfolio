@@ -7,6 +7,7 @@ import {
   useActiveAnchors,
   type TOCItemType,
 } from "fumadocs-core/toc"
+import { IconListFilled } from "@tabler/icons-react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import type * as React from "react"
 
@@ -38,11 +39,15 @@ export function ArticleToc({
           <ArticleTocItems toc={visibleItems} />
         </nav>
         <details className="rounded-lg border border-border px-3 py-2 xl:hidden">
-          <summary className="cursor-pointer py-1 text-sm font-medium text-foreground">
+          <summary className="cursor-pointer list-none py-1 text-sm font-medium text-foreground [&::-webkit-details-marker]:hidden">
+            <IconListFilled
+              aria-hidden="true"
+              className="mr-2 inline-block size-4 align-[-0.2em]"
+            />
             On this page
           </summary>
           <nav aria-label={ariaLabel} className="pt-2">
-            <ArticleTocItems toc={visibleItems} />
+            <ArticleTocItems showTrackingRail={false} toc={visibleItems} />
           </nav>
         </details>
       </>
@@ -51,8 +56,10 @@ export function ArticleToc({
 }
 
 function ArticleTocItems({
+  showTrackingRail = true,
   toc,
 }: {
+  showTrackingRail?: boolean
   toc: readonly TOCItemType[]
 }): React.ReactElement {
   const activeAnchor = useActiveAnchor()
@@ -80,7 +87,7 @@ function ArticleTocItems({
   )
   const activeIndexSet = useMemo(() => new Set(activeIndexes), [activeIndexes])
   const measureRail = useCallback(() => {
-    if (activeIndexes.length === 0) {
+    if (!showTrackingRail || activeIndexes.length === 0) {
       setRailStyle((current) =>
         current.height === 0 ? current : { ...current, height: 0 }
       )
@@ -112,9 +119,11 @@ function ArticleTocItems({
         ? current
         : nextRailStyle
     )
-  }, [activeIndexes])
+  }, [activeIndexes, showTrackingRail])
 
   useEffect(() => {
+    if (!showTrackingRail) return
+
     const frame = window.requestAnimationFrame(measureRail)
 
     const list = listRef.current
@@ -129,28 +138,34 @@ function ArticleTocItems({
       window.cancelAnimationFrame(frame)
       observer.disconnect()
     }
-  }, [measureRail])
+  }, [measureRail, showTrackingRail])
 
   return (
     <ol
-      className="relative space-y-0.5 before:absolute before:top-1 before:bottom-1 before:left-[0.21875rem] before:w-px before:bg-muted-foreground/15"
+      className={cn(
+        "relative space-y-0.5",
+        showTrackingRail &&
+          "before:absolute before:top-1 before:bottom-1 before:left-[0.21875rem] before:w-px before:bg-muted-foreground/15"
+      )}
       ref={listRef}
     >
-      <m.span
-        aria-hidden="true"
-        animate={{
-          opacity: railStyle.height > 0 ? 1 : 0,
-          transform: `translateY(${railStyle.top}px) scaleY(${Math.max(railStyle.height, 0)})`,
-        }}
-        className="absolute left-[0.1875rem] w-0.5 origin-top rounded-full bg-foreground"
-        initial={false}
-        style={{ height: 1, top: 0 }}
-        transition={{
-          type: "spring",
-          duration: 0.3,
-          bounce: 0,
-        }}
-      />
+      {showTrackingRail ? (
+        <m.span
+          aria-hidden="true"
+          animate={{
+            opacity: railStyle.height > 0 ? 1 : 0,
+            transform: `translateY(${railStyle.top}px) scaleY(${Math.max(railStyle.height, 0)})`,
+          }}
+          className="absolute left-[0.1875rem] w-0.5 origin-top rounded-full bg-foreground"
+          initial={false}
+          style={{ height: 1, top: 0 }}
+          transition={{
+            type: "spring",
+            duration: 0.3,
+            bounce: 0,
+          }}
+        />
+      ) : null}
       {toc.map((item, index) => {
         const active = activeIndexSet.has(index)
 

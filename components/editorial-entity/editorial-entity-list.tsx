@@ -16,6 +16,7 @@ type EditorialEntitySurfaceProps = {
 type EditorialEntityElement = ReactElement<EditorialEntitySurfaceProps>
 
 type EditorialEntityListProps<TItem> = {
+  backgroundOutsetX?: number
   getId: (item: TItem) => string
   itemClassName?: string
   items: readonly TItem[]
@@ -32,6 +33,7 @@ type EditorialEntityListProps<TItem> = {
 const siblingDimmingClassName = "entity-sibling-dimming"
 
 export function EditorialEntityList<TItem>({
+  backgroundOutsetX,
   getId,
   itemClassName,
   items,
@@ -41,7 +43,7 @@ export function EditorialEntityList<TItem>({
   surfaceInteraction = "focus",
 }: EditorialEntityListProps<TItem>): React.ReactElement {
   return (
-    <AnimatedEntityBackground>
+    <AnimatedEntityBackground backgroundOutsetX={backgroundOutsetX}>
       {items.map((item, index) => {
         const id = getId(item)
         const element = renderItem(

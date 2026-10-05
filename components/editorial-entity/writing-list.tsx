@@ -32,7 +32,9 @@ export function WritingList({
   return (
     <EntityList className="space-y-0">
       <EditorialEntityList
+        backgroundOutsetX={6}
         getId={(post) => post.title}
+        itemClassName="rounded-2xl py-2"
         items={posts}
         renderItem={(post, { "data-id": dataId, className }) => (
           <WritingListRow
@@ -43,6 +45,7 @@ export function WritingList({
           />
         )}
         siblingDimming
+        surfaceInset="none"
       />
     </EntityList>
   )

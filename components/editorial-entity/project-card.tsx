@@ -11,6 +11,7 @@ import { textStyles } from "@/lib/design/text-styles"
 import { cn } from "@/lib/utils"
 
 export type ProjectCardProps = {
+  className?: string
   detailHref: string
   liveHref: string
   loading?: "eager" | "lazy"
@@ -24,6 +25,7 @@ export type ProjectCardProps = {
 }
 
 export function ProjectCard({
+  className,
   detailHref,
   liveHref,
   loading,
@@ -38,7 +40,10 @@ export function ProjectCard({
   return (
     <EntitySurface
       as="article"
-      className="pointer-events-none relative flex h-full flex-col"
+      className={cn(
+        "pointer-events-none relative flex h-full flex-col",
+        className
+      )}
       inset={surfaceInset}
       interaction={surfaceInteraction}
     >

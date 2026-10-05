@@ -37,6 +37,7 @@ type AnimatedBackgroundChild = ReactElement<AnimatedBackgroundChildProps>
 
 export type AnimatedBackgroundProps = {
   backgroundStyle?: CSSProperties
+  backgroundOutsetX?: number
   children: AnimatedBackgroundChild | AnimatedBackgroundChild[]
   className?: string
   defaultValue?: string
@@ -93,6 +94,7 @@ const backgroundPresenceVariants = {
 
 export function AnimatedBackground({
   backgroundStyle,
+  backgroundOutsetX = 0,
   children,
   className,
   defaultValue,
@@ -247,11 +249,15 @@ export function AnimatedBackground({
                     {isActive ? (
                       <m.div
                         className={cn(
-                          "pointer-events-none size-full",
+                          "pointer-events-none absolute inset-y-0 rounded-[inherit]",
                           className
                         )}
                         layoutId={`background-${uniqueId}`}
-                        style={backgroundStyle}
+                        style={{
+                          ...backgroundStyle,
+                          left: `var(--animated-background-left, ${-backgroundOutsetX}px)`,
+                          right: `var(--animated-background-right, ${-backgroundOutsetX}px)`,
+                        }}
                         transition={
                           canHover ? resolvedTransition : { duration: 0 }
                         }

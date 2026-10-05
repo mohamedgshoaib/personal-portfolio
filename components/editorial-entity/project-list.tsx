@@ -13,6 +13,8 @@ import {
 
 type ProjectListRowProps = React.ComponentPropsWithoutRef<"div"> & {
   "data-id": string
+  backgroundBoundsClassName?: string
+  cardInsetClassName?: string
   children?: React.ReactNode
   loading?: "eager" | "lazy"
   project: ProjectContent
@@ -29,14 +31,21 @@ export function ProjectList({
   const projectBackHref = source === "home" ? "/" : "/projects"
 
   return (
-    <div className="grid sm:grid-cols-2 sm:gap-x-6">
+    <div className="grid sm:grid-cols-2">
       <EditorialEntityList
+        backgroundOutsetX={6}
         getId={(project) => project.name}
-        itemClassName="h-full cursor-default"
+        itemClassName="h-full cursor-default rounded-2xl py-2"
         items={projects}
         renderItem={(project, { "data-id": dataId, className }, index) => (
           <ProjectListRow
             className={className}
+            backgroundBoundsClassName={
+              index % 2 === 0
+                ? "sm:[--animated-background-right:0px]"
+                : "sm:[--animated-background-left:0px]"
+            }
+            cardInsetClassName={index % 2 === 0 ? "sm:pr-2" : "sm:pl-2"}
             data-id={dataId}
             loading={index < 2 ? "eager" : undefined}
             project={project}
@@ -44,7 +53,7 @@ export function ProjectList({
           />
         )}
         siblingDimming
-        surfaceInset="card"
+        surfaceInset="none"
         surfaceInteraction="none"
       />
     </div>
@@ -52,6 +61,8 @@ export function ProjectList({
 }
 
 function ProjectListRow({
+  backgroundBoundsClassName,
+  cardInsetClassName,
   children,
   loading,
   project,
@@ -59,9 +70,17 @@ function ProjectListRow({
   ...surfaceProps
 }: ProjectListRowProps): React.ReactElement {
   return (
-    <div {...surfaceProps} className={cn(surfaceProps.className, "relative")}>
+    <div
+      {...surfaceProps}
+      className={cn(
+        surfaceProps.className,
+        "relative",
+        backgroundBoundsClassName
+      )}
+    >
       {children}
       <ProjectCard
+        className={cardInsetClassName}
         detailHref={project.href}
         liveHref={project.liveHref}
         name={project.name}
